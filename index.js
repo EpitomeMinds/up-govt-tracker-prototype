@@ -15,9 +15,26 @@ const log = signale.scope("server:global");
 const DEFAULT_STATE = process.env.DEFAULT_STATE || "UP";
 const PORT = process.env.PORT || 3000;
 
+function resolveCorsOrigin() {
+  const raw = process.env.CORS_ORIGIN || "*";
+  if (raw === "*") return "*";
+
+  const allowed = raw
+    .split(",")
+    .map((o) => o.trim().replace(/\/$/, ""))
+    .filter(Boolean);
+
+  return (origin, callback) => {
+    if (!origin) return callback(null, true);
+    const normalized = origin.replace(/\/$/, "");
+    if (allowed.includes(normalized)) return callback(null, true);
+    callback(new Error(`CORS blocked for origin: ${origin}`));
+  };
+}
+
 app.use(
   cors({
-    origin: process.env.CORS_ORIGIN || "*",
+    origin: resolveCorsOrigin(),
   })
 );
 app.use(express.json());
