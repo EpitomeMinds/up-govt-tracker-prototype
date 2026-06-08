@@ -3,6 +3,7 @@ data/jobs.db
 data/jobs.db-wal
 data/jobs.db-shm
 dashboard/.next
+dashboard/out
 dashboard/node_modules
 dashboard/.env.local
 .env
