@@ -60,6 +60,13 @@ async function stateWiseGovjobs(req, res, next) {
   var state = stateCodes.filter(function (item) {
     return item.code == stateCode;
   })[0];
+
+  if (!state) {
+    res.status(404);
+    res.results = { err: `Unknown state code: ${stateCode}` };
+    return next();
+  }
+
   var URL = state.link;
   log.info(URL);
   const topic = "Govt. job for " + state.name;

@@ -1,0 +1,541 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bi-sidebar: #0f1623;
+  --bi-sidebar-hover: #1a2438;
+  --bi-canvas: #f0f3fa;
+  --bi-widget: #ffffff;
+  --bi-border: #e2e8f0;
+  --bi-accent: #2563eb;
+  --bi-accent-soft: #eff6ff;
+  --bi-muted: #64748b;
+  --bi-title: #0f172a;
+}
+
+body {
+  color: var(--bi-title);
+  background: var(--bi-canvas);
+  min-height: 100vh;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+@layer base {
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+  }
+}
+
+@layer components {
+  /* ── App shell ── */
+  .bi-app {
+    @apply flex h-screen overflow-hidden bg-bi-canvas;
+  }
+
+  .bi-canvas {
+    @apply relative min-h-0 flex-1 overflow-auto;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(37, 99, 235, 0.06), transparent),
+      radial-gradient(circle at 1px 1px, rgba(15, 23, 42, 0.035) 1px, transparent 0);
+    background-color: var(--bi-canvas);
+    background-size: 100% 100%, 20px 20px;
+  }
+
+  /* ── Sidebar ── */
+  .bi-sidebar {
+    @apply relative flex w-[240px] shrink-0 flex-col text-white shadow-sidebar;
+    background: linear-gradient(180deg, #0f1623 0%, #151d2e 50%, #0f1623 100%);
+  }
+
+  .bi-sidebar::after {
+    content: "";
+    @apply pointer-events-none absolute inset-y-0 right-0 w-px;
+    background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+  }
+
+  .bi-sidebar-brand {
+    @apply border-b border-white/[0.06] px-5 py-5;
+  }
+
+  .bi-sidebar-nav {
+    @apply flex-1 space-y-1 overflow-y-auto px-3 py-4;
+  }
+
+  .bi-nav-item {
+    @apply relative flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left transition-all duration-200;
+  }
+
+  .bi-nav-item-inactive {
+    @apply text-slate-400 hover:bg-white/[0.06] hover:text-slate-200;
+  }
+
+  .bi-nav-item-active {
+    @apply bg-white/[0.08] text-white shadow-glow;
+  }
+
+  .bi-nav-item-active::before {
+    content: "";
+    @apply absolute left-0 top-1/2 h-7 w-[3px] -translate-y-1/2 rounded-r-full;
+    background: linear-gradient(180deg, #60a5fa, #2563eb);
+  }
+
+  .bi-nav-icon {
+    @apply flex h-9 w-9 shrink-0 items-center justify-center rounded-xl transition duration-200;
+  }
+
+  .bi-nav-icon-active {
+    @apply text-white shadow-md;
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+  }
+
+  .bi-nav-icon-inactive {
+    @apply bg-white/[0.06] text-slate-500;
+  }
+
+  .bi-sidebar-footer {
+    @apply border-t border-white/[0.06] px-4 py-4 text-xs text-slate-500;
+  }
+
+  /* ── Top navigation & toolbar ── */
+  .bi-main-tabs {
+    @apply flex shrink-0 gap-1 border-b border-bi-border/80 bg-white/80 px-4 py-2.5 backdrop-blur-md;
+  }
+
+  .bi-page-header {
+    @apply flex shrink-0 flex-wrap items-center gap-4 border-b border-bi-border/60 bg-white/90 px-5 py-3.5 backdrop-blur-sm;
+  }
+
+  .bi-page-header-icon {
+    @apply flex h-11 w-11 items-center justify-center rounded-2xl text-white shadow-md;
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+  }
+
+  .bi-toolbar {
+    @apply flex shrink-0 flex-wrap items-center gap-3 border-b border-bi-border/60 bg-white/90 px-5 py-3 backdrop-blur-sm;
+  }
+
+  .bi-toolbar-title {
+    @apply text-base font-bold tracking-tight text-bi-title;
+  }
+
+  .bi-toolbar-sub {
+    @apply mt-0.5 text-xs text-bi-muted;
+  }
+
+  .bi-select {
+    @apply rounded-xl border border-bi-border bg-white px-3.5 py-2 text-xs font-semibold text-bi-title shadow-sm outline-none transition hover:border-bi-muted/40 focus:border-bi-accent focus:ring-2 focus:ring-bi-accent/20;
+  }
+
+  .bi-search {
+    @apply h-10 w-56 rounded-xl border border-bi-border bg-white pl-10 pr-3 text-sm text-bi-title shadow-sm outline-none transition placeholder:text-bi-muted focus:border-bi-accent focus:ring-2 focus:ring-bi-accent/20;
+  }
+
+  .bi-pill {
+    @apply rounded-full px-3.5 py-1.5 text-xs font-semibold transition duration-150;
+  }
+
+  .bi-pill-active {
+    @apply bg-bi-accent text-white shadow-sm;
+  }
+
+  .bi-pill-inactive {
+    @apply bg-white text-bi-label shadow-sm ring-1 ring-bi-border hover:bg-bi-accentSoft hover:text-bi-accent hover:ring-bi-accent/30;
+  }
+
+  /* ── Breadcrumb ── */
+  .bi-breadcrumb {
+    @apply mb-3 flex shrink-0 flex-wrap items-center gap-2 rounded-xl border border-bi-border/60 bg-white/70 px-4 py-2 text-xs backdrop-blur-sm;
+  }
+
+  .bi-breadcrumb-path {
+    @apply font-medium text-bi-muted;
+  }
+
+  .bi-breadcrumb-active {
+    @apply rounded-md bg-bi-accentSoft px-2 py-0.5 font-bold text-bi-accent;
+  }
+
+  .bi-breadcrumb-meta {
+    @apply hidden truncate text-bi-muted sm:inline;
+  }
+
+  /* ── Widgets ── */
+  .bi-widget {
+    @apply overflow-hidden rounded-2xl border border-bi-border/50 bg-bi-widget shadow-widget transition-all duration-200 hover:shadow-widget-hover;
+  }
+
+  .bi-widget-header {
+    @apply flex items-start justify-between border-b border-bi-border/50 bg-gradient-to-r from-slate-50/80 to-white px-5 py-3.5;
+  }
+
+  .bi-widget-title {
+    @apply text-sm font-bold tracking-tight text-bi-title;
+  }
+
+  .bi-widget-body {
+    @apply px-3 py-3;
+  }
+
+  .bi-widget-dot {
+    @apply h-2 w-2 rounded-full;
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    box-shadow: 0 0 6px rgba(37, 99, 235, 0.4);
+  }
+
+  /* ── KPI cards ── */
+  .bi-kpi {
+    @apply relative overflow-hidden rounded-2xl border border-bi-border/50 bg-white shadow-widget transition-all duration-200 hover:-translate-y-0.5 hover:shadow-widget-hover;
+  }
+
+  .bi-kpi-accent {
+    @apply absolute left-0 top-0 h-full w-1;
+  }
+
+  .bi-kpi-body {
+    @apply px-5 py-4 pl-6;
+  }
+
+  .bi-kpi-label {
+    @apply text-[11px] font-bold uppercase tracking-wider text-bi-muted;
+  }
+
+  .bi-kpi-value {
+    @apply mt-1.5 text-2xl font-extrabold tabular-nums tracking-tight text-bi-title;
+  }
+
+  .bi-kpi-delta {
+    @apply mt-1 text-xs font-medium text-bi-muted;
+  }
+
+  .bi-kpi-icon {
+    @apply flex h-10 w-10 items-center justify-center rounded-xl;
+  }
+
+  /* ── Stat strip (zone KPI bars) ── */
+  .bi-stat-strip {
+    @apply bi-widget shrink-0 border-l-4 px-4 py-3;
+  }
+
+  .bi-stat-strip-item {
+    @apply flex items-baseline gap-2;
+  }
+
+  .bi-stat-strip-label {
+    @apply text-xs font-semibold text-bi-muted;
+  }
+
+  .bi-stat-strip-value {
+    @apply text-base font-extrabold tabular-nums;
+  }
+
+  .bi-stat-strip-hint {
+    @apply text-xs text-bi-muted;
+  }
+
+  /* ── Zone header ── */
+  .bi-zone-header {
+    @apply mb-6 shrink-0;
+  }
+
+  .bi-zone-title {
+    @apply text-xl font-extrabold tracking-tight text-bi-title;
+  }
+
+  .bi-zone-desc {
+    @apply mt-1 max-w-2xl text-sm text-bi-muted;
+  }
+
+  .bi-zone-badge {
+    @apply inline-flex items-center rounded-full bg-bi-accentSoft px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-bi-accent ring-1 ring-bi-accent/20;
+  }
+
+  /* ── Buttons ── */
+  .btn-primary {
+    @apply inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold text-white shadow-sm transition duration-150 hover:shadow-md disabled:opacity-50;
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 rounded-xl border border-bi-border bg-white px-4 py-2 text-sm font-semibold text-bi-label shadow-sm transition hover:bg-bi-canvas;
+  }
+
+  .btn-ghost {
+    @apply rounded-lg px-2 py-1 text-xs font-semibold text-bi-muted transition hover:bg-bi-accentSoft hover:text-bi-accent;
+  }
+
+  /* ── Badges (table tags) ── */
+  .bi-badge {
+    @apply inline-flex items-center rounded-lg px-2 py-0.5 text-xs font-semibold ring-1 ring-inset;
+  }
+
+  .bi-badge-blue {
+    @apply bg-blue-50 text-blue-700 ring-blue-200/60;
+  }
+
+  .bi-badge-teal {
+    @apply bg-teal-50 text-teal-700 ring-teal-200/60;
+  }
+
+  .bi-badge-violet {
+    @apply bg-violet-50 text-violet-700 ring-violet-200/60;
+  }
+
+  .bi-badge-slate {
+    @apply bg-slate-50 text-slate-600 ring-slate-200/60;
+  }
+
+  .bi-badge-amber {
+    @apply bg-amber-50 text-amber-700 ring-amber-200/60;
+  }
+
+  .bi-badge-coral {
+    @apply bg-red-50 text-red-700 ring-red-200/60;
+  }
+
+  /* ── Drill-down bar ── */
+  .bi-drill-bar {
+    @apply mb-3 shrink-0 rounded-2xl border border-bi-accent/20 px-4 py-3 shadow-sm;
+    background: linear-gradient(135deg, rgba(239, 246, 255, 0.95), rgba(255, 255, 255, 0.9));
+  }
+
+  /* ── Legacy aliases ── */
+  .card {
+    @apply bi-widget;
+  }
+
+  .chart-card {
+    @apply bi-widget;
+  }
+
+  /* ── Filter panel ── */
+  .filter-panel {
+    @apply rounded-2xl border border-bi-border bg-white shadow-widget;
+  }
+
+  .filter-panel-header {
+    @apply flex flex-col gap-3 border-b border-bi-border/60 bg-gradient-to-r from-bi-canvas to-white px-5 py-4 sm:flex-row sm:items-center sm:justify-between;
+  }
+
+  .filter-panel-icon {
+    @apply flex h-10 w-10 items-center justify-center rounded-xl bg-bi-accentSoft text-bi-accent ring-1 ring-bi-accent/20;
+  }
+
+  .filter-badge {
+    @apply rounded-full bg-bi-accentSoft px-2.5 py-0.5 text-xs font-bold text-bi-accent ring-1 ring-bi-accent/25;
+  }
+
+  .filter-panel-body {
+    @apply space-y-4 p-5;
+  }
+
+  .filter-btn-ghost {
+    @apply inline-flex items-center gap-1.5 rounded-xl border border-bi-border bg-white px-3 py-2 text-xs font-semibold text-bi-label shadow-sm transition hover:bg-bi-canvas;
+  }
+
+  .filter-btn-primary {
+    @apply inline-flex items-center gap-1.5 rounded-xl px-3 py-2 text-xs font-semibold text-white shadow-sm transition disabled:opacity-50;
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+  }
+
+  .filter-search-wrap {
+    @apply relative flex items-center gap-2 rounded-xl border border-bi-border bg-white px-4 py-2.5 shadow-sm transition focus-within:border-bi-accent focus-within:ring-2 focus-within:ring-bi-accent/20;
+  }
+
+  .filter-search {
+    @apply w-full bg-transparent text-sm text-bi-title outline-none placeholder:text-bi-muted;
+  }
+
+  .filter-search-clear {
+    @apply flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-bi-muted transition hover:bg-bi-border hover:text-bi-title;
+  }
+
+  .filter-section {
+    @apply rounded-xl border border-bi-border/60 bg-bi-canvas/40 px-4 py-3;
+  }
+
+  .filter-section-card {
+    @apply rounded-xl border border-bi-border bg-white p-4 shadow-sm;
+  }
+
+  .filter-section-icon {
+    @apply flex h-6 w-6 items-center justify-center rounded-md bg-bi-canvas text-bi-muted;
+  }
+
+  .filter-label {
+    @apply mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-bi-muted;
+  }
+
+  .filter-select-wrap {
+    @apply relative rounded-xl border border-bi-border bg-white shadow-sm transition hover:border-bi-muted/40;
+  }
+
+  .filter-select-active {
+    @apply border-bi-accent/40 bg-bi-accentSoft/30 ring-1 ring-bi-accent/20;
+  }
+
+  .filter-select {
+    @apply w-full cursor-pointer appearance-none rounded-xl bg-transparent py-2.5 pl-3 pr-9 text-sm text-bi-title outline-none;
+  }
+
+  .filter-pill {
+    @apply rounded-full px-3.5 py-1.5 text-xs font-semibold ring-1 transition hover:brightness-95;
+  }
+
+  .filter-pill-active {
+    @apply bg-bi-accent text-white ring-bi-accent shadow-sm;
+  }
+
+  .filter-toggle {
+    @apply relative flex w-full cursor-pointer items-center gap-2 rounded-xl border border-bi-border bg-white px-3 py-2.5 text-sm font-medium text-bi-label shadow-sm transition hover:border-bi-muted/40;
+  }
+
+  .filter-toggle-on {
+    @apply border-bi-accent/40 bg-bi-accentSoft text-bi-accent ring-1 ring-bi-accent/25;
+  }
+
+  .filter-toggle-knob {
+    @apply relative ml-auto h-5 w-9 shrink-0 rounded-full bg-bi-border transition-colors before:absolute before:left-0.5 before:top-0.5 before:h-4 before:w-4 before:rounded-full before:bg-white before:shadow-sm before:transition-transform before:content-[''];
+  }
+
+  .filter-toggle-on .filter-toggle-knob {
+    @apply bg-bi-accent before:translate-x-4;
+  }
+
+  .filter-chips-row {
+    @apply border-t border-bi-border/60 pt-4;
+  }
+
+  .filter-chip {
+    @apply inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-semibold text-bi-label shadow-sm ring-1 ring-bi-border transition hover:bg-bi-accentSoft hover:text-bi-accent hover:ring-bi-accent/30;
+  }
+
+  .filter-chip-x {
+    @apply text-sm leading-none text-bi-muted;
+  }
+
+  .filter-chip-clear {
+    @apply text-xs font-semibold text-bi-muted underline-offset-2 hover:text-bi-title hover:underline;
+  }
+
+  /* ── Map ── */
+  .map-split-map {
+    @apply border-b border-bi-border lg:border-b-0 lg:border-r;
+  }
+
+  .map-split-cities {
+    @apply bg-white;
+  }
+
+  .map-city-row {
+    @apply mb-px flex w-full items-center gap-1.5 rounded-lg px-2 py-2 text-left transition hover:bg-bi-canvas;
+  }
+
+  .map-city-row-selected {
+    @apply bg-bi-accentSoft ring-1 ring-bi-accent/30 hover:bg-bi-accentSoft;
+  }
+
+  .map-city-row-empty {
+    @apply opacity-60;
+  }
+
+  .map-city-rank {
+    @apply flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-bi-canvas text-[10px] font-bold tabular-nums text-bi-muted;
+  }
+
+  .map-city-row-selected .map-city-rank {
+    @apply bg-bi-accent text-white;
+  }
+
+  .map-city-name {
+    @apply min-w-0 flex-1 truncate text-xs font-semibold text-bi-title;
+  }
+
+  .map-city-row-selected .map-city-name {
+    @apply text-bi-accent;
+  }
+
+  .map-city-stats {
+    @apply flex shrink-0 flex-col items-end text-right;
+  }
+
+  .map-city-vacancies {
+    @apply text-xs font-bold tabular-nums text-bi-accent;
+  }
+
+  .map-city-listings {
+    @apply text-[10px] text-bi-muted;
+  }
+
+  /* ── Data grid ── */
+  .bi-grid thead {
+    @apply border-b border-bi-border bg-slate-50/90 text-[11px] font-bold uppercase tracking-wider text-bi-muted;
+  }
+
+  .bi-grid tbody tr {
+    @apply border-b border-bi-border/40 transition hover:bg-bi-accentSoft/25;
+  }
+
+  .bi-grid tbody tr:last-child {
+    @apply border-b-0;
+  }
+
+  .mini-chart {
+    @apply min-h-0;
+  }
+
+  /* ── Loading ── */
+  .bi-spinner {
+    @apply h-9 w-9 animate-spin rounded-full border-[3px] border-bi-accent/20 border-t-bi-accent;
+  }
+}
+
+@keyframes drillDownIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.drill-down-enter {
+  animation: drillDownIn 0.3s ease-out;
+}
+
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: #e2e8f0;
+}
+
+.up-map-tooltip {
+  @apply rounded-lg border-0 bg-bi-sidebar px-3 py-1.5 text-xs font-semibold text-white shadow-lg;
+}
+
+.leaflet-container {
+  font-family: inherit;
+}

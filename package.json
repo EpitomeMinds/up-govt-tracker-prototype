@@ -1,12 +1,14 @@
 {
   "name": "jobful-api",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "A RESTful API to fetch latest job notifications (INDIA only) from various sources.",
   "main": "index.js",
   "scripts": {
     "test": "jest  --forceExit",
     "devrun": "nodemon index.js",
-    "start": "node index.js"
+    "start": "node index.js",
+    "sync": "node scripts/sync.js",
+    "sync:all": "node scripts/sync.js --all"
   },
   "repository": {
     "type": "git",
@@ -25,11 +27,13 @@
   "author": "dipankar pal",
   "license": "MIT",
   "dependencies": {
+    "better-sqlite3": "^11.10.0",
     "cheerio": "^1.0.0-rc.3",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jest": "^25.3.0",
-    "request": "^2.88.2",
+    "node-cron": "^3.0.3",
     "signale": "^1.4.0"
   },
   "devDependencies": {

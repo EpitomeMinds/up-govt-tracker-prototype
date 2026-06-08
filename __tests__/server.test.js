@@ -1,6 +1,6 @@
 
 const request = require("supertest");
-const app = require('../server');
+const app = require("../index");
 const signale = require('signale');
 
 // beforeAll(async () => {
@@ -44,6 +44,23 @@ describe("GET /freejobalert/ ", () => {
         expect(response.statusCode).toBe(404);
     });
 }); */
+
+describe("GET /api/jobs ", () => {
+    test("It should respond with paginated jobs", async () => {
+        const response = await request(app).get("/api/jobs?state=UP&limit=5");
+        expect(response.statusCode).toBe(200);
+        expect(response.body).toHaveProperty("data");
+        expect(response.body).toHaveProperty("pagination");
+    });
+});
+
+describe("GET /api/stats ", () => {
+    test("It should respond with stats", async () => {
+        const response = await request(app).get("/api/stats?state=UP");
+        expect(response.statusCode).toBe(200);
+        expect(response.body.stateCode).toBe("UP");
+    });
+});
 
 describe("GET /freejobalert/teaching-jobs ", () => {
     test("It should respond with: status code 200", async () => {

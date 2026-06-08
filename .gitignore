@@ -1,4 +1,9 @@
 node_modules
+data/jobs.db
+data/jobs.db-wal
+data/jobs.db-shm
+dashboard/.next
+dashboard/node_modules
 sampleHTML
 
 .vercel

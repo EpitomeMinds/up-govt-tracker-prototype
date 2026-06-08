@@ -1,222 +1,143 @@
-const request = require('request');
-const cheerio = require('cheerio');
-const stateCodes =require('../../data/freeJobAlertStateMap.json');
-//const log = require('signale');
-const signale = require('signale');
+const cheerio = require("cheerio");
+const signale = require("signale");
 
+const USER_AGENT =
+  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36";
 
-function topicScraper(URL, topic,tableNO) {
-    var log = signale.scope("scraper:TopicScraper");
-    const options = {
-        url: URL,
-        headers: {
-            'User-Agent': 'request'
-        }
-    };
-    var results = [];
-    return new Promise((resolve,reject)=>{
-        request.get(options,(error,response,html)=>{
-            if(error)
-            {
-                log.error("could not fetch the source");
-                reject(error);
-            }
-            else if(!error && response.statusCode === 200)
-            {
-                
-                log.success("successfully fetched");
-                const $ = cheerio.load(html);
-                var allPosts = $('div .post');
-                var topic = $(allPosts).find('table').eq(tableNO);
-                // log.log(topic.html());
-                var entries = $(topic).find('tr').toArray();
-               // log.log(entries.length);
-
-                entries.forEach((el,index)=>{
-                    if(index===0) return; //to skip the first row which contains empty data
-                    var result ={
-                        postDate:"",
-                        postBoard:"",
-                        postName:"",
-                        qualification:"",
-                        advtNo:"",
-                        lastDate:"",
-                        link:""
-                    }
-                    result.postDate = $(el).find('td').eq(0).text();
-                    result.postBoard=$(el).find('td').eq(1).text();
-                    result.postName=$(el).find('td').eq(2).text();
-                    result.qualification = $(el).find('td').eq(3).text();
-                    result.advtNo = $(el).find('td').eq(4).text();
-                    result.lastDate = $(el).find('td').eq(5).text();
-                    result.link = $(el).find('td').eq(6).find('a').attr('href');
-
-                    results.push(result);
-                 
-                });
-                //log.log(results);
-                resolve(results);
-            }
-        })
-    })
-}
-
-function latestNotifications(URL) {
-var log = signale.scope("scraper:latestNotifications");
-const options = {
-    url: URL,
-    headers: {
-        'User-Agent': 'request'
-    }
+const DEFAULT_HEADERS = {
+  "User-Agent": USER_AGENT,
+  Accept:
+    "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+  "Accept-Language": "en-US,en;q=0.9",
+  "Cache-Control": "no-cache",
 };
 
-var results = [];
-return new Promise((resolve, reject) => {
-
-    request.get(options, (error, response, html) => {
-        if (error) {
-            log.error("could not fetch the source");
-            reject(error);
-        }
-        else if (!error && response.statusCode === 200) {
-            log.success("successfully fetched");
-            const $ = cheerio.load(html);
-            const notifications = $('div .listcontentj').find('ul').toArray();
-            notifications.forEach((el, index) => {
-                var result = {
-                    title: "",
-                    link: ""
-                };
-                var entry = $(el).first('li').find('a');
-                result.title = $(entry).text();
-                result.link = $(entry).attr('href');
-                // add it to the list
-                results.push(result);
-            });
-            //log.log(results);
-            resolve(results);
-        }
-
-    });
-});
+async function fetchHtml(url, retries = 3) {
+  let lastError;
+  for (let attempt = 1; attempt <= retries; attempt++) {
+    try {
+      const response = await fetch(url, { headers: DEFAULT_HEADERS });
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status} for ${url}`);
+      }
+      return response.text();
+    } catch (err) {
+      lastError = err;
+      if (attempt < retries) {
+        await new Promise((r) => setTimeout(r, attempt * 1000));
+      }
+    }
+  }
+  throw lastError;
 }
 
+function parseJobRow($, el) {
+  return {
+    postDate: $(el).find("td").eq(0).text().trim(),
+    postBoard: $(el).find("td").eq(1).text().trim(),
+    postName: $(el).find("td").eq(2).text().trim(),
+    qualification: $(el).find("td").eq(3).text().trim(),
+    advtNo: $(el).find("td").eq(4).text().trim(),
+    lastDate: $(el).find("td").eq(5).text().trim(),
+    link: $(el).find("td").eq(6).find("a").attr("href") || "",
+  };
+}
 
-//////////////////////////////////// state wise scraper ////////////////////////////////////
+function findRecruitmentTable($) {
+  const matchPattern = /<th[^>]*>\s*Recruitment Board\s*<\/th>/i;
+  let desiredTable = null;
 
-
-
-
-
-
-
-
-
-
-function smartScraper(URL,topic) {
-    var log = signale.scope("scraper:stateWiseScraper");
-
- 
-
-    const options = {
-        url: URL,
-        headers: {
-            'User-Agent': 'request'
-        }
-    };
-    
-    var results = [];
-    return new Promise((resolve, reject) => {
-    
-        request.get(options, (error, response, html) => {
-            if (error) {
-                log.error("could not fetch the source");
-                reject(error);
-            }
-            else if (!error && response.statusCode === 200) {
-                log.success("successfully fetched");
-                const $ = cheerio.load(html);
-                const posts = $('div .post');
-                const tables = posts.find('table').toArray();
-              //  signale.log(tables.length);
-               
-                var desiredTble;
-
-                const matchPattern = new RegExp('<th>Recruitment Board</th>');
-
-                tables.forEach((el,index)=>{
-                    //signale.log($(el).html());
-
-
-                    // points the actual table avoiding other unnecessary stuffs
-                    var textToMatch =$(el).html().replace(/^\s+|\s+$/g, '');
-                    if(matchPattern.test(textToMatch)) {
-                        desiredTble=index;
-                       // log.star("matched");
-                        return;
-                    }
-                });
-
-                var dataTable = tables[desiredTble];
-               // signale.log($(dataTable).text());
-                var entries = $(dataTable).find('tr').toArray();
-                 entries.forEach((el,index)=>{
-                     if(index===0) return; //to skip the first row which contains empty data
-                     var result ={
-                         postDate:"",
-                         postBoard:"",
-                         postName:"",
-                         qualification:"",
-                         advtNo:"",
-                         lastDate:"",
-                         link:""
-                     }
-                     result.postDate = $(el).find('td').eq(0).text();
-                     result.postBoard=$(el).find('td').eq(1).text();
-                     result.postName=$(el).find('td').eq(2).text();
-                     result.qualification = $(el).find('td').eq(3).text();
-                     result.advtNo = $(el).find('td').eq(4).text();
-                     result.lastDate = $(el).find('td').eq(5).text();
-                     result.link = $(el).find('td').eq(6).find('a').attr('href');
- 
-                     results.push(result);
-                  
-                 });
-                 //signale.star(results);
-                resolve(results);
-            }
-    
-        });
-    });
+  $("table").each((_, table) => {
+    const html = $(table).html() || "";
+    if (matchPattern.test(html)) {
+      desiredTable = table;
+      return false;
     }
+  });
 
+  return desiredTable;
+}
 
+function parseJobTable($, table) {
+  const results = [];
+  if (!table) return results;
 
+  $(table)
+    .find("tr")
+    .each((index, el) => {
+      if (index === 0) return;
+      const row = parseJobRow($, el);
+      if (row.postName || row.postBoard) {
+        results.push(row);
+      }
+    });
 
+  return results;
+}
 
+function findTablesInPost($) {
+  const posts = $("div.post, article, .entry-content");
+  if (posts.length === 0) {
+    return $("table").toArray();
+  }
+  return posts.find("table").toArray();
+}
 
-    // smartScraper("http://www.freejobalert.com/odisha-government-jobs/","West Bengal").then((data)=>{
-    //     // signale.log(data);
-    // }).catch((err)=>{
-    //     // signale.error(err);
-    // })
+async function topicScraper(URL, topic, tableNO) {
+  const log = signale.scope("scraper:TopicScraper");
+  log.info(`Fetching ${URL}`);
 
+  const html = await fetchHtml(URL);
+  const $ = cheerio.load(html);
+  const tables = findTablesInPost($);
+  const table = tables[tableNO];
 
+  if (!table) {
+    log.warn(`Table index ${tableNO} not found, trying recruitment table`);
+    return parseJobTable($, findRecruitmentTable($));
+  }
 
+  return parseJobTable($, table);
+}
 
+async function latestNotifications(URL) {
+  const log = signale.scope("scraper:latestNotifications");
+  log.info(`Fetching ${URL}`);
 
+  const html = await fetchHtml(URL);
+  const $ = cheerio.load(html);
+  const results = [];
 
+  $("div.listcontentj ul").each((_, el) => {
+    const entry = $(el).find("a").first();
+    const title = entry.text().trim();
+    const link = entry.attr("href") || "";
+    if (title) {
+      results.push({ title, link });
+    }
+  });
 
+  return results;
+}
 
+async function smartScraper(URL, topic) {
+  const log = signale.scope("scraper:stateWiseScraper");
+  log.info(`Fetching ${URL} (${topic})`);
 
+  const html = await fetchHtml(URL);
+  const $ = cheerio.load(html);
+  const table = findRecruitmentTable($);
+  const results = parseJobTable($, table);
 
+  log.success(`Parsed ${results.length} jobs`);
+  return results;
+}
 
-
-
-
-
-
-
-module.exports.latestNotifications = latestNotifications;
-module.exports.topicScraper = topicScraper;
-module.exports.smartScraper=smartScraper;
+module.exports = {
+  latestNotifications,
+  topicScraper,
+  smartScraper,
+  fetchHtml,
+  findRecruitmentTable,
+  parseJobTable,
+};
