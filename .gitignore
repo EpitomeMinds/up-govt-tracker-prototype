@@ -4,6 +4,8 @@ data/jobs.db-wal
 data/jobs.db-shm
 dashboard/.next
 dashboard/node_modules
+dashboard/.env.local
+.env
 sampleHTML
 
 .vercel
