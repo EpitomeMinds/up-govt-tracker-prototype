@@ -669,6 +669,28 @@ body {
   @apply inline-flex items-center gap-2 rounded-xl bg-[#2563eb] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#1d4ed8];
 }
 
+@keyframes portalBtnBlink {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 0 rgba(37, 99, 235, 0.55),
+      0 1px 2px rgba(15, 23, 42, 0.08);
+  }
+  50% {
+    box-shadow:
+      0 0 0 10px rgba(37, 99, 235, 0),
+      0 4px 16px rgba(37, 99, 235, 0.45);
+  }
+}
+
+.portal-btn-blinker {
+  animation: portalBtnBlink 1.8s ease-in-out infinite;
+}
+
+.portal-btn-blinker:hover {
+  animation-play-state: paused;
+}
+
 .portal-btn-icon {
   @apply inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-600 transition hover:bg-slate-50;
 }
