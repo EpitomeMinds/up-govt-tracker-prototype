@@ -18,9 +18,12 @@ const PAGE_SIZE = 4;
 interface Props {
   analytics: ExtendedAnalytics;
   onDrillDown: (dimension: string, key: string) => void;
+  embedded?: boolean;
 }
 
-export default function RecruitersZone({ analytics, onDrillDown }: Props) {
+export default function RecruitersZone({ analytics, onDrillDown, embedded = false }: Props) {
+  const chartH = embedded ? 210 : 240;
+  const stretch = !embedded;
   const [page, setPage] = useState(1);
   const boards = analytics.boardVacancyBars;
   const { pageItems, totalPages, safePage } = usePagination(boards, PAGE_SIZE, page);
@@ -54,7 +57,7 @@ export default function RecruitersZone({ analytics, onDrillDown }: Props) {
 
   return (
     <ZoneShell compact>
-      <div className="flex h-full min-h-0 flex-col gap-3">
+      <div className={`flex flex-col gap-3 ${embedded ? "" : "h-full min-h-0"}`}>
         <VacancyKpiStrip
           accent="#2563eb"
           items={[
@@ -64,11 +67,12 @@ export default function RecruitersZone({ analytics, onDrillDown }: Props) {
           ]}
         />
 
-        <div className="grid min-h-0 flex-1 grid-cols-2 gap-3">
+        <div className={`grid grid-cols-1 gap-3 md:grid-cols-2 ${stretch ? "min-h-0 flex-1" : ""}`}>
           <HorizontalVacancyChart
             title="Recruitment boards"
             data={boardChartData}
-            fillHeight
+            height={chartH}
+            fillHeight={stretch}
             fill="#2563eb"
             onClick={(key) => {
               if (key !== "__other__") onDrillDown("board", key);
@@ -77,7 +81,8 @@ export default function RecruitersZone({ analytics, onDrillDown }: Props) {
           <ShareDonutChart
             title="How to apply"
             data={applicationPie}
-            fill
+            height={chartH}
+            fill={stretch}
             onClick={(key) => onDrillDown("applicationType", key)}
           />
         </div>

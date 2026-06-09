@@ -1,0 +1,263 @@
+"use client";
+
+import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
+import PortalSidebar, { type PortalNavId } from "./PortalSidebar";
+import PortalHeader from "./PortalHeader";
+import PortalLoginModal from "./PortalLoginModal";
+import { clearPortalSession, getPortalSession, type PortalSession } from "@/lib/portalAuth";
+import PortalKpiRow from "./PortalKpiRow";
+import PortalFilterBar from "./PortalFilterBar";
+import PortalVacancyList from "./PortalVacancyList";
+import PortalAnalyticsPanel from "./PortalAnalyticsPanel";
+import PortalGrowthDashboard from "./PortalGrowthDashboard";
+import PortalUserManagement from "./PortalUserManagement";
+import type { ExtendedAnalytics, DashboardFilters, JobEnriched } from "@/lib/jobAnalytics";
+import type { Stats } from "@/lib/types";
+import type { InvestmentPredictionsResponse } from "@/lib/investmentTypes";
+import type { AiRecommendationsResponse } from "@/lib/aiRecommendationsTypes";
+
+function PortalAnalysisSkeleton() {
+  return (
+    <div className="flex flex-1 items-center justify-center py-24">
+      <div className="text-center">
+        <div className="portal-spinner mx-auto mb-4" />
+        <p className="text-sm font-semibold text-slate-700">Loading analysis…</p>
+      </div>
+    </div>
+  );
+}
+
+function PortalDashboardSkeleton() {
+  return (
+    <div className="animate-pulse space-y-5">
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        {Array.from({ length: 4 }).map((_, i) => (
+          <div key={i} className="portal-kpi-card h-28 bg-slate-100" />
+        ))}
+      </div>
+      <div className="portal-filter-card h-16 bg-slate-100" />
+      <div className="grid gap-5 xl:grid-cols-[1.2fr_0.8fr]">
+        <div className="portal-panel h-[480px] bg-slate-100" />
+        <div className="portal-panel h-[480px] bg-slate-100" />
+      </div>
+    </div>
+  );
+}
+
+const PortalDetailedAnalysis = dynamic(() => import("./PortalDetailedAnalysis"), {
+  loading: () => <PortalAnalysisSkeleton />,
+});
+
+const PortalGrowthDetailedAnalysis = dynamic(
+  () => import("./PortalGrowthDetailedAnalysis"),
+  { loading: () => <PortalAnalysisSkeleton /> }
+);
+
+interface Props {
+  analytics: ExtendedAnalytics;
+  filtered: JobEnriched[];
+  enriched: JobEnriched[];
+  filters: DashboardFilters;
+  boards: string[];
+  cities: { key: string; name: string }[];
+  qualTags: string[];
+  stateCode: string;
+  stateName: string;
+  stats: Stats | null;
+  investmentJobs: number;
+  lastSync?: string | null;
+  loading?: boolean;
+  error?: string;
+  investmentData?: InvestmentPredictionsResponse | null;
+  investmentLoading?: boolean;
+  investmentSyncing?: boolean;
+  onInvestmentSync?: () => void;
+  aiData?: AiRecommendationsResponse | null;
+  activeNav: PortalNavId;
+  onNavChange: (id: PortalNavId) => void;
+  onFilterChange: (next: Partial<DashboardFilters>) => void;
+  onFilterReset: () => void;
+  onDrillDown: (dimension: string, key: string) => void;
+  onSync: () => void;
+  syncing?: boolean;
+}
+
+export default function PortalDashboard({
+  analytics,
+  filtered,
+  enriched,
+  filters,
+  boards,
+  cities,
+  qualTags,
+  stateCode,
+  stateName,
+  stats,
+  investmentJobs,
+  lastSync,
+  loading,
+  error,
+  investmentData,
+  investmentLoading,
+  investmentSyncing,
+  onInvestmentSync,
+  aiData,
+  activeNav,
+  onNavChange,
+  onFilterChange,
+  onFilterReset,
+  onDrillDown,
+  onSync,
+  syncing,
+}: Props) {
+  const [showDetailedAnalysis, setShowDetailedAnalysis] = useState(false);
+  const [showGrowthDetailedAnalysis, setShowGrowthDetailedAnalysis] = useState(false);
+  const [authReady, setAuthReady] = useState(false);
+  const [session, setSession] = useState<PortalSession | null>(null);
+  const isAuthenticated = session !== null;
+
+  useEffect(() => {
+    setSession(getPortalSession());
+    setAuthReady(true);
+  }, []);
+
+  const handleLogin = (nextSession: PortalSession) => {
+    setSession(nextSession);
+  };
+
+  const handleLogout = () => {
+    clearPortalSession();
+    setSession(null);
+    setShowDetailedAnalysis(false);
+    setShowGrowthDetailedAnalysis(false);
+  };
+  const showInvestment = activeNav === "investment";
+  const showUsers = activeNav === "users";
+  const showMap = filters.state === "UP";
+
+  const handleNavChange = (id: PortalNavId) => {
+    setShowDetailedAnalysis(false);
+    setShowGrowthDetailedAnalysis(false);
+    onNavChange(id);
+  };
+
+  const sidebarActive: PortalNavId = showDetailedAnalysis
+    ? "dashboard"
+    : showGrowthDetailedAnalysis
+      ? "investment"
+      : activeNav;
+  const showInitialLoader = loading && filtered.length === 0;
+  const locked = !authReady || !isAuthenticated;
+  const showLoginModal = authReady && !isAuthenticated;
+
+  return (
+    <div className="portal-app">
+      <div className={locked ? "portal-app-locked flex min-w-0 flex-1" : "flex min-w-0 flex-1"}>
+        <PortalSidebar
+          active={sidebarActive}
+          onChange={handleNavChange}
+          lastSync={lastSync}
+          isAuthenticated={isAuthenticated}
+          onLogout={handleLogout}
+        />
+
+        <div className="portal-main">
+          <PortalHeader onSync={onSync} syncing={syncing} session={session} />
+
+        <div className="portal-content">
+          {error && (
+            <div className="mb-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+              {error}
+            </div>
+          )}
+
+          {showDetailedAnalysis ? (
+            <PortalDetailedAnalysis
+              analytics={analytics}
+              filtered={filtered}
+              enriched={enriched}
+              stateCode={stateCode}
+              stateName={stateName}
+              showMap={showMap}
+              selectedCityId={filters.city}
+              selectedDistrict={filters.district}
+              onSelectCity={(cityId) =>
+                onFilterChange({
+                  city: filters.city === cityId ? "" : cityId,
+                  district: cityId ? "" : filters.district,
+                })
+              }
+              onSelectDistrict={(district) =>
+                onFilterChange({
+                  district: filters.district === district ? "" : district,
+                  city: district ? "" : filters.city,
+                })
+              }
+              onDrillDown={onDrillDown}
+              onBack={() => setShowDetailedAnalysis(false)}
+            />
+          ) : showUsers ? (
+            <PortalUserManagement />
+          ) : showInvestment ? (
+            investmentLoading || !investmentData ? (
+              <div className="flex flex-1 flex-col items-center justify-center py-24">
+                <div className="portal-spinner mb-4" />
+                <p className="text-sm font-semibold text-slate-700">Loading investment data…</p>
+              </div>
+            ) : showGrowthDetailedAnalysis ? (
+              <PortalGrowthDetailedAnalysis
+                data={investmentData}
+                aiData={aiData}
+                stateName={stateName}
+                onBack={() => setShowGrowthDetailedAnalysis(false)}
+              />
+            ) : (
+              <PortalGrowthDashboard
+                data={investmentData}
+                syncing={investmentSyncing ?? false}
+                onSync={onInvestmentSync}
+                onOpenDetailedAnalysis={() => setShowGrowthDetailedAnalysis(true)}
+              />
+            )
+          ) : showInitialLoader ? (
+            <PortalDashboardSkeleton />
+          ) : (
+            <>
+              <PortalKpiRow
+                activeVacancies={analytics.totalVacancies}
+                newThisWeek={stats?.newThisWeek ?? 0}
+                departmentCount={analytics.boardVacancyBars.length}
+                investmentJobs={investmentJobs}
+                applicationsToday={stats?.newThisWeek ?? analytics.closingSoon}
+              />
+
+              <div className="mt-5">
+                <PortalFilterBar
+                  filters={filters}
+                  boards={boards}
+                  cities={cities}
+                  qualTags={qualTags}
+                  onChange={onFilterChange}
+                  onApply={() => {}}
+                  onReset={onFilterReset}
+                />
+              </div>
+
+              <div className="mt-5 grid gap-5 xl:grid-cols-[1.2fr_0.8fr]">
+                <PortalVacancyList jobs={filtered} />
+                <PortalAnalyticsPanel
+                  analytics={analytics}
+                  onOpenDetailedAnalysis={() => setShowDetailedAnalysis(true)}
+                />
+              </div>
+            </>
+          )}
+        </div>
+        </div>
+      </div>
+
+      {showLoginModal && <PortalLoginModal onLogin={handleLogin} />}
+    </div>
+  );
+}

@@ -14,9 +14,12 @@ import {
 interface Props {
   analytics: ExtendedAnalytics;
   onDrillDown: (dimension: string, key: string) => void;
+  embedded?: boolean;
 }
 
-export default function WorkforceZone({ analytics, onDrillDown }: Props) {
+export default function WorkforceZone({ analytics, onDrillDown, embedded = false }: Props) {
+  const chartH = embedded ? 210 : 240;
+  const stretch = !embedded;
   const labourPie = analytics.labourChartData.map((item) => ({
     key: item.key,
     name: item.name,
@@ -26,7 +29,7 @@ export default function WorkforceZone({ analytics, onDrillDown }: Props) {
 
   return (
     <ZoneShell compact>
-      <div className="flex h-full min-h-0 flex-col gap-3">
+      <div className={`flex flex-col gap-3 ${embedded ? "" : "h-full min-h-0"}`}>
         <VacancyKpiStrip
           accent={LABOUR_COLORS.skilled}
           items={analytics.labourChartData.map((l) => ({
@@ -37,16 +40,18 @@ export default function WorkforceZone({ analytics, onDrillDown }: Props) {
           }))}
         />
 
-        <div className="grid min-h-0 flex-1 grid-cols-2 gap-3">
+        <div className={`grid grid-cols-1 gap-3 md:grid-cols-2 ${stretch ? "min-h-0 flex-1" : ""}`}>
           <LabourClusteredChart
             data={analytics.labourChartData}
-            fill
+            height={chartH}
+            fill={stretch}
             onClick={(key) => onDrillDown("labourType", key)}
           />
           <ShareDonutChart
             title="Vacancy share"
             data={labourPie}
-            fill
+            height={chartH}
+            fill={stretch}
             onClick={(key) => onDrillDown("labourType", key)}
           />
         </div>

@@ -14,9 +14,10 @@ type ViewMode = "scroll" | "pages";
 
 interface Props {
   jobs: JobEnriched[];
+  embedded?: boolean;
 }
 
-export default function ListingsZone({ jobs }: Props) {
+export default function ListingsZone({ jobs, embedded = false }: Props) {
   const [page, setPage] = useState(1);
   const [viewMode, setViewMode] = useState<ViewMode>("scroll");
   const analytics = computeExtendedAnalytics(jobs);
@@ -25,7 +26,7 @@ export default function ListingsZone({ jobs }: Props) {
 
   return (
     <ZoneShell compact>
-      <div className="flex h-full min-h-0 flex-col gap-3">
+      <div className={`flex flex-col gap-3 ${embedded ? "" : "h-full min-h-0"}`}>
         <VacancyKpiStrip
           accent="#2563eb"
           items={[
@@ -36,7 +37,9 @@ export default function ListingsZone({ jobs }: Props) {
           ]}
         />
 
-        <div className="bi-widget flex min-h-0 flex-1 flex-col overflow-hidden">
+        <div
+          className={`bi-widget flex flex-col overflow-hidden ${embedded ? "max-h-[480px]" : "min-h-0 flex-1"}`}
+        >
           <div className="flex shrink-0 items-center justify-between gap-3 border-b border-bi-border/60 px-4 py-2.5">
             <div className="flex items-center gap-2">
               <span className="text-xs font-semibold text-bi-muted">View</span>

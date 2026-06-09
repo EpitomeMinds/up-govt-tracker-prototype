@@ -18,9 +18,12 @@ const PAGE_SIZE = 4;
 interface Props {
   analytics: ExtendedAnalytics;
   onDrillDown: (dimension: string, key: string) => void;
+  embedded?: boolean;
 }
 
-export default function QualificationsZone({ analytics, onDrillDown }: Props) {
+export default function QualificationsZone({ analytics, onDrillDown, embedded = false }: Props) {
+  const chartH = embedded ? 210 : 240;
+  const stretch = !embedded;
   const [page, setPage] = useState(1);
   const qualItems = analytics.qualDemandBars;
   const { pageItems, totalPages, safePage } = usePagination(qualItems, PAGE_SIZE, page);
@@ -40,7 +43,7 @@ export default function QualificationsZone({ analytics, onDrillDown }: Props) {
 
   return (
     <ZoneShell compact>
-      <div className="flex h-full min-h-0 flex-col gap-3">
+      <div className={`flex flex-col gap-3 ${embedded ? "" : "h-full min-h-0"}`}>
         <VacancyKpiStrip
           accent="#6c5ce7"
           items={[
@@ -49,17 +52,19 @@ export default function QualificationsZone({ analytics, onDrillDown }: Props) {
           ]}
         />
 
-        <div className="grid min-h-0 flex-1 grid-cols-2 gap-3">
+        <div className={`grid grid-cols-1 gap-3 md:grid-cols-2 ${stretch ? "min-h-0 flex-1" : ""}`}>
           <ShareDonutChart
             title="Education tier split"
             data={educationPie}
-            fill
+            height={chartH}
+            fill={stretch}
             onClick={(key) => onDrillDown("educationTier", key)}
           />
           <HorizontalVacancyChart
             title="Qualification tags"
             data={qualChartData}
-            fillHeight
+            height={chartH}
+            fillHeight={stretch}
             fill="#7c3aed"
             onClick={(key) => {
               if (key !== "__other__") onDrillDown("qualification", key);

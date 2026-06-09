@@ -311,10 +311,12 @@ export function StackedLabourChart({
 
 export function CityShareDonutChart({
   data,
+  height = 240,
   fill = false,
   onClick,
 }: {
   data: { key: string; name: string; vacancies: number; listings?: number }[];
+  height?: number;
   fill?: boolean;
   onClick?: (key: string) => void;
 }) {
@@ -337,6 +339,7 @@ export function CityShareDonutChart({
     <ShareDonutChart
       title="City vacancy share"
       data={pieData}
+      height={height}
       fill={fill}
       onClick={(key) => { if (key !== "__other__" && onClick) onClick(key); }}
     />
@@ -347,17 +350,22 @@ export function CityRankingPanel({
   cities,
   selectedCityId,
   onSelect,
+  maxHeight,
 }: {
   cities: { key: string; name: string; vacancies: number; listings?: number }[];
   selectedCityId: string;
   onSelect: (key: string) => void;
+  maxHeight?: number;
 }) {
   const sorted = [...cities].sort((a, b) => b.vacancies - a.vacancies);
   const maxVac = sorted[0]?.vacancies ?? 1;
   const totalVac = sorted.reduce((s, c) => s + c.vacancies, 0);
 
   return (
-    <div className="bi-widget flex min-h-0 flex-1 flex-col overflow-hidden">
+    <div
+      className={`bi-widget flex flex-col overflow-hidden ${maxHeight ? "" : "min-h-0 flex-1"}`}
+      style={maxHeight ? { maxHeight } : undefined}
+    >
       <div className="shrink-0 border-b border-bi-border px-3 py-2">
         <p className="text-xs font-bold text-bi-title">City ranking</p>
         <p className="text-[10px] text-bi-muted">Share of {formatCount(totalVac)} vacancies</p>

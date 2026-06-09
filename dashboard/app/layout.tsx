@@ -9,8 +9,8 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Epitome Minds · Govt Jobs Analytics",
-  description: "Epitome Minds — Uttar Pradesh government jobs and workforce analytics",
+  title: "UP Government Employment Portal",
+  description: "Integrated dashboard for Uttar Pradesh government jobs and workforce analytics",
 };
 
 export default function RootLayout({
