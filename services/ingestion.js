@@ -2,6 +2,7 @@ const signale = require("signale");
 const { smartScraper } = require("../customModules/freejobalerts/scraper");
 const stateCodes = require("../data/freeJobAlertStateMap.json");
 const { upsertJobs, logSync } = require("../db/database");
+const { resolveNoticeLinksForJobs } = require("./noticeLinkResolver");
 
 const log = signale.scope("ingestion");
 
@@ -17,7 +18,9 @@ async function syncState(stateCode) {
 
   try {
     const jobs = await smartScraper(state.link, `Govt. jobs for ${state.name}`);
-    const result = upsertJobs(code, jobs);
+    log.info(`Resolving official notice links for ${jobs.length} jobs…`);
+    const jobsWithLinks = await resolveNoticeLinksForJobs(jobs);
+    const result = upsertJobs(code, jobsWithLinks);
     logSync(code, result.count, "success");
     log.success(`Synced ${result.count} jobs for ${code}`);
     return { stateCode: code, stateName: state.name, ...result };

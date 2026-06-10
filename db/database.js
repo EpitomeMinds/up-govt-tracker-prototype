@@ -25,6 +25,7 @@ db.exec(`
     last_date     TEXT,
     last_date_parsed TEXT,
     link          TEXT,
+    official_link TEXT,
     source        TEXT DEFAULT 'freejobalert',
     scraped_at    TEXT NOT NULL,
     is_active     INTEGER DEFAULT 1
@@ -70,6 +71,11 @@ db.exec(`
   );
 `);
 
+const jobColumns = db.prepare("PRAGMA table_info(jobs)").all().map((c) => c.name);
+if (!jobColumns.includes("official_link")) {
+  db.exec("ALTER TABLE jobs ADD COLUMN official_link TEXT");
+}
+
 function hashJobId(stateCode, job) {
   const key = [stateCode, job.postBoard, job.postName, job.advtNo, job.link]
     .join("|")
@@ -95,10 +101,10 @@ function parseLastDate(lastDate) {
 const upsertJob = db.prepare(`
   INSERT INTO jobs (
     id, state_code, post_date, post_board, post_name, qualification,
-    advt_no, last_date, last_date_parsed, link, source, scraped_at, is_active
+    advt_no, last_date, last_date_parsed, link, official_link, source, scraped_at, is_active
   ) VALUES (
     @id, @state_code, @post_date, @post_board, @post_name, @qualification,
-    @advt_no, @last_date, @last_date_parsed, @link, @source, @scraped_at, 1
+    @advt_no, @last_date, @last_date_parsed, @link, @official_link, @source, @scraped_at, 1
   )
   ON CONFLICT(id) DO UPDATE SET
     post_date = excluded.post_date,
@@ -109,6 +115,7 @@ const upsertJob = db.prepare(`
     last_date = excluded.last_date,
     last_date_parsed = excluded.last_date_parsed,
     link = excluded.link,
+    official_link = excluded.official_link,
     scraped_at = excluded.scraped_at,
     is_active = 1
 `);
@@ -142,6 +149,7 @@ function upsertJobs(stateCode, jobs) {
         last_date: job.lastDate || "",
         last_date_parsed: parseLastDate(job.lastDate),
         link: job.link || "",
+        official_link: job.officialLink || job.official_link || "",
         source: "freejobalert",
         scraped_at: scrapedAt,
       });

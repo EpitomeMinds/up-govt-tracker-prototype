@@ -1,7 +1,7 @@
 "use client";
 
-import type { JobEnriched } from "@/lib/jobAnalytics";
-import { formatCount } from "@/lib/jobAnalytics";
+import { getJobNoticeUrl } from "@/lib/jobNoticeLinks";
+import { formatCount, type JobEnriched } from "@/lib/jobAnalytics";
 
 interface Props {
   jobs: JobEnriched[];
@@ -136,18 +136,21 @@ export default function JobsTable({ jobs, loading, embedded = false, stickyHeade
                   </div>
                 </td>
                 <td className="px-4 py-3.5">
-                  {job.link ? (
-                    <a
-                      href={job.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="whitespace-nowrap text-xs font-semibold text-bi-accent hover:underline"
-                    >
-                      Open →
-                    </a>
-                  ) : (
-                    "—"
-                  )}
+                  {(() => {
+                    const noticeUrl = getJobNoticeUrl(job);
+                    return noticeUrl ? (
+                      <a
+                        href={noticeUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="whitespace-nowrap text-xs font-semibold text-bi-accent hover:underline"
+                      >
+                        View Notice →
+                      </a>
+                    ) : (
+                      "—"
+                    );
+                  })()}
                 </td>
               </tr>
             ))}

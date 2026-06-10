@@ -9,6 +9,7 @@ export interface Job {
   last_date: string;
   last_date_parsed: string | null;
   link: string;
+  official_link?: string;
   scraped_at: string;
   is_active: number;
 }
