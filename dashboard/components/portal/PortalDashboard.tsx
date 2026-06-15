@@ -16,6 +16,7 @@ import type { ExtendedAnalytics, DashboardFilters, JobEnriched } from "@/lib/job
 import type { Stats } from "@/lib/types";
 import type { InvestmentPredictionsResponse } from "@/lib/investmentTypes";
 import type { AiRecommendationsResponse } from "@/lib/aiRecommendationsTypes";
+import type { GrowthDrillNavigation } from "@/lib/portalGrowthNavigation";
 
 function PortalAnalysisSkeleton() {
   return (
@@ -113,6 +114,7 @@ export default function PortalDashboard({
 }: Props) {
   const [showDetailedAnalysis, setShowDetailedAnalysis] = useState(false);
   const [showGrowthDetailedAnalysis, setShowGrowthDetailedAnalysis] = useState(false);
+  const [growthInitialNav, setGrowthInitialNav] = useState<GrowthDrillNavigation | null>(null);
   const [authReady, setAuthReady] = useState(false);
   const [session, setSession] = useState<PortalSession | null>(null);
   const isAuthenticated = session !== null;
@@ -132,19 +134,25 @@ export default function PortalDashboard({
     setShowDetailedAnalysis(false);
     setShowGrowthDetailedAnalysis(false);
   };
-  const showInvestment = activeNav === "investment";
+  const showInvestment = activeNav === "investment" || activeNav === "dashboard";
   const showUsers = activeNav === "users";
   const showMap = filters.state === "UP";
 
   const handleNavChange = (id: PortalNavId) => {
     setShowDetailedAnalysis(false);
     setShowGrowthDetailedAnalysis(false);
+    setGrowthInitialNav(null);
     onNavChange(id);
   };
 
-  const sidebarActive: PortalNavId = showDetailedAnalysis
-    ? "dashboard"
-    : showGrowthDetailedAnalysis
+  const openGrowthDetailed = (nav?: GrowthDrillNavigation) => {
+    setGrowthInitialNav(nav ?? null);
+    setShowGrowthDetailedAnalysis(true);
+  };
+
+  const sidebarActive: PortalNavId = showDetailedAnalysis || showGrowthDetailedAnalysis
+    ? "investment"
+    : activeNav === "dashboard"
       ? "investment"
       : activeNav;
   const showInitialLoader = loading && filtered.length === 0;
@@ -209,15 +217,19 @@ export default function PortalDashboard({
               <PortalGrowthDetailedAnalysis
                 data={investmentData}
                 aiData={aiData}
-                stateName={stateName}
-                onBack={() => setShowGrowthDetailedAnalysis(false)}
+                initialNav={growthInitialNav}
+                onBack={() => {
+                  setShowGrowthDetailedAnalysis(false);
+                  setGrowthInitialNav(null);
+                }}
               />
             ) : (
               <PortalGrowthDashboard
                 data={investmentData}
+                aiData={aiData}
                 syncing={investmentSyncing ?? false}
                 onSync={onInvestmentSync}
-                onOpenDetailedAnalysis={() => setShowGrowthDetailedAnalysis(true)}
+                onOpenDetailedAnalysis={openGrowthDetailed}
               />
             )
           ) : showInitialLoader ? (

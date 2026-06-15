@@ -33,7 +33,7 @@ export default function AiAnalyticsZone({ data, onFilterChange, onSelect }: Prop
           />
         </div>
         <div className="col-span-5 grid min-h-0 grid-rows-2 gap-3">
-          <ChartCard title="Status pipeline" height={182}>
+          <ChartCard title="Confidence mix" height={182}>
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie

@@ -23,7 +23,7 @@ export default function PortalGrowthKpiRow({ kpis }: Props) {
     {
       label: "Projected Jobs",
       value: formatCount(kpis.projectedJobs),
-      delta: "By Dec 2026",
+      delta: "2026-2035 projection",
       className: "portal-growth-kpi-blue",
       icon: (
         <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
@@ -34,7 +34,7 @@ export default function PortalGrowthKpiRow({ kpis }: Props) {
     {
       label: "Active Projects",
       value: formatCount(kpis.activeProjects),
-      delta: `${kpis.activeProjects} sectors · ${kpis.districtCount} districts`,
+      delta: `${kpis.industryCount} industries · ${kpis.districtCount} districts`,
       className: "portal-growth-kpi-green",
       icon: (
         <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
@@ -43,9 +43,9 @@ export default function PortalGrowthKpiRow({ kpis }: Props) {
       ),
     },
     {
-      label: "Companies",
-      value: String(kpis.companies),
-      delta: "National + MNC",
+      label: "Top Opportunities",
+      value: String(kpis.topOpportunities),
+      delta: "Ranked workbook rows",
       className: "portal-growth-kpi-purple",
       icon: (
         <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>

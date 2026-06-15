@@ -43,9 +43,9 @@ export default function TabbedAiDashboard({
   const zones: AiZoneItem[] = useMemo(
     () => [
       { id: "overview", label: "Overview", hint: "KPIs & summary", icon: <IconOverview /> },
-      { id: "boards", label: "Boards", hint: "Departments by category", icon: <IconBoards /> },
-      { id: "initiatives", label: "Initiatives", hint: "List & details", icon: <IconInitiatives /> },
-      { id: "sectors", label: "Sectors", hint: "Industry breakdown", icon: <IconSectors /> },
+      { id: "boards", label: "Clusters", hint: "Industries by cluster", icon: <IconBoards /> },
+      { id: "initiatives", label: "Projects", hint: "List & details", icon: <IconInitiatives /> },
+      { id: "sectors", label: "Industries", hint: "Industry breakdown", icon: <IconSectors /> },
       { id: "regions", label: "Regions", hint: "Geographic view", icon: <IconRegions /> },
       { id: "analytics", label: "Analytics", hint: "Charts & pipeline", icon: <IconAnalytics /> },
     ],
@@ -58,17 +58,17 @@ export default function TabbedAiDashboard({
     const s = data.summary;
     switch (activeZone) {
       case "overview":
-        return `${s.totalRecommendations} initiatives · ${s.boardCount} boards · ${formatWorkforce(s.totalSkillGap)} skill gap`;
+        return `${s.totalRecommendations} projects · ${s.boardCount} industries · ${formatWorkforce(s.totalRequired)} vacancies`;
       case "boards":
-        return `${s.boardCount} boards · ${s.categoryCount} categories`;
+        return `${s.boardCount} industries · ${s.categoryCount} clusters`;
       case "initiatives":
-        return `${data.recommendations.length} matching initiatives`;
+        return `${data.recommendations.length} matching projects`;
       case "sectors":
-        return `${s.sectorCount} sectors`;
+        return `${s.sectorCount} industries`;
       case "regions":
         return `${s.regionCount} regions`;
       case "analytics":
-        return `${s.byActionType.length} action types`;
+        return `${s.byActionType.length} skill types`;
       default:
         return "";
     }
@@ -87,7 +87,7 @@ export default function TabbedAiDashboard({
         {toolbar}
         <main className="bi-canvas flex min-h-0 flex-1 flex-col overflow-hidden px-6 py-4">
           <div className="bi-breadcrumb">
-            <span className="bi-breadcrumb-path">AI Recommendations</span>
+            <span className="bi-breadcrumb-path">AI Growth & Recommendations</span>
             <span className="text-bi-border">/</span>
             <span className="bi-breadcrumb-active">{activeLabel}</span>
             {zoneSubtitle && (

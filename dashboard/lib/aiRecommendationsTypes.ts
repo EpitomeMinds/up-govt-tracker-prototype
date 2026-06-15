@@ -30,6 +30,20 @@ export interface AiRecommendation {
   impactScore: number;
   sectorId: string;
   regionId: string;
+  subSector?: string;
+  investmentProject?: string;
+  skillType?: string;
+  jobCategory?: string;
+  projectedVacancies?: number;
+  investmentValueCr?: number;
+  startDate?: string;
+  expectedCompletion?: string;
+  hiringPeriod?: string;
+  location?: string;
+  keySkillsRequired?: string;
+  sourceReference?: string;
+  confidenceLevel?: string;
+  additionalInsights?: string;
 }
 
 export interface AiDepartmentRow extends AiAggregateRow {
@@ -133,6 +147,15 @@ export const DEFAULT_AI_FILTERS: AiRecommendationFilters = {
 };
 
 export const BOARD_CATEGORY_COLORS: Record<string, string> = {
+  "Manufacturing & Electronics": "#0078e8",
+  "Construction & Infrastructure": "#64748b",
+  "IT, GCC & Digital": "#6c5ce7",
+  "Logistics & Mobility": "#0891b2",
+  "Energy & Renewables": "#84cc16",
+  "Health, Pharma & Biotech": "#059669",
+  "Consumer & MSME": "#d97706",
+  "Services & Hospitality": "#e84393",
+  "Defence & Aerospace": "#dc2626",
   "Industry & Investment": "#0078e8",
   "Health & Medical": "#059669",
   "Education & Skills": "#6c5ce7",

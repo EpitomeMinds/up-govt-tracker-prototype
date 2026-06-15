@@ -52,7 +52,7 @@ export default function AiDashboardSidebar({
 
       <nav className="bi-sidebar-nav">
         <p className="mb-2 px-2 text-[10px] font-bold uppercase tracking-[0.12em] text-slate-500">
-          AI views
+          Growth views
         </p>
         {zones.map((zone) => {
           const isActive = active === zone.id;
@@ -80,8 +80,8 @@ export default function AiDashboardSidebar({
       </nav>
 
       <div className="bi-sidebar-footer">
-        <p>UP AI Recommendations</p>
-        <p className="mt-1 text-slate-600">250 workforce initiatives</p>
+        <p>UP & Delhi NCR Growth</p>
+        <p className="mt-1 text-slate-600">44 investment projects</p>
         <p className="mt-1 font-semibold text-slate-400">Epitome Minds</p>
       </div>
     </aside>

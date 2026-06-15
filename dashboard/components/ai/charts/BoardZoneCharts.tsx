@@ -55,7 +55,7 @@ export function BoardCategoryGapChart({
     }));
 
   return (
-    <ChartCard title="Gap by board" height={height}>
+    <ChartCard title="Gap by industry" height={height}>
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={chartData} layout="vertical" margin={{ top: 0, right: 8, left: 0, bottom: 0 }}>
           <XAxis type="number" tick={{ fontSize: 8, fill: "#94a3b8" }} tickFormatter={formatWorkforce} />
@@ -92,7 +92,7 @@ export function BoardCategoryPriorityChart({
           <YAxis tick={{ fontSize: 8, fill: "#94a3b8" }} allowDecimals={false} />
           <Tooltip
             formatter={(v: number, _n, p) => [
-              `${v} initiatives · ${formatWorkforce((p.payload as { gap: number }).gap)} gap`,
+              `${v} projects · ${formatWorkforce((p.payload as { gap: number }).gap)} gap`,
               "Count",
             ]}
           />
@@ -174,7 +174,7 @@ export function BoardWorkforceCompareChart({
     }));
 
   return (
-    <ChartCard title="Workforce balance" height={height}>
+    <ChartCard title="Vacancy balance" height={height}>
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={chartData} margin={{ top: 4, right: 4, left: -20, bottom: 0 }}>
           <XAxis dataKey="name" tick={{ fontSize: 7, fill: "#64748b" }} interval={0} angle={-18} textAnchor="end" height={36} />
@@ -246,7 +246,7 @@ export function BoardAnalyticsCard({
         <div className="flex items-start justify-between gap-2">
           <div className="min-w-0">
             <p className="line-clamp-2 text-xs font-bold text-bi-title">{dept.name}</p>
-            <p className="mt-0.5 text-[10px] text-bi-muted">{dept.count} initiatives</p>
+            <p className="mt-0.5 text-[10px] text-bi-muted">{dept.count} projects</p>
           </div>
           <span
             className="shrink-0 rounded-full px-2 py-0.5 text-[9px] font-bold tabular-nums"
@@ -327,10 +327,10 @@ export function BoardAnalyticsCard({
       </div>
 
       <div className="mt-auto grid grid-cols-3 gap-1 border-t border-bi-border/40 bg-bi-canvas/40 px-3 py-2">
-        <MetricChip label="Budget" value={formatBudgetCr(dept.budgetCr)} />
-        <MetricChip label="AI conf." value={`${dept.avgConfidence}%`} />
+        <MetricChip label="Investment" value={formatBudgetCr(dept.budgetCr)} />
+        <MetricChip label="Confidence" value={`${dept.avgConfidence}%`} />
         <MetricChip
-          label="vs cat."
+          label="vs cluster"
           value={`${vsCategory >= 0 ? "+" : ""}${vsCategory.toFixed(0)}%`}
           highlight={vsCategory > 5}
         />
@@ -374,13 +374,13 @@ export function BoardCategoryKpiStrip({
         <div>
           <h3 className="text-sm font-bold text-bi-title">{category.name}</h3>
           <p className="text-[11px] text-bi-muted">
-            {category.count} initiatives · {category.departments.length} boards
+            {category.count} projects · {category.departments.length} industries
           </p>
         </div>
         <div className="flex flex-wrap gap-4">
           <KpiPill label="Skill gap" value={formatWorkforce(category.gap)} color="#ff6b6b" />
-          <KpiPill label="Required" value={formatWorkforce(category.required)} color={AI_WORKFORCE_COLORS.required} />
-          <KpiPill label="Budget" value={formatBudgetCr(category.budgetCr)} color="#6c5ce7" />
+          <KpiPill label="Vacancies" value={formatWorkforce(category.required)} color={AI_WORKFORCE_COLORS.required} />
+          <KpiPill label="Investment" value={formatBudgetCr(category.budgetCr)} color="#6c5ce7" />
           <KpiPill label="Fill rate" value={`${fillRate}%`} color="#00a896" />
         </div>
       </div>

@@ -69,7 +69,7 @@ export function SkillGapByPriorityChart({
     }));
 
   return (
-    <ChartCard title="Skill gap by priority" height={height}>
+    <ChartCard title="Vacancies and skill gap by priority" height={height}>
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={chartData} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#e8ebf2" vertical={false} />
@@ -77,7 +77,7 @@ export function SkillGapByPriorityChart({
           <YAxis
             tick={{ fontSize: 9, fill: "#64748b" }}
             tickFormatter={formatWorkforce}
-            label={{ value: "Workforce", angle: -90, position: "insideLeft", style: { fontSize: 10, fill: "#64748b" } }}
+            label={{ value: "Vacancies", angle: -90, position: "insideLeft", style: { fontSize: 10, fill: "#64748b" } }}
           />
           <Tooltip content={<WorkforceTooltip />} />
           <Legend wrapperStyle={{ fontSize: 10 }} iconSize={8} />
@@ -120,7 +120,7 @@ export function SkillGapBySectorChart({
     }));
 
   return (
-    <ChartCard title="Skill gap by sector" height={height}>
+    <ChartCard title="Skill gap by industry" height={height}>
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={chartData} layout="vertical" margin={{ top: 4, right: 16, left: 4, bottom: 4 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#e8ebf2" horizontal={false} />
@@ -243,7 +243,7 @@ export function ActionTypePieChart({
   return (
     <div className="grid h-full min-h-0 grid-cols-12 gap-3">
       <div className="col-span-7 min-h-0">
-        <ChartCard title="Recommendations by action type" height={height}>
+        <ChartCard title="Projects by skill type" height={height}>
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Pie
@@ -279,7 +279,7 @@ export function ActionTypePieChart({
               </Pie>
               <Tooltip
                 formatter={(v: number, _n, p) => [
-                  `${v} initiatives · ${formatBudgetCr((p.payload as { budgetCr: number }).budgetCr)}`,
+                  `${v} projects · ${formatBudgetCr((p.payload as { budgetCr: number }).budgetCr)}`,
                   "Count",
                 ]}
               />
@@ -290,14 +290,14 @@ export function ActionTypePieChart({
       </div>
       <div className="bi-widget col-span-5 flex min-h-0 flex-col overflow-hidden">
         <div className="shrink-0 border-b border-bi-border px-3 py-2">
-          <p className="text-xs font-bold text-bi-title">Action type summary</p>
+          <p className="text-xs font-bold text-bi-title">Skill type summary</p>
           <p className="text-[10px] text-bi-muted">Count &amp; budget (Cr)</p>
         </div>
         <div className="min-h-0 flex-1 overflow-hidden">
           <table className="w-full text-left text-[10px]">
             <thead className="sticky top-0 bg-white">
               <tr className="border-b border-bi-border text-bi-muted">
-                <th className="px-3 py-1.5 font-semibold">Action</th>
+                <th className="px-3 py-1.5 font-semibold">Skill</th>
                 <th className="px-2 py-1.5 font-semibold text-right">Count</th>
                 <th className="px-3 py-1.5 font-semibold text-right">Budget</th>
               </tr>

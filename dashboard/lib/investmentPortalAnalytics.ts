@@ -1,12 +1,14 @@
 import type { InvestmentPredictionsResponse } from "./investmentTypes";
+import { SECTOR_COLORS } from "./investmentPortalAnalyticsConstants";
 
 export interface GrowthKpis {
   totalInvestmentCr: number;
   investmentGrowthPct: number;
   projectedJobs: number;
   activeProjects: number;
+  industryCount: number;
   districtCount: number;
-  companies: number;
+  topOpportunities: number;
 }
 
 export interface TrendPoint {
@@ -30,17 +32,11 @@ export interface DistrictImpactRow {
   jobsProjected: number;
   topSector: string;
   status: "Active" | "Pipeline";
+  skillType?: string;
+  growthOutlook?: string;
+  keyProjects?: string;
+  policy?: string;
 }
-
-const SECTOR_COLORS = [
-  "#f97316",
-  "#2563eb",
-  "#10b981",
-  "#8b5cf6",
-  "#ec4899",
-  "#06b6d4",
-  "#6366f1",
-];
 
 /** Merge equivalent district names so rows are not split (e.g. GB Nagar → Noida). */
 const DISTRICT_ALIASES: Record<string, string> = {
@@ -58,6 +54,20 @@ function sectorDistricts(sector: InvestmentPredictionsResponse["sectors"][0]): s
 }
 
 export function computeGrowthKpis(data: InvestmentPredictionsResponse): GrowthKpis {
+  if (data.workbook?.sheets) {
+    return {
+      totalInvestmentCr:
+        data.summary.totalInvestmentCr ??
+        data.sectors.reduce((sum, sector) => sum + (sector.investmentCr ?? 0), 0),
+      investmentGrowthPct: data.summary.avgConfidence,
+      projectedJobs: data.summary.totalPredicted12m,
+      activeProjects: data.summary.projectCount ?? data.workbook.sheets.mainDataset?.length ?? data.sectors.length,
+      industryCount: data.summary.sectorCount,
+      districtCount: data.summary.districtCount ?? data.workbook.sheets.districtForecast?.length ?? 0,
+      topOpportunities: data.workbook.sheets.topOpportunities?.length ?? data.sectors.length,
+    };
+  }
+
   const projectedJobs = data.summary.totalPredicted12m;
   const totalInvestmentCr =
     data.sectors.reduce(
@@ -76,8 +86,9 @@ export function computeGrowthKpis(data: InvestmentPredictionsResponse): GrowthKp
     investmentGrowthPct: Math.round(avgGrowth),
     projectedJobs,
     activeProjects,
+    industryCount: data.summary.sectorCount,
     districtCount: districts.size || 75,
-    companies: Math.round(
+    topOpportunities: Math.round(
       data.summary.sectorCount * 2.4 + data.summary.highGrowthSectors * 8
     ),
   };
@@ -94,6 +105,28 @@ export function formatCount(n: number): string {
 }
 
 export function buildTrendData(data: InvestmentPredictionsResponse): TrendPoint[] {
+  if (data.workbook?.sheets.mainDataset?.length) {
+    const yearMap = new Map<string, { jobs: number; investment: number }>();
+    for (const row of data.workbook.sheets.mainDataset) {
+      const period = String(row["Hiring Period"] ?? row["Start Date"] ?? "2026");
+      const years = period.match(/20\d{2}/g) ?? ["2026"];
+      const start = Number(years[0]);
+      const end = Number(years[years.length - 1] ?? years[0]);
+      const span = Math.max(1, end - start + 1);
+      const jobs = Number(String(row["Projected Vacancies"] ?? 0).replace(/[^0-9.-]/g, ""));
+      const investment = Number(String(row["Investment Value (INR Cr)"] ?? 0).replace(/[^0-9.-]/g, ""));
+      for (let year = start; year <= end; year += 1) {
+        const existing = yearMap.get(String(year)) ?? { jobs: 0, investment: 0 };
+        existing.jobs += Math.round(jobs / span);
+        existing.investment += Math.round(investment / span);
+        yearMap.set(String(year), existing);
+      }
+    }
+    return Array.from(yearMap.entries())
+      .sort((a, b) => Number(a[0]) - Number(b[0]))
+      .map(([month, value]) => ({ month, ...value }));
+  }
+
   const monthMap = new Map<string, { jobs: number; investment: number }>();
 
   for (const sector of data.sectors) {
@@ -122,6 +155,28 @@ export function buildSectorJobData(data: InvestmentPredictionsResponse): SectorJ
 }
 
 export function buildDistrictRows(data: InvestmentPredictionsResponse): DistrictImpactRow[] {
+  const districtForecast = data.workbook?.sheets.districtForecast;
+  if (districtForecast?.length) {
+    return districtForecast
+      .map((row) => ({
+        district: String(row["District / City"] ?? "Unknown"),
+        investmentCr: Number(String(row["Total Investment (INR Cr est.)"] ?? 0).replace(/[^0-9.-]/g, "")),
+        projects: String(row["Key Projects"] ?? "")
+          .split(",")
+          .map((p) => p.trim())
+          .filter(Boolean).length,
+        jobsCreated: 0,
+        jobsProjected: Number(String(row["Total Projected Jobs"] ?? 0).replace(/[^0-9.-]/g, "")),
+        topSector: String(row["Top Industries"] ?? "General").split(",")[0]?.trim() || "General",
+        status: String(row["Growth Outlook"] ?? "").includes("★★★") ? ("Active" as const) : ("Pipeline" as const),
+        skillType: String(row["Dominant Skill Type"] ?? ""),
+        growthOutlook: String(row["Growth Outlook"] ?? ""),
+        keyProjects: String(row["Key Projects"] ?? ""),
+        policy: String(row["Special Economic Zone / Policy"] ?? ""),
+      }))
+      .sort((a, b) => b.investmentCr - a.investmentCr);
+  }
+
   const map = new Map<
     string,
     {
@@ -181,10 +236,10 @@ export function buildDistrictRows(data: InvestmentPredictionsResponse): District
 
 export function exportDistrictCsv(rows: DistrictImpactRow[]): void {
   const header =
-    "District,Investment (Cr),Projects,Jobs Created,Jobs Projected,Top Sector,Status";
+    "District,Investment (Cr),Projects,Jobs Projected,Top Sector,Skill Type,Growth Outlook,Key Projects,Policy,Status";
   const lines = rows.map(
     (r) =>
-      `"${r.district}",${Math.round(r.investmentCr)},${r.projects},${r.jobsCreated},${r.jobsProjected},"${r.topSector}",${r.status}`
+      `"${r.district}",${Math.round(r.investmentCr)},${r.projects},${r.jobsProjected},"${r.topSector}","${r.skillType ?? ""}","${r.growthOutlook ?? ""}","${r.keyProjects ?? ""}","${r.policy ?? ""}",${r.status}`
   );
   const blob = new Blob([[header, ...lines].join("\n")], { type: "text/csv" });
   const url = URL.createObjectURL(blob);

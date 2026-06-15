@@ -49,10 +49,10 @@ export default function AiFilterPanel({
           </div>
           <div>
             <h2 className="text-base font-bold tracking-tight text-slate-900">
-              Filter recommendations
+              Filter growth report
             </h2>
             <p className="text-xs text-slate-500">
-              Narrow by priority, sector, region, status &amp; timeline
+              Narrow by priority, industry, region, confidence &amp; hiring period
             </p>
           </div>
           {activeCount > 0 && (
@@ -84,7 +84,7 @@ export default function AiFilterPanel({
             <SearchIcon />
             <input
               className="filter-search"
-              placeholder="Search title, sector, department, region…"
+              placeholder="Search project, industry, skill, location…"
               value={filters.q}
               onChange={(e) => onChange({ q: e.target.value })}
             />
@@ -129,14 +129,14 @@ export default function AiFilterPanel({
 
           <div className="grid gap-4 lg:grid-cols-2">
             <div className="filter-section-card">
-              <SectionLabel icon={<SectorIcon />} title="Sector & region" />
+              <SectionLabel icon={<SectorIcon />} title="Industry & region" />
               <div className="grid gap-3 sm:grid-cols-2">
                 <FilterSelect
-                  label="Sector"
+                  label="Industry"
                   value={filters.sector}
                   onChange={(v) => onChange({ sector: v })}
                   options={[
-                    { value: "", label: "All sectors" },
+                    { value: "", label: "All industries" },
                     ...facets.sectors.map((s) => ({ value: s, label: s })),
                   ]}
                 />
@@ -153,23 +153,23 @@ export default function AiFilterPanel({
             </div>
 
             <div className="filter-section-card">
-              <SectionLabel icon={<BoardIcon />} title="Boards & departments" />
+              <SectionLabel icon={<BoardIcon />} title="Industry clusters" />
               <div className="grid gap-3 sm:grid-cols-2">
                 <FilterSelect
-                  label="Board category"
+                  label="Cluster"
                   value={filters.boardCategory}
                   onChange={(v) => onChange({ boardCategory: v, department: "" })}
                   options={[
-                    { value: "", label: "All categories" },
+                    { value: "", label: "All clusters" },
                     ...facets.boardCategories.map((c) => ({ value: c, label: c })),
                   ]}
                 />
                 <FilterSelect
-                  label="Department / board"
+                  label="Industry"
                   value={filters.department}
                   onChange={(v) => onChange({ department: v, boardCategory: "" })}
                   options={[
-                    { value: "", label: "All boards" },
+                    { value: "", label: "All industries" },
                     ...facets.departments.map((d) => ({ value: d, label: d })),
                   ]}
                 />
@@ -177,14 +177,14 @@ export default function AiFilterPanel({
             </div>
 
             <div className="filter-section-card">
-              <SectionLabel icon={<StatusIcon />} title="Status & timeline" />
+              <SectionLabel icon={<StatusIcon />} title="Confidence & timeline" />
               <div className="grid gap-3 sm:grid-cols-2">
                 <FilterSelect
-                  label="Status"
+                  label="Confidence"
                   value={filters.status}
                   onChange={(v) => onChange({ status: v })}
                   options={[
-                    { value: "", label: "All statuses" },
+                    { value: "", label: "All confidence levels" },
                     ...facets.statuses.map((s) => ({ value: s, label: s })),
                   ]}
                 />
@@ -204,7 +204,7 @@ export default function AiFilterPanel({
             </div>
 
             <div className="filter-section-card lg:col-span-2">
-              <SectionLabel icon={<ActionIcon />} title="Action type" />
+              <SectionLabel icon={<ActionIcon />} title="Skill type" />
               <div className="flex flex-wrap gap-2">
                 <button
                   type="button"

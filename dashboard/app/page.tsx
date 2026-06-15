@@ -29,7 +29,7 @@ const STATE_NAMES: Record<string, string> = {
 };
 
 export default function Dashboard() {
-  const [portalNav, setPortalNav] = useState<PortalNavId>("dashboard");
+  const [portalNav, setPortalNav] = useState<PortalNavId>("investment");
   const [filters, setFilters] = useState<DashboardFilters>(DEFAULT_FILTERS);
   const [allJobs, setAllJobs] = useState<Job[]>([]);
   const [stats, setStats] = useState<Stats | null>(null);

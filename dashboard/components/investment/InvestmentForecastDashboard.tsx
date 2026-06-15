@@ -71,24 +71,15 @@ export default function InvestmentForecastDashboard({
       <header className="bi-zone-header">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
-            <span className="bi-zone-badge mb-2 inline-block">Invest UP · AI Forecast</span>
-            <h2 className="bi-zone-title">Future Openings by Investment Sector</h2>
+            <span className="bi-zone-badge mb-2 inline-block">Workbook Growth Report</span>
+            <h2 className="bi-zone-title">UP &amp; Delhi NCR Jobs Investment Projection</h2>
             <p className="bi-zone-desc">
-              Sectors scraped from{" "}
-              <a
-                href="https://invest.up.gov.in/sectors-in-uttar-pradesh/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-medium text-bi-accent hover:underline"
-              >
-                Invest UP
-              </a>
-              . Predictions combine policy signals, investment scores, and current vacancy
-              baselines.
+              Projections are loaded from the workbook across investment projects, skills,
+              opportunities, district forecasts, employment rankings, and assumptions.
             </p>
           </div>
           <button type="button" className="btn-primary text-xs" onClick={onSync} disabled={syncing}>
-            {syncing ? "Refreshing…" : "Refresh sectors"}
+            {syncing ? "Refreshing…" : "Refresh workbook data"}
           </button>
         </div>
         <p className="mt-2 text-[10px] text-bi-muted">
@@ -100,7 +91,7 @@ export default function InvestmentForecastDashboard({
 
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <KpiCard
-          label="Sectors tracked"
+          label="Industries tracked"
           value={String(data.summary.sectorCount)}
           delta={`${data.summary.highGrowthSectors} high-growth`}
           accent="blue"
@@ -111,7 +102,7 @@ export default function InvestmentForecastDashboard({
           }
         />
         <KpiCard
-          label="Predicted (6 months)"
+          label="Projected (6 months)"
           value={formatN(data.summary.totalPredicted6m)}
           delta="Across all sectors"
           accent="teal"
@@ -122,7 +113,7 @@ export default function InvestmentForecastDashboard({
           }
         />
         <KpiCard
-          label="Predicted (12 months)"
+          label="Projected (2026-2035)"
           value={formatN(data.summary.totalPredicted12m)}
           delta={`${data.summary.avgConfidence}% avg confidence`}
           accent="violet"
@@ -173,7 +164,7 @@ export default function InvestmentForecastDashboard({
       </div>
 
       <ChartCard
-        title="12-month forecast by sector"
+        title="Projected jobs by industry"
         height={340}
       >
         <ResponsiveContainer width="100%" height="100%">

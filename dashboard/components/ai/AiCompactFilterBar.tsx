@@ -44,7 +44,7 @@ export default function AiCompactFilterBar({
         </svg>
         <input
           className="bi-search"
-          placeholder="Search title, sector, department…"
+          placeholder="Search project, industry, skill, location…"
           value={filters.q}
           onChange={(e) => onChange({ q: e.target.value })}
         />
@@ -77,7 +77,7 @@ export default function AiCompactFilterBar({
         value={filters.sector}
         onChange={(e) => onChange({ sector: e.target.value })}
       >
-        <option value="">All sectors</option>
+        <option value="">All industries</option>
         {facets.sectors.map((s) => (
           <option key={s} value={s}>
             {s.length > 32 ? `${s.slice(0, 31)}…` : s}
@@ -103,7 +103,7 @@ export default function AiCompactFilterBar({
         value={filters.boardCategory}
         onChange={(e) => onChange({ boardCategory: e.target.value, department: "" })}
       >
-        <option value="">All categories</option>
+        <option value="">All clusters</option>
         {facets.boardCategories.map((c) => (
           <option key={c} value={c}>
             {c.length > 24 ? `${c.slice(0, 23)}…` : c}
@@ -116,7 +116,7 @@ export default function AiCompactFilterBar({
         value={filters.department}
         onChange={(e) => onChange({ department: e.target.value, boardCategory: "" })}
       >
-        <option value="">All boards</option>
+        <option value="">All industries</option>
         {facets.departments.map((d) => (
           <option key={d} value={d}>
             {d.length > 28 ? `${d.slice(0, 27)}…` : d}
@@ -129,7 +129,7 @@ export default function AiCompactFilterBar({
         value={filters.status}
         onChange={(e) => onChange({ status: e.target.value })}
       >
-        <option value="">All statuses</option>
+        <option value="">All confidence</option>
         {facets.statuses.map((s) => (
           <option key={s} value={s}>
             {s}

@@ -37,15 +37,6 @@ export default function PortalSidebar({
 }: Props) {
   const mainNav: NavItem[] = [
     {
-      id: "dashboard",
-      label: "Dashboard",
-      icon: (
-        <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-        </svg>
-      ),
-    },
-    {
       id: "investment",
       label: "Growth & Recommendations",
       icon: (
@@ -86,7 +77,7 @@ export default function PortalSidebar({
       <div className="portal-sidebar-brand">
         <UpGovtLogo size="sm" />
         <div>
-          <p className="text-sm font-bold text-white">UP Govt Portal</p>
+          <p className="text-sm font-bold text-white">Employment Portal</p>
           <p className="text-[11px] text-slate-400">Employment Dashboard</p>
         </div>
       </div>

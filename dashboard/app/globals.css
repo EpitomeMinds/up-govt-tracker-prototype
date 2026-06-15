@@ -541,7 +541,7 @@ body {
   font-family: inherit;
 }
 
-/* ── UP Government Portal layout ── */
+/* ── Employment Portal layout ── */
 .portal-app {
   @apply flex h-screen overflow-hidden bg-[#eef2f7];
 }

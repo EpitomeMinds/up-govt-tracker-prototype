@@ -7,6 +7,8 @@ import { exportDistrictCsv, formatInvestmentCr } from "@/lib/investmentPortalAna
 interface Props {
   rows: DistrictImpactRow[];
   compact?: boolean;
+  onDistrictClick?: (district: string) => void;
+  selectedDistrict?: string;
 }
 
 const SECTOR_BADGE: Record<string, string> = {
@@ -17,7 +19,7 @@ function sectorBadgeClass(_sector: string) {
   return SECTOR_BADGE.default;
 }
 
-export default function PortalDistrictTable({ rows, compact }: Props) {
+export default function PortalDistrictTable({ rows, compact, onDistrictClick, selectedDistrict }: Props) {
   const [query, setQuery] = useState("");
 
   const filtered = useMemo(() => {
@@ -38,6 +40,11 @@ export default function PortalDistrictTable({ rows, compact }: Props) {
         <h2 className="portal-panel-title min-w-0 flex-1 truncate pr-3">
           District-wise Investment &amp; Job Impact
         </h2>
+        {onDistrictClick && (
+          <span className="hidden text-[10px] font-medium text-slate-500 sm:inline">
+            Click a row to drill down
+          </span>
+        )}
         <div className="flex shrink-0 items-center gap-2">
           <input
             type="text"
@@ -60,7 +67,7 @@ export default function PortalDistrictTable({ rows, compact }: Props) {
         </div>
       </div>
       <div className="overflow-x-auto">
-        <table className="portal-growth-table w-full min-w-[720px] text-left text-sm">
+        <table className="portal-growth-table w-full min-w-[980px] text-left text-sm">
           <thead>
             <tr>
               <th>District</th>
@@ -68,21 +75,31 @@ export default function PortalDistrictTable({ rows, compact }: Props) {
               <th title="Investment sectors led from this district (each sector counted once statewide)">
                 Projects
               </th>
-              <th>Jobs Created</th>
               <th>Jobs Projected</th>
               <th>Top Sector</th>
+              <th>Skill Type</th>
+              <th>Growth</th>
+              <th>Key Projects</th>
+              <th>Policy</th>
               <th>Status</th>
             </tr>
           </thead>
           <tbody>
             {displayRows.map((row) => (
-              <tr key={row.district}>
+              <tr
+                key={row.district}
+                className={
+                  onDistrictClick
+                    ? `cursor-pointer transition-colors hover:bg-blue-50/60 ${
+                        selectedDistrict === row.district ? "bg-blue-50" : ""
+                      }`
+                    : undefined
+                }
+                onClick={() => onDistrictClick?.(row.district)}
+              >
                 <td className="font-semibold text-slate-800">{row.district}</td>
                 <td>{formatInvestmentCr(row.investmentCr)}</td>
                 <td>{row.projects}</td>
-                <td className="font-semibold text-emerald-600">
-                  {row.jobsCreated.toLocaleString("en-IN")}
-                </td>
                 <td className="font-semibold text-orange-500">
                   {row.jobsProjected.toLocaleString("en-IN")}
                 </td>
@@ -94,6 +111,14 @@ export default function PortalDistrictTable({ rows, compact }: Props) {
                       ? `${row.topSector.slice(0, 21)}…`
                       : row.topSector}
                   </span>
+                </td>
+                <td>{row.skillType || "—"}</td>
+                <td>{row.growthOutlook || "—"}</td>
+                <td className="max-w-[220px]">
+                  <span className="line-clamp-2">{row.keyProjects || "—"}</span>
+                </td>
+                <td className="max-w-[220px]">
+                  <span className="line-clamp-2">{row.policy || "—"}</span>
                 </td>
                 <td>
                   <span className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-600">
@@ -109,7 +134,7 @@ export default function PortalDistrictTable({ rows, compact }: Props) {
             ))}
             {displayRows.length === 0 && (
               <tr>
-                <td colSpan={7} className="py-8 text-center text-slate-500">
+                <td colSpan={10} className="py-8 text-center text-slate-500">
                   No districts match your search.
                 </td>
               </tr>

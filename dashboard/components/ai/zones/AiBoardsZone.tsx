@@ -75,7 +75,7 @@ export default function AiBoardsZone({ data, onFilterChange, onGoInitiatives }: 
               >
                 <span className="block text-[11px] font-bold">{cat.name}</span>
                 <span className="text-[9px] opacity-80">
-                  {cat.count} · {cat.departments.length} boards
+                  {cat.count} · {cat.departments.length} industries
                 </span>
               </button>
             );
@@ -103,7 +103,7 @@ export default function AiBoardsZone({ data, onFilterChange, onGoInitiatives }: 
             </div>
 
             <div className="flex shrink-0 items-center justify-between gap-2 px-0.5">
-              <p className="text-[11px] font-semibold text-bi-title">Board drill-down</p>
+              <p className="text-[11px] font-semibold text-bi-title">Industry drill-down</p>
               <button
                 type="button"
                 className="btn-primary px-3 py-1 text-[10px]"

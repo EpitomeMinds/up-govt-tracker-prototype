@@ -1,6 +1,5 @@
 "use client";
 
-import { useMemo } from "react";
 import {
   Bar,
   BarChart,
@@ -18,25 +17,38 @@ import type { InvestmentPredictionsResponse } from "@/lib/investmentTypes";
 import {
   buildSectorJobData,
   buildTrendData,
+  type SectorJobRow,
+  type TrendPoint,
 } from "@/lib/investmentPortalAnalytics";
 
 interface Props {
   data: InvestmentPredictionsResponse;
   compact?: boolean;
+  trendData?: TrendPoint[];
+  sectorData?: SectorJobRow[];
+  onSectorClick?: (sector: string) => void;
+  onYearClick?: (year: string) => void;
 }
 
-export default function PortalGrowthCharts({ data, compact }: Props) {
-  const trendData = useMemo(() => buildTrendData(data), [data]);
-  const sectorData = useMemo(() => buildSectorJobData(data), [data]);
+export default function PortalGrowthCharts({
+  data,
+  compact,
+  trendData: trendOverride,
+  sectorData: sectorOverride,
+  onSectorClick,
+  onYearClick,
+}: Props) {
+  const trendData = trendOverride ?? buildTrendData(data);
+  const sectorData = sectorOverride ?? buildSectorJobData(data);
   const chartHeight = compact ? 210 : 280;
 
   return (
     <div className="grid gap-4 xl:grid-cols-2">
       <div className="portal-panel">
         <div className="portal-panel-header">
-          <h2 className="portal-panel-title">Investment vs Job Creation Trend</h2>
+          <h2 className="portal-panel-title">Investment vs Job Projection Timeline</h2>
           <select className="portal-select text-xs" defaultValue="12m">
-            <option value="12m">Last 12 Months</option>
+            <option value="12m">Workbook Years</option>
           </select>
         </div>
         <div className="px-2 pb-4" style={{ height: chartHeight }}>
@@ -69,16 +81,26 @@ export default function PortalGrowthCharts({ data, compact }: Props) {
                 name="Investment (Rs Cr)"
                 stroke="#f97316"
                 strokeWidth={2.5}
-                dot={{ r: 3, fill: "#f97316" }}
+                dot={{ r: 3, fill: "#f97316", cursor: onYearClick ? "pointer" : "default" }}
+                activeDot={{ r: 5, cursor: onYearClick ? "pointer" : "default" }}
+                onClick={(point) => {
+                  const year = String((point as { month?: string }).month ?? "");
+                  if (year && onYearClick) onYearClick(year);
+                }}
               />
               <Line
                 yAxisId="right"
                 type="monotone"
                 dataKey="jobs"
-                name="Jobs Created"
+                name="Projected Jobs"
                 stroke="#2563eb"
                 strokeWidth={2.5}
-                dot={{ r: 3, fill: "#2563eb" }}
+                dot={{ r: 3, fill: "#2563eb", cursor: onYearClick ? "pointer" : "default" }}
+                activeDot={{ r: 5, cursor: onYearClick ? "pointer" : "default" }}
+                onClick={(point) => {
+                  const year = String((point as { month?: string }).month ?? "");
+                  if (year && onYearClick) onYearClick(year);
+                }}
               />
             </LineChart>
           </ResponsiveContainer>
@@ -87,9 +109,12 @@ export default function PortalGrowthCharts({ data, compact }: Props) {
 
       <div className="portal-panel">
         <div className="portal-panel-header">
-          <h2 className="portal-panel-title">Sector-wise Job Distribution</h2>
-          <select className="portal-select text-xs" defaultValue="2026">
-            <option value="2026">2026</option>
+          <h2 className="portal-panel-title">Industry-wise Job Distribution</h2>
+          {onSectorClick && (
+            <span className="text-[10px] font-medium text-slate-500">Click a bar to drill down</span>
+          )}
+          <select className="portal-select text-xs" defaultValue="2035">
+            <option value="2035">2026-2035</option>
           </select>
         </div>
         <div className="px-2 pb-4" style={{ height: chartHeight }}>
@@ -116,7 +141,20 @@ export default function PortalGrowthCharts({ data, compact }: Props) {
                   (payload?.[0]?.payload as { fullName?: string })?.fullName ?? ""
                 }
               />
-              <Bar dataKey="jobs" radius={[6, 6, 0, 0]} maxBarSize={48}>
+              <Bar
+                dataKey="jobs"
+                radius={[6, 6, 0, 0]}
+                maxBarSize={48}
+                cursor={onSectorClick ? "pointer" : "default"}
+                onClick={(payload) => {
+                  const fullName = String(
+                    (payload as { fullName?: string; payload?: { fullName?: string } }).fullName ??
+                      (payload as { payload?: { fullName?: string } }).payload?.fullName ??
+                      ""
+                  );
+                  if (fullName && onSectorClick) onSectorClick(fullName);
+                }}
+              >
                 {sectorData.map((entry) => (
                   <Cell key={entry.fullName} fill={entry.fill} />
                 ))}

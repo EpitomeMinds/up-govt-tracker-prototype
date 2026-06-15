@@ -26,8 +26,8 @@ export default function AiSectorsZone({ data, onFilterChange }: Props) {
         </div>
         <div className="bi-widget col-span-4 flex min-h-0 flex-col overflow-hidden">
           <div className="shrink-0 border-b border-bi-border px-3 py-2">
-            <p className="text-xs font-bold text-bi-title">Top gaps</p>
-            <p className="text-[10px] text-bi-muted">Highest shortage sectors</p>
+            <p className="text-xs font-bold text-bi-title">Top industry gaps</p>
+            <p className="text-[10px] text-bi-muted">Highest projected shortages</p>
           </div>
           <div className="min-h-0 flex-1 space-y-1 overflow-hidden p-2">
             {sectors.slice(0, 10).map((s, i) => (

@@ -21,10 +21,10 @@ export default function AiOverviewZone({ data, onFilterChange }: Props) {
     <ZoneShell compact>
       <div className="grid h-full min-h-0 grid-rows-[auto_1fr] gap-3">
         <div className="grid shrink-0 grid-cols-2 gap-2 xl:grid-cols-4">
-          <KpiCard label="Skill gap" value={formatWorkforce(s.totalSkillGap)} delta={`${s.avgGapPercent}% avg`} accent="coral" icon={<span>⚠</span>} />
-          <KpiCard label="Workforce req." value={formatWorkforce(s.totalRequired)} delta={formatWorkforce(s.totalAvailable) + " avail."} accent="teal" icon={<span>👥</span>} />
-          <KpiCard label="Budget" value={formatBudgetCr(s.totalBudgetCr)} delta={`${s.criticalCount} critical`} accent="violet" icon={<span>₹</span>} />
-          <KpiCard label="AI confidence" value={`${s.avgConfidence}%`} delta={`Impact ${s.avgImpact}`} accent="amber" icon={<span>✦</span>} />
+          <KpiCard label="Skill gap" value={formatWorkforce(s.totalSkillGap)} delta={`${s.avgGapPercent}% estimated`} accent="coral" icon={<span>⚠</span>} />
+          <KpiCard label="Vacancies" value={formatWorkforce(s.totalRequired)} delta={formatWorkforce(s.totalAvailable) + " est. ready"} accent="teal" icon={<span>👥</span>} />
+          <KpiCard label="Investment" value={formatBudgetCr(s.totalBudgetCr)} delta={`${s.criticalCount} critical priority`} accent="violet" icon={<span>₹</span>} />
+          <KpiCard label="Confidence" value={`${s.avgConfidence}%`} delta={`Impact ${s.avgImpact}`} accent="amber" icon={<span>✦</span>} />
         </div>
         <div className="grid min-h-0 grid-cols-2 gap-3">
           <SkillGapByPriorityChart

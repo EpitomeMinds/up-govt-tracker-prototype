@@ -50,7 +50,7 @@ export default function PortalHeader({ onSync, syncing, session }: Props) {
         <div className="flex min-w-0 items-center gap-3">
           <UpGovtLogo size="sm" className="hidden sm:inline-flex" />
           <div className="min-w-0">
-            <h1 className="portal-header-title">UP Government Employment Portal</h1>
+            <h1 className="portal-header-title">Employment Portal</h1>
             <p className="portal-header-subtitle">Integrated Dashboard for All Departments</p>
           </div>
         </div>

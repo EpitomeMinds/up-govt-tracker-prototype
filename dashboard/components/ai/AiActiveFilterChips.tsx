@@ -12,12 +12,12 @@ interface Props {
 const LABELS: Record<keyof AiRecommendationFilters, string> = {
   q: "Search",
   priority: "Priority",
-  sector: "Sector",
+  sector: "Industry",
   region: "Region",
-  department: "Board",
-  boardCategory: "Category",
-  status: "Status",
-  actionType: "Action",
+  department: "Industry",
+  boardCategory: "Cluster",
+  status: "Confidence",
+  actionType: "Skill type",
   startYear: "Start year",
 };
 

@@ -36,7 +36,7 @@ export default function PortalLoginModal({ onLogin }: Props) {
         <div className="mb-6 text-center">
           <UpGovtLogo size="md" className="mx-auto mb-4" />
           <h2 className="text-xl font-bold text-slate-900">Sign in to Portal</h2>
-          <p className="mt-1 text-sm text-slate-500">UP Government Employment Dashboard</p>
+          <p className="mt-1 text-sm text-slate-500">Employment Portal</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">

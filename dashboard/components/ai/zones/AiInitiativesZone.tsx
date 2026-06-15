@@ -29,7 +29,7 @@ export default function AiInitiativesZone({
       <div className="grid h-full min-h-0 grid-cols-12 gap-3">
         <div className="bi-widget col-span-5 flex min-h-0 flex-col overflow-hidden">
           <div className="shrink-0 border-b border-bi-border px-3 py-2">
-            <p className="text-xs font-bold text-bi-title">Recommendations</p>
+            <p className="text-xs font-bold text-bi-title">Investment projects</p>
           </div>
           <div className="min-h-0 flex-1">
             {pageItems.map((rec) => (
@@ -61,7 +61,7 @@ export default function AiInitiativesZone({
             />
           ) : (
             <div className="bi-widget flex h-full items-center justify-center text-sm text-bi-muted">
-              No initiatives match filters
+              No projects match filters
             </div>
           )}
         </div>

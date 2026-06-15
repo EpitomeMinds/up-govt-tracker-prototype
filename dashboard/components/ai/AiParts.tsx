@@ -72,13 +72,13 @@ export function RecommendationDetail({
       <div className="min-h-0 flex-1 space-y-3 overflow-hidden p-4">
         <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
           {[
-            { label: "Required", value: formatWorkforce(rec.requiredWorkforce) },
-            { label: "Available", value: formatWorkforce(rec.currentlyAvailable) },
+            { label: "Vacancies", value: formatWorkforce(rec.requiredWorkforce) },
+            { label: "Est. ready", value: formatWorkforce(rec.currentlyAvailable) },
             { label: "Skill gap", value: `${formatWorkforce(rec.skillGap)} (${rec.gapPercent}%)` },
-            { label: "Budget", value: formatBudgetCr(rec.budgetCr) },
-            { label: "Duration", value: `${rec.durationMonths} mo` },
+            { label: "Investment", value: formatBudgetCr(rec.budgetCr) },
+            { label: "Duration", value: rec.durationMonths ? `${rec.durationMonths} mo` : rec.horizon },
             { label: "Start", value: String(rec.startYear) },
-            { label: "AI conf.", value: `${rec.aiConfidence}%` },
+            { label: "Confidence", value: rec.confidenceLevel || `${rec.aiConfidence}%` },
             { label: "Impact", value: String(rec.impactScore) },
           ].map((m) => (
             <div key={m.label} className="rounded-lg bg-bi-canvas/80 px-2.5 py-2">
@@ -88,7 +88,7 @@ export function RecommendationDetail({
           ))}
         </div>
         <div className="grid gap-2 sm:grid-cols-2">
-          <InfoCell label="Board / Department">
+          <InfoCell label="Industry">
             {onDrillBoard ? (
               <button
                 type="button"
@@ -101,22 +101,38 @@ export function RecommendationDetail({
               rec.department
             )}
           </InfoCell>
-          <InfoCell label="Sector">
-            {onDrillSector ? (
-              <button
-                type="button"
-                className="font-semibold text-bi-accent hover:underline"
-                onClick={() => onDrillSector(rec.sector)}
-              >
-                {rec.sector}
-              </button>
-            ) : (
-              rec.sector
-            )}
-          </InfoCell>
+          {rec.sector !== rec.department && (
+            <InfoCell label="Sector">
+              {onDrillSector ? (
+                <button
+                  type="button"
+                  className="font-semibold text-bi-accent hover:underline"
+                  onClick={() => onDrillSector(rec.sector)}
+                >
+                  {rec.sector}
+                </button>
+              ) : (
+                rec.sector
+              )}
+            </InfoCell>
+          )}
           <InfoCell label="Region">{rec.region}</InfoCell>
-          <InfoCell label="Action">{rec.actionType}</InfoCell>
+          <InfoCell label="Skill type">{rec.actionType}</InfoCell>
+          {rec.subSector && <InfoCell label="Sub-sector">{rec.subSector}</InfoCell>}
+          {rec.jobCategory && <InfoCell label="Job category">{rec.jobCategory}</InfoCell>}
+          {rec.location && <InfoCell label="Location">{rec.location}</InfoCell>}
+          {rec.expectedCompletion && <InfoCell label="Completion">{rec.expectedCompletion}</InfoCell>}
         </div>
+        {(rec.keySkillsRequired || rec.additionalInsights) && (
+          <div className="grid gap-2 sm:grid-cols-2">
+            {rec.keySkillsRequired && (
+              <InfoBlock label="Key skills">{rec.keySkillsRequired}</InfoBlock>
+            )}
+            {rec.additionalInsights && (
+              <InfoBlock label="Additional insights">{rec.additionalInsights}</InfoBlock>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
@@ -127,6 +143,15 @@ function InfoCell({ label, children }: { label: string; children: React.ReactNod
     <div className="rounded-lg bg-bi-canvas/60 px-3 py-2">
       <p className="text-[9px] font-bold uppercase text-bi-muted">{label}</p>
       <p className="truncate text-sm font-medium text-bi-title">{children}</p>
+    </div>
+  );
+}
+
+function InfoBlock({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <div className="rounded-lg bg-bi-canvas/60 px-3 py-2">
+      <p className="text-[9px] font-bold uppercase text-bi-muted">{label}</p>
+      <p className="line-clamp-3 text-xs leading-relaxed text-bi-title">{children}</p>
     </div>
   );
 }

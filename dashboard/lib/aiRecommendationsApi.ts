@@ -44,6 +44,9 @@ export const PRIORITY_COLORS: Record<string, string> = {
 };
 
 export const STATUS_COLORS: Record<string, string> = {
+  High: "#059669",
+  Medium: "#f59e0b",
+  Low: "#8b95ad",
   Approved: "#059669",
   "In Execution": "#0078e8",
   Proposed: "#6c5ce7",
