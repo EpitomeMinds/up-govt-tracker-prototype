@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "sync:data": "cp ../data/upGrowthInvestmentReport.json public/upGrowthInvestmentReport.json && cp ../data/upAiRecommendations.json public/upAiRecommendations.json",
+    "predev": "npm run sync:data",
+    "prebuild": "npm run sync:data",
     "dev": "next dev -p 3001",
     "build": "next build",
     "start": "next start -p 3001"

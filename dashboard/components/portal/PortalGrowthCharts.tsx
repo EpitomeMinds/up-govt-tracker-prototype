@@ -8,7 +8,6 @@ import {
   Legend,
   Line,
   LineChart,
-  ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
@@ -20,6 +19,7 @@ import {
   type SectorJobRow,
   type TrendPoint,
 } from "@/lib/investmentPortalAnalytics";
+import StableChartContainer from "@/components/charts/StableChartContainer";
 
 interface Props {
   data: InvestmentPredictionsResponse;
@@ -51,9 +51,8 @@ export default function PortalGrowthCharts({
             <option value="12m">Workbook Years</option>
           </select>
         </div>
-        <div className="px-2 pb-4" style={{ height: chartHeight }}>
-          <ResponsiveContainer width="100%" height="100%" minWidth={0}>
-            <LineChart data={trendData} margin={{ top: 8, right: 16, left: 0, bottom: 0 }}>
+        <StableChartContainer height={chartHeight} className="px-2 pb-4">
+          <LineChart data={trendData} margin={{ top: 8, right: 16, left: 0, bottom: 0 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
               <XAxis dataKey="month" tick={{ fontSize: 11, fill: "#64748b" }} />
               <YAxis
@@ -103,8 +102,7 @@ export default function PortalGrowthCharts({
                 }}
               />
             </LineChart>
-          </ResponsiveContainer>
-        </div>
+        </StableChartContainer>
       </div>
 
       <div className="portal-panel">
@@ -117,9 +115,8 @@ export default function PortalGrowthCharts({
             <option value="2035">2026-2035</option>
           </select>
         </div>
-        <div className="px-2 pb-4" style={{ height: chartHeight }}>
-          <ResponsiveContainer width="100%" height="100%" minWidth={0}>
-            <BarChart data={sectorData} margin={{ top: 8, right: 8, left: -12, bottom: 48 }}>
+        <StableChartContainer height={chartHeight} className="px-2 pb-4">
+          <BarChart data={sectorData} margin={{ top: 8, right: 8, left: -12, bottom: 48 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" vertical={false} />
               <XAxis
                 dataKey="name"
@@ -160,8 +157,7 @@ export default function PortalGrowthCharts({
                 ))}
               </Bar>
             </BarChart>
-          </ResponsiveContainer>
-        </div>
+        </StableChartContainer>
       </div>
     </div>
   );

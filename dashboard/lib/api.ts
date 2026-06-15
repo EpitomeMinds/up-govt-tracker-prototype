@@ -14,6 +14,26 @@ async function fetchJson<T>(path: string, init?: RequestInit): Promise<T> {
   return res.json();
 }
 
+async function loadBundledGrowthReport(): Promise<InvestmentPredictionsResponse | null> {
+  try {
+    const res = await fetch("/upGrowthInvestmentReport.json", { cache: "no-store" });
+    if (!res.ok) return null;
+    return res.json();
+  } catch {
+    return null;
+  }
+}
+
+function hasWorkbookSheets(data: InvestmentPredictionsResponse | null | undefined): boolean {
+  const sheets = data?.workbook?.sheets;
+  if (!sheets) return false;
+  return Boolean(
+    sheets.topOpportunities?.length ||
+      sheets.employmentRanking?.length ||
+      sheets.mainDataset?.length
+  );
+}
+
 export function getJobs(params: {
   state?: string;
   board?: string;
@@ -47,10 +67,24 @@ export async function triggerSync(state = "UP", invest = false): Promise<void> {
   await fetchJson(`/api/sync${qs}`, { method: "POST" });
 }
 
-export function getInvestmentPredictions(
+export async function getInvestmentPredictions(
   state = "UP"
 ): Promise<InvestmentPredictionsResponse> {
-  return fetchJson(`/api/investments/predictions?state=${state}`);
+  try {
+    const data = await fetchJson<InvestmentPredictionsResponse>(
+      `/api/investments/predictions?state=${state}`
+    );
+    if (hasWorkbookSheets(data)) return data;
+  } catch {
+    // Fall through to bundled workbook JSON below.
+  }
+
+  const bundled = await loadBundledGrowthReport();
+  if (bundled) {
+    return { ...bundled, stateCode: state };
+  }
+
+  throw new Error("Investment predictions unavailable");
 }
 
 export async function triggerInvestmentSync(): Promise<void> {

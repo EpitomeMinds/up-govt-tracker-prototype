@@ -8,7 +8,7 @@ async function fetchJson<T>(path: string): Promise<T> {
   return res.json();
 }
 
-export function getAiRecommendations(
+export async function getAiRecommendations(
   filters: Partial<AiRecommendationFilters> = {}
 ): Promise<AiRecommendationsResponse> {
   const params = new URLSearchParams();
@@ -22,7 +22,14 @@ export function getAiRecommendations(
   if (filters.startYear) params.set("startYear", filters.startYear);
   if (filters.q) params.set("q", filters.q);
   const qs = params.toString();
-  return fetchJson(`/api/ai-recommendations${qs ? `?${qs}` : ""}`);
+
+  try {
+    return await fetchJson(`/api/ai-recommendations${qs ? `?${qs}` : ""}`);
+  } catch {
+    const res = await fetch("/upAiRecommendations.json", { cache: "no-store" });
+    if (res.ok) return res.json();
+    throw new Error("AI recommendations unavailable");
+  }
 }
 
 export function formatWorkforce(n: number): string {

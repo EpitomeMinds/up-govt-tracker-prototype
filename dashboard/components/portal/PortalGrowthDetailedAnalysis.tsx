@@ -11,7 +11,6 @@ import {
   Legend,
   Pie,
   PieChart,
-  ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
@@ -30,6 +29,7 @@ import PortalGrowthKpiRow from "./PortalGrowthKpiRow";
 import PortalGrowthCharts from "./PortalGrowthCharts";
 import PortalDistrictTable from "./PortalDistrictTable";
 import PortalRecommendationsDashboard from "./PortalRecommendationsDashboard";
+import StableChartContainer from "@/components/charts/StableChartContainer";
 
 export type { GrowthAnalysisSectionId };
 
@@ -226,9 +226,8 @@ export default function PortalGrowthDetailedAnalysis({
                 <div className="portal-panel-header">
                   <h3 className="portal-panel-title">Sector Forecast</h3>
                 </div>
-                <div className="h-[240px] px-2 pb-4">
-                  <ResponsiveContainer width="100%" height="100%" minWidth={0}>
-                    <BarChart data={sectorData} margin={{ bottom: 48, left: -8 }}>
+                <StableChartContainer height={240} className="px-2 pb-4">
+                  <BarChart data={sectorData} margin={{ bottom: 48, left: -8 }}>
                       <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" vertical={false} />
                       <XAxis
                         dataKey="name"
@@ -285,8 +284,7 @@ export default function PortalGrowthDetailedAnalysis({
                         ))}
                       </Bar>
                     </BarChart>
-                  </ResponsiveContainer>
-                </div>
+                </StableChartContainer>
               </div>
               <div className="grid gap-3 sm:grid-cols-2">
                 {data.sectors.slice(0, 6).map((sector) => (
@@ -359,8 +357,7 @@ export default function PortalGrowthDetailedAnalysis({
               <div className="portal-panel-header">
                 <h3 className="portal-panel-title">Investment vs Job Creation Trend</h3>
               </div>
-              <div className="h-[320px] px-2 pb-4">
-                <ResponsiveContainer width="100%" height="100%" minWidth={0}>
+              <StableChartContainer height={320} className="px-2 pb-4">
                   <AreaChart data={trendData}>
                     <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
                     <XAxis dataKey="month" tick={{ fontSize: 11, fill: "#64748b" }} />
@@ -385,8 +382,7 @@ export default function PortalGrowthDetailedAnalysis({
                       strokeWidth={2}
                     />
                   </AreaChart>
-                </ResponsiveContainer>
-              </div>
+              </StableChartContainer>
             </div>
           )}
 
@@ -577,7 +573,7 @@ function ProjectsCharts({
   return (
     <div className="grid gap-3 xl:grid-cols-2">
       <ChartPanel title="Top Industries by Investment">
-        <ResponsiveContainer width="100%" height="100%" minWidth={0}>
+        <StableChartContainer height={260} className="px-2 pb-4">
           <BarChart data={industryData} layout="vertical" margin={{ left: 12, right: 20 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" horizontal={false} />
             <XAxis type="number" tick={{ fontSize: 10 }} tickFormatter={formatShort} />
@@ -605,10 +601,10 @@ function ProjectsCharts({
               }}
             />
           </BarChart>
-        </ResponsiveContainer>
+        </StableChartContainer>
       </ChartPanel>
       <ChartPanel title="Projected Jobs by Region">
-        <ResponsiveContainer width="100%" height="100%" minWidth={0}>
+        <StableChartContainer height={260} className="px-2 pb-4">
           <PieChart>
             <Pie
               data={regionData}
@@ -637,7 +633,7 @@ function ProjectsCharts({
             <Tooltip formatter={(v: number) => [v.toLocaleString("en-IN"), "Jobs"]} />
             <Legend wrapperStyle={{ fontSize: 11 }} />
           </PieChart>
-        </ResponsiveContainer>
+        </StableChartContainer>
       </ChartPanel>
     </div>
   );
@@ -666,7 +662,7 @@ function SkillsCharts({
   return (
     <div className="grid gap-3 xl:grid-cols-2">
       <ChartPanel title="Projected Openings by Skill">
-        <ResponsiveContainer width="100%" height="100%" minWidth={0}>
+        <StableChartContainer height={260} className="px-2 pb-4">
           <BarChart data={openings} layout="vertical" margin={{ left: 12, right: 20 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" horizontal={false} />
             <XAxis type="number" tick={{ fontSize: 10 }} tickFormatter={formatShort} />
@@ -694,10 +690,10 @@ function SkillsCharts({
               }}
             />
           </BarChart>
-        </ResponsiveContainer>
+        </StableChartContainer>
       </ChartPanel>
       <ChartPanel title="Demand Level Mix">
-        <ResponsiveContainer width="100%" height="100%" minWidth={0}>
+        <StableChartContainer height={260} className="px-2 pb-4">
           <PieChart>
             <Pie
               data={demand}
@@ -725,7 +721,7 @@ function SkillsCharts({
             <Tooltip />
             <Legend wrapperStyle={{ fontSize: 11 }} />
           </PieChart>
-        </ResponsiveContainer>
+        </StableChartContainer>
       </ChartPanel>
     </div>
   );
@@ -766,7 +762,7 @@ function OpportunitiesCharts({
   return (
     <div className="grid gap-3 xl:grid-cols-2">
       <ChartPanel title="Top Opportunity Scores">
-        <ResponsiveContainer width="100%" height="100%" minWidth={0}>
+        <StableChartContainer height={260} className="px-2 pb-4">
           <BarChart data={scores} margin={{ bottom: 56, left: -10 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" vertical={false} />
             <XAxis dataKey="name" tick={{ fontSize: 9 }} angle={-35} textAnchor="end" height={64} interval={0} />
@@ -803,10 +799,10 @@ function OpportunitiesCharts({
               }}
             />
           </BarChart>
-        </ResponsiveContainer>
+        </StableChartContainer>
       </ChartPanel>
       <ChartPanel title="Automation Risk Mix">
-        <ResponsiveContainer width="100%" height="100%" minWidth={0}>
+        <StableChartContainer height={260} className="px-2 pb-4">
           <PieChart>
             <Pie
               data={risks}
@@ -835,7 +831,7 @@ function OpportunitiesCharts({
             <Tooltip />
             <Legend wrapperStyle={{ fontSize: 11 }} />
           </PieChart>
-        </ResponsiveContainer>
+        </StableChartContainer>
       </ChartPanel>
     </div>
   );
@@ -865,7 +861,7 @@ function RankingCharts({
   return (
     <div className="grid gap-3 xl:grid-cols-2">
       <ChartPanel title="Jobs by Employment Tier">
-        <ResponsiveContainer width="100%" height="100%" minWidth={0}>
+        <StableChartContainer height={260} className="px-2 pb-4">
           <BarChart data={tierData} layout="vertical" margin={{ left: 12, right: 20 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" horizontal={false} />
             <XAxis type="number" tick={{ fontSize: 10 }} tickFormatter={formatShort} />
@@ -893,10 +889,10 @@ function RankingCharts({
               }}
             />
           </BarChart>
-        </ResponsiveContainer>
+        </StableChartContainer>
       </ChartPanel>
       <ChartPanel title="AI Disruption Risk Mix">
-        <ResponsiveContainer width="100%" height="100%" minWidth={0}>
+        <StableChartContainer height={260} className="px-2 pb-4">
           <PieChart>
             <Pie
               data={aiRiskData}
@@ -924,7 +920,7 @@ function RankingCharts({
             <Tooltip />
             <Legend wrapperStyle={{ fontSize: 11 }} />
           </PieChart>
-        </ResponsiveContainer>
+        </StableChartContainer>
       </ChartPanel>
     </div>
   );
@@ -957,7 +953,7 @@ function SummaryCharts({
   return (
     <div className="grid gap-3 xl:grid-cols-2">
       <ChartPanel title="Executive Summary: Investment by Industry">
-        <ResponsiveContainer width="100%" height="100%" minWidth={0}>
+        <StableChartContainer height={260} className="px-2 pb-4">
           <BarChart data={industries} layout="vertical" margin={{ left: 12, right: 20 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" horizontal={false} />
             <XAxis type="number" tick={{ fontSize: 10 }} tickFormatter={formatShort} />
@@ -985,10 +981,10 @@ function SummaryCharts({
               }}
             />
           </BarChart>
-        </ResponsiveContainer>
+        </StableChartContainer>
       </ChartPanel>
       <ChartPanel title="Investment Share by Region">
-        <ResponsiveContainer width="100%" height="100%" minWidth={0}>
+        <StableChartContainer height={260} className="px-2 pb-4">
           <PieChart>
             <Pie
               data={regions}
@@ -1017,7 +1013,7 @@ function SummaryCharts({
             <Tooltip formatter={(v: number) => [formatShort(v), "Investment (Cr)"]} />
             <Legend wrapperStyle={{ fontSize: 11 }} />
           </PieChart>
-        </ResponsiveContainer>
+        </StableChartContainer>
       </ChartPanel>
     </div>
   );
@@ -1029,9 +1025,7 @@ function ChartPanel({ title, children }: { title: string; children: React.ReactN
       <div className="portal-panel-header">
         <h3 className="portal-panel-title">{title}</h3>
       </div>
-      <div className="h-[260px] px-2 pb-4">
-        {children}
-      </div>
+      {children}
     </div>
   );
 }
