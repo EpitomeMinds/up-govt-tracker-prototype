@@ -9,13 +9,18 @@ import { clearPortalSession, getPortalSession, type PortalSession } from "@/lib/
 import PortalKpiRow from "./PortalKpiRow";
 import PortalFilterBar from "./PortalFilterBar";
 import PortalVacancyList from "./PortalVacancyList";
+import PortalNcsVacancyList from "./PortalNcsVacancyList";
+import PortalNcsFilterBar from "./PortalNcsFilterBar";
+import PortalNcsMetricsPanel from "./PortalNcsMetricsPanel";
 import PortalAnalyticsPanel from "./PortalAnalyticsPanel";
 import PortalGrowthDashboard from "./PortalGrowthDashboard";
 import PortalUserManagement from "./PortalUserManagement";
 import type { ExtendedAnalytics, DashboardFilters, JobEnriched } from "@/lib/jobAnalytics";
+import type { NcsDashboardFilters, NcsFacetsResponse, NcsJob, NcsStats } from "@/lib/ncsJobTypes";
 import type { Stats } from "@/lib/types";
 import type { InvestmentPredictionsResponse } from "@/lib/investmentTypes";
 import type { AiRecommendationsResponse } from "@/lib/aiRecommendationsTypes";
+import type { LiveDataSourcesResponse } from "@/lib/liveDataTypes";
 import type { GrowthDrillNavigation } from "@/lib/portalGrowthNavigation";
 
 function PortalAnalysisSkeleton() {
@@ -75,6 +80,9 @@ interface Props {
   investmentSyncing?: boolean;
   onInvestmentSync?: () => void;
   aiData?: AiRecommendationsResponse | null;
+  liveData?: LiveDataSourcesResponse | null;
+  liveDataLoading?: boolean;
+  liveDataError?: string;
   activeNav: PortalNavId;
   onNavChange: (id: PortalNavId) => void;
   onFilterChange: (next: Partial<DashboardFilters>) => void;
@@ -82,6 +90,17 @@ interface Props {
   onDrillDown: (dimension: string, key: string) => void;
   onSync: () => void;
   syncing?: boolean;
+  ncsJobs?: NcsJob[];
+  ncsFiltered?: NcsJob[];
+  ncsFilters?: NcsDashboardFilters;
+  ncsFacets?: NcsFacetsResponse["facets"] | null;
+  ncsStats?: NcsStats | null;
+  ncsMatchTotal?: number;
+  ncsLoading?: boolean;
+  ncsSyncing?: boolean;
+  onNcsFilterChange?: (next: Partial<NcsDashboardFilters>) => void;
+  onNcsFilterReset?: () => void;
+  onNcsSync?: () => void;
 }
 
 export default function PortalDashboard({
@@ -104,6 +123,9 @@ export default function PortalDashboard({
   investmentSyncing,
   onInvestmentSync,
   aiData,
+  liveData,
+  liveDataLoading,
+  liveDataError,
   activeNav,
   onNavChange,
   onFilterChange,
@@ -111,6 +133,17 @@ export default function PortalDashboard({
   onDrillDown,
   onSync,
   syncing,
+  ncsJobs = [],
+  ncsFiltered = [],
+  ncsFilters,
+  ncsFacets,
+  ncsStats,
+  ncsMatchTotal = 0,
+  ncsLoading,
+  ncsSyncing,
+  onNcsFilterChange,
+  onNcsFilterReset,
+  onNcsSync,
 }: Props) {
   const [showDetailedAnalysis, setShowDetailedAnalysis] = useState(false);
   const [showGrowthDetailedAnalysis, setShowGrowthDetailedAnalysis] = useState(false);
@@ -136,6 +169,7 @@ export default function PortalDashboard({
   };
   const showInvestment = activeNav === "investment" || activeNav === "dashboard";
   const showUsers = activeNav === "users";
+  const showVacancy = activeNav === "vacancy";
   const showMap = filters.state === "UP";
 
   const handleNavChange = (id: PortalNavId) => {
@@ -171,7 +205,11 @@ export default function PortalDashboard({
         />
 
         <div className="portal-main">
-          <PortalHeader onSync={onSync} syncing={syncing} session={session} />
+          <PortalHeader
+            onSync={showVacancy ? onNcsSync : onSync}
+            syncing={showVacancy ? ncsSyncing : syncing}
+            session={session}
+          />
 
         <div className="portal-content">
           {error && (
@@ -227,10 +265,44 @@ export default function PortalDashboard({
               <PortalGrowthDashboard
                 data={investmentData}
                 aiData={aiData}
+                liveData={liveData}
+                liveDataLoading={liveDataLoading}
+                liveDataError={liveDataError}
                 syncing={investmentSyncing ?? false}
                 onSync={onInvestmentSync}
                 onOpenDetailedAnalysis={openGrowthDetailed}
               />
+            )
+          ) : showVacancy ? (
+            ncsLoading && ncsFiltered.length === 0 ? (
+              <PortalDashboardSkeleton />
+            ) : (
+              <>
+                <PortalNcsMetricsPanel
+                  stats={ncsStats ?? null}
+                  matchTotal={ncsMatchTotal}
+                  onApplyDrillFilter={onNcsFilterChange}
+                />
+
+                <div className="mt-5">
+                {ncsFilters && onNcsFilterChange && onNcsFilterReset && (
+                  <PortalNcsFilterBar
+                    filters={ncsFilters}
+                    facets={ncsFacets ?? null}
+                    totalAvailable={ncsStats?.total}
+                    onChange={onNcsFilterChange}
+                    onReset={onNcsFilterReset}
+                  />
+                )}
+                </div>
+
+                <div className="mt-5 grid gap-5">
+                  <PortalNcsVacancyList
+                    jobs={ncsFiltered}
+                    totalCount={ncsMatchTotal || ncsStats?.total}
+                  />
+                </div>
+              </>
             )
           ) : showInitialLoader ? (
             <PortalDashboardSkeleton />

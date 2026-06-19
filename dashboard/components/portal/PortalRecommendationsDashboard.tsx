@@ -42,6 +42,28 @@ interface DrillState {
   items: AiRecommendation[];
 }
 
+function SourceLink({ rec }: { rec: AiRecommendation }) {
+  const url = rec.sourceUrl;
+  if (!url) return null;
+  return (
+    <a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="portal-btn-primary mt-3 inline-flex items-center gap-1.5 text-xs"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+      </svg>
+      View details
+      {rec.sourceLabel && (
+        <span className="font-normal opacity-80">· {rec.sourceLabel}</span>
+      )}
+    </a>
+  );
+}
+
 export default function PortalRecommendationsDashboard({ data, onOpenDetailed }: Props) {
   const [drill, setDrill] = useState<DrillState | null>(null);
   const [selectedId, setSelectedId] = useState<number | null>(null);
@@ -144,6 +166,15 @@ export default function PortalRecommendationsDashboard({ data, onOpenDetailed }:
     <div className="space-y-5 pb-6">
       <div>
         <h2 className="text-lg font-bold text-slate-900">AI Recommendations &amp; Skill Gaps</h2>
+        {data.meta.sources && (
+          <p className="mt-1 text-xs text-slate-500">
+            Authentic data from {Array.isArray(data.meta.sources) ? data.meta.sources.length : 1} official
+            sources · {data.recommendations.length} projects
+            {typeof data.meta.workbookProjects === "number" && (
+              <> ({data.meta.workbookProjects} investment + {data.meta.liveUpsidaProjects ?? 0} live UPSIDA)</>
+            )}
+          </p>
+        )}
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
@@ -382,6 +413,12 @@ export default function PortalRecommendationsDashboard({ data, onOpenDetailed }:
                 {selected.additionalInsights && (
                   <p className="mt-3 text-xs leading-relaxed text-slate-600">{selected.additionalInsights}</p>
                 )}
+                {selected.sourceReference && (
+                  <p className="mt-2 text-[10px] text-slate-500">
+                    Source: {selected.sourceReference}
+                  </p>
+                )}
+                <SourceLink rec={selected} />
               </div>
             ) : null}
           </div>

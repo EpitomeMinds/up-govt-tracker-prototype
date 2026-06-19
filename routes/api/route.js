@@ -7,11 +7,19 @@ const {
   getInvestmentSectors,
   getInvestmentSyncMeta,
   getActiveJobsForState,
+  queryNcsJobs,
+  getNcsStats,
+  getNcsFilterOptions,
+  getNcsFacets,
 } = require("../../db/database");
 const { syncState, syncAllStates } = require("../../services/ingestion");
 const { syncInvestUp } = require("../../services/investIngestion");
+const { syncNcsJobs } = require("../../services/ncsJobSync");
+const { getNcsFrameAnalytics, listNcsFrames } = require("../../services/ncsAnalytics");
 const { generateInvestmentPredictions } = require("../../services/investmentPrediction");
-const { getAiRecommendations, getRecommendationById } = require("../../services/aiRecommendations");
+const { getAiRecommendations, getRecommendationById, reloadData } = require("../../services/aiRecommendations");
+const { getGrowthReport, reloadGrowthReport } = require("../../services/growthReport");
+const { syncAuthenticData, loadScrapedCache } = require("../../services/recommendationSync");
 
 const router = express.Router();
 const log = signale.scope("api");
@@ -47,6 +55,85 @@ router.get("/jobs", (req, res) => {
 router.get("/stats", (req, res) => {
   const stateCode = String(req.query.state || "UP").toUpperCase();
   res.json(getStats(stateCode));
+});
+
+router.get("/ncs/jobs", (req, res) => {
+  const {
+    q,
+    city,
+    state,
+    jobType,
+    functionalArea,
+    industry,
+    minSalary,
+    maxSalary,
+    minExperience,
+    maxExperience,
+    sort = "published_at",
+    order = "desc",
+    page = "1",
+    limit = "50",
+  } = req.query;
+
+  const result = queryNcsJobs({
+    q: q || undefined,
+    city: city || undefined,
+    state: state || undefined,
+    jobType: jobType || undefined,
+    functionalArea: functionalArea || undefined,
+    industry: industry || undefined,
+    minSalary: minSalary || undefined,
+    maxSalary: maxSalary || undefined,
+    minExperience: minExperience || undefined,
+    maxExperience: maxExperience || undefined,
+    sort,
+    order,
+    page,
+    limit,
+  });
+
+  res.json(result);
+});
+
+router.get("/ncs/stats", (req, res) => {
+  res.json(getNcsStats());
+});
+
+router.get("/ncs/facets", (req, res) => {
+  const cached = getNcsFilterOptions();
+  const facets = getNcsFacets();
+  res.json({
+    facets,
+    filterOptions: cached?.data || null,
+    scrapedAt: cached?.scrapedAt || null,
+  });
+});
+
+router.get("/ncs/analytics/frames", (req, res) => {
+  res.json({ frames: listNcsFrames() });
+});
+
+router.get("/ncs/analytics/frame/:frameId", (req, res) => {
+  try {
+    const result = getNcsFrameAnalytics(req.params.frameId, req.query.filters);
+    res.json(result);
+  } catch (err) {
+    log.error(err.message);
+    res.status(400).json({ error: err.message });
+  }
+});
+
+router.post("/ncs/sync", async (req, res) => {
+  try {
+    const maxPages = req.query.maxPages || req.body?.maxPages;
+    const result = await syncNcsJobs({
+      maxPages: maxPages != null ? Number(maxPages) : undefined,
+    });
+    res.json({ ok: true, ...result });
+  } catch (err) {
+    log.error(err.message);
+    res.status(500).json({ ok: false, error: err.message });
+  }
 });
 
 router.post("/sync", async (req, res) => {
@@ -86,6 +173,23 @@ router.get("/investments/sectors", (req, res) => {
 
 router.get("/investments/predictions", async (req, res) => {
   const stateCode = String(req.query.state || "UP").toUpperCase();
+
+  try {
+    const growthReport = getGrowthReport();
+    const meta = getInvestmentSyncMeta();
+    return res.json({
+      ...growthReport,
+      stateCode,
+      meta: {
+        ...growthReport.meta,
+        lastSync: meta?.lastSync ?? null,
+        sectorCount: growthReport.sectors?.length ?? 0,
+      },
+    });
+  } catch (growthErr) {
+    log.warn(`Growth report unavailable (${growthErr.message}), falling back to live predictions`);
+  }
+
   let sectors = getInvestmentSectors();
 
   if (sectors.length === 0) {
@@ -148,11 +252,46 @@ router.get("/ai-recommendations", (req, res) => {
   }
 });
 
+router.get("/ai-recommendations/sources", (req, res) => {
+  try {
+    const cache = loadScrapedCache();
+    if (!cache) {
+      return res.status(404).json({ error: "No scraped source cache — run POST /api/ai-recommendations/sync first" });
+    }
+    res.json(cache);
+  } catch (err) {
+    log.error(err.message);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+router.post("/ai-recommendations/sync", async (req, res) => {
+  try {
+    const result = await syncAuthenticData();
+    reloadData();
+    reloadGrowthReport();
+    res.json(result);
+  } catch (err) {
+    log.error(err.message);
+    res.status(500).json({ ok: false, error: err.message });
+  }
+});
+
 router.get("/ai-recommendations/:id", (req, res) => {
   try {
     const item = getRecommendationById(req.params.id);
     if (!item) return res.status(404).json({ error: "Not found" });
     res.json(item);
+  } catch (err) {
+    log.error(err.message);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+router.get("/growth/report", (req, res) => {
+  try {
+    const report = getGrowthReport();
+    res.json(report);
   } catch (err) {
     log.error(err.message);
     res.status(500).json({ error: err.message });

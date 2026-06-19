@@ -268,4 +268,6 @@ module.exports = {
   reloadData,
   loadData,
   categorizeBoard,
+  buildSummary,
+  filterRecommendations,
 };

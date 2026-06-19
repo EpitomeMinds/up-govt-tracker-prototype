@@ -42,6 +42,10 @@ export interface AiRecommendation {
   location?: string;
   keySkillsRequired?: string;
   sourceReference?: string;
+  sourceUrl?: string;
+  sourceLabel?: string;
+  listUrl?: string;
+  dataSource?: string;
   confidenceLevel?: string;
   additionalInsights?: string;
 }
@@ -116,6 +120,9 @@ export interface AiRecommendationsResponse {
     sheet: string;
     exportedAt: string;
     totalRecords: number;
+    sources?: string[];
+    workbookProjects?: number;
+    liveUpsidaProjects?: number;
   };
   summary: AiRecommendationsSummary;
   facets: AiRecommendationsFacets;

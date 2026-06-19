@@ -1083,6 +1083,7 @@ function WorkbookTable({
   compact?: boolean;
 }) {
   const displayRows = rows ?? [];
+  const hasSourceLinks = displayRows.some((row) => Boolean(row.sourceUrl));
 
   return (
     <div className="space-y-3">
@@ -1099,6 +1100,7 @@ function WorkbookTable({
               {columns.map((column) => (
                 <th key={column}>{column}</th>
               ))}
+              {hasSourceLinks && <th>Details</th>}
             </tr>
           </thead>
           <tbody>
@@ -1111,18 +1113,37 @@ function WorkbookTable({
                     </span>
                   </td>
                 ))}
+                {hasSourceLinks && (
+                  <td className="align-top whitespace-nowrap">
+                    {row.sourceUrl ? (
+                      <a
+                        href={String(row.sourceUrl)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-xs font-semibold text-[#2563eb] hover:text-[#1d4ed8]"
+                      >
+                        View details
+                        <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                      </a>
+                    ) : (
+                      "—"
+                    )}
+                  </td>
+                )}
               </tr>
             ))}
             {compact && displayRows.length > 12 && (
               <tr>
-                <td colSpan={columns.length} className="py-3 text-center text-xs font-semibold text-slate-500">
+                <td colSpan={columns.length + (hasSourceLinks ? 1 : 0)} className="py-3 text-center text-xs font-semibold text-slate-500">
                   Showing 12 of {displayRows.length} matched rows
                 </td>
               </tr>
             )}
             {displayRows.length === 0 && (
               <tr>
-                <td colSpan={columns.length} className="py-10 text-center text-slate-500">
+                <td colSpan={columns.length + (hasSourceLinks ? 1 : 0)} className="py-10 text-center text-slate-500">
                   No workbook rows found for this sheet.
                 </td>
               </tr>

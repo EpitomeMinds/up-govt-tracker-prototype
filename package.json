@@ -8,7 +8,9 @@
     "devrun": "nodemon index.js",
     "start": "node index.js",
     "sync": "node scripts/sync.js",
-    "sync:all": "node scripts/sync.js --all"
+    "sync:all": "node scripts/sync.js --all",
+    "sync:authentic": "node scripts/sync-authentic-data.js",
+    "sync:ncs": "node scripts/sync-ncs-jobs.js"
   },
   "repository": {
     "type": "git",

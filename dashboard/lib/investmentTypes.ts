@@ -64,6 +64,8 @@ export interface WorkbookProjectRow {
   jobCategory: string;
   keySkillsRequired: string;
   sourceReference: string;
+  sourceUrl?: string;
+  sourceLabel?: string;
   confidenceLevel: string;
   additionalInsights: string;
 }

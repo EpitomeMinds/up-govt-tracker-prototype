@@ -91,6 +91,10 @@ export async function triggerInvestmentSync(): Promise<void> {
   await fetchJson("/api/investments/sync", { method: "POST" });
 }
 
+export async function triggerAuthenticDataSync(): Promise<void> {
+  await fetchJson("/api/ai-recommendations/sync", { method: "POST" });
+}
+
 export function formatDate(iso: string | null): string {
   if (!iso) return "—";
   try {

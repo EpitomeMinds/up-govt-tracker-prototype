@@ -25,13 +25,18 @@ import PortalGrowthKpiRow from "./PortalGrowthKpiRow";
 import PortalGrowthCharts from "./PortalGrowthCharts";
 import PortalDistrictTable from "./PortalDistrictTable";
 import PortalRecommendationsDashboard from "./PortalRecommendationsDashboard";
+import PortalLiveDataBlock from "./PortalLiveDataBlock";
 import PortalGrowthRecommendationsFilterBar from "./PortalGrowthRecommendationsFilterBar";
+import type { LiveDataSourcesResponse } from "@/lib/liveDataTypes";
 
-type ViewTab = "growth" | "recommendations";
+type ViewTab = "growth" | "recommendations" | "live";
 
 interface Props {
   data: InvestmentPredictionsResponse;
   aiData?: AiRecommendationsResponse | null;
+  liveData?: LiveDataSourcesResponse | null;
+  liveDataLoading?: boolean;
+  liveDataError?: string;
   onOpenDetailedAnalysis: (nav?: GrowthDrillNavigation) => void;
   syncing?: boolean;
   onSync?: () => void;
@@ -40,6 +45,9 @@ interface Props {
 export default function PortalGrowthDashboard({
   data,
   aiData,
+  liveData,
+  liveDataLoading,
+  liveDataError,
   onOpenDetailedAnalysis,
   syncing,
   onSync,
@@ -74,7 +82,7 @@ export default function PortalGrowthDashboard({
             onClick={onSync}
             disabled={syncing}
           >
-            {syncing ? "Refreshing…" : "Refresh data"}
+            {syncing ? "Refreshing…" : "Refresh from official sources"}
           </button>
         )}
       </div>
@@ -99,6 +107,18 @@ export default function PortalGrowthDashboard({
             </span>
           )}
         </button>
+        <button
+          type="button"
+          className={`portal-analysis-tab ${view === "live" ? "portal-analysis-tab-active" : ""}`}
+          onClick={() => setView("live")}
+        >
+          Live Data
+          {liveData && (
+            <span className="ml-1.5 rounded-full bg-emerald-100 px-1.5 py-0.5 text-[9px] font-bold text-emerald-700">
+              {liveData.upsidaProjects.length} UPSIDA
+            </span>
+          )}
+        </button>
       </div>
 
       {view === "growth" ? (
@@ -111,7 +131,7 @@ export default function PortalGrowthDashboard({
           onChange={(next) => setGrowthFilters((prev) => ({ ...prev, ...next }))}
           onReset={() => setGrowthFilters(DEFAULT_GROWTH_FILTERS)}
         />
-      ) : aiData ? (
+      ) : view === "recommendations" && aiData ? (
         <PortalGrowthRecommendationsFilterBar
           mode="recommendations"
           aiFilters={aiFilters}
@@ -157,6 +177,28 @@ export default function PortalGrowthDashboard({
             Get Detailed Growth Analysis
           </button>
         </>
+      ) : view === "live" ? (
+        liveDataLoading ? (
+          <div className="portal-panel flex flex-col items-center justify-center gap-3 py-16 text-center">
+            <div className="portal-spinner mb-1" />
+            <p className="text-sm font-semibold text-slate-700">Loading live data…</p>
+          </div>
+        ) : liveData ? (
+          <PortalLiveDataBlock data={liveData} onRefresh={onSync} refreshing={syncing} />
+        ) : (
+          <div className="portal-panel flex flex-col items-center justify-center gap-3 py-16 text-center">
+            <p className="text-sm font-semibold text-slate-700">Live data unavailable</p>
+            <p className="max-w-sm text-xs text-slate-500">
+              {liveDataError ||
+                "Could not reach the API. Ensure the backend is running on port 3000, then refresh."}
+            </p>
+            {onSync && (
+              <button type="button" className="portal-btn-primary text-xs" onClick={onSync} disabled={syncing}>
+                {syncing ? "Refreshing…" : "Refresh live data"}
+              </button>
+            )}
+          </div>
+        )
       ) : filteredAiData ? (
         <PortalRecommendationsDashboard
           key={JSON.stringify(aiFilters)}

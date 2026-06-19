@@ -9,8 +9,10 @@ import {
   getInvestmentPredictions,
   triggerSync,
   triggerInvestmentSync,
+  triggerAuthenticDataSync,
 } from "@/lib/api";
 import { getAiRecommendations } from "@/lib/aiRecommendationsApi";
+import { getLiveDataSources } from "@/lib/liveDataApi";
 import { getPortalLanguage, refreshHindiTranslation } from "@/lib/googleTranslate";
 import { aggregateByCity } from "@/lib/upCities";
 import {
@@ -23,18 +25,32 @@ import {
 import type { Job, Stats } from "@/lib/types";
 import type { InvestmentPredictionsResponse } from "@/lib/investmentTypes";
 import type { AiRecommendationsResponse } from "@/lib/aiRecommendationsTypes";
+import type { LiveDataSourcesResponse } from "@/lib/liveDataTypes";
+import { getNcsJobs, getNcsStats, getNcsFacets, triggerNcsSync } from "@/lib/ncsJobsApi";
+import { DEFAULT_NCS_FILTERS } from "@/lib/ncsJobAnalytics";
+import type { NcsDashboardFilters, NcsFacetsResponse, NcsJob, NcsStats } from "@/lib/ncsJobTypes";
 
 const STATE_NAMES: Record<string, string> = {
   UP: "Uttar Pradesh",
 };
 
 export default function Dashboard() {
-  const [portalNav, setPortalNav] = useState<PortalNavId>("investment");
+  const [portalNav, setPortalNav] = useState<PortalNavId>("vacancy");
   const [filters, setFilters] = useState<DashboardFilters>(DEFAULT_FILTERS);
   const [allJobs, setAllJobs] = useState<Job[]>([]);
   const [stats, setStats] = useState<Stats | null>(null);
   const [investmentData, setInvestmentData] = useState<InvestmentPredictionsResponse | null>(null);
   const [aiData, setAiData] = useState<AiRecommendationsResponse | null>(null);
+  const [liveData, setLiveData] = useState<LiveDataSourcesResponse | null>(null);
+  const [liveDataLoading, setLiveDataLoading] = useState(false);
+  const [liveDataError, setLiveDataError] = useState("");
+  const [ncsJobs, setNcsJobs] = useState<NcsJob[]>([]);
+  const [ncsStats, setNcsStats] = useState<NcsStats | null>(null);
+  const [ncsFacets, setNcsFacets] = useState<NcsFacetsResponse["facets"] | null>(null);
+  const [ncsFilters, setNcsFilters] = useState<NcsDashboardFilters>(DEFAULT_NCS_FILTERS);
+  const [ncsLoading, setNcsLoading] = useState(false);
+  const [ncsMatchTotal, setNcsMatchTotal] = useState(0);
+  const [ncsSyncing, setNcsSyncing] = useState(false);
   const [loading, setLoading] = useState(true);
   const [investmentLoading, setInvestmentLoading] = useState(false);
   const [syncing, setSyncing] = useState(false);
@@ -44,6 +60,8 @@ export default function Dashboard() {
   const enriched = useMemo(() => allJobs.map(enrichJob), [allJobs]);
   const filtered = useMemo(() => applyFilters(enriched, filters), [enriched, filters]);
   const analytics = useMemo(() => computeExtendedAnalytics(filtered), [filtered]);
+
+  const ncsFiltered = useMemo(() => ncsJobs, [ncsJobs]);
 
   const boards = useMemo(() => {
     const set = new Set(enriched.map((j) => j.post_board).filter(Boolean));
@@ -97,14 +115,60 @@ export default function Dashboard() {
     try {
       const data = await getAiRecommendations();
       setAiData(data);
+      return data;
     } catch {
       setAiData(null);
+      return null;
     }
   }, []);
+
+  const loadLiveData = useCallback(async () => {
+    setLiveDataLoading(true);
+    setLiveDataError("");
+    try {
+      const data = await getLiveDataSources();
+      setLiveData(data);
+    } catch (err) {
+      setLiveData(null);
+      setLiveDataError(err instanceof Error ? err.message : "Failed to load live data");
+    } finally {
+      setLiveDataLoading(false);
+    }
+  }, []);
+
+  const loadNcsData = useCallback(async (activeFilters: NcsDashboardFilters = ncsFilters) => {
+    setNcsLoading(true);
+    try {
+      const [jobsRes, statsRes, facetsRes] = await Promise.all([
+        getNcsJobs({ ...activeFilters, limit: 200 }),
+        getNcsStats(),
+        getNcsFacets(),
+      ]);
+      setNcsJobs(jobsRes.data);
+      setNcsMatchTotal(jobsRes.pagination.total);
+      setNcsStats(statsRes);
+      setNcsFacets(facetsRes.facets);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to load NCS vacancies");
+      setNcsJobs([]);
+      setNcsStats(null);
+      setNcsFacets(null);
+    } finally {
+      setNcsLoading(false);
+    }
+  }, [ncsFilters]);
 
   useEffect(() => {
     loadData();
   }, [loadData]);
+
+  useEffect(() => {
+    if (portalNav !== "vacancy") return;
+    const timer = window.setTimeout(() => {
+      loadNcsData(ncsFilters);
+    }, 300);
+    return () => window.clearTimeout(timer);
+  }, [portalNav, ncsFilters, loadNcsData]);
 
   // Load investment data after main dashboard data, not in parallel on first paint
   useEffect(() => {
@@ -117,8 +181,9 @@ export default function Dashboard() {
   useEffect(() => {
     if (portalNav === "investment" && !investmentLoading) {
       loadAiRecommendations();
+      loadLiveData();
     }
-  }, [portalNav, investmentLoading, loadAiRecommendations]);
+  }, [portalNav, investmentLoading, loadAiRecommendations, loadLiveData]);
 
   useEffect(() => {
     if (loading || getPortalLanguage() !== "hi") return;
@@ -163,12 +228,38 @@ export default function Dashboard() {
   const handleInvestmentSync = async () => {
     setInvestmentSyncing(true);
     try {
-      await triggerInvestmentSync();
+      await Promise.all([triggerInvestmentSync(), triggerAuthenticDataSync()]);
       await loadInvestment();
+      await loadAiRecommendations();
+      await loadLiveData();
     } finally {
       setInvestmentSyncing(false);
     }
   };
+
+  const handleNcsFilterChange = (next: Partial<NcsDashboardFilters>) => {
+    setNcsFilters((prev) => ({ ...prev, ...next }));
+  };
+
+  const handleNcsFilterReset = () => {
+    setNcsFilters(DEFAULT_NCS_FILTERS);
+  };
+
+  const handleNcsSync = async () => {
+    setNcsSyncing(true);
+    setError("");
+    try {
+      await triggerNcsSync();
+      await loadNcsData();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "NCS sync failed");
+    } finally {
+      setNcsSyncing(false);
+    }
+  };
+
+  const sidebarLastSync =
+    portalNav === "vacancy" ? ncsStats?.lastSync?.synced_at : stats?.lastSync?.synced_at;
 
   return (
     <PortalDashboard
@@ -183,7 +274,7 @@ export default function Dashboard() {
       stateName={stateName}
       stats={stats}
       investmentJobs={investmentJobs}
-      lastSync={stats?.lastSync?.synced_at}
+      lastSync={sidebarLastSync}
       loading={loading}
       error={error}
       investmentData={investmentData}
@@ -191,6 +282,9 @@ export default function Dashboard() {
       investmentSyncing={investmentSyncing}
       onInvestmentSync={handleInvestmentSync}
       aiData={aiData}
+      liveData={liveData}
+      liveDataLoading={liveDataLoading}
+      liveDataError={liveDataError}
       activeNav={portalNav}
       onNavChange={setPortalNav}
       onFilterChange={handleFilterChange}
@@ -198,6 +292,17 @@ export default function Dashboard() {
       onDrillDown={handleDrillDown}
       onSync={handleSync}
       syncing={syncing}
+      ncsJobs={ncsJobs}
+      ncsFiltered={ncsFiltered}
+      ncsFilters={ncsFilters}
+      ncsFacets={ncsFacets}
+      ncsStats={ncsStats}
+      ncsMatchTotal={ncsMatchTotal}
+      ncsLoading={ncsLoading}
+      ncsSyncing={ncsSyncing}
+      onNcsFilterChange={handleNcsFilterChange}
+      onNcsFilterReset={handleNcsFilterReset}
+      onNcsSync={handleNcsSync}
     />
   );
 }

@@ -2,6 +2,8 @@ const fs = require("fs");
 const path = require("path");
 const Database = require("better-sqlite3");
 const crypto = require("crypto");
+const { normalizeStateToGeo, primeStateVariantCache } = require("../services/indiaStateNormalize");
+const { resolveIndustryBucket } = require("../services/ncsIndustryBuckets");
 
 const DATA_DIR = path.join(__dirname, "..", "data");
 const DB_PATH = process.env.DB_PATH || path.join(DATA_DIR, "jobs.db");
@@ -68,6 +70,58 @@ db.exec(`
     status     TEXT,
     message    TEXT,
     synced_at  TEXT NOT NULL
+  );
+
+  CREATE TABLE IF NOT EXISTS ncs_jobs (
+    id                 INTEGER PRIMARY KEY,
+    job_title          TEXT NOT NULL,
+    organization_name  TEXT,
+    functional_area    TEXT,
+    functional_role    TEXT,
+    industry           TEXT,
+    job_type           TEXT,
+    job_description    TEXT,
+    required_skills    TEXT,
+    city               TEXT,
+    state              TEXT,
+    locations          TEXT,
+    min_experience     REAL,
+    max_experience     REAL,
+    min_salary         REAL,
+    max_salary         REAL,
+    hide_salary_range  INTEGER DEFAULT 0,
+    no_of_vacancies    INTEGER,
+    applicant_count    INTEGER DEFAULT 0,
+    gender_preference  TEXT,
+    is_government_job  INTEGER DEFAULT 0,
+    published_at       TEXT,
+    expired_at         TEXT,
+    created_at         TEXT,
+    link               TEXT,
+    source             TEXT DEFAULT 'ncs',
+    scraped_at         TEXT NOT NULL,
+    is_active          INTEGER DEFAULT 1
+  );
+
+  CREATE INDEX IF NOT EXISTS idx_ncs_jobs_city ON ncs_jobs(city);
+  CREATE INDEX IF NOT EXISTS idx_ncs_jobs_state ON ncs_jobs(state);
+  CREATE INDEX IF NOT EXISTS idx_ncs_jobs_job_type ON ncs_jobs(job_type);
+  CREATE INDEX IF NOT EXISTS idx_ncs_jobs_functional_area ON ncs_jobs(functional_area);
+  CREATE INDEX IF NOT EXISTS idx_ncs_jobs_active ON ncs_jobs(is_active);
+  CREATE INDEX IF NOT EXISTS idx_ncs_jobs_published ON ncs_jobs(published_at);
+
+  CREATE TABLE IF NOT EXISTS ncs_sync_log (
+    id          INTEGER PRIMARY KEY AUTOINCREMENT,
+    job_count   INTEGER,
+    status      TEXT,
+    message     TEXT,
+    synced_at   TEXT NOT NULL
+  );
+
+  CREATE TABLE IF NOT EXISTS ncs_filter_options (
+    id         INTEGER PRIMARY KEY CHECK (id = 1),
+    payload    TEXT NOT NULL,
+    scraped_at TEXT NOT NULL
   );
 `);
 
@@ -375,6 +429,472 @@ function getActiveJobsForState(stateCode = "UP") {
     .all(stateCode);
 }
 
+const upsertNcsJob = db.prepare(`
+  INSERT INTO ncs_jobs (
+    id, job_title, organization_name, functional_area, functional_role, industry,
+    job_type, job_description, required_skills, city, state, locations,
+    min_experience, max_experience, min_salary, max_salary, hide_salary_range,
+    no_of_vacancies, applicant_count, gender_preference, is_government_job,
+    published_at, expired_at, created_at, link, source, scraped_at, is_active
+  ) VALUES (
+    @id, @job_title, @organization_name, @functional_area, @functional_role, @industry,
+    @job_type, @job_description, @required_skills, @city, @state, @locations,
+    @min_experience, @max_experience, @min_salary, @max_salary, @hide_salary_range,
+    @no_of_vacancies, @applicant_count, @gender_preference, @is_government_job,
+    @published_at, @expired_at, @created_at, @link, @source, @scraped_at, 1
+  )
+  ON CONFLICT(id) DO UPDATE SET
+    job_title = excluded.job_title,
+    organization_name = excluded.organization_name,
+    functional_area = excluded.functional_area,
+    functional_role = excluded.functional_role,
+    industry = excluded.industry,
+    job_type = excluded.job_type,
+    job_description = excluded.job_description,
+    required_skills = excluded.required_skills,
+    city = excluded.city,
+    state = excluded.state,
+    locations = excluded.locations,
+    min_experience = excluded.min_experience,
+    max_experience = excluded.max_experience,
+    min_salary = excluded.min_salary,
+    max_salary = excluded.max_salary,
+    hide_salary_range = excluded.hide_salary_range,
+    no_of_vacancies = excluded.no_of_vacancies,
+    applicant_count = excluded.applicant_count,
+    gender_preference = excluded.gender_preference,
+    is_government_job = excluded.is_government_job,
+    published_at = excluded.published_at,
+    expired_at = excluded.expired_at,
+    created_at = excluded.created_at,
+    link = excluded.link,
+    scraped_at = excluded.scraped_at,
+    is_active = 1
+`);
+
+const deactivateMissingNcsJobs = db.prepare(`
+  UPDATE ncs_jobs SET is_active = 0
+  WHERE id NOT IN (SELECT value FROM json_each(?))
+`);
+
+const insertNcsSyncLog = db.prepare(`
+  INSERT INTO ncs_sync_log (job_count, status, message, synced_at)
+  VALUES (@job_count, @status, @message, @synced_at)
+`);
+
+const upsertNcsFilterOptions = db.prepare(`
+  INSERT INTO ncs_filter_options (id, payload, scraped_at)
+  VALUES (1, @payload, @scraped_at)
+  ON CONFLICT(id) DO UPDATE SET
+    payload = excluded.payload,
+    scraped_at = excluded.scraped_at
+`);
+
+function mapNcsJobRow(job, scrapedAt) {
+  return {
+    id: job.id,
+    job_title: job.jobTitle || "",
+    organization_name: job.organizationName || "",
+    functional_area: job.functionalArea || "",
+    functional_role: job.functionalRole || "",
+    industry: job.industry || "",
+    job_type: job.jobType || "",
+    job_description: job.jobDescription || "",
+    required_skills: JSON.stringify(job.requiredSkills || []),
+    city: job.city || "",
+    state: job.state || "",
+    locations: JSON.stringify(job.locations || []),
+    min_experience: job.minExperience,
+    max_experience: job.maxExperience,
+    min_salary: job.minSalary,
+    max_salary: job.maxSalary,
+    hide_salary_range: job.hideSalaryRange ? 1 : 0,
+    no_of_vacancies: job.noOfVacancies,
+    applicant_count: job.applicantCount ?? 0,
+    gender_preference: job.genderPreference || "",
+    is_government_job: job.isGovernmentJob ? 1 : 0,
+    published_at: job.publishedAt || "",
+    expired_at: job.expiredAt || "",
+    created_at: job.createdAt || "",
+    link: job.link || "",
+    source: "ncs",
+    scraped_at: scrapedAt,
+  };
+}
+
+function parseNcsJobRow(row) {
+  if (!row) return row;
+  let requiredSkills = [];
+  let locations = [];
+  try {
+    requiredSkills = JSON.parse(row.required_skills || "[]");
+  } catch {
+    requiredSkills = [];
+  }
+  try {
+    locations = JSON.parse(row.locations || "[]");
+  } catch {
+    locations = [];
+  }
+  return {
+    ...row,
+    required_skills: requiredSkills,
+    locations,
+    hide_salary_range: Boolean(row.hide_salary_range),
+    is_government_job: Boolean(row.is_government_job),
+    is_active: Boolean(row.is_active),
+  };
+}
+
+function upsertNcsJobs(jobs) {
+  const scrapedAt = new Date().toISOString();
+  const ids = [];
+
+  const tx = db.transaction((items) => {
+    for (const job of items) {
+      ids.push(job.id);
+      upsertNcsJob.run(mapNcsJobRow(job, scrapedAt));
+    }
+    deactivateMissingNcsJobs.run(JSON.stringify(ids));
+  });
+
+  tx(jobs);
+  return { count: jobs.length, scrapedAt };
+}
+
+function saveNcsFilterOptions(options) {
+  const scrapedAt = new Date().toISOString();
+  upsertNcsFilterOptions.run({
+    payload: JSON.stringify(options),
+    scraped_at: scrapedAt,
+  });
+  return { scrapedAt };
+}
+
+function getNcsFilterOptions() {
+  const row = db.prepare("SELECT payload, scraped_at FROM ncs_filter_options WHERE id = 1").get();
+  if (!row) return null;
+  try {
+    return { data: JSON.parse(row.payload), scrapedAt: row.scraped_at };
+  } catch {
+    return null;
+  }
+}
+
+function queryNcsJobs({
+  q,
+  city,
+  state,
+  jobType,
+  functionalArea,
+  industry,
+  minSalary,
+  maxSalary,
+  minExperience,
+  maxExperience,
+  sort = "published_at",
+  order = "desc",
+  page = 1,
+  limit = 50,
+  activeOnly = true,
+  privateOnly = true,
+}) {
+  const conditions = [];
+  const params = { limit: Number(limit), offset: (Number(page) - 1) * Number(limit) };
+
+  if (activeOnly) conditions.push("is_active = 1");
+  if (privateOnly) conditions.push("is_government_job = 0");
+
+  if (city) {
+    conditions.push("city = @city");
+    params.city = city;
+  }
+  if (state) {
+    conditions.push("state = @state");
+    params.state = state;
+  }
+  if (jobType) {
+    conditions.push("job_type = @jobType");
+    params.jobType = jobType;
+  }
+  if (functionalArea) {
+    conditions.push("functional_area = @functionalArea");
+    params.functionalArea = functionalArea;
+  }
+  if (industry) {
+    conditions.push("industry = @industry");
+    params.industry = industry;
+  }
+  if (minSalary != null && minSalary !== "") {
+    conditions.push("(max_salary IS NULL OR max_salary >= @minSalary)");
+    params.minSalary = Number(minSalary);
+  }
+  if (maxSalary != null && maxSalary !== "") {
+    conditions.push("(min_salary IS NULL OR min_salary <= @maxSalary)");
+    params.maxSalary = Number(maxSalary);
+  }
+  if (minExperience != null && minExperience !== "") {
+    conditions.push("(max_experience IS NULL OR max_experience >= @minExperience)");
+    params.minExperience = Number(minExperience);
+  }
+  if (maxExperience != null && maxExperience !== "") {
+    conditions.push("(min_experience IS NULL OR min_experience <= @maxExperience)");
+    params.maxExperience = Number(maxExperience);
+  }
+  if (q) {
+    conditions.push(
+      "(job_title LIKE @q OR organization_name LIKE @q OR functional_area LIKE @q OR job_description LIKE @q OR city LIKE @q OR state LIKE @q)"
+    );
+    params.q = `%${q}%`;
+  }
+
+  const sortMap = {
+    published_at: "published_at",
+    salary: "max_salary",
+    experience: "min_experience",
+    title: "job_title",
+    applicants: "applicant_count",
+  };
+  const sortCol = sortMap[sort] || "published_at";
+  const sortOrder = order === "asc" ? "ASC" : "DESC";
+  const where = conditions.length ? conditions.join(" AND ") : "1=1";
+
+  const countRow = db
+    .prepare(`SELECT COUNT(*) as total FROM ncs_jobs WHERE ${where}`)
+    .get(params);
+
+  const rows = db
+    .prepare(
+      `SELECT * FROM ncs_jobs WHERE ${where} ORDER BY ${sortCol} ${sortOrder}, job_title ASC LIMIT @limit OFFSET @offset`
+    )
+    .all(params);
+
+  return {
+    data: rows.map(parseNcsJobRow),
+    pagination: {
+      page: Number(page),
+      limit: Number(limit),
+      total: countRow.total,
+      pages: Math.ceil(countRow.total / Number(limit)) || 1,
+    },
+  };
+}
+
+function getNormalizedStateStats() {
+  const rows = db
+    .prepare(
+      `SELECT state,
+        COUNT(*) AS postings,
+        SUM(CASE WHEN no_of_vacancies IS NOT NULL AND no_of_vacancies > 0 THEN no_of_vacancies ELSE 1 END) AS vacancies,
+        SUM(COALESCE(applicant_count, 0)) AS applicants
+       FROM ncs_jobs
+       WHERE is_active = 1 AND is_government_job = 0
+         AND state IS NOT NULL AND TRIM(state) != ''
+       GROUP BY state`
+    )
+    .all();
+
+  primeStateVariantCache(rows.map((r) => r.state));
+
+  const merged = new Map();
+  for (const row of rows) {
+    const geo = normalizeStateToGeo(row.state);
+    if (!geo) continue;
+    const cur = merged.get(geo) || { name: geo, postings: 0, vacancies: 0, applicants: 0 };
+    cur.postings += row.postings;
+    cur.vacancies += row.vacancies;
+    cur.applicants += row.applicants;
+    merged.set(geo, cur);
+  }
+
+  return Array.from(merged.values());
+}
+
+function topRankings(items, metric, limit = 5) {
+  return [...items]
+    .sort((a, b) => b[metric] - a[metric])
+    .slice(0, limit)
+    .map(({ name, postings, vacancies, applicants }) => ({
+      name,
+      postings,
+      vacancies,
+      applicants,
+      value: metric === "postings" ? postings : metric === "vacancies" ? vacancies : applicants,
+    }));
+}
+
+function getIndustryStats() {
+  const rows = db
+    .prepare(
+      `SELECT industry, functional_area,
+        COUNT(*) AS postings,
+        SUM(CASE WHEN no_of_vacancies IS NOT NULL AND no_of_vacancies > 0 THEN no_of_vacancies ELSE 1 END) AS vacancies,
+        SUM(COALESCE(applicant_count, 0)) AS applicants
+       FROM ncs_jobs
+       WHERE is_active = 1 AND is_government_job = 0
+       GROUP BY industry, functional_area`
+    )
+    .all();
+
+  const merged = new Map();
+  for (const row of rows) {
+    const bucket = resolveIndustryBucket(row.industry, row.functional_area);
+    const cur = merged.get(bucket) || { name: bucket, postings: 0, vacancies: 0, applicants: 0 };
+    cur.postings += row.postings;
+    cur.vacancies += row.vacancies;
+    cur.applicants += row.applicants;
+    merged.set(bucket, cur);
+  }
+
+  return Array.from(merged.values());
+}
+
+function topStateRankings(states, metric, limit = 5) {
+  return topRankings(states, metric, limit);
+}
+
+function getNcsStats() {
+  const total = db
+    .prepare("SELECT COUNT(*) as c FROM ncs_jobs WHERE is_active = 1 AND is_government_job = 0")
+    .get().c;
+
+  const aggregates = db
+    .prepare(
+      `SELECT
+        COUNT(*) as totalPostings,
+        SUM(CASE WHEN no_of_vacancies IS NOT NULL AND no_of_vacancies > 0 THEN no_of_vacancies ELSE 1 END) as totalVacancies,
+        SUM(COALESCE(applicant_count, 0)) as totalApplicants,
+        COUNT(DISTINCT NULLIF(organization_name, '')) as employers
+       FROM ncs_jobs
+       WHERE is_active = 1 AND is_government_job = 0`
+    )
+    .get();
+
+  const sevenDaysAgo = new Date();
+  sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+
+  const newThisWeek = db
+    .prepare(
+      `SELECT COUNT(*) as c FROM ncs_jobs
+       WHERE is_active = 1 AND is_government_job = 0 AND published_at >= ?`
+    )
+    .get(sevenDaysAgo.toISOString()).c;
+
+  const topCities = db
+    .prepare(
+      `SELECT city, COUNT(*) as count FROM ncs_jobs
+       WHERE is_active = 1 AND is_government_job = 0 AND city != ''
+       GROUP BY city ORDER BY count DESC LIMIT 10`
+    )
+    .all();
+
+  const topFunctionalAreas = db
+    .prepare(
+      `SELECT functional_area as area, COUNT(*) as count FROM ncs_jobs
+       WHERE is_active = 1 AND is_government_job = 0 AND functional_area != ''
+       GROUP BY functional_area ORDER BY count DESC LIMIT 10`
+    )
+    .all();
+
+  const jobTypes = db
+    .prepare(
+      `SELECT job_type as type, COUNT(*) as count FROM ncs_jobs
+       WHERE is_active = 1 AND is_government_job = 0 AND job_type != ''
+       GROUP BY job_type ORDER BY count DESC`
+    )
+    .all();
+
+  const sectorBreakdown = db
+    .prepare(
+      `SELECT functional_area as name,
+        COUNT(*) as postings,
+        SUM(CASE WHEN no_of_vacancies IS NOT NULL AND no_of_vacancies > 0 THEN no_of_vacancies ELSE 1 END) as vacancies
+       FROM ncs_jobs
+       WHERE is_active = 1 AND is_government_job = 0 AND functional_area != ''
+       GROUP BY functional_area ORDER BY postings DESC LIMIT 8`
+    )
+    .all();
+
+  const stateStats = getNormalizedStateStats();
+  const industryStats = getIndustryStats();
+
+  const lastSync = db
+    .prepare("SELECT synced_at, job_count, status FROM ncs_sync_log ORDER BY id DESC LIMIT 1")
+    .get();
+
+  return {
+    total,
+    totalPostings: aggregates.totalPostings ?? total,
+    totalVacancies: aggregates.totalVacancies ?? total,
+    totalApplicants: aggregates.totalApplicants ?? 0,
+    statesCovered: stateStats.length,
+    employers: aggregates.employers ?? 0,
+    newThisWeek,
+    topIndustriesByPostings: topRankings(industryStats, "postings"),
+    topIndustriesByVacancies: topRankings(industryStats, "vacancies"),
+    topIndustriesByApplicants: topRankings(industryStats, "applicants"),
+    topStatesByVacancies: topStateRankings(stateStats, "vacancies"),
+    topCities,
+    topFunctionalAreas,
+    jobTypes,
+    sectorBreakdown,
+    lastSync: lastSync || null,
+  };
+}
+
+function logNcsSync(jobCount, status, message = "") {
+  insertNcsSyncLog.run({
+    job_count: jobCount,
+    status,
+    message,
+    synced_at: new Date().toISOString(),
+  });
+}
+
+function getNcsFacets() {
+  const cities = db
+    .prepare(
+      `SELECT city, COUNT(*) as count FROM ncs_jobs
+       WHERE is_active = 1 AND is_government_job = 0 AND city != ''
+       GROUP BY city ORDER BY count DESC LIMIT 200`
+    )
+    .all();
+
+  const states = db
+    .prepare(
+      `SELECT state, COUNT(*) as count FROM ncs_jobs
+       WHERE is_active = 1 AND is_government_job = 0 AND state != ''
+       GROUP BY state ORDER BY count DESC`
+    )
+    .all();
+
+  const functionalAreas = db
+    .prepare(
+      `SELECT functional_area as name, COUNT(*) as count FROM ncs_jobs
+       WHERE is_active = 1 AND is_government_job = 0 AND functional_area != ''
+       GROUP BY functional_area ORDER BY count DESC LIMIT 100`
+    )
+    .all();
+
+  const industries = db
+    .prepare(
+      `SELECT industry as name, COUNT(*) as count FROM ncs_jobs
+       WHERE is_active = 1 AND is_government_job = 0 AND industry != ''
+       GROUP BY industry ORDER BY count DESC LIMIT 50`
+    )
+    .all();
+
+  const jobTypes = db
+    .prepare(
+      `SELECT job_type as name, COUNT(*) as count FROM ncs_jobs
+       WHERE is_active = 1 AND is_government_job = 0 AND job_type != ''
+       GROUP BY job_type ORDER BY count DESC`
+    )
+    .all();
+
+  return { cities, states, functionalAreas, industries, jobTypes };
+}
+
 module.exports = {
   db,
   upsertJobs,
@@ -388,4 +908,11 @@ module.exports = {
   getInvestmentSyncMeta,
   logInvestmentSync,
   getActiveJobsForState,
+  upsertNcsJobs,
+  queryNcsJobs,
+  getNcsStats,
+  logNcsSync,
+  saveNcsFilterOptions,
+  getNcsFilterOptions,
+  getNcsFacets,
 };

@@ -67,41 +67,49 @@ function parseSectorsFromHtml(html) {
   return Array.from(found);
 }
 
-function mergeWithProfiles(scrapedNames) {
+function sectorsFromScrapedNames(scrapedNames) {
   const scrapedSet = new Set(scrapedNames.map((n) => n.toLowerCase()));
 
-  return sectorProfiles.map((profile) => ({
-    ...profile,
-    liveOnSite: scrapedSet.has(profile.name.toLowerCase()) || scrapedNames.length === 0,
-    sourceUrl: `${SECTORS_URL}#${profile.slug}`,
-  }));
+  return sectorProfiles
+    .filter((profile) => scrapedSet.has(profile.name.toLowerCase()))
+    .map((profile) => ({
+      ...profile,
+      liveOnSite: true,
+      sourceUrl: `${SECTORS_URL}#${profile.slug}`,
+    }));
 }
 
 async function scrapeInvestUpSectors() {
-  let scrapedNames = [];
-  let source = "investup_live";
-
   try {
     log.info(`Fetching ${SECTORS_URL}`);
     const html = await fetchHtml(SECTORS_URL);
-    scrapedNames = parseSectorsFromHtml(html);
-    log.success(`Parsed ${scrapedNames.length} sector references from Invest UP`);
+    const scrapedNames = parseSectorsFromHtml(html);
+    const sectors = sectorsFromScrapedNames(scrapedNames);
+    log.success(`Parsed ${sectors.length} live Invest UP sectors (${scrapedNames.length} hits)`);
+    return {
+      sectors,
+      meta: {
+        source: sectors.length > 0 ? "investup_live" : "investup_failed",
+        scrapedAt: new Date().toISOString(),
+        sectorCount: sectors.length,
+        liveSectorHits: scrapedNames.length,
+        portalUrl: SECTORS_URL,
+      },
+    };
   } catch (err) {
-    source = "investup_fallback";
-    log.warn(`Live scrape failed (${err.message}) — using curated Invest UP sector profiles`);
+    log.warn(`Invest UP scrape failed (${err.message})`);
+    return {
+      sectors: [],
+      meta: {
+        source: "investup_failed",
+        scrapedAt: new Date().toISOString(),
+        sectorCount: 0,
+        liveSectorHits: 0,
+        portalUrl: SECTORS_URL,
+        error: err.message,
+      },
+    };
   }
-
-  const sectors = mergeWithProfiles(scrapedNames);
-  return {
-    sectors,
-    meta: {
-      source,
-      scrapedAt: new Date().toISOString(),
-      sectorCount: sectors.length,
-      liveSectorHits: scrapedNames.length,
-      portalUrl: SECTORS_URL,
-    },
-  };
 }
 
 module.exports = { scrapeInvestUpSectors, slugify };

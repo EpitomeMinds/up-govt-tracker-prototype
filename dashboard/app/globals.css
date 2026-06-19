@@ -524,6 +524,21 @@ body {
   }
 }
 
+@keyframes ncsFrameIn {
+  from {
+    opacity: 0;
+    transform: translateX(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.ncs-frame-chart {
+  animation: ncsFrameIn 0.28s ease-out;
+}
+
 .drill-down-enter {
   animation: drillDownIn 0.3s ease-out;
 }

@@ -7,6 +7,7 @@ const api = require("./routes/api/route");
 const { startCron } = require("./services/cron");
 const { syncState } = require("./services/ingestion");
 const { syncInvestUp } = require("./services/investIngestion");
+const { syncAuthenticData, loadScrapedCache } = require("./services/recommendationSync");
 
 dotenv.config();
 
@@ -50,6 +51,9 @@ app.get("/", (req, res) => {
       sync: "POST /api/sync?state=UP",
       investments: "/api/investments/predictions?state=UP",
       investSync: "POST /api/investments/sync",
+      aiRecommendations: "/api/ai-recommendations",
+      aiSync: "POST /api/ai-recommendations/sync",
+      growthReport: "/api/growth/report",
       legacy: "/freejobalert/gov/state/UP",
     },
   });
@@ -77,12 +81,30 @@ async function bootstrap() {
     } catch (err) {
       log.warn(`Invest UP startup sync failed: ${err.message}`);
     }
+    if (!loadScrapedCache()) {
+      try {
+        log.info("Initial authentic recommendations sync (no cache found)…");
+        await syncAuthenticData();
+      } catch (err) {
+        log.warn(`Authentic data startup sync failed: ${err.message}`);
+      }
+    }
   }
 
   startCron();
 
-  app.listen(PORT, () => {
+  const server = app.listen(PORT, () => {
     log.watch(`listening on port ${PORT}`);
+  });
+
+  server.on("error", (err) => {
+    if (err.code === "EADDRINUSE") {
+      log.error(`Port ${PORT} is already in use — stop the other API process first:`);
+      log.error(`  lsof -i :${PORT}   then   kill <PID>`);
+      log.error(`Or use: fuser -k ${PORT}/tcp`);
+      process.exit(1);
+    }
+    throw err;
   });
 }
 

@@ -1,0 +1,590 @@
+{
+  "syncedAt": "2026-06-19T19:27:53.298Z",
+  "upsida": {
+    "source": "upsida_live",
+    "scrapedAt": "2026-06-19T19:27:52.241Z",
+    "portalUrl": "https://upsida.in/Home/UpcomingProjects",
+    "projectCount": 17
+  },
+  "investIndia": {
+    "source": "investindia_live",
+    "scrapedAt": "2026-06-19T19:27:52.092Z",
+    "portalUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
+    "sectorCount": 40
+  },
+  "ncs": {
+    "source": "ncs_live",
+    "scrapedAt": "2026-06-19T19:27:53.298Z",
+    "portalUrl": "https://www.ncs.gov.in/",
+    "upJobsUrl": "https://betacloud.ncs.gov.in/job-listing",
+    "govtJobsUrl": "https://www.ncs.gov.in/_layouts/15/ncsp/govtjobvacancies.aspx",
+    "linkCount": 2
+  },
+  "nsdc": {
+    "source": "nsdc_live",
+    "scrapedAt": "2026-06-19T19:27:52.396Z",
+    "portalUrl": "https://www.nsdcindia.org/",
+    "sectorCount": 22
+  },
+  "investUp": {
+    "source": "investup_failed",
+    "scrapedAt": "2026-06-19T19:27:52.157Z",
+    "sectorCount": 0,
+    "liveSectorHits": 0,
+    "portalUrl": "https://invest.up.gov.in/sectors-in-uttar-pradesh/",
+    "error": "fetch failed"
+  },
+  "upsidaProjects": [
+    {
+      "id": "upsida-barabanki-up-state-spinning-company-ltd",
+      "district": "Barabanki",
+      "name": "UP State Spinning Company Ltd.",
+      "title": "UP State Spinning Company Ltd. – Barabanki",
+      "sector": "Textile & Apparel",
+      "detailUrl": "https://upsida.in/assets/images/upcominprojectsimg/Barabanki-GIS.png",
+      "sourceUrl": "https://upsida.in/assets/images/upcominprojectsimg/Barabanki-GIS.png",
+      "listUrl": "https://upsida.in/Home/UpcomingProjects",
+      "imageUrl": "https://upsida.in/assets/images/upcominprojectsimg/Ballia.jpg",
+      "source": "upsida_live",
+      "scrapedAt": "2026-06-19T19:27:52.236Z"
+    },
+    {
+      "id": "upsida-prayagraj-up-state-yarn-company-meja",
+      "district": "Prayagraj",
+      "name": "UP State Yarn Company, Meja",
+      "title": "UP State Yarn Company, Meja – Prayagraj",
+      "sector": "Textile & Apparel",
+      "detailUrl": "https://upsida.in/assets/images/upcominprojectsimg/PRAYAGRAJ-GIS.png",
+      "sourceUrl": "https://upsida.in/assets/images/upcominprojectsimg/PRAYAGRAJ-GIS.png",
+      "listUrl": "https://upsida.in/Home/UpcomingProjects",
+      "imageUrl": "https://upsida.in/assets/images/upcominprojectsimg/BarabankiSpinning.jpg",
+      "source": "upsida_live",
+      "scrapedAt": "2026-06-19T19:27:52.236Z"
+    },
+    {
+      "id": "upsida-banda-up-state-yarn-company",
+      "district": "Banda",
+      "name": "UP State Yarn Company",
+      "title": "UP State Yarn Company – Banda",
+      "sector": "Textile & Apparel",
+      "detailUrl": "https://upsida.in/assets/images/upcominprojectsimg/Banda-GIS.png",
+      "sourceUrl": "https://upsida.in/assets/images/upcominprojectsimg/Banda-GIS.png",
+      "listUrl": "https://upsida.in/Home/UpcomingProjects",
+      "imageUrl": "https://upsida.in/assets/images/upcominprojectsimg/Prayagraj2.jpg",
+      "source": "upsida_live",
+      "scrapedAt": "2026-06-19T19:27:52.236Z"
+    },
+    {
+      "id": "upsida-rasra-balia-up-state-yarn-company",
+      "district": "Rasra Balia",
+      "name": "UP State Yarn Company",
+      "title": "UP State Yarn Company – Rasra Balia",
+      "sector": "Textile & Apparel",
+      "detailUrl": "https://upsida.in/assets/images/upcominprojectsimg/BALLIA-GIS.png",
+      "sourceUrl": "https://upsida.in/assets/images/upcominprojectsimg/BALLIA-GIS.png",
+      "listUrl": "https://upsida.in/Home/UpcomingProjects",
+      "imageUrl": "https://upsida.in/assets/images/upcominprojectsimg/RasraBallia.jpg",
+      "source": "upsida_live",
+      "scrapedAt": "2026-06-19T19:27:52.237Z"
+    },
+    {
+      "id": "upsida-sitapur-up-co-operative-spinning-mill-mahmudabad",
+      "district": "SitaPur",
+      "name": "UP Co-operative Spinning Mill,Mahmudabad",
+      "title": "UP Co-operative Spinning Mill,Mahmudabad – SitaPur",
+      "sector": "Textile & Apparel",
+      "detailUrl": "https://upsida.in/assets/images/upcominprojectsimg/Mehmudabad-Sitapur-GIS.png",
+      "sourceUrl": "https://upsida.in/assets/images/upcominprojectsimg/Mehmudabad-Sitapur-GIS.png",
+      "listUrl": "https://upsida.in/Home/UpcomingProjects",
+      "imageUrl": "https://upsida.in/assets/images/upcominprojectsimg/MuhamdabadSpinningMills.jpg",
+      "source": "upsida_live",
+      "scrapedAt": "2026-06-19T19:27:52.237Z"
+    },
+    {
+      "id": "upsida-fatehpur-up-co-operative-spinning-mill",
+      "district": "Fatehpur",
+      "name": "UP Co-operative Spinning Mill",
+      "title": "UP Co-operative Spinning Mill – Fatehpur",
+      "sector": "Textile & Apparel",
+      "detailUrl": "https://upsida.in/assets/images/upcominprojectsimg/FATEHPUR-GIS.png",
+      "sourceUrl": "https://upsida.in/assets/images/upcominprojectsimg/FATEHPUR-GIS.png",
+      "listUrl": "https://upsida.in/Home/UpcomingProjects",
+      "imageUrl": "https://upsida.in/assets/images/upcominprojectsimg/FatehpurSpinningMills.jpg",
+      "source": "upsida_live",
+      "scrapedAt": "2026-06-19T19:27:52.237Z"
+    },
+    {
+      "id": "upsida-prayagraj-up-co-operative-spinning-mill-mauaima",
+      "district": "Prayagraj",
+      "name": "UP Co-operative Spinning Mill, Mauaima",
+      "title": "UP Co-operative Spinning Mill, Mauaima – Prayagraj",
+      "sector": "Textile & Apparel",
+      "detailUrl": "https://upsida.in/assets/images/upcominprojectsimg/Prayagraj-02-GIS.png",
+      "sourceUrl": "https://upsida.in/assets/images/upcominprojectsimg/Prayagraj-02-GIS.png",
+      "listUrl": "https://upsida.in/Home/UpcomingProjects",
+      "imageUrl": "https://upsida.in/assets/images/upcominprojectsimg/Jamnager.jpg",
+      "source": "upsida_live",
+      "scrapedAt": "2026-06-19T19:27:52.237Z"
+    },
+    {
+      "id": "upsida-gajipur-up-co-operative-yarn-mill-badaura",
+      "district": "Gajipur",
+      "name": "UP Co-operative Yarn Mill,Badaura",
+      "title": "UP Co-operative Yarn Mill,Badaura – Gajipur",
+      "sector": "Textile & Apparel",
+      "detailUrl": "https://upsida.in/assets/images/upcominprojectsimg/Badaura-Ghazipur-GIS.png",
+      "sourceUrl": "https://upsida.in/assets/images/upcominprojectsimg/Badaura-Ghazipur-GIS.png",
+      "listUrl": "https://upsida.in/Home/UpcomingProjects",
+      "imageUrl": "https://upsida.in/assets/images/upcominprojectsimg/BadauraYarnMills.jpg",
+      "source": "upsida_live",
+      "scrapedAt": "2026-06-19T19:27:52.237Z"
+    },
+    {
+      "id": "upsida-farrukhabad-up-co-operative-spinning-mill",
+      "district": "Farrukhabad",
+      "name": "UP Co-operative Spinning Mill",
+      "title": "UP Co-operative Spinning Mill – Farrukhabad",
+      "sector": "Textile & Apparel",
+      "detailUrl": "https://upsida.in/assets/images/upcominprojectsimg/FARRUKHABAD-GIS.png",
+      "sourceUrl": "https://upsida.in/assets/images/upcominprojectsimg/FARRUKHABAD-GIS.png",
+      "listUrl": "https://upsida.in/Home/UpcomingProjects",
+      "imageUrl": "https://upsida.in/assets/images/upcominprojectsimg/OIP (2).jpg",
+      "source": "upsida_live",
+      "scrapedAt": "2026-06-19T19:27:52.238Z"
+    },
+    {
+      "id": "upsida-bulandshahr-up-co-operative-spinning-mill",
+      "district": "Bulandshahr",
+      "name": "UP Co-operative Spinning Mill",
+      "title": "UP Co-operative Spinning Mill – Bulandshahr",
+      "sector": "Textile & Apparel",
+      "detailUrl": "https://upsida.in/assets/images/upcominprojectsimg/BULANDSHAHR-GIS.png",
+      "sourceUrl": "https://upsida.in/assets/images/upcominprojectsimg/BULANDSHAHR-GIS.png",
+      "listUrl": "https://upsida.in/Home/UpcomingProjects",
+      "imageUrl": "https://upsida.in/assets/images/upcominprojectsimg/Prayagraj.jpg",
+      "source": "upsida_live",
+      "scrapedAt": "2026-06-19T19:27:52.238Z"
+    },
+    {
+      "id": "upsida-unnao-trans-ganga-city",
+      "district": "Unnao",
+      "name": "TRANS GANGA CITY",
+      "title": "TRANS GANGA CITY – Unnao",
+      "sector": "Construction & Infrastructure",
+      "detailUrl": "https://onemap.nic.in/upsida/map.aspx?INDUSTRIALAREA=Trans%20Ganga%20City",
+      "sourceUrl": "https://onemap.nic.in/upsida/map.aspx?INDUSTRIALAREA=Trans%20Ganga%20City",
+      "listUrl": "https://upsida.in/Home/UpcomingProjects",
+      "imageUrl": "https://onlineupsida.com/images/transganga.jpg",
+      "source": "upsida_live",
+      "scrapedAt": "2026-06-19T19:27:52.238Z"
+    },
+    {
+      "id": "upsida-prayagraj-saraswati-hi-tech-city",
+      "district": "Prayagraj",
+      "name": "Saraswati HI-TECH City",
+      "title": "Saraswati HI-TECH City – Prayagraj",
+      "sector": "Construction & Infrastructure",
+      "detailUrl": "https://onemap.nic.in/upsida/map.aspx?INDUSTRIALAREA=Saraswati%20Hi-Tech%20City",
+      "sourceUrl": "https://onemap.nic.in/upsida/map.aspx?INDUSTRIALAREA=Saraswati%20Hi-Tech%20City",
+      "listUrl": "https://upsida.in/Home/UpcomingProjects",
+      "imageUrl": "https://onlineupsida.com/images/sarswati.jpg",
+      "source": "upsida_live",
+      "scrapedAt": "2026-06-19T19:27:52.238Z"
+    },
+    {
+      "id": "upsida-surajpur-flatted-factory",
+      "district": "Surajpur",
+      "name": "Flatted Factory",
+      "title": "Flatted Factory – Surajpur",
+      "sector": "Construction & Infrastructure",
+      "detailUrl": "https://onemap.nic.in/upsida/map.aspx?INDUSTRIALAREA=EPIP%20Kasna",
+      "sourceUrl": "https://onemap.nic.in/upsida/map.aspx?INDUSTRIALAREA=EPIP%20Kasna",
+      "listUrl": "https://upsida.in/Home/UpcomingProjects",
+      "imageUrl": "https://onlineupsida.com/images/trans-delhi.jpg",
+      "source": "upsida_live",
+      "scrapedAt": "2026-06-19T19:27:52.239Z"
+    },
+    {
+      "id": "upsida-auraiya-industrial-area-dibiyapur",
+      "district": "Auraiya",
+      "name": "Industrial Area Dibiyapur",
+      "title": "Industrial Area Dibiyapur – Auraiya",
+      "sector": "Construction & Infrastructure",
+      "detailUrl": "https://onemap.nic.in/upsida/map.aspx?INDUSTRIALAREA=I%20A%20Dibiyapur",
+      "sourceUrl": "https://onemap.nic.in/upsida/map.aspx?INDUSTRIALAREA=I%20A%20Dibiyapur",
+      "listUrl": "https://upsida.in/Home/UpcomingProjects",
+      "imageUrl": "https://onlineupsida.com/images/auriya.jpg",
+      "source": "upsida_live",
+      "scrapedAt": "2026-06-19T19:27:52.239Z"
+    },
+    {
+      "id": "upsida-baheri-mega-food-park",
+      "district": "Baheri",
+      "name": "Mega Food Park",
+      "title": "Mega Food Park – Baheri",
+      "sector": "Food Processing",
+      "detailUrl": "https://onemap.nic.in/upsida/map.aspx?INDUSTRIALAREA=Baheri%20Industrial%20Area",
+      "sourceUrl": "https://onemap.nic.in/upsida/map.aspx?INDUSTRIALAREA=Baheri%20Industrial%20Area",
+      "listUrl": "https://upsida.in/Home/UpcomingProjects",
+      "imageUrl": "https://onlineupsida.com/images/baheri-index.png",
+      "source": "upsida_live",
+      "scrapedAt": "2026-06-19T19:27:52.239Z"
+    },
+    {
+      "id": "upsida-kannauj-perfume-park",
+      "district": "Kannauj",
+      "name": "Perfume Park",
+      "title": "Perfume Park – Kannauj",
+      "sector": "Consumer & MSME",
+      "detailUrl": "https://onemap.nic.in/upsida/map.aspx?INDUSTRIALAREA=Perfume%20Park",
+      "sourceUrl": "https://onemap.nic.in/upsida/map.aspx?INDUSTRIALAREA=Perfume%20Park",
+      "listUrl": "https://upsida.in/Home/UpcomingProjects",
+      "imageUrl": "https://onlineupsida.com/images/kauunja.jpg",
+      "source": "upsida_live",
+      "scrapedAt": "2026-06-19T19:27:52.239Z"
+    },
+    {
+      "id": "upsida-agra-integrated-manufacturing-cluster",
+      "district": "Agra",
+      "name": "Integrated Manufacturing Cluster",
+      "title": "Integrated Manufacturing Cluster – Agra",
+      "sector": "Construction & Infrastructure",
+      "detailUrl": "https://onemap.nic.in/upsida/map.aspx?INDUSTRIALAREA=IMC%20Agra",
+      "sourceUrl": "https://onemap.nic.in/upsida/map.aspx?INDUSTRIALAREA=IMC%20Agra",
+      "listUrl": "https://upsida.in/Home/UpcomingProjects",
+      "imageUrl": "https://onlineupsida.com/images/agra-park.jpg",
+      "source": "upsida_live",
+      "scrapedAt": "2026-06-19T19:27:52.240Z"
+    }
+  ],
+  "investIndiaSectors": [
+    {
+      "name": "Agriculture & Allied Sector",
+      "url": "https://www.investindia.gov.in/sector/agriculture-allied-sector",
+      "source": "investindia_live"
+    },
+    {
+      "name": "Auto Components",
+      "url": "https://www.investindia.gov.in/sector/auto-components",
+      "source": "investindia_live"
+    },
+    {
+      "name": "Automobile",
+      "url": "https://www.investindia.gov.in/sector/automobile",
+      "source": "investindia_live"
+    },
+    {
+      "name": "Ayush",
+      "url": "https://www.investindia.gov.in/sector/ayush",
+      "source": "investindia_live"
+    },
+    {
+      "name": "Biotechnology",
+      "url": "https://www.investindia.gov.in/sector/biotechnology",
+      "source": "investindia_live"
+    },
+    {
+      "name": "Capital Goods",
+      "url": "https://www.investindia.gov.in/sector/capital-goods",
+      "source": "investindia_live"
+    },
+    {
+      "name": "Chemicals",
+      "url": "https://www.investindia.gov.in/sector/chemicals",
+      "source": "investindia_live"
+    },
+    {
+      "name": "Civil Aviation",
+      "url": "https://www.investindia.gov.in/sector/civil-aviation",
+      "source": "investindia_live"
+    },
+    {
+      "name": "Construction",
+      "url": "https://www.investindia.gov.in/sector/construction",
+      "source": "investindia_live"
+    },
+    {
+      "name": "Beauty & Personal Care",
+      "url": "https://www.investindia.gov.in/sector/beauty-personal-care",
+      "source": "investindia_live"
+    },
+    {
+      "name": "Gems & Jewellery",
+      "url": "https://www.investindia.gov.in/sector/gems-jewellery",
+      "source": "investindia_live"
+    },
+    {
+      "name": "Furniture",
+      "url": "https://www.investindia.gov.in/sector/furniture",
+      "source": "investindia_live"
+    },
+    {
+      "name": "Packaging",
+      "url": "https://www.investindia.gov.in/sector/packaging",
+      "source": "investindia_live"
+    },
+    {
+      "name": "Toys",
+      "url": "https://www.investindia.gov.in/sector/toys",
+      "source": "investindia_live"
+    },
+    {
+      "name": "Defence Manufacturing",
+      "url": "https://www.investindia.gov.in/sector/defence-manufacturing",
+      "source": "investindia_live"
+    },
+    {
+      "name": "Education",
+      "url": "https://www.investindia.gov.in/sector/education",
+      "source": "investindia_live"
+    },
+    {
+      "name": "Electric Mobility",
+      "url": "https://www.investindia.gov.in/sector/electric-mobility",
+      "source": "investindia_live"
+    },
+    {
+      "name": "Electronic Components and Materials",
+      "url": "https://www.investindia.gov.in/sector/electronic-components-materials",
+      "source": "investindia_live"
+    },
+    {
+      "name": "Electronic Equipment & Sub-assemblies",
+      "url": "https://www.investindia.gov.in/sector/electronic-equipment-subassemblies",
+      "source": "investindia_live"
+    },
+    {
+      "name": "Electronic Products",
+      "url": "https://www.investindia.gov.in/sector/electronic-products",
+      "source": "investindia_live"
+    },
+    {
+      "name": "Food Processing",
+      "url": "https://www.investindia.gov.in/sector/food-processing",
+      "source": "investindia_live"
+    },
+    {
+      "name": "Healthcare",
+      "url": "https://www.investindia.gov.in/sector/healthcare",
+      "source": "investindia_live"
+    },
+    {
+      "name": "IT & BPM",
+      "url": "https://www.investindia.gov.in/sector/it-bpm",
+      "source": "investindia_live"
+    },
+    {
+      "name": "Leather and Footwear",
+      "url": "https://www.investindia.gov.in/sector/leather-and-footwear",
+      "source": "investindia_live"
+    },
+    {
+      "name": "Media",
+      "url": "https://www.investindia.gov.in/sector/media",
+      "source": "investindia_live"
+    },
+    {
+      "name": "Medical Devices",
+      "url": "https://www.investindia.gov.in/sector/medical-devices",
+      "source": "investindia_live"
+    },
+    {
+      "name": "Oil & Gas",
+      "url": "https://www.investindia.gov.in/sector/oil-and-gas",
+      "source": "investindia_live"
+    },
+    {
+      "name": "Pharmaceuticals",
+      "url": "https://www.investindia.gov.in/sector/pharmaceuticals",
+      "source": "investindia_live"
+    },
+    {
+      "name": "Ports & Shipping",
+      "url": "https://www.investindia.gov.in/sector/ports-shipping",
+      "source": "investindia_live"
+    },
+    {
+      "name": "Railways",
+      "url": "https://www.investindia.gov.in/sector/railways",
+      "source": "investindia_live"
+    },
+    {
+      "name": "Real Estate",
+      "url": "https://www.investindia.gov.in/sector/real-estate",
+      "source": "investindia_live"
+    },
+    {
+      "name": "Renewable Energy",
+      "url": "https://www.investindia.gov.in/sector/renewable-energy",
+      "source": "investindia_live"
+    },
+    {
+      "name": "Retail & E-commerce",
+      "url": "https://www.investindia.gov.in/sector/retail-e-commerce",
+      "source": "investindia_live"
+    },
+    {
+      "name": "Roads & Highways",
+      "url": "https://www.investindia.gov.in/sector/road-highways",
+      "source": "investindia_live"
+    },
+    {
+      "name": "Semiconductor and IT Hardware",
+      "url": "https://www.investindia.gov.in/sector/semiconductor-and-it-hardware",
+      "source": "investindia_live"
+    },
+    {
+      "name": "Space",
+      "url": "https://www.investindia.gov.in/sector/space",
+      "source": "investindia_live"
+    },
+    {
+      "name": "Telecom",
+      "url": "https://www.investindia.gov.in/sector/telecom",
+      "source": "investindia_live"
+    },
+    {
+      "name": "Textiles & Apparel",
+      "url": "https://www.investindia.gov.in/sector/textiles-apparel",
+      "source": "investindia_live"
+    },
+    {
+      "name": "Thermal Power",
+      "url": "https://www.investindia.gov.in/sector/thermal-power",
+      "source": "investindia_live"
+    },
+    {
+      "name": "Tourism & Hospitality",
+      "url": "https://www.investindia.gov.in/sector/tourism-hospitality",
+      "source": "investindia_live"
+    }
+  ],
+  "investUpSectors": [],
+  "ncsData": {
+    "upSkillPortals": [],
+    "industryJobLinks": [
+      {
+        "name": "Jobs in Health Sector",
+        "url": "https://betacloud.ncs.gov.in/job-listing?industry=Health",
+        "source": "ncs_live"
+      },
+      {
+        "name": "Human Resources for Health Sector",
+        "url": "https://betacloud.ncs.gov.in/job-listing?industry=Health",
+        "source": "ncs_live"
+      }
+    ]
+  },
+  "nsdcSectors": [
+    {
+      "name": "QP - NOS / Course Search",
+      "url": "https://www.nsdcindia.org/qp-nos-results",
+      "source": "nsdc_live"
+    },
+    {
+      "name": "WorldSkills & IndiaSkills",
+      "url": "http://worldskills.nsdcindia.org/",
+      "source": "nsdc_live"
+    },
+    {
+      "name": "Skill India Digital Hub (SIDH)",
+      "url": "https://nsdcindia.org/Sidh/",
+      "source": "nsdc_live"
+    },
+    {
+      "name": "Find a PMKVY Training Centre",
+      "url": "https://www.pmkvyofficial.org/pmkvy2/find-a-training-centre.php",
+      "source": "nsdc_live"
+    },
+    {
+      "name": "Technical Intern Training Program (TITP)",
+      "url": "https://www.nsdcindia.org/home-titp",
+      "source": "nsdc_live"
+    },
+    {
+      "name": "Skill Impact Bond",
+      "url": "https://www.nsdcindia.org/sib",
+      "source": "nsdc_live"
+    },
+    {
+      "name": "NSDC Training Partners",
+      "url": "https://www.nsdcindia.org/partners",
+      "source": "nsdc_live"
+    },
+    {
+      "name": "Become NSDC Training Partners",
+      "url": "https://www.nsdcindia.org/non-funded-partnership",
+      "source": "nsdc_live"
+    },
+    {
+      "name": "Find A Training Partner",
+      "url": "https://www.nsdcindia.org/tphub",
+      "source": "nsdc_live"
+    },
+    {
+      "name": "Find A Training Center",
+      "url": "https://nsdcindia.org/find-nsdc-training-centre",
+      "source": "nsdc_live"
+    },
+    {
+      "name": "Sector Skill Councils",
+      "url": "https://www.nsdcindia.org/sector-skill-councils",
+      "source": "nsdc_live"
+    },
+    {
+      "name": "Find a NSDC Training Centre",
+      "url": "https://nsdcindia.org/find-nsdc-training-centre",
+      "source": "nsdc_live"
+    },
+    {
+      "name": "Kaushal Mart - Skilling Resource Marketplace",
+      "url": "http://kaushalmart.nsdcindia.org",
+      "source": "nsdc_live"
+    },
+    {
+      "name": "Skill Reports",
+      "url": "https://www.nsdcindia.org/nsdcreports",
+      "source": "nsdc_live"
+    },
+    {
+      "name": "Skill Matters",
+      "url": "https://www.nsdcindia.org/newsletter",
+      "source": "nsdc_live"
+    },
+    {
+      "name": "Find a Skill India Training Centre",
+      "url": "https://www.nsdcindia.org/skillcentres",
+      "source": "nsdc_live"
+    },
+    {
+      "name": "Takshashila Training of Trainers and Assessors",
+      "url": "https://nsdcindia.org/national-portal-trainers-and-assessors",
+      "source": "nsdc_live"
+    },
+    {
+      "name": "TakshashilaTraining of Trainers and Assessors",
+      "url": "https://nsdcindia.org/national-portal-trainers-and-assessors",
+      "source": "nsdc_live"
+    },
+    {
+      "name": "IndiaSkills 2021",
+      "url": "https://worldskillsindia.co.in/indiaskills.php",
+      "source": "nsdc_live"
+    },
+    {
+      "name": "JuniorSkills 2021",
+      "url": "https://worldskillsindia.co.in/juniorskills2021/",
+      "source": "nsdc_live"
+    },
+    {
+      "name": "SDMS Training",
+      "url": "https://www.nsdcindia.org/sdms-training",
+      "source": "nsdc_live"
+    },
+    {
+      "name": "NSDC Skills Intelligence Platform (SkillsIP)",
+      "url": "https://skillsip.nsdcindia.org/",
+      "source": "nsdc_live"
+    }
+  ]
+}
