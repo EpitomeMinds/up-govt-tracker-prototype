@@ -59,19 +59,27 @@ function ChartTooltip({
   payload?: {
     name: string;
     value: number;
-    payload?: { postings?: number; vacancies?: number };
+    payload?: { label?: string; postings?: number; vacancies?: number; applicants?: number };
   }[];
   label?: string;
   drillable?: boolean;
 }) {
   if (!active || !payload?.length) return null;
-  const row = payload[0]?.payload;
+  const point = payload[0];
+  const row = (point?.payload ?? point) as {
+    label?: string;
+    postings?: number;
+    vacancies?: number;
+    applicants?: number;
+  };
+  const title = row?.label || point?.name || label;
   const postings = row?.postings;
-  const vacancies = row?.vacancies ?? payload[0]?.value;
+  const vacancies = row?.vacancies;
+  const applicants = row?.applicants;
 
   return (
     <div className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs shadow-md">
-      <p className="font-semibold text-slate-800">{label}</p>
+      {title && <p className="font-semibold text-slate-800">{title}</p>}
       {postings != null && (
         <p className="mt-0.5 text-slate-600">
           Postings: {Number(postings).toLocaleString("en-IN")}
@@ -80,6 +88,11 @@ function ChartTooltip({
       {vacancies != null && (
         <p className="mt-0.5 text-slate-600">
           Vacancies: {Number(vacancies).toLocaleString("en-IN")}
+        </p>
+      )}
+      {applicants != null && (
+        <p className="mt-0.5 text-slate-600">
+          Applicants: {Number(applicants).toLocaleString("en-IN")}
         </p>
       )}
       {drillable && <p className="mt-1 text-[10px] text-blue-600">Click to drill down</p>}
@@ -402,7 +415,7 @@ function renderChart(
             <Cell key={entry.key} fill={entry.fill} />
           ))}
         </Pie>
-        <Tooltip formatter={(v: number) => [v.toLocaleString("en-IN"), "Postings"]} />
+        <Tooltip content={<ChartTooltip drillable={drillable} />} />
         <Legend wrapperStyle={{ fontSize: 9 }} />
       </PieChart>
     );
