@@ -56,9 +56,9 @@ export type NcsFrameId =
   | "salary"
   | "experience";
 
-export const NCS_FRAME_IDS: NcsFrameId[] = [
+export const NCS_FRAME_IDS = [
   "employers",
   "employment",
   "salary",
   "experience",
-];
+] as const satisfies readonly NcsFrameId[];
