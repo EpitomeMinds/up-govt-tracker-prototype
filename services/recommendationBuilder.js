@@ -3,7 +3,8 @@ const path = require("path");
 const { resolveFromReference, resolveSectorUrl } = require("./sourceResolver");
 const { buildSummary, categorizeBoard } = require("./aiRecommendations");
 
-const GROWTH_REPORT_PATH = path.join(
+const GROWTH_REPORT_PATH = path.join(__dirname, "..", "data", "upGrowthInvestmentReport.json");
+const GROWTH_PUBLIC_PATH = path.join(
   __dirname,
   "..",
   "dashboard",
@@ -31,11 +32,25 @@ function parseYear(raw) {
   return match ? Number(match[0]) : new Date().getFullYear();
 }
 
-function priorityFromConfidence(level, gapPercent) {
+function normalizeGapPercent(raw) {
+  const n = parseNumber(raw);
+  if (n <= 0) return 0;
+  return n <= 1 ? Math.round(n * 1000) / 10 : Math.round(n * 10) / 10;
+}
+
+function priorityFromGap(severity, gapPct) {
+  const s = String(severity || "").toLowerCase();
+  if (s.includes("critical") || gapPct >= 35) return "Critical";
+  if (s.includes("high") || gapPct >= 25) return "High";
+  if (gapPct >= 15) return "Medium";
+  return "Low";
+}
+
+function priorityFromConfidence(level, gapPct) {
   const l = String(level || "").toLowerCase();
-  if (l === "high" && gapPercent >= 30) return "Critical";
+  if (l === "high" && gapPct >= 30) return "Critical";
   if (l === "high") return "High";
-  if (l === "medium" && gapPercent >= 35) return "High";
+  if (l === "medium" && gapPct >= 35) return "High";
   if (l === "medium") return "Medium";
   return "Low";
 }
@@ -47,12 +62,55 @@ function gapFromVacancies(vacancies) {
   return { required, available: required - gap, gap, gapPct };
 }
 
+function vacancyGapRowToRecommendation(row, index) {
+  const demand = parseNumber(row["Total Projected Demand (12-mo)"]);
+  const supply = parseNumber(row["Annual Skilled-Talent Supply"]);
+  const gap = parseNumber(row["Net Vacancy Gap"]);
+  const gapPct = normalizeGapPercent(row["Gap as % of Demand"]);
+  const sector = String(row.Sector || "General");
+  const region = String(row.State || "India");
+  const confidence = String(row.Confidence || "Medium");
+  const severity = String(row["Gap Severity"] || "");
+
+  return {
+    id: index + 1,
+    priority: priorityFromGap(severity, gapPct),
+    title: `${sector} — ${region} vacancy gap`,
+    sector,
+    department: sector,
+    region,
+    horizon: "12 months",
+    actionType: String(row["Top Constraint"] || "Skilled talent"),
+    status: confidence,
+    requiredWorkforce: Math.round(demand),
+    currentlyAvailable: Math.round(supply),
+    skillGap: Math.round(gap),
+    gapPercent: gapPct,
+    budgetCr: 0,
+    durationMonths: 12,
+    startYear: 2026,
+    institutionsInvolved: 2,
+    aiConfidence: confidence === "High" ? 88 : confidence === "Medium" ? 72 : 58,
+    impactScore: Math.min(99, Math.round(gapPct + parseNumber(row["YoY Demand Growth %"]))),
+    sectorId: slug(sector),
+    regionId: slug(region),
+    subSector: sector,
+    projectedVacancies: Math.round(demand),
+    location: region,
+    keySkillsRequired: String(row["Recommended Action"] || ""),
+    sourceReference: String(row.Source || ""),
+    confidenceLevel: confidence,
+    additionalInsights: String(row["Recommended Action"] || ""),
+    dataSource: "vacancy_gap_analysis",
+  };
+}
+
 function workbookRowToRecommendation(row, index, investIndiaSectors) {
   const vacancies = parseNumber(row["Projected Vacancies"]);
   const investmentCr = parseNumber(row["Investment Value (INR Cr)"]);
   const { required, available, gap, gapPct } = gapFromVacancies(vacancies);
-  const sector = String(row["Department / Industry"] || "General");
-  const region = String(row.Region || "Uttar Pradesh");
+  const sector = String(row.Sector || row["Department / Industry"] || "General");
+  const region = String(row.State || row.Region || "India");
   const confidence = String(row["Confidence Level"] || "Medium");
   const sourceRef = String(row["Source / Reference"] || "");
   const resolved = resolveFromReference(sourceRef, sector, investIndiaSectors);
@@ -97,13 +155,80 @@ function workbookRowToRecommendation(row, index, investIndiaSectors) {
     sourceLabel: resolved.label,
     confidenceLevel: confidence,
     additionalInsights: String(row["Additional Insights"] || ""),
-    dataSource: "workbook_investment_report",
+    dataSource: "project_pipeline",
+  };
+}
+
+function alertRowToRecommendation(row, index) {
+  const regionSector = String(row["Region / Sector"] || "");
+  const parts = regionSector.split("—").map((p) => p.trim());
+  const region = parts[0] || "India";
+  const sector = parts[1] || parts[0] || "Cross-sector";
+  const severity = String(row.Severity || "High");
+
+  return {
+    id: index + 1,
+    priority: severity.toLowerCase() === "critical" ? "Critical" : "High",
+    title: String(row.Type || "Workforce alert"),
+    sector,
+    department: "Alerts & Watchlist",
+    region,
+    horizon: "Immediate",
+    actionType: String(row.Type || "Alert"),
+    status: severity,
+    requiredWorkforce: 5000,
+    currentlyAvailable: 2500,
+    skillGap: 2500,
+    gapPercent: 50,
+    budgetCr: 0,
+    durationMonths: 6,
+    startYear: 2026,
+    institutionsInvolved: 1,
+    aiConfidence: 90,
+    impactScore: 85,
+    sectorId: slug(sector),
+    regionId: slug(region),
+    keySkillsRequired: String(row["Recommended Audience"] || ""),
+    additionalInsights: String(row.Detail || ""),
+    dataSource: "alerts_watchlist",
+  };
+}
+
+function insightRowToRecommendation(row, index) {
+  const insight = String(row["Generated Insight (Natural Language)"] || "");
+  const conf = String(row.Confidence || "M").toUpperCase();
+  const confidence = conf === "H" ? "High" : conf === "L" ? "Low" : "Medium";
+
+  return {
+    id: index + 1,
+    priority: "High",
+    title: insight.length > 100 ? `${insight.slice(0, 97)}…` : insight,
+    sector: String(row["Sector(s)"] || "Cross-sector"),
+    department: "AI Insights",
+    region: String(row["Region(s)"] || "India"),
+    horizon: String(row.Horizon || "12-18 months"),
+    actionType: "AI Insight",
+    status: confidence,
+    requiredWorkforce: 10000,
+    currentlyAvailable: 7000,
+    skillGap: 3000,
+    gapPercent: 30,
+    budgetCr: 0,
+    durationMonths: 18,
+    startYear: 2026,
+    institutionsInvolved: 1,
+    aiConfidence: confidence === "High" ? 88 : 72,
+    impactScore: 75,
+    sectorId: slug(String(row["Sector(s)"] || "insight")),
+    regionId: slug(String(row["Region(s)"] || "india")),
+    additionalInsights: insight,
+    sourceReference: String(row["Traceable Inputs (sheet!cell logic)"] || ""),
+    dataSource: "ai_insights",
   };
 }
 
 function upsidaProjectToRecommendation(project, idOffset, investIndiaSectors) {
   const sector = project.sector || "Industry & Investment";
-  const sectorUrl = resolveSectorUrl(sector, investIndiaSectors);
   const { required, available, gap, gapPct } = gapFromVacancies(2500);
 
   return {
@@ -136,7 +261,7 @@ function upsidaProjectToRecommendation(project, idOffset, investIndiaSectors) {
     sourceUrl: project.detailUrl || project.sourceUrl,
     sourceLabel: "UPSIDA Official Portal",
     confidenceLevel: "High",
-    additionalInsights: `Live industrial project listed on UPSIDA portal in ${project.district}. Click View Details for official project map/GIS documentation.`,
+    additionalInsights: `Live industrial project listed on UPSIDA portal in ${project.district}.`,
     dataSource: "upsida_live",
     listUrl: project.listUrl,
   };
@@ -144,31 +269,50 @@ function upsidaProjectToRecommendation(project, idOffset, investIndiaSectors) {
 
 function inferUpsidaSkills(name) {
   const n = name.toLowerCase();
-  if (/spinning|yarn|textile|mill/i.test(n)) return "Spinning, Weaving, Quality Control, Machine Operation, Maintenance";
-  if (/food/i.test(n)) return "Food Processing, Cold Chain, Quality Assurance, Packaging";
-  if (/perfume/i.test(n)) return "Fragrance Blending, Quality Testing, Packaging, Lab Operations";
-  if (/hi-tech|trans ganga|integrated/i.test(n)) return "Construction, Infrastructure, Logistics, Industrial Operations";
+  if (/spinning|yarn|textile|mill/i.test(n)) return "Spinning, Weaving, Quality Control, Machine Operation";
+  if (/food/i.test(n)) return "Food Processing, Cold Chain, Quality Assurance";
   return "Industrial Operations, Safety, Quality Control, Maintenance";
 }
 
-function loadWorkbookRows() {
-  if (!fs.existsSync(GROWTH_REPORT_PATH)) return [];
-  const report = JSON.parse(fs.readFileSync(GROWTH_REPORT_PATH, "utf8"));
-  return report.workbook?.sheets?.mainDataset || [];
+function loadGrowthReport() {
+  for (const p of [GROWTH_REPORT_PATH, GROWTH_PUBLIC_PATH]) {
+    if (fs.existsSync(p)) return JSON.parse(fs.readFileSync(p, "utf8"));
+  }
+  return null;
 }
 
-function buildRecommendations({ upsidaProjects = [], investIndiaSectors = [] } = {}) {
-  const workbookRows = loadWorkbookRows();
-  const fromWorkbook = workbookRows.map((row, i) =>
-    workbookRowToRecommendation(row, i, investIndiaSectors)
+function loadWorkbookRows() {
+  const report = loadGrowthReport();
+  return report?.workbook?.sheets?.mainDataset || [];
+}
+
+function buildRecommendationsFromGrowthReport(report, { investIndiaSectors = [] } = {}) {
+  const sheets = report?.workbook?.sheets || {};
+  const vacancyGap = sheets.vacancyGapAnalysis || [];
+  const pipeline = sheets.mainDataset || [];
+  const alerts = sheets.alertsWatchlist || [];
+  const insights = sheets.aiInsights || [];
+
+  const fromVacancy = vacancyGap.map((row, i) => vacancyGapRowToRecommendation(row, i));
+  const fromPipeline = pipeline.map((row, i) =>
+    workbookRowToRecommendation(row, fromVacancy.length + i, investIndiaSectors)
+  );
+  const fromAlerts = alerts.map((row, i) =>
+    alertRowToRecommendation(row, fromVacancy.length + fromPipeline.length + i)
+  );
+  const fromInsights = insights.map((row, i) =>
+    insightRowToRecommendation(row, fromVacancy.length + fromPipeline.length + fromAlerts.length + i)
   );
 
-  const existingTitles = new Set(fromWorkbook.map((r) => r.title.toLowerCase()));
-  const upsidaRecs = upsidaProjects
-    .filter((p) => !existingTitles.has(p.title.toLowerCase()))
-    .map((p, i) => upsidaProjectToRecommendation(p, fromWorkbook.length + i + 1, investIndiaSectors));
-
-  const recommendations = [...fromWorkbook, ...upsidaRecs].map((r, i) => ({ ...r, id: i + 1 }));
+  const seen = new Set();
+  const recommendations = [...fromVacancy, ...fromPipeline, ...fromAlerts, ...fromInsights]
+    .filter((r) => {
+      const key = r.title.toLowerCase();
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    })
+    .map((r, i) => ({ ...r, id: i + 1 }));
 
   const summary = buildSummary(recommendations);
   const facets = {
@@ -184,15 +328,79 @@ function buildRecommendations({ upsidaProjects = [], investIndiaSectors = [] } =
 
   return {
     meta: {
-      source: "authentic_multi_source_pipeline",
+      source: "investment_forecasting_model",
       sources: [
-        "UP & Delhi NCR Jobs Investment Report (workbook)",
-        "UPSIDA Upcoming Projects Portal",
-        "Invest India – Uttar Pradesh",
-        "National Career Service (NCS)",
-        "National Skill Development Corporation (NSDC)",
+        "Government investment & PLI programmes",
+        "Vacancy gap analysis",
+        "Project pipeline",
+        "AI insights",
+        "Investment alerts",
       ],
-      sheet: "Main Dataset + Live Scrapers",
+      exportedAt: report.generatedAt || new Date().toISOString(),
+      totalRecords: recommendations.length,
+      workbookProjects: pipeline.length,
+      liveUpsidaProjects: 0,
+    },
+    summary,
+    facets,
+    recommendations,
+  };
+}
+
+function buildRecommendations({ upsidaProjects = [], investIndiaSectors = [] } = {}) {
+  const report = loadGrowthReport();
+  if (report?.workbook?.sheets?.vacancyGapAnalysis?.length) {
+    const base = buildRecommendationsFromGrowthReport(report, { investIndiaSectors });
+    if (!upsidaProjects.length) return base;
+
+    const existingTitles = new Set(base.recommendations.map((r) => r.title.toLowerCase()));
+    const upsidaRecs = upsidaProjects
+      .filter((p) => !existingTitles.has(p.title.toLowerCase()))
+      .map((p, i) =>
+        upsidaProjectToRecommendation(p, base.recommendations.length + i + 1, investIndiaSectors)
+      );
+
+    const recommendations = [...base.recommendations, ...upsidaRecs].map((r, i) => ({ ...r, id: i + 1 }));
+    return {
+      ...base,
+      meta: {
+        ...base.meta,
+        liveUpsidaProjects: upsidaRecs.length,
+        totalRecords: recommendations.length,
+      },
+      summary: buildSummary(recommendations),
+      recommendations,
+    };
+  }
+
+  const workbookRows = loadWorkbookRows();
+  const fromWorkbook = workbookRows.map((row, i) =>
+    workbookRowToRecommendation(row, i, investIndiaSectors)
+  );
+
+  const existingTitles = new Set(fromWorkbook.map((r) => r.title.toLowerCase()));
+  const upsidaRecs = upsidaProjects
+    .filter((p) => !existingTitles.has(p.title.toLowerCase()))
+    .map((p, i) => upsidaProjectToRecommendation(p, fromWorkbook.length + i + 1, investIndiaSectors));
+
+  const recommendations = [...fromWorkbook, ...upsidaRecs].map((r, i) => ({ ...r, id: i + 1 }));
+  const summary = buildSummary(recommendations);
+  const facets = {
+    priorities: [...new Set(recommendations.map((r) => r.priority))],
+    sectors: [...new Set(recommendations.map((r) => r.sector))].sort(),
+    regions: [...new Set(recommendations.map((r) => r.region))].sort(),
+    departments: [...new Set(recommendations.map((r) => r.department))].sort(),
+    boardCategories: [...new Set(recommendations.map((r) => r.department))],
+    statuses: [...new Set(recommendations.map((r) => r.status))].sort(),
+    actionTypes: [...new Set(recommendations.map((r) => r.actionType))].sort(),
+    startYears: [...new Set(recommendations.map((r) => r.startYear))].sort(),
+  };
+
+  return {
+    meta: {
+      source: "authentic_multi_source_pipeline",
+      sources: ["Project Pipeline"],
+      sheet: "Main Dataset",
       exportedAt: new Date().toISOString(),
       totalRecords: recommendations.length,
       workbookProjects: fromWorkbook.length,
@@ -206,7 +414,9 @@ function buildRecommendations({ upsidaProjects = [], investIndiaSectors = [] } =
 
 module.exports = {
   buildRecommendations,
+  buildRecommendationsFromGrowthReport,
   workbookRowToRecommendation,
+  vacancyGapRowToRecommendation,
   upsidaProjectToRecommendation,
   loadWorkbookRows,
 };

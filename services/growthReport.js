@@ -50,9 +50,10 @@ function enrichReport(report, investIndiaSectors = []) {
 
   return {
     ...report,
-    model: "workbook-growth-investment-v3-authentic",
+    model: report.model || "ai-job-opportunity-forecasting-v1",
     modelNote:
-      "Growth data enriched with official source URLs from Invest India, UPSIDA, Invest UP, NCS, and government policy portals.",
+      report.modelNote ||
+      "Growth data from AI Job Opportunity Forecasting Dashboard workbook (PIB, DPIIT, Naukri, Tracxn, India Investment Grid, NSDC).",
     generatedAt: new Date().toISOString(),
     sectors,
     workbook: report.workbook

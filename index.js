@@ -67,30 +67,32 @@ app.all("*", (req, res) => {
   res.status(404).json({ err: "404 Invalid URL" });
 });
 
-async function bootstrap() {
-  if (process.env.SKIP_STARTUP_SYNC !== "true") {
+async function runStartupSyncs() {
+  if (process.env.SKIP_STARTUP_SYNC === "true") return;
+
+  try {
+    log.info(`Initial sync for ${DEFAULT_STATE}...`);
+    await syncState(DEFAULT_STATE);
+  } catch (err) {
+    log.warn(`Startup sync failed: ${err.message}`);
+  }
+  try {
+    log.info("Initial Invest UP sector sync…");
+    await syncInvestUp();
+  } catch (err) {
+    log.warn(`Invest UP startup sync failed: ${err.message}`);
+  }
+  if (!loadScrapedCache()) {
     try {
-      log.info(`Initial sync for ${DEFAULT_STATE}...`);
-      await syncState(DEFAULT_STATE);
+      log.info("Initial authentic recommendations sync (no cache found)…");
+      await syncAuthenticData();
     } catch (err) {
-      log.warn(`Startup sync failed: ${err.message}`);
-    }
-    try {
-      log.info("Initial Invest UP sector sync…");
-      await syncInvestUp();
-    } catch (err) {
-      log.warn(`Invest UP startup sync failed: ${err.message}`);
-    }
-    if (!loadScrapedCache()) {
-      try {
-        log.info("Initial authentic recommendations sync (no cache found)…");
-        await syncAuthenticData();
-      } catch (err) {
-        log.warn(`Authentic data startup sync failed: ${err.message}`);
-      }
+      log.warn(`Authentic data startup sync failed: ${err.message}`);
     }
   }
+}
 
+async function bootstrap() {
   startCron();
 
   const server = app.listen(PORT, () => {
@@ -106,6 +108,9 @@ async function bootstrap() {
     }
     throw err;
   });
+
+  // Serve API immediately; long-running scrapes must not block the dashboard.
+  void runStartupSyncs().catch((err) => log.warn(`Background startup sync error: ${err.message}`));
 }
 
 if (require.main === module) {

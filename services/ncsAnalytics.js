@@ -170,6 +170,7 @@ function queryStateNormalized(where, params) {
 
 function aggregateQuery(groupExpr, groupAlias, where, params, limit = TOP_N, orderBy = "vacancies") {
   const orderCol = orderBy === "vacancies" ? "vacancies" : "postings";
+  const limitClause = limit != null ? `LIMIT ${limit}` : "";
   const sql = `
     SELECT ${groupExpr} AS ${groupAlias},
       COUNT(*) AS postings,
@@ -179,7 +180,7 @@ function aggregateQuery(groupExpr, groupAlias, where, params, limit = TOP_N, ord
     WHERE ${where} AND ${groupExpr} IS NOT NULL AND TRIM(CAST(${groupExpr} AS TEXT)) != ''
     GROUP BY ${groupAlias}
     ORDER BY ${orderCol} DESC
-    LIMIT ${limit}
+    ${limitClause}
   `;
   return db.prepare(sql).all(params);
 }
@@ -212,28 +213,59 @@ function queryIndustryBuckets(where, params) {
     .slice(0, TOP_N);
 }
 
+function queryIndustryBucketsAll(where, params) {
+  const rows = db
+    .prepare(
+      `SELECT industry, functional_area,
+        COUNT(*) AS postings,
+        SUM(CASE WHEN no_of_vacancies IS NOT NULL AND no_of_vacancies > 0 THEN no_of_vacancies ELSE 1 END) AS vacancies,
+        SUM(COALESCE(applicant_count, 0)) AS applicants
+       FROM ncs_jobs
+       WHERE ${where}
+       GROUP BY industry, functional_area`
+    )
+    .all(params);
+
+  const merged = new Map();
+  for (const row of rows) {
+    const bucket = resolveIndustryBucket(row.industry, row.functional_area);
+    const cur = merged.get(bucket) || { key: bucket, postings: 0, vacancies: 0, applicants: 0 };
+    cur.postings += row.postings;
+    cur.vacancies += row.vacancies;
+    cur.applicants += row.applicants;
+    merged.set(bucket, cur);
+  }
+
+  return Array.from(merged.values()).sort((a, b) => b.vacancies - a.vacancies);
+}
+
 function queryDimension(dimension, where, params, frameId, filterCount) {
+  return queryDimensionWithLimit(dimension, where, params, frameId, filterCount, TOP_N);
+}
+
+function queryDimensionWithLimit(dimension, where, params, frameId, filterCount, limit) {
   switch (dimension) {
     case "state":
       return queryStateNormalized(where, params);
     case "industry":
-      return queryIndustryBuckets(where, params);
+      if (limit === TOP_N) return queryIndustryBuckets(where, params);
+      return queryIndustryBucketsAll(where, params).slice(0, limit ?? undefined);
     case "organization":
-      return aggregateQuery("organization_name", "key", where, params, TOP_N);
+      return aggregateQuery("organization_name", "key", where, params, limit);
     case "city":
-      return aggregateQuery("city", "key", where, params, TOP_N);
+      return aggregateQuery("city", "key", where, params, limit);
     case "functionalArea":
-      return aggregateQuery("functional_area", "key", where, params, TOP_N);
+      return aggregateQuery("functional_area", "key", where, params, limit);
     case "functionalRole":
-      return aggregateQuery("functional_role", "key", where, params, TOP_N);
+      return aggregateQuery("functional_role", "key", where, params, limit);
     case "jobTitle":
-      return aggregateQuery("job_title", "key", where, params, 8, "vacancies");
+      return aggregateQuery("job_title", "key", where, params, limit ?? 8, "vacancies");
     case "jobType":
-      return aggregateQuery("job_type", "key", where, params, TOP_N);
+      return aggregateQuery("job_type", "key", where, params, limit);
     case "salaryBand":
-      return aggregateQuery(SALARY_BAND_EXPR, "key", where, params, TOP_N);
+      return aggregateQuery(SALARY_BAND_EXPR, "key", where, params, limit);
     case "experienceBand":
-      return aggregateQuery(EXPERIENCE_BAND_EXPR, "key", where, params, TOP_N);
+      return aggregateQuery(EXPERIENCE_BAND_EXPR, "key", where, params, limit);
     case "month":
       return db
         .prepare(
@@ -340,11 +372,14 @@ function buildBreadcrumb(frameId, filters) {
   return crumbs;
 }
 
-function formatMonth(key) {
-  if (!key || key.length < 7) return key;
-  const [y, m] = key.split("-");
-  const d = new Date(Number(y), Number(m) - 1, 1);
-  return d.toLocaleDateString("en-IN", { month: "short", year: "numeric" });
+function formatDatumRows(rows, dimension) {
+  return rows.map((row) => ({
+    key: row.key,
+    label: dimension === "month" ? formatMonth(row.key) : String(row.key).replace(/_/g, " "),
+    postings: row.postings,
+    vacancies: row.vacancies,
+    applicants: row.applicants,
+  }));
 }
 
 function getNcsFrameAnalytics(frameId, rawFilters = []) {
@@ -360,6 +395,10 @@ function getNcsFrameAnalytics(frameId, rawFilters = []) {
   const { where, params } = buildWhere(filters);
 
   const rows = queryDimension(dimension, where, params, frameId, filters.length);
+  const pickerRows =
+    nextDimension && dimension !== "jobTitle"
+      ? queryDimensionWithLimit(dimension, where, params, frameId, filters.length, 500)
+      : [];
   const summary = db
     .prepare(
       `SELECT COUNT(*) AS postings,
@@ -369,17 +408,13 @@ function getNcsFrameAnalytics(frameId, rawFilters = []) {
     )
     .get(params);
 
-  const data = rows.map((row) => ({
-    key: row.key,
-    label: dimension === "month" ? formatMonth(row.key) : String(row.key).replace(/_/g, " "),
-    postings: row.postings,
-    vacancies: row.vacancies,
-    applicants: row.applicants,
-  }));
+  const data = formatDatumRows(rows, dimension);
+  const pickerOptions = formatDatumRows(pickerRows, dimension);
 
   const chartType = chartTypeFor(frameId, dimension, filters.length);
   if (chartType === "bar" || chartType === "horizontalBar") {
     data.sort((a, b) => b.vacancies - a.vacancies);
+    pickerOptions.sort((a, b) => b.vacancies - a.vacancies);
   }
 
   return {
@@ -399,7 +434,15 @@ function getNcsFrameAnalytics(frameId, rawFilters = []) {
       applicants: summary?.applicants ?? 0,
     },
     data,
+    pickerOptions,
   };
+}
+
+function formatMonth(key) {
+  if (!key || key.length < 7) return key;
+  const [y, m] = key.split("-");
+  const d = new Date(Number(y), Number(m) - 1, 1);
+  return d.toLocaleDateString("en-IN", { month: "short", year: "numeric" });
 }
 
 function listNcsFrames() {

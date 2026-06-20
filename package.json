@@ -10,7 +10,8 @@
     "sync": "node scripts/sync.js",
     "sync:all": "node scripts/sync.js --all",
     "sync:authentic": "node scripts/sync-authentic-data.js",
-    "sync:ncs": "node scripts/sync-ncs-jobs.js"
+    "sync:ncs": "node scripts/sync-ncs-jobs.js",
+    "import:workbook": "python3 scripts/import-ai-job-workbook.py && node scripts/build-recommendations-from-growth.js"
   },
   "repository": {
     "type": "git",
