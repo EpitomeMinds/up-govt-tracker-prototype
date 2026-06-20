@@ -70,13 +70,41 @@ export interface WorkbookProjectRow {
   additionalInsights: string;
 }
 
+export interface DashboardKpis {
+  pliJobsCumulative?: number;
+  fdiInflowUsdBn?: number;
+  startupFundingUsdBn?: number;
+  trackedPipelineInvestmentCr?: number;
+  forecastHorizons?: { horizon: string; jobs: number; low: number; high: number }[];
+  topStatesByIntensity?: { rank: number; state: string; intensity: number }[];
+}
+
 export interface WorkbookGrowthSheets {
   mainDataset?: Record<string, unknown>[];
+  projectPipeline?: Record<string, unknown>[];
+  projectPipelineSheet?: Record<string, unknown>[];
+  controlPanel?: Record<string, unknown>[];
+  vacancyGapAnalysis?: Record<string, unknown>[];
+  jobForecast?: Record<string, unknown>[];
+  sectorSubSectorMaster?: Record<string, unknown>[];
+  stateCityMaster?: Record<string, unknown>[];
+  hiringHeatmap?: Record<string, unknown>[];
   executiveSummary?: Record<string, unknown>[];
   skillDemandForecast?: Record<string, unknown>[];
   topOpportunities?: Record<string, unknown>[];
   districtForecast?: Record<string, unknown>[];
   employmentRanking?: Record<string, unknown>[];
+  investmentToEmployment?: Record<string, unknown>[];
+  aiInsights?: Record<string, unknown>[];
+  alertsWatchlist?: Record<string, unknown>[];
+  fdiTracker?: Record<string, unknown>[];
+  pliTracker?: Record<string, unknown>[];
+  startupTracker?: Record<string, unknown>[];
+  historicalTrend?: Record<string, unknown>[];
+  economicIndicators?: Record<string, unknown>[];
+  dataSources?: Record<string, unknown>[];
+  methodologyAssumptions?: Record<string, unknown>[];
+  dashboardKpis?: DashboardKpis;
   assumptions?: Record<string, unknown>[];
 }
 

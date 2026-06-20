@@ -47,6 +47,8 @@ export interface NcsFrameAnalytics {
     applicants: number;
   };
   data: NcsAnalyticsDatum[];
+  /** Full drill list for filter picker (chart shows top 5 only). */
+  pickerOptions?: NcsAnalyticsDatum[];
 }
 
 export type NcsFrameId =

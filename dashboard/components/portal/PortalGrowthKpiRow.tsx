@@ -45,7 +45,7 @@ export default function PortalGrowthKpiRow({ kpis }: Props) {
     {
       label: "Top Opportunities",
       value: String(kpis.topOpportunities),
-      delta: "Ranked workbook rows",
+      delta: "Ranked rows",
       className: "portal-growth-kpi-purple",
       icon: (
         <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>

@@ -71,15 +71,15 @@ export default function InvestmentForecastDashboard({
       <header className="bi-zone-header">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div>
-            <span className="bi-zone-badge mb-2 inline-block">Workbook Growth Report</span>
+            <span className="bi-zone-badge mb-2 inline-block">Growth Investment Report</span>
             <h2 className="bi-zone-title">UP &amp; Delhi NCR Jobs Investment Projection</h2>
             <p className="bi-zone-desc">
-              Projections are loaded from the workbook across investment projects, skills,
-              opportunities, district forecasts, employment rankings, and assumptions.
+              Projections across investment projects, skills, opportunities, district forecasts,
+              employment rankings, and assumptions.
             </p>
           </div>
           <button type="button" className="btn-primary text-xs" onClick={onSync} disabled={syncing}>
-            {syncing ? "Refreshing…" : "Refresh workbook data"}
+            {syncing ? "Refreshing…" : "Refresh data"}
           </button>
         </div>
         <p className="mt-2 text-[10px] text-bi-muted">

@@ -2,6 +2,7 @@
 
 import type { AiRecommendationFilters, AiRecommendationsFacets } from "@/lib/aiRecommendationsTypes";
 import type { GrowthFacets, GrowthFilters } from "@/lib/portalGrowthFilters";
+import { subSectorsForIndustry } from "@/lib/portalGrowthFilters";
 
 type Mode = "growth" | "recommendations";
 
@@ -9,6 +10,8 @@ interface BaseProps {
   mode: Mode;
   resultCount: number;
   totalCount: number;
+  recommendationCount?: number;
+  recommendationTotal?: number;
   onReset: () => void;
 }
 
@@ -29,7 +32,7 @@ interface RecommendationsProps extends BaseProps {
 type Props = GrowthProps | RecommendationsProps;
 
 export default function PortalGrowthRecommendationsFilterBar(props: Props) {
-  const { mode, resultCount, totalCount, onReset } = props;
+  const { mode, resultCount, totalCount, recommendationCount, recommendationTotal, onReset } = props;
   const activeCount =
     mode === "growth"
       ? Object.values(props.growthFilters).filter(Boolean).length
@@ -54,7 +57,10 @@ export default function PortalGrowthRecommendationsFilterBar(props: Props) {
             </span>
           )}
           <span className="text-[11px] text-slate-500">
-            {resultCount} of {totalCount} shown
+            {resultCount} of {totalCount} projects
+            {recommendationTotal != null && recommendationCount != null && (
+              <> · {recommendationCount} of {recommendationTotal} recommendations</>
+            )}
           </span>
         </div>
         <button type="button" onClick={onReset} className="portal-btn-ghost text-xs">
@@ -78,6 +84,20 @@ function GrowthFields({
   growthFacets,
   onChange,
 }: GrowthProps) {
+  const subSectorOptions = subSectorsForIndustry(growthFacets, growthFilters.industry);
+
+  const handleIndustryChange = (industry: string) => {
+    const next: Partial<GrowthFilters> = { industry };
+    if (
+      growthFilters.subSector &&
+      industry &&
+      !subSectorsForIndustry(growthFacets, industry).includes(growthFilters.subSector)
+    ) {
+      next.subSector = "";
+    }
+    onChange(next);
+  };
+
   return (
     <>
       <SearchInput
@@ -87,9 +107,22 @@ function GrowthFields({
       />
       <Select
         value={growthFilters.industry}
-        onChange={(industry) => onChange({ industry })}
-        label="Industry"
+        onChange={handleIndustryChange}
+        label="Sector"
         options={growthFacets.industries}
+      />
+      <Select
+        value={growthFilters.state}
+        onChange={(state) => onChange({ state })}
+        label="State"
+        options={growthFacets.states}
+      />
+      <Select
+        value={growthFilters.subSector}
+        onChange={(subSector) => onChange({ subSector })}
+        label={growthFilters.industry ? "Sub-sector" : "Sub-sector (pick sector first)"}
+        options={subSectorOptions}
+        disabled={!growthFilters.industry}
       />
       <Select
         value={growthFilters.region}
@@ -208,23 +241,26 @@ function Select({
   onChange,
   label,
   options,
+  disabled,
 }: {
   value: string;
   onChange: (value: string) => void;
   label: string;
   options: string[];
+  disabled?: boolean;
 }) {
   return (
     <select
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      className="portal-select min-w-[130px]"
+      className="portal-select min-w-[130px] disabled:cursor-not-allowed disabled:opacity-50"
       aria-label={label}
+      disabled={disabled}
     >
       <option value="">{label}</option>
       {options.map((opt) => (
-        <option key={opt} value={opt}>
-          {opt.length > 36 ? `${opt.slice(0, 35)}…` : opt}
+        <option key={opt} value={opt} title={opt}>
+          {opt.length > 42 ? `${opt.slice(0, 41)}…` : opt}
         </option>
       ))}
     </select>

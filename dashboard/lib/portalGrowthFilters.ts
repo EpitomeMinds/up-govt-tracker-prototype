@@ -11,7 +11,9 @@ export interface GrowthFilters {
   q: string;
   industry: string;
   region: string;
+  state: string;
   district: string;
+  subSector: string;
   skillType: string;
   confidence: string;
 }
@@ -19,7 +21,10 @@ export interface GrowthFilters {
 export interface GrowthFacets {
   industries: string[];
   regions: string[];
+  states: string[];
   districts: string[];
+  subSectors: string[];
+  subSectorsByIndustry: Record<string, string[]>;
   skillTypes: string[];
   confidenceLevels: string[];
 }
@@ -28,7 +33,9 @@ export const DEFAULT_GROWTH_FILTERS: GrowthFilters = {
   q: "",
   industry: "",
   region: "",
+  state: "",
   district: "",
+  subSector: "",
   skillType: "",
   confidence: "",
 };
@@ -43,6 +50,99 @@ function mainRows(data: InvestmentPredictionsResponse): Record<string, unknown>[
   return data.workbook?.sheets?.mainDataset ?? [];
 }
 
+function masterRows(data: InvestmentPredictionsResponse): Record<string, unknown>[] {
+  return data.workbook?.sheets?.sectorSubSectorMaster ?? [];
+}
+
+const STOP_WORDS = new Set([
+  "and",
+  "incl",
+  "the",
+  "for",
+  "with",
+  "from",
+  "via",
+  "all",
+  "bands",
+]);
+
+function tokenize(label: string): string[] {
+  return label
+    .toLowerCase()
+    .split(/[\s/&,()–\-]+/)
+    .map((t) => t.replace(/[^a-z0-9]/g, ""))
+    .filter((t) => t.length > 2 && !STOP_WORDS.has(t));
+}
+
+/** Match a pipeline / recommendation row against a master sub-sector label. */
+export function rowMatchesMasterSubSector(
+  row: Record<string, unknown>,
+  subSector: string
+): boolean {
+  const hay = [
+    row.Sector,
+    row["Department / Industry"],
+    row["Sub-Sector"],
+    row["Investment Project / Initiative"],
+    row.sector,
+    row.subSector,
+    row.title,
+  ]
+    .map((v) => String(v ?? "").toLowerCase())
+    .join(" ");
+  const subL = subSector.toLowerCase();
+  if (hay.includes(subL)) return true;
+
+  const primary = subSector.split(/[(]/)[0]?.trim().toLowerCase() ?? "";
+  if (primary.length >= 8) {
+    for (let len = Math.min(primary.length, 22); len >= 8; len -= 1) {
+      for (let i = 0; i <= primary.length - len; i += 1) {
+        const chunk = primary.slice(i, i + len);
+        if (hay.includes(chunk)) return true;
+      }
+    }
+  }
+
+  const tokens = tokenize(subSector).filter((t) => t.length >= 4);
+  if (!tokens.length) return false;
+  const hits = tokens.filter((t) => hay.includes(t)).length;
+  const need = tokens.length <= 2 ? tokens.length : Math.max(2, Math.ceil(tokens.length * 0.5));
+  return hits >= need;
+}
+
+function buildMasterSectorFacets(data: InvestmentPredictionsResponse): {
+  industries: string[];
+  subSectors: string[];
+  subSectorsByIndustry: Record<string, string[]>;
+} {
+  const subSectorsByIndustry: Record<string, string[]> = {};
+  const industries: string[] = [];
+  const allSubSectors = new Set<string>();
+
+  for (const row of masterRows(data)) {
+    const parent = String(row["Parent Sector"] ?? "").trim();
+    const sub = String(row["Sub-Sector / Industry"] ?? "").trim();
+    if (!parent || !sub) continue;
+    if (!subSectorsByIndustry[parent]) {
+      subSectorsByIndustry[parent] = [];
+      industries.push(parent);
+    }
+    if (!subSectorsByIndustry[parent].includes(sub)) {
+      subSectorsByIndustry[parent].push(sub);
+      allSubSectors.add(sub);
+    }
+  }
+
+  industries.sort();
+  for (const parent of industries) subSectorsByIndustry[parent].sort();
+
+  return {
+    industries,
+    subSectors: [...allSubSectors].sort(),
+    subSectorsByIndustry,
+  };
+}
+
 export function extractGrowthFacets(data: InvestmentPredictionsResponse): GrowthFacets {
   const rows = mainRows(data);
   const uniq = (key: string) =>
@@ -51,20 +151,44 @@ export function extractGrowthFacets(data: InvestmentPredictionsResponse): Growth
   const districts = [
     ...new Set(
       rows
-        .map((r) => String(r.Location ?? "").trim())
+        .map((r) => String(r["City/District"] ?? r.Location ?? "").trim())
         .filter(Boolean)
         .flatMap((loc) => loc.split(/[,/]/).map((p) => p.trim()))
         .filter(Boolean)
     ),
   ].sort();
 
+  const masterSectors = buildMasterSectorFacets(data);
+
   return {
-    industries: uniq("Department / Industry"),
+    industries: masterSectors.industries,
     regions: uniq("Region"),
+    states: uniq("State").length ? uniq("State") : uniq("Region"),
     districts,
+    subSectors: masterSectors.subSectors,
+    subSectorsByIndustry: masterSectors.subSectorsByIndustry,
     skillTypes: uniq("Skill Type"),
     confidenceLevels: uniq("Confidence Level"),
   };
+}
+
+export function subSectorsForIndustry(facets: GrowthFacets, industry: string): string[] {
+  if (!industry) return [];
+  return facets.subSectorsByIndustry[industry] ?? [];
+}
+
+/** Apply growth sector / sub-sector filters to AI recommendation rows. */
+export function recommendationMatchesGrowthSectorFilters(
+  rec: Record<string, unknown>,
+  filters: GrowthFilters,
+  facets: GrowthFacets
+): boolean {
+  if (filters.subSector) return rowMatchesMasterSubSector(rec, filters.subSector);
+  if (filters.industry) {
+    const subs = facets.subSectorsByIndustry[filters.industry] ?? [];
+    return subs.some((sub) => rowMatchesMasterSubSector(rec, sub));
+  }
+  return true;
 }
 
 export function countActiveGrowthFilters(filters: GrowthFilters): number {
@@ -78,11 +202,19 @@ export function filterGrowthRows(
   let rows = mainRows(data);
   if (!rows.length) return rows;
 
-  if (filters.industry) {
-    rows = rows.filter((r) => String(r["Department / Industry"] ?? "") === filters.industry);
+  const facets = extractGrowthFacets(data);
+
+  if (filters.subSector) {
+    rows = rows.filter((r) => rowMatchesMasterSubSector(r, filters.subSector));
+  } else if (filters.industry) {
+    const subs = facets.subSectorsByIndustry[filters.industry] ?? [];
+    rows = rows.filter((r) => subs.some((sub) => rowMatchesMasterSubSector(r, sub)));
+  }
+  if (filters.state) {
+    rows = rows.filter((r) => String(r.State ?? r.Region ?? "") === filters.state);
   }
   if (filters.region) {
-    rows = rows.filter((r) => String(r.Region ?? "") === filters.region);
+    rows = rows.filter((r) => String(r.Region ?? r.State ?? "") === filters.region);
   }
   if (filters.district) {
     const d = filters.district.toLowerCase();
@@ -99,8 +231,10 @@ export function filterGrowthRows(
     rows = rows.filter((r) => {
       const hay = [
         r["Investment Project / Initiative"],
+        r.Sector,
         r["Department / Industry"],
         r["Sub-Sector"],
+        r.State,
         r.Location,
         r["Key Skills Required"],
         r["Job Category"],
@@ -134,7 +268,7 @@ export function computeFilteredGrowthKpis(
     0
   );
   const projectedJobs = rows.reduce((sum, r) => sum + readNum(r["Projected Vacancies"]), 0);
-  const industries = new Set(rows.map((r) => String(r["Department / Industry"] ?? "").trim()).filter(Boolean));
+  const industries = new Set(rows.map((r) => String(r.Sector ?? r["Department / Industry"] ?? "").trim()).filter(Boolean));
   const districts = new Set(
     rows
       .map((r) => String(r.Location ?? "").trim())

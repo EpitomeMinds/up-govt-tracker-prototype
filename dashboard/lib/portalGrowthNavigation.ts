@@ -1,19 +1,9 @@
-export type GrowthAnalysisSectionId =
-  | "overview"
-  | "sectors"
-  | "districts"
-  | "trends"
-  | "projects"
-  | "skills"
-  | "opportunities"
-  | "ranking"
-  | "summary"
-  | "recommendations";
+import type { GrowthWorkbookSheetId } from "./growthWorkbookSheetRegistry";
 
 /** Where a chart click should navigate in the growth detailed view. */
 export interface GrowthDrillNavigation {
-  section: GrowthAnalysisSectionId;
-  /** Workbook column to filter on (e.g. "Department / Industry"). */
+  section: GrowthWorkbookSheetId | string;
+  /** Workbook column to filter on (e.g. "Sector"). */
   filterKey?: string;
   filterValue?: string;
 }
@@ -24,29 +14,31 @@ export interface GrowthOverviewDrillHandlers {
   onDistrictClick?: (district: string) => void;
 }
 
-/** Map industry bar click → Projects tab filtered by industry. */
+/** Map industry bar click → Top Employers sheet. */
 export function sectorDrillNav(sectorName: string): GrowthDrillNavigation {
   return {
-    section: "projects",
-    filterKey: "Department / Industry",
+    section: "topOpportunities",
+    filterKey: "Sector",
     filterValue: sectorName,
   };
 }
 
-/** Map timeline year click → Projects tab filtered by hiring period. */
+/** Map timeline year click → Job Forecast sheet. */
 export function yearDrillNav(year: string): GrowthDrillNavigation {
   return {
-    section: "projects",
-    filterKey: "Hiring Period",
+    section: "jobForecast",
+    filterKey: "Sector",
     filterValue: year,
   };
 }
 
-/** Map district row click → Projects tab filtered by location. */
+/** Map district row click → Vacancy Gap sheet. */
 export function districtDrillNav(district: string): GrowthDrillNavigation {
   return {
-    section: "projects",
-    filterKey: "Location",
+    section: "vacancyGapAnalysis",
+    filterKey: "State",
     filterValue: district,
   };
 }
+
+export type GrowthAnalysisSectionId = GrowthWorkbookSheetId;

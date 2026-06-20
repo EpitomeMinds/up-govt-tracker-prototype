@@ -254,7 +254,6 @@ export default function PortalDashboard({
             ) : showGrowthDetailedAnalysis ? (
               <PortalGrowthDetailedAnalysis
                 data={investmentData}
-                aiData={aiData}
                 initialNav={growthInitialNav}
                 onBack={() => {
                   setShowGrowthDetailedAnalysis(false);

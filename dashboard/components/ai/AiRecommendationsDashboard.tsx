@@ -101,8 +101,13 @@ export default function AiRecommendationsDashboard({
         <h2 className="bi-zone-title">AI Recommendations Dashboard</h2>
         <p className="bi-zone-desc">
           {data.meta.totalRecords} workforce recommendations across {data.summary.sectorCount}{" "}
-          sectors and {data.summary.regionCount} regions — sourced from{" "}
-          <span className="font-medium text-bi-title">{data.meta.source}</span>
+          sectors and {data.summary.regionCount} regions
+          {Array.isArray(data.meta.sources) && data.meta.sources.length > 0 && (
+            <>
+              {" "}
+              — sourced from {data.meta.sources.length} official datasets
+            </>
+          )}
         </p>
       </header>
 

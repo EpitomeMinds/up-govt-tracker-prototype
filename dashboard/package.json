@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "import:workbook": "python3 ../scripts/import-ai-job-workbook.py && node ../scripts/build-recommendations-from-growth.js",
     "sync:data": "mkdir -p public && for f in upGrowthInvestmentReport.json upAiRecommendations.json; do if [ -f ../data/$f ]; then cp ../data/$f public/$f; elif [ ! -f public/$f ]; then echo \"Missing workbook data: public/$f (and ../data/$f not found)\"; exit 1; fi; done",
     "predev": "npm run sync:data",
     "prebuild": "npm run sync:data",

@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import {
   Bar,
@@ -19,6 +19,7 @@ import {
 } from "recharts";
 import { getNcsFrameAnalytics } from "@/lib/ncsAnalyticsApi";
 import type {
+  NcsAnalyticsDatum,
   NcsAnalyticsFilter,
   NcsFrameAnalytics,
   NcsFrameId,
@@ -111,6 +112,7 @@ export default function NcsDrillChartFrame({
   const [analytics, setAnalytics] = useState<NcsFrameAnalytics | null>(null);
   const [loading, setLoading] = useState(true);
   const [slideKey, setSlideKey] = useState(0);
+  const [filterOpen, setFilterOpen] = useState(false);
 
   const load = useCallback(async (activeFilters: NcsAnalyticsFilter[]) => {
     setLoading(true);
@@ -131,6 +133,7 @@ export default function NcsDrillChartFrame({
 
   const drillInto = (key: string) => {
     if (!analytics?.drillable || !analytics.dimension) return;
+    setFilterOpen(false);
     const next = [...filters, { dimension: analytics.dimension, value: key }];
     setFilters(next);
     syncListFilters(next);
@@ -157,6 +160,7 @@ export default function NcsDrillChartFrame({
   };
 
   const goToLevel = (level: number) => {
+    setFilterOpen(false);
     const next = filters.slice(0, level);
     setFilters(next);
     syncListFilters(next);
@@ -168,9 +172,13 @@ export default function NcsDrillChartFrame({
   };
 
   const reset = () => {
+    setFilterOpen(false);
     setFilters([]);
     onApplyFilter?.({});
   };
+
+  const isDrilled = filters.length > 0;
+  const pickerOptions = analytics?.pickerOptions ?? [];
 
   const chartData = (analytics?.data ?? []).map((row, i) => ({
     ...row,
@@ -194,16 +202,27 @@ export default function NcsDrillChartFrame({
           <h2 className="portal-panel-title truncate">{title}</h2>
         </div>
         <div className="flex shrink-0 items-center gap-1">
-          {filters.length > 0 && (
-            <>
-              <button type="button" onClick={goBack} className="portal-btn-ghost px-2 py-1 text-[11px]">
-                ← Back
-              </button>
-              <button type="button" onClick={reset} className="portal-btn-ghost px-2 py-1 text-[11px]">
-                Reset
-              </button>
-            </>
+          {analytics?.drillable && pickerOptions.length > 0 && (
+            <FrameFilterMenu
+              open={filterOpen}
+              onOpenChange={setFilterOpen}
+              options={pickerOptions}
+              onPick={(row) => drillInto(row.key)}
+            />
           )}
+          {filters.length > 0 && (
+            <button type="button" onClick={goBack} className="portal-btn-ghost px-2 py-1 text-[11px]">
+              ← Back
+            </button>
+          )}
+          <button
+            type="button"
+            onClick={reset}
+            className={`portal-btn-ghost px-2 py-1 text-[11px] ${isDrilled ? "text-blue-700" : "text-slate-500"}`}
+            disabled={!isDrilled}
+          >
+            Reset
+          </button>
         </div>
       </div>
 
@@ -468,5 +487,96 @@ function renderChart(
         }}
       />
     </BarChart>
+  );
+}
+
+function FrameFilterMenu({
+  open,
+  onOpenChange,
+  options,
+  onPick,
+}: {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  options: NcsAnalyticsDatum[];
+  onPick: (row: NcsAnalyticsDatum) => void;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const top5 = options.slice(0, 5);
+  const rest = options.slice(5);
+
+  useEffect(() => {
+    if (!open) return;
+    const onDoc = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) onOpenChange(false);
+    };
+    document.addEventListener("mousedown", onDoc);
+    return () => document.removeEventListener("mousedown", onDoc);
+  }, [open, onOpenChange]);
+
+  return (
+    <div className="relative" ref={ref}>
+      <button
+        type="button"
+        onClick={() => onOpenChange(!open)}
+        className="portal-btn-ghost flex h-7 w-7 items-center justify-center p-0"
+        aria-label="Filter and drill options"
+        title="Pick option to drill down"
+      >
+        <svg className="h-4 w-4 text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"
+          />
+        </svg>
+      </button>
+
+      {open && (
+        <div className="absolute right-0 top-full z-30 mt-1 max-h-[320px] w-[min(300px,calc(100vw-2rem))] overflow-y-auto rounded-xl border border-slate-200 bg-white py-1 shadow-lg">
+          <FilterSection title={`Top 5 · chart`} rows={top5} onPick={onPick} />
+          {rest.length > 0 && (
+            <FilterSection title={`All others (${rest.length})`} rows={rest} onPick={onPick} />
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function FilterSection({
+  title,
+  rows,
+  onPick,
+}: {
+  title: string;
+  rows: NcsAnalyticsDatum[];
+  onPick: (row: NcsAnalyticsDatum) => void;
+}) {
+  if (!rows.length) return null;
+  return (
+    <div className="border-b border-slate-100 last:border-b-0">
+      <p className="sticky top-0 bg-slate-50 px-3 py-1.5 text-[9px] font-bold uppercase tracking-wide text-slate-500">
+        {title}
+      </p>
+      <ul>
+        {rows.map((row) => (
+          <li key={row.key}>
+            <button
+              type="button"
+              onClick={() => onPick(row)}
+              className="flex w-full items-center justify-between gap-2 px-3 py-2 text-left text-[11px] hover:bg-blue-50"
+            >
+              <span className="min-w-0 flex-1 truncate font-medium text-slate-800" title={row.label}>
+                {row.label}
+              </span>
+              <span className="shrink-0 tabular-nums text-slate-500">
+                {formatCount(row.vacancies)}
+              </span>
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }

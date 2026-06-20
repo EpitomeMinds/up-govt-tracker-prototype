@@ -48,7 +48,7 @@ export default function PortalGrowthCharts({
         <div className="portal-panel-header">
           <h2 className="portal-panel-title">Investment vs Job Projection Timeline</h2>
           <select className="portal-select text-xs" defaultValue="12m">
-            <option value="12m">Workbook Years</option>
+            <option value="12m">Years</option>
           </select>
         </div>
         <StableChartContainer height={chartHeight} className="px-2 pb-4">
