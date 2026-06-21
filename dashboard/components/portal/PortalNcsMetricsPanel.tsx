@@ -11,7 +11,6 @@ import {
   clearDrillDimensionPatch,
   clearDrillStackDashboardPatch,
   drillDimensionToDashboardPatch,
-  hasNcsScopeFilters,
   NCS_GLOBAL_DRILL_DIMENSIONS,
   ncsDashboardToScopeFilters,
 } from "@/lib/ncsAnalyticsFilters";
@@ -112,7 +111,6 @@ export default function PortalNcsMetricsPanel({
     [frameDrillFilters, onApplyDrillFilter]
   );
 
-  const isFiltered = hasNcsScopeFilters(appliedFilters);
   const postings = stats?.totalPostings ?? stats?.total ?? 0;
   const vacancies = stats?.totalVacancies ?? 0;
   const applicants = stats?.totalApplicants ?? 0;
@@ -122,9 +120,9 @@ export default function PortalNcsMetricsPanel({
   const kpiCards = [
     {
       id: "vacancies",
-      label: isFiltered ? "Vacancies" : "Total Vacancies",
+      label: "Total Vacancies",
       value: formatCount(vacancies),
-      delta: isFiltered ? "In current selection" : "Open positions nationally",
+      delta: "Open positions nationally",
       deltaClass: "text-violet-600",
       tooltipTitle: "Top 5 industry sectors by vacancies",
       rankings: stats?.topIndustriesByVacancies ?? [],
@@ -133,11 +131,12 @@ export default function PortalNcsMetricsPanel({
     },
     {
       id: "postings",
-      label: isFiltered ? "Postings" : "Total Postings",
+      label: "Total Postings",
       value: formatCount(postings),
-      delta: isFiltered
-        ? `+${formatCount(newWeek)} new this week in selection`
-        : `+${formatCount(newWeek)} new this week`,
+      delta:
+        matchTotal != null && matchTotal !== postings
+          ? `${formatCount(matchTotal)} match filters`
+          : `+${formatCount(newWeek)} new this week`,
       deltaClass: "text-emerald-600",
       tooltipTitle: "Top 5 industry sectors by postings",
       rankings: stats?.topIndustriesByPostings ?? [],
@@ -146,11 +145,9 @@ export default function PortalNcsMetricsPanel({
     },
     {
       id: "applicants",
-      label: isFiltered ? "Applicants" : "Total Applicants",
+      label: "Total Applicants",
       value: formatCount(applicants),
-      delta: isFiltered
-        ? `${formatCount(stats?.employers ?? 0)} employers in selection`
-        : `${formatCount(stats?.employers ?? 0)} employers`,
+      delta: `${formatCount(stats?.employers ?? 0)} employers`,
       deltaClass: "text-slate-500",
       tooltipTitle: "Top 5 industry sectors by applicants",
       rankings: stats?.topIndustriesByApplicants ?? [],
@@ -159,11 +156,9 @@ export default function PortalNcsMetricsPanel({
     },
     {
       id: "states",
-      label: isFiltered ? "States & UTs" : "States & UTs Covered",
+      label: "States & UTs Covered",
       value: String(states),
-      delta: isFiltered
-        ? "States in current selection"
-        : "Indian states & union territories with jobs",
+      delta: "Indian states & union territories with jobs",
       deltaClass: "text-slate-500",
       tooltipTitle: "Top 5 states by vacancies",
       rankings: stats?.topStatesByVacancies ?? [],

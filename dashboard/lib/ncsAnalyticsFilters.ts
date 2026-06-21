@@ -19,14 +19,8 @@ export function ncsDashboardToScopeFilters(filters: NcsDashboardFilters): NcsAna
   if (filters.industry) scope.push({ dimension: "industry", value: filters.industry });
   if (filters.q.trim()) scope.push({ dimension: "search", value: filters.q.trim() });
   if (filters.minSalary) scope.push({ dimension: "minSalary", value: filters.minSalary });
-  if (filters.maxSalary) scope.push({ dimension: "maxSalary", value: filters.maxSalary });
   if (filters.minExperience) scope.push({ dimension: "minExperience", value: filters.minExperience });
-  if (filters.maxExperience) scope.push({ dimension: "maxExperience", value: filters.maxExperience });
   return scope;
-}
-
-export function hasNcsScopeFilters(filters: NcsDashboardFilters): boolean {
-  return ncsDashboardToScopeFilters(filters).length > 0;
 }
 
 export function ncsDashboardToDrillFilters(filters: NcsDashboardFilters): NcsAnalyticsFilter[] {
