@@ -41,13 +41,12 @@ interface Props {
   defaultTitle: string;
   defaultHint?: string;
   size?: "default" | "large" | "fill";
-  onApplyFilter?: (filters: Partial<{
-    state: string;
-    city: string;
-    functionalArea: string;
-    jobType: string;
-    q: string;
-  }>) => void;
+  drillFilters: NcsAnalyticsFilter[];
+  scopeFilters?: NcsAnalyticsFilter[];
+  onDrill: (dimension: string, value: string) => void;
+  onDrillBack: () => void;
+  onDrillReset: () => void;
+  onDrillToLevel: (level: number) => void;
 }
 
 function ChartTooltip({
@@ -106,18 +105,22 @@ export default function NcsDrillChartFrame({
   defaultTitle,
   defaultHint,
   size = "default",
-  onApplyFilter,
+  drillFilters,
+  scopeFilters = [],
+  onDrill,
+  onDrillBack,
+  onDrillReset,
+  onDrillToLevel,
 }: Props) {
-  const [filters, setFilters] = useState<NcsAnalyticsFilter[]>([]);
   const [analytics, setAnalytics] = useState<NcsFrameAnalytics | null>(null);
   const [loading, setLoading] = useState(true);
   const [slideKey, setSlideKey] = useState(0);
   const [filterOpen, setFilterOpen] = useState(false);
 
-  const load = useCallback(async (activeFilters: NcsAnalyticsFilter[]) => {
+  const load = useCallback(async () => {
     setLoading(true);
     try {
-      const data = await getNcsFrameAnalytics(frameId, activeFilters);
+      const data = await getNcsFrameAnalytics(frameId, drillFilters, scopeFilters);
       setAnalytics(data);
       setSlideKey((k) => k + 1);
     } catch {
@@ -125,59 +128,34 @@ export default function NcsDrillChartFrame({
     } finally {
       setLoading(false);
     }
-  }, [frameId]);
+  }, [frameId, drillFilters, scopeFilters]);
 
   useEffect(() => {
-    load(filters);
-  }, [filters, load]);
+    load();
+  }, [load]);
 
   const drillInto = (key: string) => {
     if (!analytics?.drillable || !analytics.dimension) return;
     setFilterOpen(false);
-    const next = [...filters, { dimension: analytics.dimension, value: key }];
-    setFilters(next);
-    syncListFilters(next);
-  };
-
-  const syncListFilters = (stack: NcsAnalyticsFilter[]) => {
-    if (!onApplyFilter) return;
-    const patch: Partial<{ state: string; city: string; functionalArea: string; jobType: string; q: string }> = {
-      state: "",
-      city: "",
-      functionalArea: "",
-      jobType: "",
-      q: "",
-    };
-    for (const f of stack) {
-      if (f.dimension === "state") patch.state = f.value;
-      if (f.dimension === "city") patch.city = f.value;
-      if (f.dimension === "functionalArea") patch.functionalArea = f.value;
-      if (f.dimension === "jobType") patch.jobType = f.value;
-      if (f.dimension === "functionalRole" || f.dimension === "jobTitle") patch.q = f.value;
-      if (f.dimension === "organization") patch.q = f.value;
-    }
-    onApplyFilter(patch);
+    onDrill(analytics.dimension, key);
   };
 
   const goToLevel = (level: number) => {
     setFilterOpen(false);
-    const next = filters.slice(0, level);
-    setFilters(next);
-    syncListFilters(next);
+    onDrillToLevel(level);
   };
 
   const goBack = () => {
-    if (filters.length === 0) return;
-    goToLevel(filters.length - 1);
+    if (drillFilters.length === 0) return;
+    onDrillBack();
   };
 
   const reset = () => {
     setFilterOpen(false);
-    setFilters([]);
-    onApplyFilter?.({});
+    onDrillReset();
   };
 
-  const isDrilled = filters.length > 0;
+  const isDrilled = drillFilters.length > 0;
   const pickerOptions = analytics?.pickerOptions ?? [];
 
   const chartData = (analytics?.data ?? []).map((row, i) => ({
@@ -200,6 +178,9 @@ export default function NcsDrillChartFrame({
       <div className="portal-panel-header shrink-0 gap-2">
         <div className="min-w-0 flex-1">
           <h2 className="portal-panel-title truncate">{title}</h2>
+          {!isDrilled && defaultHint && (
+            <p className="truncate text-[10px] text-slate-500">{defaultHint}</p>
+          )}
         </div>
         <div className="flex shrink-0 items-center gap-1">
           {analytics?.drillable && pickerOptions.length > 0 && (
@@ -210,7 +191,7 @@ export default function NcsDrillChartFrame({
               onPick={(row) => drillInto(row.key)}
             />
           )}
-          {filters.length > 0 && (
+          {drillFilters.length > 0 && (
             <button type="button" onClick={goBack} className="portal-btn-ghost px-2 py-1 text-[11px]">
               ← Back
             </button>

@@ -1,16 +1,6 @@
 "use client";
 
 import { useMemo } from "react";
-import {
-  Bar,
-  BarChart,
-  CartesianGrid,
-  Legend,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
 import type { InvestmentPredictionsResponse } from "@/lib/investmentTypes";
 import type { AiRecommendationsSummary } from "@/lib/aiRecommendationsTypes";
 import { buildGrowthDashboardKpis } from "@/lib/growthWorkbookAnalytics";
@@ -136,13 +126,6 @@ export default function PortalGrowthMetricsPanel({
         ))}
       </div>
 
-      {kpis.forecastHorizons.length > 0 && (
-        <div className="grid gap-4 xl:grid-cols-[1.4fr_0.6fr]">
-          <DashboardHorizonChart horizons={kpis.forecastHorizons} />
-          <TopStatesPanel states={kpis.topStates} />
-        </div>
-      )}
-
       <div className="grid gap-4 xl:grid-cols-2 xl:items-stretch">
         <GrowthDrillChartFrame
           frameId="geography"
@@ -224,83 +207,6 @@ function GrowthKpiCard({
           </p>
         </div>
       )}
-    </div>
-  );
-}
-
-function DashboardHorizonChart({
-  horizons,
-}: {
-  horizons: { horizon: string; jobs: number; low: number; high: number }[];
-}) {
-  return (
-    <div className="portal-panel">
-      <div className="portal-panel-header">
-        <div>
-          <h2 className="portal-panel-title">National Job-Creation Forecast by Horizon</h2>
-          <p className="text-[10px] text-slate-500">
-            Point estimates + 80% CI · tracked pipeline
-          </p>
-        </div>
-      </div>
-      <div className="h-[280px] px-2 pb-4">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={horizons} margin={{ top: 8, right: 12, left: 0, bottom: 8 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" vertical={false} />
-            <XAxis dataKey="horizon" tick={{ fontSize: 11, fill: "#64748b" }} />
-            <YAxis tick={{ fontSize: 10, fill: "#64748b" }} tickFormatter={formatIndianCount} />
-            <Tooltip
-              formatter={(v: number, name: string) => [
-                formatIndianCount(v),
-                name === "jobs" ? "Point estimate" : name,
-              ]}
-            />
-            <Legend wrapperStyle={{ fontSize: 10 }} />
-            <Bar dataKey="jobs" name="Point estimate" fill="#2563eb" radius={[4, 4, 0, 0]} />
-            <Bar dataKey="low" name="80% CI Low" fill="#93c5fd" radius={[4, 4, 0, 0]} />
-            <Bar dataKey="high" name="80% CI High" fill="#1d4ed8" radius={[4, 4, 0, 0]} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
-    </div>
-  );
-}
-
-function TopStatesPanel({
-  states,
-}: {
-  states: { rank: number; state: string; intensity: number }[];
-}) {
-  return (
-    <div className="portal-panel flex flex-col">
-      <div className="portal-panel-header shrink-0">
-        <div>
-          <h2 className="portal-panel-title">Top States by Hiring Intensity</h2>
-          <p className="text-[10px] text-slate-500">Avg. composite index · use Geography map to drill</p>
-        </div>
-      </div>
-      <div className="min-h-0 flex-1 overflow-y-auto p-2">
-        <table className="w-full text-left text-sm">
-          <thead>
-            <tr className="text-[10px] font-bold uppercase text-slate-500">
-              <th className="pb-2 pr-2">Rank</th>
-              <th className="pb-2 pr-2">State</th>
-              <th className="pb-2 text-right">Index</th>
-            </tr>
-          </thead>
-          <tbody>
-            {states.map((row) => (
-              <tr key={row.rank} className="border-t border-slate-100">
-                <td className="py-2 pr-2 font-bold text-slate-700">{row.rank}</td>
-                <td className="py-2 pr-2 font-semibold text-slate-800">{row.state}</td>
-                <td className="py-2 text-right tabular-nums font-semibold text-slate-800">
-                  {row.intensity.toFixed(1)}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
     </div>
   );
 }

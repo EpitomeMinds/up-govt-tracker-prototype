@@ -48,6 +48,8 @@ export default function Dashboard() {
   const [ncsStats, setNcsStats] = useState<NcsStats | null>(null);
   const [ncsFacets, setNcsFacets] = useState<NcsFacetsResponse["facets"] | null>(null);
   const [ncsFilters, setNcsFilters] = useState<NcsDashboardFilters>(DEFAULT_NCS_FILTERS);
+  const [ncsDraftFilters, setNcsDraftFilters] = useState<NcsDashboardFilters>(DEFAULT_NCS_FILTERS);
+  const [ncsDrillKey, setNcsDrillKey] = useState(0);
   const [ncsLoading, setNcsLoading] = useState(false);
   const [ncsMatchTotal, setNcsMatchTotal] = useState(0);
   const [ncsSyncing, setNcsSyncing] = useState(false);
@@ -164,10 +166,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     if (portalNav !== "vacancy") return;
-    const timer = window.setTimeout(() => {
-      loadNcsData(ncsFilters);
-    }, 300);
-    return () => window.clearTimeout(timer);
+    loadNcsData(ncsFilters);
   }, [portalNav, ncsFilters, loadNcsData]);
 
   // Load investment data after main dashboard data, not in parallel on first paint
@@ -238,11 +237,26 @@ export default function Dashboard() {
   };
 
   const handleNcsFilterChange = (next: Partial<NcsDashboardFilters>) => {
-    setNcsFilters((prev) => ({ ...prev, ...next }));
+    setNcsDraftFilters((prev) => ({ ...prev, ...next }));
+  };
+
+  const handleNcsFilterApply = () => {
+    setNcsFilters(ncsDraftFilters);
+    setNcsDrillKey((k) => k + 1);
   };
 
   const handleNcsFilterReset = () => {
+    setNcsDraftFilters(DEFAULT_NCS_FILTERS);
     setNcsFilters(DEFAULT_NCS_FILTERS);
+    setNcsDrillKey((k) => k + 1);
+  };
+
+  const handleNcsDrillFilter = (next: Partial<NcsDashboardFilters>) => {
+    setNcsFilters((prev) => {
+      const applied = { ...prev, ...next };
+      setNcsDraftFilters(applied);
+      return applied;
+    });
   };
 
   const handleNcsSync = async () => {
@@ -294,14 +308,18 @@ export default function Dashboard() {
       syncing={syncing}
       ncsJobs={ncsJobs}
       ncsFiltered={ncsFiltered}
-      ncsFilters={ncsFilters}
+      ncsFilters={ncsDraftFilters}
+      ncsAppliedFilters={ncsFilters}
+      ncsDrillKey={ncsDrillKey}
       ncsFacets={ncsFacets}
       ncsStats={ncsStats}
       ncsMatchTotal={ncsMatchTotal}
       ncsLoading={ncsLoading}
       ncsSyncing={ncsSyncing}
       onNcsFilterChange={handleNcsFilterChange}
+      onNcsFilterApply={handleNcsFilterApply}
       onNcsFilterReset={handleNcsFilterReset}
+      onNcsDrillFilter={handleNcsDrillFilter}
       onNcsSync={handleNcsSync}
     />
   );

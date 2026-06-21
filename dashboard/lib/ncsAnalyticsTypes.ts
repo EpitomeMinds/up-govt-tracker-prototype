@@ -9,7 +9,10 @@ export type NcsAnalyticsDimension =
   | "jobType"
   | "salaryBand"
   | "experienceBand"
-  | "month";
+  | "month"
+  | "search"
+  | "minSalary"
+  | "minExperience";
 
 export interface NcsAnalyticsFilter {
   dimension: NcsAnalyticsDimension;

@@ -1,10 +1,19 @@
 "use client";
 
+import { useCallback, useMemo, useState } from "react";
 import type { NcsRanking, NcsStats } from "@/lib/ncsJobTypes";
 import type { NcsDashboardFilters } from "@/lib/ncsJobTypes";
 import { formatCount } from "@/lib/jobAnalytics";
 import NcsDrillChartFrame from "./NcsDrillChartFrame";
 import { NCS_FRAME_IDS } from "@/lib/ncsAnalyticsTypes";
+import type { NcsAnalyticsDimension, NcsAnalyticsFilter, NcsFrameId } from "@/lib/ncsAnalyticsTypes";
+import {
+  clearDrillDimensionPatch,
+  clearDrillStackDashboardPatch,
+  drillDimensionToDashboardPatch,
+  NCS_GLOBAL_DRILL_DIMENSIONS,
+  ncsDashboardToScopeFilters,
+} from "@/lib/ncsAnalyticsFilters";
 
 const FRAME_LABELS: Record<
   (typeof NCS_FRAME_IDS)[number],
@@ -19,10 +28,89 @@ const FRAME_LABELS: Record<
 interface Props {
   stats: NcsStats | null;
   matchTotal?: number;
+  appliedFilters: NcsDashboardFilters;
   onApplyDrillFilter?: (patch: Partial<NcsDashboardFilters>) => void;
 }
 
-export default function PortalNcsMetricsPanel({ stats, matchTotal, onApplyDrillFilter }: Props) {
+export default function PortalNcsMetricsPanel({
+  stats,
+  matchTotal,
+  appliedFilters,
+  onApplyDrillFilter,
+}: Props) {
+  const [frameDrillFilters, setFrameDrillFilters] = useState<
+    Partial<Record<NcsFrameId, NcsAnalyticsFilter[]>>
+  >({});
+
+  const scopeFilters = useMemo(
+    () => ncsDashboardToScopeFilters(appliedFilters),
+    [appliedFilters]
+  );
+
+  const handleDrill = useCallback(
+    (frameId: NcsFrameId, dimension: string, value: string) => {
+      const dim = dimension as NcsAnalyticsDimension;
+      const entry: NcsAnalyticsFilter = { dimension: dim, value };
+
+      setFrameDrillFilters((prev) => ({
+        ...prev,
+        [frameId]: [...(prev[frameId] ?? []), entry],
+      }));
+
+      if (NCS_GLOBAL_DRILL_DIMENSIONS.has(dim) || dim === "functionalRole" || dim === "jobTitle") {
+        onApplyDrillFilter?.(drillDimensionToDashboardPatch(dim, value));
+      }
+    },
+    [onApplyDrillFilter]
+  );
+
+  const handleDrillBack = useCallback(
+    (frameId: NcsFrameId) => {
+      const local = frameDrillFilters[frameId] ?? [];
+      if (local.length === 0) return;
+
+      const removed = local[local.length - 1];
+      const next = local.slice(0, -1);
+      setFrameDrillFilters((prev) => ({ ...prev, [frameId]: next }));
+
+      if (
+        NCS_GLOBAL_DRILL_DIMENSIONS.has(removed.dimension) ||
+        removed.dimension === "functionalRole" ||
+        removed.dimension === "jobTitle"
+      ) {
+        onApplyDrillFilter?.(clearDrillDimensionPatch(removed.dimension));
+      }
+    },
+    [frameDrillFilters, onApplyDrillFilter]
+  );
+
+  const handleDrillToLevel = useCallback(
+    (frameId: NcsFrameId, level: number) => {
+      const local = frameDrillFilters[frameId] ?? [];
+      if (level >= local.length) return;
+
+      const removed = local.slice(level);
+      const next = local.slice(0, level);
+      setFrameDrillFilters((prev) => ({ ...prev, [frameId]: next }));
+
+      if (removed.length > 0) {
+        onApplyDrillFilter?.(clearDrillStackDashboardPatch(removed));
+      }
+    },
+    [frameDrillFilters, onApplyDrillFilter]
+  );
+
+  const handleDrillReset = useCallback(
+    (frameId: NcsFrameId) => {
+      const local = frameDrillFilters[frameId] ?? [];
+      if (local.length === 0) return;
+
+      setFrameDrillFilters((prev) => ({ ...prev, [frameId]: [] }));
+      onApplyDrillFilter?.(clearDrillStackDashboardPatch(local));
+    },
+    [frameDrillFilters, onApplyDrillFilter]
+  );
+
   const postings = stats?.totalPostings ?? stats?.total ?? 0;
   const vacancies = stats?.totalVacancies ?? 0;
   const applicants = stats?.totalApplicants ?? 0;
@@ -79,23 +167,6 @@ export default function PortalNcsMetricsPanel({ stats, matchTotal, onApplyDrillF
     },
   ];
 
-  const handleDrillFilter = (patch: Partial<{
-    state: string;
-    city: string;
-    functionalArea: string;
-    jobType: string;
-    q: string;
-  }>) => {
-    if (!onApplyDrillFilter) return;
-    onApplyDrillFilter({
-      state: patch.state ?? "",
-      city: patch.city ?? "",
-      functionalArea: patch.functionalArea ?? "",
-      jobType: patch.jobType ?? "",
-      q: patch.q ?? "",
-    });
-  };
-
   return (
     <div className="-mt-1 space-y-4">
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
@@ -110,7 +181,12 @@ export default function PortalNcsMetricsPanel({ stats, matchTotal, onApplyDrillF
           defaultTitle="Geography"
           defaultHint="Heat map · click state → top 5 cities → sectors"
           size="fill"
-          onApplyFilter={handleDrillFilter}
+          drillFilters={frameDrillFilters.geography ?? []}
+          scopeFilters={scopeFilters}
+          onDrill={(dimension, value) => handleDrill("geography", dimension, value)}
+          onDrillBack={() => handleDrillBack("geography")}
+          onDrillReset={() => handleDrillReset("geography")}
+          onDrillToLevel={(level) => handleDrillToLevel("geography", level)}
         />
 
         <div className="grid min-h-[792px] grid-cols-1 gap-4 sm:grid-cols-2">
@@ -120,7 +196,12 @@ export default function PortalNcsMetricsPanel({ stats, matchTotal, onApplyDrillF
               frameId={frameId}
               defaultTitle={FRAME_LABELS[frameId].title}
               defaultHint={FRAME_LABELS[frameId].hint}
-              onApplyFilter={handleDrillFilter}
+              drillFilters={frameDrillFilters[frameId] ?? []}
+              scopeFilters={scopeFilters}
+              onDrill={(dimension, value) => handleDrill(frameId, dimension, value)}
+              onDrillBack={() => handleDrillBack(frameId)}
+              onDrillReset={() => handleDrillReset(frameId)}
+              onDrillToLevel={(level) => handleDrillToLevel(frameId, level)}
             />
           ))}
         </div>

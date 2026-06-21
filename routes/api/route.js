@@ -115,7 +115,11 @@ router.get("/ncs/analytics/frames", (req, res) => {
 
 router.get("/ncs/analytics/frame/:frameId", (req, res) => {
   try {
-    const result = getNcsFrameAnalytics(req.params.frameId, req.query.filters);
+    const result = getNcsFrameAnalytics(
+      req.params.frameId,
+      req.query.filters,
+      req.query.scope
+    );
     res.json(result);
   } catch (err) {
     log.error(err.message);

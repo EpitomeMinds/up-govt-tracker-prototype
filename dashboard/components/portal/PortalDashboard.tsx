@@ -17,6 +17,7 @@ import PortalGrowthDashboard from "./PortalGrowthDashboard";
 import PortalUserManagement from "./PortalUserManagement";
 import type { ExtendedAnalytics, DashboardFilters, JobEnriched } from "@/lib/jobAnalytics";
 import type { NcsDashboardFilters, NcsFacetsResponse, NcsJob, NcsStats } from "@/lib/ncsJobTypes";
+import { DEFAULT_NCS_FILTERS } from "@/lib/ncsJobAnalytics";
 import type { Stats } from "@/lib/types";
 import type { InvestmentPredictionsResponse } from "@/lib/investmentTypes";
 import type { AiRecommendationsResponse } from "@/lib/aiRecommendationsTypes";
@@ -93,13 +94,17 @@ interface Props {
   ncsJobs?: NcsJob[];
   ncsFiltered?: NcsJob[];
   ncsFilters?: NcsDashboardFilters;
+  ncsAppliedFilters?: NcsDashboardFilters;
+  ncsDrillKey?: number;
   ncsFacets?: NcsFacetsResponse["facets"] | null;
   ncsStats?: NcsStats | null;
   ncsMatchTotal?: number;
   ncsLoading?: boolean;
   ncsSyncing?: boolean;
   onNcsFilterChange?: (next: Partial<NcsDashboardFilters>) => void;
+  onNcsFilterApply?: () => void;
   onNcsFilterReset?: () => void;
+  onNcsDrillFilter?: (next: Partial<NcsDashboardFilters>) => void;
   onNcsSync?: () => void;
 }
 
@@ -136,13 +141,17 @@ export default function PortalDashboard({
   ncsJobs = [],
   ncsFiltered = [],
   ncsFilters,
+  ncsAppliedFilters,
+  ncsDrillKey = 0,
   ncsFacets,
   ncsStats,
   ncsMatchTotal = 0,
   ncsLoading,
   ncsSyncing,
   onNcsFilterChange,
+  onNcsFilterApply,
   onNcsFilterReset,
+  onNcsDrillFilter,
   onNcsSync,
 }: Props) {
   const [showDetailedAnalysis, setShowDetailedAnalysis] = useState(false);
@@ -278,18 +287,21 @@ export default function PortalDashboard({
             ) : (
               <>
                 <PortalNcsMetricsPanel
+                  key={ncsDrillKey}
                   stats={ncsStats ?? null}
                   matchTotal={ncsMatchTotal}
-                  onApplyDrillFilter={onNcsFilterChange}
+                  appliedFilters={ncsAppliedFilters ?? ncsFilters ?? DEFAULT_NCS_FILTERS}
+                  onApplyDrillFilter={onNcsDrillFilter}
                 />
 
                 <div className="mt-5">
-                {ncsFilters && onNcsFilterChange && onNcsFilterReset && (
+                {ncsFilters && onNcsFilterChange && onNcsFilterApply && onNcsFilterReset && (
                   <PortalNcsFilterBar
                     filters={ncsFilters}
                     facets={ncsFacets ?? null}
                     totalAvailable={ncsStats?.total}
                     onChange={onNcsFilterChange}
+                    onApply={onNcsFilterApply}
                     onReset={onNcsFilterReset}
                   />
                 )}

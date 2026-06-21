@@ -121,6 +121,24 @@ function buildWhere(filters) {
         conditions.push("strftime('%Y-%m', published_at) = @month");
         params.month = f.value;
         break;
+      case "search": {
+        const term = `%${String(f.value).trim()}%`;
+        conditions.push(
+          "(LOWER(job_title) LIKE LOWER(@search) OR LOWER(organization_name) LIKE LOWER(@search) OR LOWER(functional_area) LIKE LOWER(@search) OR LOWER(job_description) LIKE LOWER(@search) OR LOWER(city) LIKE LOWER(@search) OR LOWER(state) LIKE LOWER(@search))"
+        );
+        params.search = term;
+        break;
+      }
+      case "minSalary":
+        conditions.push(
+          "(hide_salary_range = 0 AND COALESCE(max_salary, min_salary) >= @minSalary)"
+        );
+        params.minSalary = Number(f.value);
+        break;
+      case "minExperience":
+        conditions.push("(max_experience IS NOT NULL AND max_experience >= @minExperience)");
+        params.minExperience = Number(f.value);
+        break;
       default:
         break;
     }
@@ -382,22 +400,24 @@ function formatDatumRows(rows, dimension) {
   }));
 }
 
-function getNcsFrameAnalytics(frameId, rawFilters = []) {
-  const filters = parseFilters(rawFilters);
+function getNcsFrameAnalytics(frameId, rawFilters = [], rawScope = []) {
+  const drillFilters = parseFilters(rawFilters);
+  const scopeFilters = parseFilters(rawScope);
+  const filters = [...scopeFilters, ...drillFilters];
   const drillPath = FRAME_DRILL[frameId];
   if (!drillPath) {
     throw new Error(`Unknown analytics frame: ${frameId}`);
   }
 
-  const level = filters.length;
+  const level = drillFilters.length;
   const dimension = drillPath[Math.min(level, drillPath.length - 1)];
   const nextDimension = level < drillPath.length - 1 ? drillPath[level + 1] : null;
   const { where, params } = buildWhere(filters);
 
-  const rows = queryDimension(dimension, where, params, frameId, filters.length);
+  const rows = queryDimension(dimension, where, params, frameId, drillFilters.length);
   const pickerRows =
     nextDimension && dimension !== "jobTitle"
-      ? queryDimensionWithLimit(dimension, where, params, frameId, filters.length, 500)
+      ? queryDimensionWithLimit(dimension, where, params, frameId, drillFilters.length, 500)
       : [];
   const summary = db
     .prepare(
@@ -411,7 +431,7 @@ function getNcsFrameAnalytics(frameId, rawFilters = []) {
   const data = formatDatumRows(rows, dimension);
   const pickerOptions = formatDatumRows(pickerRows, dimension);
 
-  const chartType = chartTypeFor(frameId, dimension, filters.length);
+  const chartType = chartTypeFor(frameId, dimension, drillFilters.length);
   if (chartType === "bar" || chartType === "horizontalBar") {
     data.sort((a, b) => b.vacancies - a.vacancies);
     pickerOptions.sort((a, b) => b.vacancies - a.vacancies);
@@ -424,10 +444,10 @@ function getNcsFrameAnalytics(frameId, rawFilters = []) {
     nextDimension,
     drillable: Boolean(nextDimension) && data.length > 0 && dimension !== "jobTitle",
     chartType,
-    title: buildTitle(frameId, dimension, filters),
+    title: buildTitle(frameId, dimension, drillFilters),
     hint: FRAME_META[frameId]?.hint,
-    breadcrumb: buildBreadcrumb(frameId, filters),
-    filters,
+    breadcrumb: buildBreadcrumb(frameId, drillFilters),
+    filters: drillFilters,
     summary: {
       postings: summary?.postings ?? 0,
       vacancies: summary?.vacancies ?? 0,

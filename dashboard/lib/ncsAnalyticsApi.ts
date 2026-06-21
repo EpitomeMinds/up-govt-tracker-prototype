@@ -10,9 +10,12 @@ async function fetchJson<T>(path: string): Promise<T> {
 
 export function getNcsFrameAnalytics(
   frameId: NcsFrameId,
-  filters: NcsAnalyticsFilter[] = []
+  filters: NcsAnalyticsFilter[] = [],
+  scope: NcsAnalyticsFilter[] = []
 ): Promise<NcsFrameAnalytics> {
-  const qs =
-    filters.length > 0 ? `?filters=${encodeURIComponent(JSON.stringify(filters))}` : "";
-  return fetchJson(`/api/ncs/analytics/frame/${frameId}${qs}`);
+  const params = new URLSearchParams();
+  if (filters.length > 0) params.set("filters", JSON.stringify(filters));
+  if (scope.length > 0) params.set("scope", JSON.stringify(scope));
+  const qs = params.toString();
+  return fetchJson(`/api/ncs/analytics/frame/${frameId}${qs ? `?${qs}` : ""}`);
 }
