@@ -15,7 +15,11 @@ const {
 const { syncState, syncAllStates } = require("../../services/ingestion");
 const { syncInvestUp } = require("../../services/investIngestion");
 const { syncNcsJobs } = require("../../services/ncsJobSync");
-const { getNcsFrameAnalytics, listNcsFrames } = require("../../services/ncsAnalytics");
+const {
+  getNcsFrameAnalytics,
+  getNcsScopedStats,
+  listNcsFrames,
+} = require("../../services/ncsAnalytics");
 const { generateInvestmentPredictions } = require("../../services/investmentPrediction");
 const { getAiRecommendations, getRecommendationById, reloadData } = require("../../services/aiRecommendations");
 const { getGrowthReport, reloadGrowthReport } = require("../../services/growthReport");
@@ -96,6 +100,16 @@ router.get("/ncs/jobs", (req, res) => {
 });
 
 router.get("/ncs/stats", (req, res) => {
+  if (req.query.scope) {
+    try {
+      res.json(getNcsScopedStats(req.query.scope));
+      return;
+    } catch (err) {
+      log.error(err.message);
+      res.status(400).json({ error: err.message });
+      return;
+    }
+  }
   res.json(getNcsStats());
 });
 

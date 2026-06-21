@@ -4,6 +4,7 @@ import type {
   NcsJobsResponse,
   NcsStats,
 } from "./ncsJobTypes";
+import { ncsDashboardToScopeFilters } from "./ncsAnalyticsFilters";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
 
@@ -39,8 +40,12 @@ export function getNcsJobs(
   return fetchJson(`/api/ncs/jobs?${search}`);
 }
 
-export function getNcsStats(): Promise<NcsStats> {
-  return fetchJson("/api/ncs/stats");
+export function getNcsStats(filters?: Partial<NcsDashboardFilters>): Promise<NcsStats> {
+  const scope = filters ? ncsDashboardToScopeFilters(filters as NcsDashboardFilters) : [];
+  const params = new URLSearchParams();
+  if (scope.length > 0) params.set("scope", JSON.stringify(scope));
+  const qs = params.toString();
+  return fetchJson(`/api/ncs/stats${qs ? `?${qs}` : ""}`);
 }
 
 export function getNcsFacets(): Promise<NcsFacetsResponse> {
