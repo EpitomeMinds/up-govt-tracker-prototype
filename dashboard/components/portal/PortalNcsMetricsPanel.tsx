@@ -1,9 +1,10 @@
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import type { NcsRanking, NcsStats } from "@/lib/ncsJobTypes";
 import type { NcsDashboardFilters } from "@/lib/ncsJobTypes";
 import { formatCount } from "@/lib/jobAnalytics";
+import { getNcsStats } from "@/lib/ncsJobsApi";
 import NcsDrillChartFrame from "./NcsDrillChartFrame";
 import { NCS_FRAME_IDS } from "@/lib/ncsAnalyticsTypes";
 import type { NcsAnalyticsDimension, NcsAnalyticsFilter, NcsFrameId } from "@/lib/ncsAnalyticsTypes";
@@ -47,6 +48,35 @@ export default function PortalNcsMetricsPanel({
     () => ncsDashboardToScopeFilters(appliedFilters),
     [appliedFilters]
   );
+
+  const [kpiStats, setKpiStats] = useState<NcsStats | null>(stats);
+
+  useEffect(() => {
+    setKpiStats(stats);
+  }, [stats]);
+
+  useEffect(() => {
+    if (!hasNcsScopeFilters(appliedFilters)) {
+      setKpiStats(stats);
+      return;
+    }
+
+    let cancelled = false;
+    const timer = window.setTimeout(() => {
+      getNcsStats(appliedFilters)
+        .then((data) => {
+          if (!cancelled) setKpiStats(data);
+        })
+        .catch(() => {
+          if (!cancelled) setKpiStats(stats);
+        });
+    }, 150);
+
+    return () => {
+      cancelled = true;
+      window.clearTimeout(timer);
+    };
+  }, [appliedFilters, stats]);
 
   const handleDrill = useCallback(
     (frameId: NcsFrameId, dimension: string, value: string) => {
@@ -113,11 +143,11 @@ export default function PortalNcsMetricsPanel({
   );
 
   const isFiltered = hasNcsScopeFilters(appliedFilters);
-  const postings = stats?.totalPostings ?? stats?.total ?? 0;
-  const vacancies = stats?.totalVacancies ?? 0;
-  const applicants = stats?.totalApplicants ?? 0;
-  const states = stats?.statesCovered ?? 0;
-  const newWeek = stats?.newThisWeek ?? 0;
+  const postings = kpiStats?.totalPostings ?? kpiStats?.total ?? 0;
+  const vacancies = kpiStats?.totalVacancies ?? 0;
+  const applicants = kpiStats?.totalApplicants ?? 0;
+  const states = kpiStats?.statesCovered ?? 0;
+  const newWeek = kpiStats?.newThisWeek ?? 0;
 
   const kpiCards = [
     {
@@ -127,7 +157,7 @@ export default function PortalNcsMetricsPanel({
       delta: isFiltered ? "In current selection" : "Open positions nationally",
       deltaClass: "text-violet-600",
       tooltipTitle: "Top 5 industry sectors by vacancies",
-      rankings: stats?.topIndustriesByVacancies ?? [],
+      rankings: kpiStats?.topIndustriesByVacancies ?? [],
       metricLabel: "Vacancies",
       groupLabel: "industry",
     },
@@ -140,7 +170,7 @@ export default function PortalNcsMetricsPanel({
         : `+${formatCount(newWeek)} new this week`,
       deltaClass: "text-emerald-600",
       tooltipTitle: "Top 5 industry sectors by postings",
-      rankings: stats?.topIndustriesByPostings ?? [],
+      rankings: kpiStats?.topIndustriesByPostings ?? [],
       metricLabel: "Postings",
       groupLabel: "industry",
     },
@@ -149,11 +179,11 @@ export default function PortalNcsMetricsPanel({
       label: isFiltered ? "Applicants" : "Total Applicants",
       value: formatCount(applicants),
       delta: isFiltered
-        ? `${formatCount(stats?.employers ?? 0)} employers in selection`
-        : `${formatCount(stats?.employers ?? 0)} employers`,
+        ? `${formatCount(kpiStats?.employers ?? 0)} employers in selection`
+        : `${formatCount(kpiStats?.employers ?? 0)} employers`,
       deltaClass: "text-slate-500",
       tooltipTitle: "Top 5 industry sectors by applicants",
-      rankings: stats?.topIndustriesByApplicants ?? [],
+      rankings: kpiStats?.topIndustriesByApplicants ?? [],
       metricLabel: "Applicants",
       groupLabel: "industry",
     },
@@ -166,7 +196,7 @@ export default function PortalNcsMetricsPanel({
         : "Indian states & union territories with jobs",
       deltaClass: "text-slate-500",
       tooltipTitle: "Top 5 states by vacancies",
-      rankings: stats?.topStatesByVacancies ?? [],
+      rankings: kpiStats?.topStatesByVacancies ?? [],
       metricLabel: "Vacancies",
       groupLabel: "by state",
     },

@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import PortalDashboard from "@/components/portal/PortalDashboard";
 import type { PortalNavId } from "@/components/portal/PortalSidebar";
 import {
@@ -138,12 +138,12 @@ export default function Dashboard() {
     }
   }, []);
 
-  const loadNcsData = useCallback(async (activeFilters: NcsDashboardFilters = ncsFilters) => {
+  const loadNcsInitial = useCallback(async () => {
     setNcsLoading(true);
     try {
       const [jobsRes, statsRes, facetsRes] = await Promise.all([
-        getNcsJobs({ ...activeFilters, limit: 200 }),
-        getNcsStats(activeFilters),
+        getNcsJobs({ limit: 200 }),
+        getNcsStats(),
         getNcsFacets(),
       ]);
       setNcsJobs(jobsRes.data);
@@ -158,7 +158,20 @@ export default function Dashboard() {
     } finally {
       setNcsLoading(false);
     }
-  }, [ncsFilters]);
+  }, []);
+
+  const loadNcsJobs = useCallback(async (activeFilters: NcsDashboardFilters) => {
+    try {
+      const jobsRes = await getNcsJobs({ ...activeFilters, limit: 200 });
+      setNcsJobs(jobsRes.data);
+      setNcsMatchTotal(jobsRes.pagination.total);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to load NCS vacancies");
+    }
+  }, []);
+
+  const ncsBootstrappedRef = useRef(false);
+  const ncsJobsSkipDebounceRef = useRef(false);
 
   useEffect(() => {
     loadData();
@@ -166,8 +179,20 @@ export default function Dashboard() {
 
   useEffect(() => {
     if (portalNav !== "vacancy") return;
-    loadNcsData(ncsFilters);
-  }, [portalNav, ncsFilters, loadNcsData]);
+    if (!ncsBootstrappedRef.current) {
+      ncsBootstrappedRef.current = true;
+      loadNcsInitial();
+      return;
+    }
+    if (ncsJobsSkipDebounceRef.current) {
+      ncsJobsSkipDebounceRef.current = false;
+      return;
+    }
+    const timer = window.setTimeout(() => {
+      loadNcsJobs(ncsFilters);
+    }, 450);
+    return () => window.clearTimeout(timer);
+  }, [portalNav, ncsFilters, loadNcsInitial, loadNcsJobs]);
 
   // Load investment data after main dashboard data, not in parallel on first paint
   useEffect(() => {
@@ -243,12 +268,16 @@ export default function Dashboard() {
   const handleNcsFilterApply = () => {
     setNcsFilters(ncsDraftFilters);
     setNcsDrillKey((k) => k + 1);
+    ncsJobsSkipDebounceRef.current = true;
+    loadNcsJobs(ncsDraftFilters);
   };
 
   const handleNcsFilterReset = () => {
     setNcsDraftFilters(DEFAULT_NCS_FILTERS);
     setNcsFilters(DEFAULT_NCS_FILTERS);
     setNcsDrillKey((k) => k + 1);
+    ncsJobsSkipDebounceRef.current = true;
+    loadNcsJobs(DEFAULT_NCS_FILTERS);
   };
 
   const handleNcsDrillFilter = (next: Partial<NcsDashboardFilters>) => {
@@ -264,7 +293,7 @@ export default function Dashboard() {
     setError("");
     try {
       await triggerNcsSync();
-      await loadNcsData();
+      await loadNcsInitial();
     } catch (err) {
       setError(err instanceof Error ? err.message : "NCS sync failed");
     } finally {

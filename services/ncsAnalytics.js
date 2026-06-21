@@ -522,7 +522,7 @@ function getNcsScopedStats(rawScope = []) {
     vacancies: row.vacancies,
     applicants: row.applicants,
   }));
-  const industryRows = queryIndustryBucketsAll(where, params).map((row) => ({
+  const industryRows = queryIndustryBuckets(where, params).map((row) => ({
     key: row.key,
     name: row.key,
     postings: row.postings,

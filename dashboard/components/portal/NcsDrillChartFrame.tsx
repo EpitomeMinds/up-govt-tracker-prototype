@@ -117,21 +117,33 @@ export default function NcsDrillChartFrame({
   const [slideKey, setSlideKey] = useState(0);
   const [filterOpen, setFilterOpen] = useState(false);
 
-  const load = useCallback(async () => {
-    setLoading(true);
-    try {
-      const data = await getNcsFrameAnalytics(frameId, drillFilters, scopeFilters);
-      setAnalytics(data);
-      setSlideKey((k) => k + 1);
-    } catch {
-      setAnalytics(null);
-    } finally {
-      setLoading(false);
-    }
-  }, [frameId, drillFilters, scopeFilters]);
+  const load = useCallback(
+    async (signal?: AbortSignal) => {
+      setLoading(true);
+      try {
+        const data = await getNcsFrameAnalytics(frameId, drillFilters, scopeFilters, signal);
+        if (signal?.aborted) return;
+        setAnalytics(data);
+        setSlideKey((k) => k + 1);
+      } catch (err) {
+        if (signal?.aborted || (err instanceof DOMException && err.name === "AbortError")) return;
+        setAnalytics(null);
+      } finally {
+        if (!signal?.aborted) setLoading(false);
+      }
+    },
+    [frameId, drillFilters, scopeFilters]
+  );
 
   useEffect(() => {
-    load();
+    const controller = new AbortController();
+    const timer = window.setTimeout(() => {
+      void load(controller.signal);
+    }, 120);
+    return () => {
+      window.clearTimeout(timer);
+      controller.abort();
+    };
   }, [load]);
 
   const drillInto = (key: string) => {
@@ -238,7 +250,11 @@ export default function NcsDrillChartFrame({
 
       <div className="relative min-h-0 flex-1 px-2 pb-3 pt-1">
         {loading && (
-          <div className="absolute inset-0 z-10 flex items-center justify-center bg-white/70">
+          <div
+            className={`absolute inset-0 z-10 flex items-center justify-center ${
+              analytics ? "bg-white/40" : "bg-white/70"
+            }`}
+          >
             <div className="portal-spinner" />
           </div>
         )}
