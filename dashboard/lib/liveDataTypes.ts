@@ -8,6 +8,8 @@ export interface LiveSourceMeta {
   liveSectorHits?: number;
   upJobsUrl?: string;
   govtJobsUrl?: string;
+  overviewCount?: number;
+  opportunityCount?: number;
   error?: string;
 }
 
@@ -29,6 +31,46 @@ export interface InvestIndiaSectorLink {
   name: string;
   url: string;
   source: string;
+}
+
+export interface InvestUpIndustryOverview {
+  indiaScenario: string[];
+  upScenario: string[];
+  highlights: { label: string }[];
+  stats: { value: string; label: string }[];
+  otherSections?: { heading: string; bullets: string[] }[];
+}
+
+export interface InvestUpOpportunity {
+  category: string;
+  title: string;
+  description: string;
+}
+
+export interface InvestUpContact {
+  name: string;
+  department?: string;
+  designation?: string;
+  phone?: string;
+  email?: string;
+}
+
+export interface InvestUpLiveSector {
+  id?: string;
+  name: string;
+  url: string;
+  slug: string;
+  source: string;
+  industryOverview?: InvestUpIndustryOverview | null;
+  investmentOpportunities?: InvestUpOpportunity[];
+  investmentScore?: number;
+  investmentSignal?: string;
+  opportunityFormat?: string;
+  contacts?: InvestUpContact[];
+  policy?: string;
+  districtHotspots?: string[];
+  isSpecialProject?: boolean;
+  detailScraped?: boolean;
 }
 
 export interface NcsPortalLink {
@@ -53,7 +95,7 @@ export interface LiveDataSourcesResponse {
   investUp: LiveSourceMeta;
   upsidaProjects: UpsidaLiveProject[];
   investIndiaSectors: InvestIndiaSectorLink[];
-  investUpSectors?: InvestIndiaSectorLink[];
+  investUpSectors?: InvestUpLiveSector[];
   ncsData: {
     upSkillPortals: NcsPortalLink[];
     industryJobLinks: NcsPortalLink[];

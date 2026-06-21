@@ -1,20 +1,20 @@
 {
-  "syncedAt": "2026-06-19T19:27:53.298Z",
+  "syncedAt": "2026-06-21T19:36:48.760Z",
   "upsida": {
     "source": "upsida_live",
-    "scrapedAt": "2026-06-19T19:27:52.241Z",
+    "scrapedAt": "2026-06-21T19:22:11.650Z",
     "portalUrl": "https://upsida.in/Home/UpcomingProjects",
     "projectCount": 17
   },
   "investIndia": {
     "source": "investindia_live",
-    "scrapedAt": "2026-06-19T19:27:52.092Z",
+    "scrapedAt": "2026-06-21T19:22:11.547Z",
     "portalUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
     "sectorCount": 40
   },
   "ncs": {
     "source": "ncs_live",
-    "scrapedAt": "2026-06-19T19:27:53.298Z",
+    "scrapedAt": "2026-06-21T19:22:12.572Z",
     "portalUrl": "https://www.ncs.gov.in/",
     "upJobsUrl": "https://betacloud.ncs.gov.in/job-listing",
     "govtJobsUrl": "https://www.ncs.gov.in/_layouts/15/ncsp/govtjobvacancies.aspx",
@@ -22,17 +22,18 @@
   },
   "nsdc": {
     "source": "nsdc_live",
-    "scrapedAt": "2026-06-19T19:27:52.396Z",
+    "scrapedAt": "2026-06-21T19:22:11.897Z",
     "portalUrl": "https://www.nsdcindia.org/",
     "sectorCount": 22
   },
   "investUp": {
-    "source": "investup_failed",
-    "scrapedAt": "2026-06-19T19:27:52.157Z",
-    "sectorCount": 0,
-    "liveSectorHits": 0,
-    "portalUrl": "https://invest.up.gov.in/sectors-in-uttar-pradesh/",
-    "error": "fetch failed"
+    "source": "investup_live",
+    "scrapedAt": "2026-06-21T19:36:48.760Z",
+    "sectorCount": 21,
+    "liveSectorHits": 21,
+    "overviewCount": 20,
+    "opportunityCount": 20,
+    "portalUrl": "https://invest.up.gov.in/sectors-in-uttar-pradesh/"
   },
   "upsidaProjects": [
     {
@@ -46,7 +47,7 @@
       "listUrl": "https://upsida.in/Home/UpcomingProjects",
       "imageUrl": "https://upsida.in/assets/images/upcominprojectsimg/Ballia.jpg",
       "source": "upsida_live",
-      "scrapedAt": "2026-06-19T19:27:52.236Z"
+      "scrapedAt": "2026-06-21T19:22:11.640Z"
     },
     {
       "id": "upsida-prayagraj-up-state-yarn-company-meja",
@@ -59,7 +60,7 @@
       "listUrl": "https://upsida.in/Home/UpcomingProjects",
       "imageUrl": "https://upsida.in/assets/images/upcominprojectsimg/BarabankiSpinning.jpg",
       "source": "upsida_live",
-      "scrapedAt": "2026-06-19T19:27:52.236Z"
+      "scrapedAt": "2026-06-21T19:22:11.641Z"
     },
     {
       "id": "upsida-banda-up-state-yarn-company",
@@ -72,7 +73,7 @@
       "listUrl": "https://upsida.in/Home/UpcomingProjects",
       "imageUrl": "https://upsida.in/assets/images/upcominprojectsimg/Prayagraj2.jpg",
       "source": "upsida_live",
-      "scrapedAt": "2026-06-19T19:27:52.236Z"
+      "scrapedAt": "2026-06-21T19:22:11.641Z"
     },
     {
       "id": "upsida-rasra-balia-up-state-yarn-company",
@@ -85,7 +86,7 @@
       "listUrl": "https://upsida.in/Home/UpcomingProjects",
       "imageUrl": "https://upsida.in/assets/images/upcominprojectsimg/RasraBallia.jpg",
       "source": "upsida_live",
-      "scrapedAt": "2026-06-19T19:27:52.237Z"
+      "scrapedAt": "2026-06-21T19:22:11.642Z"
     },
     {
       "id": "upsida-sitapur-up-co-operative-spinning-mill-mahmudabad",
@@ -98,7 +99,7 @@
       "listUrl": "https://upsida.in/Home/UpcomingProjects",
       "imageUrl": "https://upsida.in/assets/images/upcominprojectsimg/MuhamdabadSpinningMills.jpg",
       "source": "upsida_live",
-      "scrapedAt": "2026-06-19T19:27:52.237Z"
+      "scrapedAt": "2026-06-21T19:22:11.643Z"
     },
     {
       "id": "upsida-fatehpur-up-co-operative-spinning-mill",
@@ -111,7 +112,7 @@
       "listUrl": "https://upsida.in/Home/UpcomingProjects",
       "imageUrl": "https://upsida.in/assets/images/upcominprojectsimg/FatehpurSpinningMills.jpg",
       "source": "upsida_live",
-      "scrapedAt": "2026-06-19T19:27:52.237Z"
+      "scrapedAt": "2026-06-21T19:22:11.643Z"
     },
     {
       "id": "upsida-prayagraj-up-co-operative-spinning-mill-mauaima",
@@ -124,7 +125,7 @@
       "listUrl": "https://upsida.in/Home/UpcomingProjects",
       "imageUrl": "https://upsida.in/assets/images/upcominprojectsimg/Jamnager.jpg",
       "source": "upsida_live",
-      "scrapedAt": "2026-06-19T19:27:52.237Z"
+      "scrapedAt": "2026-06-21T19:22:11.644Z"
     },
     {
       "id": "upsida-gajipur-up-co-operative-yarn-mill-badaura",
@@ -137,7 +138,7 @@
       "listUrl": "https://upsida.in/Home/UpcomingProjects",
       "imageUrl": "https://upsida.in/assets/images/upcominprojectsimg/BadauraYarnMills.jpg",
       "source": "upsida_live",
-      "scrapedAt": "2026-06-19T19:27:52.237Z"
+      "scrapedAt": "2026-06-21T19:22:11.644Z"
     },
     {
       "id": "upsida-farrukhabad-up-co-operative-spinning-mill",
@@ -150,7 +151,7 @@
       "listUrl": "https://upsida.in/Home/UpcomingProjects",
       "imageUrl": "https://upsida.in/assets/images/upcominprojectsimg/OIP (2).jpg",
       "source": "upsida_live",
-      "scrapedAt": "2026-06-19T19:27:52.238Z"
+      "scrapedAt": "2026-06-21T19:22:11.645Z"
     },
     {
       "id": "upsida-bulandshahr-up-co-operative-spinning-mill",
@@ -163,7 +164,7 @@
       "listUrl": "https://upsida.in/Home/UpcomingProjects",
       "imageUrl": "https://upsida.in/assets/images/upcominprojectsimg/Prayagraj.jpg",
       "source": "upsida_live",
-      "scrapedAt": "2026-06-19T19:27:52.238Z"
+      "scrapedAt": "2026-06-21T19:22:11.645Z"
     },
     {
       "id": "upsida-unnao-trans-ganga-city",
@@ -176,7 +177,7 @@
       "listUrl": "https://upsida.in/Home/UpcomingProjects",
       "imageUrl": "https://onlineupsida.com/images/transganga.jpg",
       "source": "upsida_live",
-      "scrapedAt": "2026-06-19T19:27:52.238Z"
+      "scrapedAt": "2026-06-21T19:22:11.646Z"
     },
     {
       "id": "upsida-prayagraj-saraswati-hi-tech-city",
@@ -189,7 +190,7 @@
       "listUrl": "https://upsida.in/Home/UpcomingProjects",
       "imageUrl": "https://onlineupsida.com/images/sarswati.jpg",
       "source": "upsida_live",
-      "scrapedAt": "2026-06-19T19:27:52.238Z"
+      "scrapedAt": "2026-06-21T19:22:11.647Z"
     },
     {
       "id": "upsida-surajpur-flatted-factory",
@@ -202,7 +203,7 @@
       "listUrl": "https://upsida.in/Home/UpcomingProjects",
       "imageUrl": "https://onlineupsida.com/images/trans-delhi.jpg",
       "source": "upsida_live",
-      "scrapedAt": "2026-06-19T19:27:52.239Z"
+      "scrapedAt": "2026-06-21T19:22:11.647Z"
     },
     {
       "id": "upsida-auraiya-industrial-area-dibiyapur",
@@ -215,7 +216,7 @@
       "listUrl": "https://upsida.in/Home/UpcomingProjects",
       "imageUrl": "https://onlineupsida.com/images/auriya.jpg",
       "source": "upsida_live",
-      "scrapedAt": "2026-06-19T19:27:52.239Z"
+      "scrapedAt": "2026-06-21T19:22:11.648Z"
     },
     {
       "id": "upsida-baheri-mega-food-park",
@@ -228,7 +229,7 @@
       "listUrl": "https://upsida.in/Home/UpcomingProjects",
       "imageUrl": "https://onlineupsida.com/images/baheri-index.png",
       "source": "upsida_live",
-      "scrapedAt": "2026-06-19T19:27:52.239Z"
+      "scrapedAt": "2026-06-21T19:22:11.648Z"
     },
     {
       "id": "upsida-kannauj-perfume-park",
@@ -241,7 +242,7 @@
       "listUrl": "https://upsida.in/Home/UpcomingProjects",
       "imageUrl": "https://onlineupsida.com/images/kauunja.jpg",
       "source": "upsida_live",
-      "scrapedAt": "2026-06-19T19:27:52.239Z"
+      "scrapedAt": "2026-06-21T19:22:11.649Z"
     },
     {
       "id": "upsida-agra-integrated-manufacturing-cluster",
@@ -254,7 +255,7 @@
       "listUrl": "https://upsida.in/Home/UpcomingProjects",
       "imageUrl": "https://onlineupsida.com/images/agra-park.jpg",
       "source": "upsida_live",
-      "scrapedAt": "2026-06-19T19:27:52.240Z"
+      "scrapedAt": "2026-06-21T19:22:11.649Z"
     }
   ],
   "investIndiaSectors": [
@@ -459,7 +460,2410 @@
       "source": "investindia_live"
     }
   ],
-  "investUpSectors": [],
+  "investUpSectors": [
+    {
+      "id": "ai-city",
+      "name": "AI City",
+      "slug": "ai-city",
+      "url": "https://invest.up.gov.in/ai-city/",
+      "source": "investup_live",
+      "industryOverview": {
+        "indiaScenario": [
+          "AI City is envisioned as a purpose-built innovation zone to position Uttar Pradesh as India’s premier hub for Artificial Intelligence. It is planned to co-locate all critical layers of the AI ecosystem viz. hardware, compute infrastructure, foundational development, and AI-driven solutions within a single integrated environment to accelerate research, deployment, and commercialization."
+        ],
+        "upScenario": [
+          "Proposed to be located at Vrindavan Yojana IT City, Lucknow",
+          "Total 258.59 Acres. 32.15 Acres for convention center | IT and Mixed land use",
+          "AI City Phase-I planned in 20+ Acres | FAR 4 Max.",
+          "Addl. FAR of 3% to 7% based on GRIHA / IGBC / LEED certification levels.",
+          "High speed optical fiber connectivity available with provisions for dedicated connections through top Telecom operators",
+          "400 KV power supply to three 220 KV grid Stations | 24/7 Water and Gas Supply available",
+          "Storm Water, Sewage and Waste Management facilities available"
+        ],
+        "highlights": [
+          {
+            "label": "Capturing the AI value chain"
+          },
+          {
+            "label": "High Value Job creation"
+          },
+          {
+            "label": "Supporting GVA growth"
+          },
+          {
+            "label": "Driving balanced Regional Development"
+          },
+          {
+            "label": "Catalyzing Governance transformation"
+          },
+          {
+            "label": "Accelerating Viksit UP vision 2047"
+          }
+        ],
+        "stats": [
+          {
+            "value": "20+ Acres",
+            "label": "AI City Lucknow"
+          },
+          {
+            "value": "258.59 Acres",
+            "label": "Total 258.59 Acres. 32.15 Acres for convention center | IT and Mixed land use"
+          },
+          {
+            "value": "20+ Acres",
+            "label": "AI City Phase-I planned in 20+ Acres | FAR 4 Max."
+          },
+          {
+            "value": "400 KV",
+            "label": "Power supply to grid stations"
+          }
+        ],
+        "otherSections": [
+          {
+            "heading": "Vision",
+            "bullets": [
+              "Capturing the AI value chain",
+              "High Value Job creation",
+              "Supporting GVA growth",
+              "Driving balanced Regional Development",
+              "Catalyzing Governance transformation",
+              "Accelerating Viksit UP vision 2047"
+            ]
+          }
+        ]
+      },
+      "investmentOpportunities": [
+        {
+          "category": "Components",
+          "title": "Iconic Office Tower",
+          "description": "Iconic Office Tower"
+        },
+        {
+          "category": "Components",
+          "title": "Incubation Centre for AI & DeepTech",
+          "description": "Incubation Centre for AI & DeepTech"
+        },
+        {
+          "category": "Components",
+          "title": "AI-Centric Flexible Workspace",
+          "description": "AI-Centric Flexible Workspace"
+        },
+        {
+          "category": "Components",
+          "title": "Commercial & Amenity Block",
+          "description": "Commercial & Amenity Block"
+        },
+        {
+          "category": "Components",
+          "title": "High-Performance Compute Capacity",
+          "description": "High-Performance Compute Capacity"
+        },
+        {
+          "category": "Components",
+          "title": "AI Testing & Simulation Labs",
+          "description": "AI Testing & Simulation Labs"
+        }
+      ],
+      "investmentScore": 96,
+      "investmentSignal": "high",
+      "opportunityFormat": "ai-city",
+      "contacts": [],
+      "policy": "UP Information Technology Policy 2017",
+      "districtHotspots": [
+        "Lucknow"
+      ],
+      "isSpecialProject": true,
+      "detailScraped": true
+    },
+    {
+      "id": "agriculture-food",
+      "name": "Agriculture & Food Processing",
+      "slug": "agriculture-food-processing",
+      "url": "https://invest.up.gov.in/agriculture-food-processing/",
+      "source": "investup_live",
+      "industryOverview": {
+        "indiaScenario": [
+          "100% FDI is permitted under the automatic route in food processing industries in India.",
+          "100% FDI is allowed through the government approval route for trading, including through e-commerce in respect of food products manufactured or produced in India.",
+          "For further details, please refer FDI Policy, Government of India",
+          "The share of processed food exports in agri-exports has increased substantially from 13.7% in 2014-15 to 25.6% in 2022-23.",
+          "The total FDI received in the food processing sector from Apr 2000 till Mar 2024 was $12.58 Bn which is 1.85% of the total FDI Equity inflow.",
+          "By 2025 the Indian Food Processing market is estimated to reach $535 Bn and growing at a compound annual growth rate of 15.2%. Tier-II and Tier-III cities could mirror the trend visible in metropolitan areas, by consuming more processed food in the coming years.",
+          "India’s consumer spending to grow to $6 Tn by 2030.",
+          "India's export of agricultural and processed food products rose close to $51 Bn in 2022-23. Major exporting countries include USA, Bangladesh, UAE, Vietnam, among others.",
+          "India has emerged as world leader in the production of a variety of fruits like mango, banana, guava, papaya, sapota, pomegranate, Lime & aonla and is the second largest producer of fruits and vegetables.",
+          "In FY 2023-24, India exported 11.1 Mn Tonnes of non-basmati rice and 5.2 Mn Tonnes of basmati rice.",
+          "Government aims to make India the Global Hub for 'Shree Anna' (Millets)"
+        ],
+        "upScenario": [
+          "15 Agro & Food Processing Parks/clusters established in Varanasi, Barabanki, Saharanpur, Gorakhpur etc.",
+          "Mega Food Park, Baheri: 40 KM from Bareilly bordering Uttarakhand. 247.60 Acres have been earmarked for the Mega Food Park",
+          "250 Regulated Market; 225 Rural Market; 100 eNAM Mandis",
+          "4 Agriculture Export Zones, 10 ICDs, 1909 Cold chains, 35 FPOs",
+          "Premier institutes like Kanpur University, Ayodhya University, SHUATS Prayagraj, SVPUAT Meerut and Indian Veterinary Institute, Bareilly"
+        ],
+        "otherSections": [],
+        "highlights": [
+          {
+            "label": "World's largest producer of Spices, Milk and Pulses"
+          },
+          {
+            "label": "World's second largest producer of tea and sugarcane"
+          },
+          {
+            "label": "World's second largest producer of wheat, fruits and vegetables"
+          }
+        ],
+        "stats": [
+          {
+            "value": "18.3%",
+            "label": "Share of GVA of Agriculture & Alled Sector in Total Economy (at current pices) (2022-23)"
+          },
+          {
+            "value": "12.22%",
+            "label": "Share in total employment"
+          },
+          {
+            "value": "$51Bn",
+            "label": "Worth of agrteutural and processed food products exported in 2022-23"
+          },
+          {
+            "value": "141.6%",
+            "label": "Cropping Intensity"
+          },
+          {
+            "value": "Largest",
+            "label": "Production of Milk, Grain, Sugarcane, Mangoes and Indian Gooseberries"
+          },
+          {
+            "value": "#3",
+            "label": "In India in Production of fruits"
+          },
+          {
+            "value": "#3",
+            "label": "In India in inland fish production"
+          },
+          {
+            "value": "Largest",
+            "label": "Exporter of processed frozen meat in India"
+          },
+          {
+            "value": "77",
+            "label": "Government community fruit preservation and training centers at district level"
+          }
+        ]
+      },
+      "investmentOpportunities": [
+        {
+          "category": "Primary Opportunities",
+          "title": "Processing",
+          "description": "- With strong supply side advantages, local demand, rising export potential and policy support, processing of food products offer immense potential in the State. Considering the abundance of naturally existing agro-resources, investments in mango processing, turmeric processing, aonla processing, breakfast and cereal manufacturing, garlic and chilli processing, etc. is a promising opportunity in Uttar Pradesh."
+        },
+        {
+          "category": "Primary Opportunities",
+          "title": "Manufacturing & Supply of Agro inputs",
+          "description": "– Given the huge agrarian economy of the State, immense potential exists in manufacturing, production and supply of necessary fertilizers, seeds, agro-chemicals, farm equipment, machinery and irrigation systems to increase production and productivity."
+        },
+        {
+          "category": "Primary Opportunities",
+          "title": "Integrated Units",
+          "description": "- Investment in developing integrated units with processing, preservation, packaging and warehousing facilities at notified Agro Parks in the state is a promising investment opportunity. These agro parks include Mega Food Park at Baheri, Agro Park at Barabanki, Khemsepur (Farukkhabad), Karkheon (Varanasi) and Barhgarh-II (Chitrakoot)."
+        },
+        {
+          "category": "Other Opportunities",
+          "title": "Other Opportunities",
+          "description": "Establishment of Centre of Excellence for Agriculture sector"
+        },
+        {
+          "category": "Other Opportunities",
+          "title": "Other Opportunities",
+          "description": "Processing of Potatoes and Mangoes"
+        },
+        {
+          "category": "Other Opportunities",
+          "title": "Other Opportunities",
+          "description": "Development of packhouses"
+        },
+        {
+          "category": "Other Opportunities",
+          "title": "Other Opportunities",
+          "description": "Development of storage infrastructure"
+        },
+        {
+          "category": "Other Opportunities",
+          "title": "Other Opportunities",
+          "description": "Development of Special Agriculture Economic Zones"
+        }
+      ],
+      "investmentScore": 82,
+      "investmentSignal": "high",
+      "opportunityFormat": "carousel",
+      "contacts": [
+        {
+          "name": "Shri. Anuruddha Kshatriya",
+          "department": "Invest UP",
+          "designation": "GM - Investment Promotion",
+          "phone": "9118712084",
+          "email": "gminvestmentpromotion@investup.org.in"
+        }
+      ],
+      "policy": "UP Food Processing Industry Policy 2017",
+      "districtHotspots": [
+        "Lucknow",
+        "Kanpur",
+        "Varanasi",
+        "Meerut",
+        "Bareilly"
+      ],
+      "detailScraped": true
+    },
+    {
+      "id": "auto-components",
+      "name": "Auto Components",
+      "slug": "auto-components-sector",
+      "url": "https://invest.up.gov.in/auto-components-sector/",
+      "source": "investup_live",
+      "industryOverview": {
+        "indiaScenario": [
+          "India's auto component sector is a vital part of the automotive ecosystem, supporting both domestic and international vehicle manufacturing. It covers a wide range of products and services, contributing 2.3% to India’s GDP and directly employing over 1.5 million people. The sector's turnover in FY24 was Rs. 6.14 lakh crore (US$ 74.1 billion), with domestic OEM supplies making up 54%, and exports contributing 18%. Over FY16-FY24, the industry grew at a CAGR of 8.63%. In FY24, exports reached US$ 21.2 billion, with a trade surplus of US$ 300 million, and are projected to hit US$ 30 billion by 2026."
+        ],
+        "upScenario": [
+          "Strategic Importance : Uttar Pradesh plays a vital role in auto component manufacturing sector due to its strategic location, SME base, skilled labour, and robust infrastructure.",
+          "Industry Overview : Home to large OEMs and tier-1 suppliers, along with a vibrant ecosystem of small and medium enterprises (SMEs). Contributes significantly to the state’s economy, particularly in manufacturing, due to proximity to major automobile hubs like Lucknow, Noida, Greater Noida, and Agra.",
+          "Home to large OEMs and tier-1 suppliers, along with a vibrant ecosystem of small and medium enterprises (SMEs).",
+          "Contributes significantly to the state’s economy, particularly in manufacturing, due to proximity to major automobile hubs like Lucknow, Noida, Greater Noida, and Agra.",
+          "Industrial Clusters : Major clusters in Ghaziabad, Lucknow, Kanpur, Bagpat, Agra host numerous auto component manufacturers, including Tata Auto Comp, Bosch, RACL Geartech and Minda Industries, specializing in gear parts, electronics component, lighting, engine components, tyres etc."
+        ],
+        "otherSections": [],
+        "highlights": [
+          {
+            "label": "Well-connected by the Golden Quadrilateral and major national/international airports."
+          },
+          {
+            "label": "Significant portions of the Eastern and Western Dedicated Freight Corridors (EDFC and WDFC) pass through the state."
+          },
+          {
+            "label": "International airport at Jewar will be the largest in North India."
+          },
+          {
+            "label": "Existing expressways (Yamuna, Agra-Lucknow) and new projects (Poorvanchal, Bundelkhand Expressways) enhance connectivity."
+          },
+          {
+            "label": "Multi-modal logistics hubs are being developed in Noida, Boraki, and Varanasi, strengthening logistics infrastructure."
+          }
+        ],
+        "stats": [
+          {
+            "value": "6th",
+            "label": "Highest share in India's IT exports growing at CAGR of ~8%"
+          },
+          {
+            "value": "12",
+            "label": "IT/ITes SEZs"
+          },
+          {
+            "value": "8",
+            "label": "Centers of Excellence in the field of AI, Drones and MedTech, etc."
+          },
+          {
+            "value": "USD 765 Mn+",
+            "label": "Investments under prior IT policy"
+          }
+        ]
+      },
+      "investmentOpportunities": [
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Growing Market :",
+          "description": "The Electric Vehicle Policy 2022 aims to boost local production of EV components (batteries, electric motors, charging stations) with attractive incentives for manufacturers. Government Support : The state government is focused on creating an ecosystem for EV manufacturing, offering financial benefits and streamlined processes."
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Diverse Manufacturing :",
+          "description": "UP can produce various components for conventional vehicles (engines, transmissions, chassis parts), providing multiple investment opportunities. OEM Collaborations : Partnerships with major OEMs can enhance growth for tier-1 and tier-2 suppliers, improving local supply chains."
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Land Availability :",
+          "description": "Ready-to-move industrial land is available at competitive rates in key industrial clusters (Noida, Greater Noida, Lucknow). Infrastructure Development : Improved logistics and new highways enhance supply chain efficiency and connectivity for manufacturing projects."
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Logistics and Connectivity :",
+          "description": "Significant investments in logistics infrastructure, including roads and transport facilities, improve operational efficiency for investors. Industrial Clusters : Clusters in Noida and Greater Noida promote collaboration and resource sharing among auto component manufacturers."
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Proximity to NCR :",
+          "description": "UP’s location near the National Capital Region (NCR) provides excellent export opportunities, enabling access to global markets."
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Business-Friendly Environment :",
+          "description": "The Single Window Clearance System reduces bureaucratic hurdles and offers various subsidies to encourage new projects. Foreign Direct Investment (FDI) : The state actively seeks FDI in the auto component sector, providing a robust framework for international companies."
+        }
+      ],
+      "investmentScore": 68,
+      "investmentSignal": "medium",
+      "opportunityFormat": "carousel",
+      "contacts": [
+        {
+          "name": "Shri. Amit Kumar Mishra",
+          "department": "Invest UP",
+          "designation": "AGM EV",
+          "phone": "9793855243",
+          "email": "agmev@investup.org.in"
+        }
+      ],
+      "policy": "Industrial Investment Policy 2017",
+      "districtHotspots": [
+        "Gautam Buddha Nagar",
+        "Ghaziabad",
+        "Lucknow",
+        "Kanpur"
+      ],
+      "detailScraped": true
+    },
+    {
+      "id": "civil-aviation",
+      "name": "Civil Aviation",
+      "slug": "civil-aviation-sector",
+      "url": "https://invest.up.gov.in/civil-aviation-sector/",
+      "source": "investup_live",
+      "industryOverview": {
+        "indiaScenario": [
+          "The Civil Aviation sector is an enabler of economic growth and development, and over the last few years, the industry has emerged as one of the fastest growing industries in the country. The sector can be broadly classified into scheduled air transport service and non-scheduled air transport service and air cargo service. While the scheduled air transport service includes domestic and international airlines, non-scheduled air transport service consists of charter operators and air taxi operators. Air cargo service includes air transportation of cargo and mail.",
+          "The Indian civil aviation industry has recovered fully from the Covid-19 pandemic shock as indicated by the air traffic movement which stood at 327.28 million in FY23 compared to 188.89 million in FY22. Indigo is the largest airline company in India with the highest market share.",
+          "In India, the Civil Aviation sector is a central subject and all necessary rules & guidelines are made by Government of India. State Governments have very limited role to play in this sector. All scheduled, non-scheduled, state government & private operations are governed and controlled within the rules & guidelines of Govt. of India. The Ministry of Civil Aviation, Government of India is responsible for formulation of national policies and programmes for the development and regulation of the Civil Aviation sector in the country. It is responsible for the administration of the Aircraft Act, 1934, Aircraft Rules, 1937 and various other legislations pertaining to the aviation sector in the country. This Ministry exercises administrative control over attached and autonomous organizations like the Directorate General of Civil Aviation, Bureau of Civil Aviation Security and Indira Gandhi Rashtriya Uran Akademi and affiliated Public Sector Undertakings like Airports Authority of India and Pawan Hans Helicopters Limited.",
+          "To facilitate the inclusive growth in this sector, Government of India has launched National Civil Aviation Policy 2016 and Regional Connectivity Scheme (RCS) with a vision to connect the underserved as well as unserved airports / airstrips/ locations through incentives from central and state governments. Such airports/locations are marked as RCS airports/locations. All State governments are encouraged to identify the locations as well as the routes and to declare incentives beyond the mandates envisaged in RCS to attract the airlines and start new routes."
+        ],
+        "upScenario": [
+          "Uttar Pradesh has emerged as a significant player in India's civil aviation sector, leveraging its strategic location, population size, and policy-driven initiatives to become a hub for aviation growth. The state is centrally located and well-connected to key cities like Delhi, enabling efficient domestic and international connectivity. With a population of over 240 million, UP offers a vast consumer and labour market, making it an ideal base for aviation-related investments.",
+          "The aviation sector in Uttar Pradesh has grown by leaps and bounds in the last 07 years and the state will soon become the only one to boast of 05 international airports in India. The upcoming Noida International Airport at Jewar is set to be India's largest airport upon completion, it will be a major catalyst for regional and international connectivity, cargo operations, and economic activity. The Kushinagar International Airport is a gateway for Buddhist tourism and international travel, enhancing the state’s global tourism appeal, while the Ayodhya Airport promotes religious tourism and regional connectivity in line with the state’s cultural heritage. Apart from this, the state has two other functional airports at Lucknow and Varanasi."
+        ],
+        "otherSections": [],
+        "highlights": [],
+        "stats": [
+          {
+            "value": "6th",
+            "label": "Highest share in India's IT exports growing at CAGR of ~8%"
+          },
+          {
+            "value": "12",
+            "label": "IT/ITes SEZs"
+          },
+          {
+            "value": "8",
+            "label": "Centers of Excellence in the field of AI, Drones and MedTech, etc."
+          },
+          {
+            "value": "USD 765 Mn+",
+            "label": "Investments under prior IT policy"
+          }
+        ]
+      },
+      "investmentOpportunities": [
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Greenfield Airports",
+          "description": "Development of new, modern airports in under-served and emerging regions. Airport Modernization Upgrading and expanding existing airport terminals, runways, and ancillary infrastructure to handle increasing passenger and cargo traffic. Cargo Terminals Development of dedicated air cargo hubs to support logistics, e-commerce, and perishable goods transportation."
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Aircraft Manufacturing Units",
+          "description": "Opportunities for assembling and manufacturing aircraft components. MRO Facilities Establishing state-of-the-art facilities for maintenance, repair, and overhaul services for aircraft. Airstrip Policy of Government of Uttar Pradesh, 2023 The policy provides opportunity for use of Govt. of Uttar Pradesh airsrips for different aviation activities like Flying Training Organisation (FTO), Aircraft Maintenance, Repaire and Overhaul (MRO) etc."
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Regional Airlines",
+          "description": "Opportunities to launch regional carriers to serve tier-2 and tier-3 cities under the Regional Connectivity Scheme (RCS). Charter Services Growing demand for private charters, especially for business travel and tourism. Cargo Airlines Dedicated cargo airlines to support agricultural exports and industrial goods transportation. HEMS Helicopter Emergency Medical Services"
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Pilot Training Academies",
+          "description": "Growing demand for trained pilots with increasing airline operations. Technical Training Institutes Facilities to train engineers and technicians for MRO, ground handling, and air traffic control."
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Fuel Services",
+          "description": "Investments in aviation fuel supply, storage, and refueling infrastructure. Ground Handling Opportunities in baggage handling, aircraft servicing, and cargo operations. Hospitality and Retail Expansion of airport lounges, food courts, and retail outlets to enhance passenger experience."
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Smart Airports",
+          "description": "Investing in advanced technologies such as IoT, AI, and biometric systems for passenger processing, security, and operations. Air Traffic Management Systems Implementation of advanced navigation and surveillance systems to ensure efficient airspace management. Drone Technology Development of unmanned aerial vehicles (UAVs) and related services for logistics, surveillance, and agriculture."
+        }
+      ],
+      "investmentScore": 78,
+      "investmentSignal": "high",
+      "opportunityFormat": "carousel",
+      "contacts": [
+        {
+          "name": "Shri. Sushil Singh",
+          "department": "Sector Expert",
+          "designation": "Additional Director",
+          "phone": "9453723040",
+          "email": "ad-admincad@up.gov.in"
+        },
+        {
+          "name": "Shri. Anuruddha Kshatriya",
+          "department": "Invest UP",
+          "designation": "GM - Investment Promotion",
+          "phone": "9118712084",
+          "email": "gminvestmentpromotion@investup.org.in"
+        }
+      ],
+      "policy": "UP Civil Aviation Policy 2017",
+      "districtHotspots": [
+        "Lucknow",
+        "Varanasi",
+        "Gorakhpur",
+        "Agra",
+        "Ayodhya"
+      ],
+      "detailScraped": true
+    },
+    {
+      "id": "dairy",
+      "name": "Dairy Sector",
+      "slug": "dairy-sector",
+      "url": "https://invest.up.gov.in/dairy-sector/",
+      "source": "investup_live",
+      "industryOverview": {
+        "indiaScenario": [
+          "India is the world’s largest milk producer, contributing 24.64% of global production in 2021-22.",
+          "Milk production increased to 230.58 million tonnes in 2022-23, growing at a CAGR of 5.85% over the past 9 years.",
+          "Rajasthan, Uttar Pradesh, Madhya Pradesh, Gujarat, and Andhra Pradesh together account for 53.11% of total milk production.",
+          "India exported 67,572.99 metric tonnes of dairy products worth $284.65 million in 2022-23.",
+          "Dairy sector growth requires investment in processing, chilling, logistics, and cattle feed.",
+          "Opportunities exist in value-added dairy products, organic/farm-fresh milk, and exports.",
+          "Animal Husbandry Infrastructure Development Fund (AHIDF):",
+          "Offers financial support for setting up new units or expanding existing ones.",
+          "Benefits include interest subvention, moratorium, and credit guarantee."
+        ],
+        "upScenario": [
+          "Home to the dairy capital of North India: Bulandshahr.",
+          "U.P.’s low processing levels of 10% vis-à-vis India avg. of 17% presents immense opportunity for investment",
+          "Establishment of 6 Dairy Complexes to make use of complete livestock ecosystem- production, processing, and waste management- and increase commercial milk production by farmers"
+        ],
+        "otherSections": [],
+        "highlights": [
+          {
+            "label": "Infrastructure gap of 120 - 130 MMT with investment potential of $18-20 Bn"
+          },
+          {
+            "label": "Market for butter and spreads is predicted to grow at an 8%, CAGR to $4.2 Bn by 2026."
+          },
+          {
+            "label": "Dairy is the single largest agricultural commodity contributing 5% of the national economy, witnessing 6.4% (CAGR) in the past 5 years."
+          }
+        ],
+        "stats": [
+          {
+            "value": "126Mn",
+            "label": "Litres/dayMILK PROCESSING CAPACITY"
+          },
+          {
+            "value": "80Mn",
+            "label": "PEOPLE ARE EMPLOYED IN THE DAIRY INDUSTRY"
+          },
+          {
+            "value": "24%",
+            "label": "INDIA'S CONTRIBUTION IN GLOBAL, MILK PRODUCTION"
+          },
+          {
+            "value": "7%",
+            "label": "Livestock Contribute to GSDP — 7% in Uttar Pradesh as compared to 5.2% for the country"
+          },
+          {
+            "value": "5.31",
+            "label": "Highest Milch Animal Population — 5.31 crore milch animal population- 19% of the country’s population"
+          },
+          {
+            "value": "Large Consumer Base",
+            "label": "Urban per capita spend on dairy is Rs 470 per month in 2020"
+          }
+        ]
+      },
+      "investmentOpportunities": [
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Overview",
+          "description": "Overview"
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Govt. Support",
+          "description": "Govt. Support"
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Opportunity",
+          "description": "Opportunity"
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Dairy Complexes",
+          "description": "Proposed Dairy Complexes"
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Dairy Complexes",
+          "description": "Complex Outlay"
+        }
+      ],
+      "investmentScore": 72,
+      "investmentSignal": "medium",
+      "opportunityFormat": "carousel",
+      "contacts": [
+        {
+          "name": "Shri. B.M.Tyagi",
+          "department": "Dairy Development",
+          "designation": "Deputy Dairy Development Officer",
+          "phone": "9690375843",
+          "email": "nodalofficerdd.gis23@gmail.com"
+        }
+      ],
+      "policy": "UP Milk Policy 2018",
+      "districtHotspots": [
+        "Lucknow",
+        "Bareilly",
+        "Meerut",
+        "Moradabad",
+        "Aligarh"
+      ],
+      "detailScraped": true
+    },
+    {
+      "id": "defence-aerospace",
+      "name": "Defence & Aerospace",
+      "slug": "defence-aerospace-sector",
+      "url": "https://invest.up.gov.in/defence-aerospace-sector/",
+      "source": "investup_live",
+      "industryOverview": {
+        "indiaScenario": [
+          "The Government of India has identified the Defence and Aerospace sector as a focus area for the ‘Aatmanirbhar Bharat’, with a formidable push on the establishment of indigenous manufacturing infrastructure supported by a requisite research and development ecosystem.",
+          "In the Interim Union Budget 2024-25, the Capital Allocations pertaining to modernisation and infrastructure development of the Defence Services has been increased to INR 1.72 Lakh Cr representing a rise of 9.4% over FY 2023-24. The industry gets INR 6.22 Lakh Cr in Union Budget 2024-25, a jump of 4.79% over previous year.",
+          "Ministry of Defence has set a target of achieving a turnover of INR 1.75 Lakh Cr in aerospace and defence Manufacturing by 2025, which includes exports of INR 35,000 Cr. Till Apr 2023, a total of 606 Industrial Licences have been issued to 369 companies operating in Defence Sector.",
+          "To support the domestic defence industry, the government aims to ensure ease of doing business by creating a robust eco-system and supportive government policies. Towards this end, the government has taken steps to bring about de-licensing, de-regulation, export promotion and foreign investment liberalization.",
+          "The Department of Military Affairs (DMA) has promulgated five Positive Indigenisation Lists comprising 5,012 items. Additionally, to promote export and liberalise foreign investments FDI in Defence Sector has been enhanced up to 74% through the Automatic Route and 100% by Government Route.",
+          "The government has also announced 2 dedicated Defence Industrial Corridors in the States of Tamil Nadu and Uttar Pradesh to act as clusters of defence manufacturing that leverage existing infrastructure, and human capital.",
+          "Further, in order to boost the domestic defence & Aerospace manufacturing sector, the Ministry of Defence has launched the Defence Testing Infrastructure Scheme (DTIS), with an outlay of Rs 400 crore for creating a state-of-the-art testing infrastructure in partnership with private industries."
+        ],
+        "upScenario": [
+          "Uttar Pradesh’s Bundelkhand region is home to one of the two dedicated Defence Industrial Corridors in the country",
+          "5000 hectares of developed land has been earmarked across six nodes along the Defence Industrial Corridor",
+          "The six nodes include Aligarh, Agra, Kanpur, Lucknow, Chitrakoot and Jhansi",
+          "9 Cities viz. Chitrakoot, Jhansi, Kanpur, Lucknow, Agra, Aligarh, Ghaziabad, Meerut, GBNagar will stand to benefit by the UP DIC",
+          "An investment of Rs 50,000 Cr is expected to take place in the region, supporting 2.5 lakh jobs",
+          "Uttar Pradesh has the largest SME base, suitable for Defence Industry",
+          "A robust & Aerospace & Defence Manufacturing Ecosystem is being created in UP. The Govt is in the process of establishing an Unmanned Aerial Vehicle (UAV) campus in Aerospace Hub, providing exclusive area for UAV OEMs and its component manufacturer. An integrated testing facility for Unmanned Aerial Systems (UAS) is also being planned near Kanpur",
+          "7 Ordnance factories, 4 HAL units and 2 Small Arms/ Field gun Factories already exist in Uttar Pradesh"
+        ],
+        "otherSections": [],
+        "highlights": [],
+        "stats": [
+          {
+            "value": "3.3%",
+            "label": "Share of GDP spent on defence (2023-24)"
+          },
+          {
+            "value": "12",
+            "label": "Defence exports have reached an all-time high in FY 2023-24"
+          },
+          {
+            "value": "INR 1.26Lakh Cr",
+            "label": "Current value of Defence production in FY 2023-24"
+          },
+          {
+            "value": "4.79",
+            "label": "% Increase in Defence Budget of FY 2024-25 over the FY 2023-24 Budget"
+          }
+        ]
+      },
+      "investmentOpportunities": [
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Small Arms & Ammunition Manufacturing Units",
+          "description": "Small arms and ammunition manufacturing units play a critical role in the defense manufacturing sector. These units focus on the production of handheld firearms, light weapons, and corresponding ammunition, serving both military and civilian markets."
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Bullet Proof Jackets and Special Clothing Manufacturing units",
+          "description": "Bulletproof jackets and special clothing are essential components of modern personal protective equipment (PPE) for military personnel, law enforcement, and other security forces. These items are designed to protect individuals from ballistic threats, shrapnel, and environmental hazards in combat and high-risk environments."
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Precision Manufacturing units in Aerospace Sector",
+          "description": "Establishing Al/ML based-diagnostic centers / developing AI/ML solutions to convert varied demographic and epidemiological profile into an advantage"
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Infrastructure",
+          "description": "Precision manufacturing in the aerospace industry involves the production of highly specialized components and systems that demand extreme accuracy and tight tolerances. These components are essential for the safety, efficiency, and performance of aircraft, spacecraft, and related systems."
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "UAV units",
+          "description": "Unmanned Aerial Vehicles (UAVs), commonly known as drones, are used across military, commercial, and recreational sectors for a wide range of applications, offering flexibility, reduced risk, and cost savings in operations."
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "MRO",
+          "description": "The increasing demand for aircraft and defense systems means a rising need for MRO services. Investing in MRO infrastructure, particularly in regions like India where MRO costs are relatively low, is a growing market. With the global expansion of commercial aviation, military fleets, and the rise of private aviation, MRO services are increasingly in demand, offering significant investment opportunities."
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Electronics & Avionics",
+          "description": "he electronics and avionics sector plays a crucial role in the aerospace industry, encompassing the systems responsible for navigation, communication, control, and flight safety. The increasing complexity of modern aircraft, the growth of unmanned aerial vehicles (UAVs), and advancements in digital technologies present significant investment opportunities for setting up electronics and avionics manufacturing units."
+        }
+      ],
+      "investmentScore": 88,
+      "investmentSignal": "high",
+      "opportunityFormat": "carousel",
+      "contacts": [
+        {
+          "name": "Shri. Hari Pratap Shahi",
+          "department": "Sector Expert",
+          "designation": "ACEO UPEIDA",
+          "phone": "9415047781",
+          "email": "ceo.eida-up@gov.in"
+        },
+        {
+          "name": "Shri. Himanshu Bhatia",
+          "department": "Invest UP",
+          "designation": "GM - Udyami Mitra",
+          "phone": "8960440837",
+          "email": "gmudyamimitra@investup.org.in"
+        }
+      ],
+      "policy": "UP Defence & Aerospace Policy 2018",
+      "districtHotspots": [
+        "Lucknow",
+        "Kanpur",
+        "Gorakhpur",
+        "Jhansi"
+      ],
+      "detailScraped": true
+    },
+    {
+      "id": "electronics-tech",
+      "name": "Electronics & Technology",
+      "slug": "electronics-technology",
+      "url": "https://invest.up.gov.in/electronics-technology/",
+      "source": "investup_live",
+      "industryOverview": {
+        "indiaScenario": [
+          "100% FDI is allowed under the automatic route. In the case of defence electronics, FDI up to 49% is allowed through automatic route and beyond 49% requires government approval.",
+          "For further details, please refer FDI Policy, Government of India",
+          "At present, India’s domestic production has increased at a CAGR of 13% from $49 Bn in FY17 to $101 Bn in FY23.",
+          "The country's electronics export is expected to reach $120 Bn by FY26.",
+          "India’s electronic goods exports increased by 32.47% in FY2024-25, rising from US$29.12 billion in FY2023-24 to US$38.58 billion in FY2024-25, making electronics one of the strongest growth drivers of India’s merchandise exports.",
+          "India ranks 60 in Network Readiness Index 2023, a jump of 7 ranks from 67 in 2021.",
+          "96% reduction in data cost from INR 269 per GB in 2014 to INR 9.94 per GB in 2023."
+        ],
+        "upScenario": [
+          "Uttar Pradesh has emerged as one of India’s most important destinations for electronics manufacturing, supported by large-scale mobile manufacturing, greenfield electronics clusters, and a policy framework spanning electronics manufacturing, electronics components and semiconductors.",
+          "The official Uttar Pradesh Electronics Component Manufacturing Policy 2025 states that the state contributes nearly half of India’s total production of mobile phones, highlighting its central role in the national electronics ecosystem.",
+          "UP’s strength is reinforced by its proximity to NCR, established manufacturing anchors, growing industrial infrastructure, and ongoing efforts to deepen local supply chains beyond finished-device assembly.",
+          "Largest Exporter of Consumer Electronics in India",
+          "0+ ESDM Companies presently operating in the state",
+          "0%Of total India, mobile component manufacturing units present operates from the State",
+          "0%Of the mobile manufactured in the country comes from the State"
+        ],
+        "otherSections": [],
+        "highlights": [
+          {
+            "label": "2nd largest mobile manufacturer & internet users in the world"
+          },
+          {
+            "label": "Over 2x increase in domestic production of electronics in last 6 years"
+          },
+          {
+            "label": "19% CAGR in average monthly data traffic per user from 9.5 GB in FY18 to 19.5 GB in FY22"
+          }
+        ],
+        "stats": [
+          {
+            "value": "$1Tn",
+            "label": "Digital Economy by FY26"
+          },
+          {
+            "value": "$155Bn",
+            "label": "Indian Electronics Market"
+          },
+          {
+            "value": "$30Bn",
+            "label": "Fiscal incentives for ESDM & Allied Sectors"
+          },
+          {
+            "value": "Largest",
+            "label": "Exporter of Consumer Electronics in India"
+          },
+          {
+            "value": "196+",
+            "label": "ESDM Companies presently operating in the state"
+          },
+          {
+            "value": "55%",
+            "label": "Of total India, mobile component manufacturing units present operates from the State"
+          },
+          {
+            "value": "40%",
+            "label": "Of the mobile manufactured in the country comes from the State"
+          }
+        ]
+      },
+      "investmentOpportunities": [
+        {
+          "category": "Investment Regions",
+          "title": "Smartphones, laptops, televisions, infotainment systems, automobile communication, etc.",
+          "description": "Smartphones, laptops, televisions, infotainment systems, automobile communication, etc."
+        },
+        {
+          "category": "Investment Regions",
+          "title": "Hub for smartphone and other consumer electronics manufacturing mainly LCDs.",
+          "description": "Hub for smartphone and other consumer electronics manufacturing mainly LCDs."
+        },
+        {
+          "category": "Investment Regions",
+          "title": "Opportunity to capture INR 5,100 crores (USD 723 million) worth of demand",
+          "description": "Opportunity to capture INR 5,100 crores (USD 723 million) worth of demand"
+        },
+        {
+          "category": "Investment Regions",
+          "title": "Potential products include monitors, Sound recording medias, Storage Devices, Insulated Electric Conductors, Data Transmission/ reception apparatus, etc.",
+          "description": "Potential products include monitors, Sound recording medias, Storage Devices, Insulated Electric Conductors, Data Transmission/ reception apparatus, etc."
+        },
+        {
+          "category": "Investment Regions",
+          "title": "Market diversification and penetration opportunities for key products like Mobile phones, microphones and components in ASEAN countries, Japan and South Korea",
+          "description": "Market diversification and penetration opportunities for key products like Mobile phones, microphones and components in ASEAN countries, Japan and South Korea"
+        },
+        {
+          "category": "Investment Regions",
+          "title": "Market diversification for key products like Computers and laptops in USA, Germany, Japan, UK.",
+          "description": "Market diversification for key products like Computers and laptops in USA, Germany, Japan, UK."
+        },
+        {
+          "category": "Investment Regions",
+          "title": "Development of rental dormitories for work force in Industrial development Authorities by itself or on PPP mode",
+          "description": "Development of rental dormitories for work force in Industrial development Authorities by itself or on PPP mode"
+        },
+        {
+          "category": "Investment Regions",
+          "title": "Development of rental facilities on Plug & Play model for ESDM investors by itself or on PPP mode.",
+          "description": "Development of rental facilities on Plug & Play model for ESDM investors by itself or on PPP mode."
+        }
+      ],
+      "investmentScore": 90,
+      "investmentSignal": "high",
+      "opportunityFormat": "bullets",
+      "contacts": [
+        {
+          "name": "Shri. Ritesh Saxena",
+          "department": "Invest UP",
+          "designation": "AGM - Udyami Mitra",
+          "phone": "7905224361",
+          "email": "agmudyamimitra@investup.org.in"
+        }
+      ],
+      "policy": "UP Electronics Manufacturing Policy 2020",
+      "districtHotspots": [
+        "Noida",
+        "Ghaziabad",
+        "Lucknow",
+        "Kanpur"
+      ],
+      "detailScraped": true
+    },
+    {
+      "id": "ev-manufacturing",
+      "name": "EV Manufacturing",
+      "slug": "ev-manufacturing-sector",
+      "url": "https://invest.up.gov.in/ev-manufacturing-sector/",
+      "source": "investup_live",
+      "industryOverview": {
+        "indiaScenario": [
+          "The Indian automobile industry is the 5th largest in the world and is expected to become the third largest by 2030, with a total of 8.7 lakh active EVs on Indian roads (December 2021). As the population rises and demand for vehicles grows, dependence on conventional energy resources is not a sustainable option as India imports close to 80% of its crude oil requirements.",
+          "According to information aggregated by India Energy Storage Alliance (IESA), the consumption of batteries is expected to be more than 36 GWh by 2025. During the 2020-2027 period, the EV sector is assessed to consume around 250 GWh of batteries.",
+          "Over the last three years, 0.52 million EVs were registered in India. NITI Aayog further aims to achieve EV sales penetration of 70% for all commercial cars, 30% for private cars, 40% for buses, and 80% for two- and three-wheelers by 2030. This is in line to achieve net zero carbon emission by 2070. As per IESA, the Indian EV industry is expected to expand at a CAGR of 36%. The electric vehicle market is estimated to be INR 50,000 crores (US$ 7.09 billion) opportunity in India by 2025. Total charging stations in India increased by 285% YoY in FY22.",
+          "The number of EVs operating in the medium and heavy passenger vehicle category increased from 124 in 2018 to 1,356 as of 6 August 2021. With battery costs declining faster than anticipated, EV economics become favorable.",
+          "The EV industry in India is likely to create 5 crore jobs by 2030. Investment flow into EV start-ups in 2021 touched an all-time high, increasing nearly 255% to reach INR 3,307 crore (US$ 444 million). In 2021, spending on electrical architecture development, such as battery development, electrification, e-motors, and power electronics, came up to INR 48,215 crores (US$ 6.39 billion).",
+          "The Government of India has launched several schemes to promote faster EV adoption, creation of charging infrastructure, and manufacturing ecosystem. The key schemes/initiatives include: FAME India Scheme : Faster Adoption & Manufacturing of (Hybrid &) Electric Vehicles (FAME) India was launched in 2015 for promoting growth and early adoption of hybrid and electric vehicles in the country. Production Linked Scheme for Advanced Chemistry Cell Battery Storage (PLI-ACC) : The Government introduced PLI for Advanced Chemistry Cell Battery Storage (PLI-ACC) in 2021. The scheme is expected to bring down the prices of batteries in the country, which will reduce the cost of EVs as well. Production Linked Incentive (PLI) Scheme for Automobile & Auto Components : The Government launched the Production Linked Incentive (PLI) Scheme for Automobile & Auto Components in September 2021, which includes promotion of indigenizing manufacturing of Battery Electric Vehicle & Hydrogen Fuel Cell Vehicle Components. The scheme provides incentive on sales to Original Equipment Manufacturers (OEMs).",
+          "FAME India Scheme : Faster Adoption & Manufacturing of (Hybrid &) Electric Vehicles (FAME) India was launched in 2015 for promoting growth and early adoption of hybrid and electric vehicles in the country.",
+          "Production Linked Scheme for Advanced Chemistry Cell Battery Storage (PLI-ACC) : The Government introduced PLI for Advanced Chemistry Cell Battery Storage (PLI-ACC) in 2021. The scheme is expected to bring down the prices of batteries in the country, which will reduce the cost of EVs as well.",
+          "Production Linked Incentive (PLI) Scheme for Automobile & Auto Components : The Government launched the Production Linked Incentive (PLI) Scheme for Automobile & Auto Components in September 2021, which includes promotion of indigenizing manufacturing of Battery Electric Vehicle & Hydrogen Fuel Cell Vehicle Components. The scheme provides incentive on sales to Original Equipment Manufacturers (OEMs)."
+        ],
+        "upScenario": [
+          "Uttar Pradesh leads with most electric vehicles in India as the state joins the nation's effort to curb pollution to transition away from fossil fuel-powered vehicles. Uttar Pradesh, the most populous state in the country, accounts for the bulk of EVs registered in India. Uttar Pradesh had a market share of over 14% in 2023 and the state has dominated the three-wheeler segment, with (> 40%) of electric three-wheelers in the country.",
+          "The State has been one of the largest beneficiaries under FAME1&2 schemes of Government of India. With regards to creation of charging infrastructure, Uttar Pradesh has been sanctioned 207 charging stations under FAME II, which are being installed in 9-cities of the State, viz. Noida, Lucknow, Varanasi, Prayagraj, Kanpur, Aligarh, Saharanpur, Bareilly & Jhansi through REIL & EESL. More charging stations are expected along the Expressways in the State. 700 EV public buses in major cities on routes identified by Urban Development Deptt."
+        ],
+        "otherSections": [],
+        "highlights": [],
+        "stats": []
+      },
+      "investmentOpportunities": [
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Hybrid Electric, Plug-in Electric Vehicle, Electric Vehicle Manufacturing & Comp",
+          "description": "Hybrid Electric, Plug-in Electric Vehicle, Electric Vehicle Manufacturing & Components such as motors, power electronic kits, etc."
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Battery Manufacturing, including R&D",
+          "description": "Battery Manufacturing, including R&D"
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Fast Charging Station",
+          "description": "Fast Charging Station"
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Slow Charging Station",
+          "description": "Slow Charging Station"
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Battery Swapping Station",
+          "description": "Battery Swapping Station"
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Road infrastructure with use of latest technology solutions",
+          "description": "Road infrastructure with use of latest technology solutions"
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Charging infrastructure and EV Manufacturing",
+          "description": "Charging infrastructure and EV Manufacturing"
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Manufacturing clusters in Central & Western regions for auto ancillaries and bat",
+          "description": "Manufacturing clusters in Central & Western regions for auto ancillaries and battery pack manufacturing"
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Setting up of Ancillary Industries",
+          "description": "Setting up of Ancillary Industries"
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Manufacturing facility with an In-House R&D centre",
+          "description": "Manufacturing facility with an In-House R&D centre"
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Hybrid & Electric Vehicles Components",
+          "description": "Hybrid & Electric Vehicles Components"
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Transmission & Steering Parts",
+          "description": "Transmission & Steering Parts"
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Original Equipment Manufacturers (OEMs)",
+          "description": "Original Equipment Manufacturers (OEMs)"
+        }
+      ],
+      "investmentScore": 92,
+      "investmentSignal": "high",
+      "opportunityFormat": "carousel",
+      "contacts": [
+        {
+          "name": "Shri. Amit Kumar Mishra",
+          "department": "Invest UP",
+          "designation": "AGM EV",
+          "phone": "9793855243",
+          "email": "agmev@investup.org.in"
+        }
+      ],
+      "policy": "UP Electric Vehicle Manufacturing Policy 2019",
+      "districtHotspots": [
+        "Noida",
+        "Lucknow",
+        "Kanpur",
+        "Ghaziabad"
+      ],
+      "detailScraped": true
+    },
+    {
+      "id": "film",
+      "name": "Film",
+      "slug": "film-sector",
+      "url": "https://invest.up.gov.in/film-sector/",
+      "source": "investup_live",
+      "industryOverview": {
+        "indiaScenario": [
+          "The Indian Media and Entertainment (M&E) industry is a sunrise sector for the economy and is making significant strides. The increasing availability of fast and cheap internet, rising incomes, and increasing purchases of consumer durables have significantly aided the industry. India’s media and entertainment industry are unique as compared to other markets. The industry is well known for its extremely high volumes and rising Average Revenue Per User (ARPU).",
+          "Media is consumed by audiences across demographics and various avenues such as television, films, out-of-home (OOH), radio, animation, and visual effect (VFX), music, gaming, digital advertising, live events, filmed entertainment, and print.",
+          "India’s Media & Entertainment industry is expected to reach $100 Bn by 2030.",
+          "The digital media segment is the 2nd largest M&E sub-segment witnessing a 15% growth in 2022 to reach INR 654 Bn",
+          "Online gaming grew 22% in 2023 to reach INR 220 Bn, and is expected to reach INR 388 Bn by 2026",
+          "The filmed entertainment segment grew 14% in 2023, to reach INR 197 Bn. 1790+ films were released in 2023, generating an all-time high of INR 120 Bn in theatrical revenues",
+          "The Animation & VFX segment grew 6% to reach INR 114 Bn and is expected to attain INR 185 Bn by 2026",
+          "On an average, every year, around 1,500 to 2,000 films are produced in more than 20 languages in India, making the Indian Film Industry the largest in the world, in terms of the number of films produced.",
+          "The Indian Media & Entertainment sector is expected to grow to INR 3.08 Tn by 2026 at 10-12% CAGR, led by OTT, Gaming, Animation and VFX.",
+          "Regional OTT content volumes exceeded Hindi language content in 2023 for the first time.",
+          "Indians spent 13 Bn+ hours on online sports, among the most time spent in the world.",
+          "56% of viewership on Television was in Indian regional languages.",
+          "Animation segment saw huge demand from OTT platforms and kid's channels.",
+          "Digital advertising grew 15% to reach INR 576 Bn in 2023 and is expected to reach INR 842 Bn by 2026."
+        ],
+        "upScenario": [
+          "Uttar Pradesh has played an important role in the history of Indian cinema. It has given several renowned film producers, directors, artists, lyricists, musicians and story/scriptwriters to the film industry.",
+          "Film Bandhu, Uttar Pradesh has been constituted as a nodal agency under the chairmanship of Additional Chief Secretary/Principal Secretary, Information & Public Relations Department, Govt. of U.P. Film Bandhu works in the direction of developing Uttar Pradesh as a hub of film production by generating a friendly climate and promoting film related activities in the state. The state also has a dedicated Film Policy, the main goal of which is to promote the state's cultural, mythological, historical heritage and glorious traditions within the country and abroad.",
+          "A Single Window Clearance System portal has been developed in Uttar Pradesh through which filmmakers can apply online for film shooting permission and apply for availing subsidy under the Film Policy.",
+          "Under the new film policy, artists and producers of UP and other states are also being provided a shooting friendly environment. Now, provisions have also been made to give subsidy to web series and web films produced in the state.",
+          "Film Bandhu, UP has been a recipient of various awards owing to the state’s friendly and safe environment. Some of the major awards won by the state include:- 'Most Film Friendly State' at the 64th National Film Awards. 'Most Film Friendly State (Special Mention) Award' at the 68th National Film Awards. Most Film Shooting Friendly State Award, International Film Festival of India, Goa, 2021 Most Shooting Friendly State Award, Mumbai International Film Festival, 2022",
+          "'Most Film Friendly State' at the 64th National Film Awards.",
+          "'Most Film Friendly State (Special Mention) Award' at the 68th National Film Awards.",
+          "Most Film Shooting Friendly State Award, International Film Festival of India, Goa, 2021",
+          "Most Shooting Friendly State Award, Mumbai International Film Festival, 2022",
+          "Shaan-e-awadh - An annual International Film Festival based on the cultural, tourism, historical heritage, and composite culture of Uttar Pradesh is organized every year since 2011. This festival consists of screening films in different languages at multiple locations in the city.",
+          "Film Development Fund - For sanctioning subsidies to films produced in the State, scholarships to students, arrangement of film equipment, setting up of film training institutes, organization of film festivals, financial assistance on film, etc.",
+          "Film Development Council - To ensure the long-term development of the film sector in UP and monitor the implementation of the State Film Policy and State Film Division to provide easy and timely certification of films, especially regional films, have been created."
+        ],
+        "otherSections": [],
+        "highlights": [],
+        "stats": []
+      },
+      "investmentOpportunities": [
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Production Houses",
+          "description": "With the growing film, media and entertainment sector in UP, investment in production houses with animation studios, recording studios, photography studios etc, is an emerging opportunity."
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "International Film Studios",
+          "description": "Collaboration of international studios with local film production houses to develop in-house Hindi and Bhojpuri movies in the state is a promising opportunity."
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "3D Cinema",
+          "description": "With emerging techniques and 3D cinema gaining trend across the globe Uttar Pradesh is an ideal destination to established 3D animation centres and production houses."
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Printing and Publishing Houses",
+          "description": "With the advent of the film and entertainment sector in the state, printing and publishing houses are also gaining momentum. Gautam Buddha Nagar and Agra are prominent destinations for such investments."
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Regional and Niche Cinema",
+          "description": "Uttar Pradesh is also a promising destination for small budget movies emphasizing content driven cinema. The market for regional cinema portraying local culture and languages is gaining wide popularity in India and the state."
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Multiplex",
+          "description": "Multiplexes are expected to gain significant market share going forward with expanding presence in Tier 2 and 3 regions. With a wide consumer base of over 200 million, Uttar Pradesh is one of the most promising destinations for the expansion of multiplexes in India."
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "VFX & Animation",
+          "description": "India has emerged as a preferred destination for outsourcing VFX and 3D conversion work. With a vibrant IT & ITes and Startup ecosystem in the state, VFX and 3D animation is another promising area of investment."
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Skill Development",
+          "description": "Several eminent artist like Amitabh Bachchan, Priyanka Chopra, Nawazuddin Siddiqui hail from UP. The citizens of the state are exposed to top cultural ethos, which provides a huge opportunity for film training institutes in skill development in the sector."
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Film Training Institute",
+          "description": "The state government has proposed to develop film training institutes at Varanasi and Gautam Budh Nagar. This will offer various educational programs, including graduation, post-graduation and PH.D programs."
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Film City",
+          "description": "The upcoming film city along Yamuna Expressway is a huge investment opportunity for business community in the sector. Besides, the state government is planning to develop more Film City projects within UP to promote and provide the proper facilities required for making films"
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Film Festival",
+          "description": "Various periodical festivals and film events will be conducted within the state to support and strengthen the film making industry."
+        }
+      ],
+      "investmentScore": 45,
+      "investmentSignal": "low",
+      "opportunityFormat": "carousel",
+      "contacts": [
+        {
+          "name": "Shri. Anuruddha Kshatriya",
+          "department": "Invest UP",
+          "designation": "GM - Investment Promotion",
+          "phone": "9118712084",
+          "email": "gminvestmentpromotion@investup.org.in"
+        }
+      ],
+      "policy": "UP Film Policy 2018",
+      "districtHotspots": [
+        "Lucknow",
+        "Noida",
+        "Varanasi",
+        "Agra"
+      ],
+      "detailScraped": true
+    },
+    {
+      "id": "fintech",
+      "name": "Fintech",
+      "slug": "fintech-sector",
+      "url": "https://invest.up.gov.in/fintech-sector/",
+      "source": "investup_live",
+      "industryOverview": {
+        "indiaScenario": [
+          "Rapid Growth : The Indian FinTech market is one of the fastest-growing globally, with an estimated market size of USD 111.14 billion in 2024, projected to reach USD 421.48 billion by 2029.",
+          "Key Segments : The sector includes various sub-segments such as digital payments, digital lending, insurtech, wealth tech, and blockchain. Digital payments and lending are particularly prominent.",
+          "Government Support : Government initiatives promoting digitization and a cashless economy have significantly boosted the sector. Policies like the Unified Payments Interface (UPI) have revolutionized digital transactions.",
+          "Innovation and Investment : The rise of digital commerce and innovations in payment technologies, such as AI, blockchain, and IoT, have driven growth. Significant investments from both domestic and international stakeholders have further fueled this expansion.",
+          "Major Players : Prominent FinTech companies in India include Paytm, Pine Labs, PayU, and Faircent. These companies are at the forefront of providing innovative financial solutions."
+        ],
+        "upScenario": [
+          "Emerging Hub : Uttar Pradesh, particularly Noida, is becoming a significant hub for FinTech startups, with over 239 FinTech companies operating in the region.",
+          "Diverse Segments : The FinTech sector in Uttar Pradesh spans various segments, including digital lending, payments, blockchain, and digital wealth management.",
+          "Government Initiatives: The state government has been proactive in promoting the FinTech sector through initiatives like the establishment of FinTech City in Noida, aiming to attract more startups and investments.",
+          "Key Players : Prominent FinTech companies based in Uttar Pradesh include Paytm, Unnati, GramCover, PayMe India, and Rapipay. These companies are leading innovation and providing diverse financial solutions.",
+          "0+ Professionals Employed",
+          "$ 0 Million has been invested",
+          "0 % growth has been observed in FinTech Startups in last 5 years",
+          "₹0 Billion Is generated annually in the form of revenue"
+        ],
+        "otherSections": [],
+        "highlights": [],
+        "stats": [
+          {
+            "value": "10000+",
+            "label": "Professionals Employed"
+          },
+          {
+            "value": "$ 500 Million",
+            "label": "has been invested"
+          },
+          {
+            "value": "150 %",
+            "label": "growth has been observed in FinTech Startups in last 5 years"
+          },
+          {
+            "value": "₹20 Billion",
+            "label": "Is generated annually in the form of revenue"
+          }
+        ]
+      },
+      "investmentOpportunities": [
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Digital Payments",
+          "description": "With the widespread adoption of digital transactions, investing in digital payment solutions is highly promising. Companies like Paytm and Pine Labs are already leading the way. There is a growing demand for digital lending platforms that offer quick and easy access to credit. Startups like PayMe India are making significant strides in this area."
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Insurtech",
+          "description": "The insurance technology sector is ripe for innovation, with opportunities to develop products that cater to the diverse needs of the population."
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Blockchain and AI",
+          "description": "Investing in blockchain technology and AI-driven fintech solutions can lead to significant advancements in security, efficiency, and customer experience."
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Agritech Fintech",
+          "description": "Given Uttar Pradesh’s strong agricultural base, fintech solutions that support agricultural financing, crop insurance, and supply chain management can be highly impactful."
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Financial Inclusion",
+          "description": "There is a substantial opportunity to develop fintech products that enhance financial inclusion, especially for underserved populations."
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "FinTech City and Incubation Centers",
+          "description": "The state government is supporting the fintech sector through initiatives like the establishment of FinTech City in Noida to attract more startups and investments. Additionally, the presence of incubation centers at premier educational institutions like IIT-Kanpur and IIM-Lucknow provides crucial support for fintech startups."
+        }
+      ],
+      "investmentScore": 65,
+      "investmentSignal": "medium",
+      "opportunityFormat": "carousel",
+      "contacts": [
+        {
+          "name": "Shri. Ritesh Saxena",
+          "department": "Invest UP",
+          "designation": "AGM - Udyami Mitra",
+          "phone": "7905224361",
+          "email": "agmudyamimitra@investup.org.in"
+        }
+      ],
+      "policy": "UP IT Policy 2017",
+      "districtHotspots": [
+        "Lucknow",
+        "Noida",
+        "Kanpur"
+      ],
+      "detailScraped": true
+    },
+    {
+      "name": "Handloom & Textile",
+      "slug": "handloom-and-textile-sector",
+      "url": "https://invest.up.gov.in/handloom-and-textile-sector/",
+      "source": "investup_live",
+      "industryOverview": {
+        "indiaScenario": [
+          "FDI up to 100% under the automatic route is permitted for Textiles Sector.",
+          "For further details, please refer FDI Policy, Government of India",
+          "India’s Textiles Exports were highest ever in FY 2021-22, crossing $44 Bn",
+          "India is the largest cotton producer (23%) in the world and has the highest area under cotton cultivation (39% of world area). Cotton plays a major role in sustaining the livelihood of an estimated 6.5 Mn cotton farmers.",
+          "The Indian textile and apparel market size is estimated around $165 Bn in 2022, with domestic market constituting $125 Bn and exports contributing $40 Bn.",
+          "The market size of the industry is projected to grow at a 10% CAGR to reach $350 Bn by 2030."
+        ],
+        "upScenario": [
+          "UP is the 3rd largest manufacturer of fabric in India accounting for ~13% of the production.",
+          "Apparel & Textiles industry employs around 1.5 million people in UP",
+          "Houses Major Clusters of Handmade Carpets, Chikankari and Silk Sarees in India atAgra, Mirzapur, Lucknow and Bhadohi.",
+          "UP has ~1.99 lakh handloom weavers and ~5 lakh Powerloom weavers.",
+          "The state is well known for its carpets. The state also accounts for ~90% of India’s carpet production.",
+          "Premier institutes like NIFT Raebareli, Uttar Pradesh Textile Technology Institute, Kanpur and Indian Institute of Apparels Technology, Varanasi",
+          "0rd Largest Textile Producer in India",
+          "0th Largest Producer of Silk in India",
+          "0thLargest Base of Apparels in India",
+          "0of the overall GDP of UP comes from T&A sector"
+        ],
+        "otherSections": [],
+        "highlights": [
+          {
+            "label": "One of the largest consumers and producers of cotton in the world."
+          },
+          {
+            "label": "Second largest manufacturer of PPE and producer of polyester, silk and fibre in the world"
+          },
+          {
+            "label": "Second largest employment provider in India after agriculture"
+          }
+        ],
+        "stats": [
+          {
+            "value": "3rd",
+            "label": "Largest Textile Producer in India"
+          },
+          {
+            "value": "5th",
+            "label": "Largest Producer of Silk in India"
+          },
+          {
+            "value": "5th",
+            "label": "Largest Base of Apparels in India"
+          },
+          {
+            "value": "1.5",
+            "label": "of the overall GDP of UP comes from T&A sector"
+          }
+        ]
+      },
+      "investmentOpportunities": [
+        {
+          "category": "Key Investment Opportunities",
+          "title": "PM MITRA Park",
+          "description": "coming up over 1,000 acres in Lucknow and Hardoi - Offers an opportunity to create an integrated textiles value chain right from spinning, weaving, processing/dyeing and printing to garment manufacturing at one location."
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Fiber Production",
+          "description": "Setting up units for man-made fiber and filament manufacturing."
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Technical Textiles",
+          "description": "Establishing units to cater to the construction, transport, agriculture, medical, hygiene, automotive, packaging and sporting tech industries"
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Home Textiles",
+          "description": "Setting up units for production of fashion accessories, bed linen, bath linen, floor textiles, carpets, upholstery fabric, etc"
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Carpet manufacturing",
+          "description": "Establishing units for a range of hand-woven and hand-knotted carpets and other floor coverings."
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Silk clusters",
+          "description": "Establishing research institutes to promote silk production"
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Integrated textile & apparel parks",
+          "description": "Setting up private textile with high automation for spinning, weaving and garmenting units."
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Garment Manufacturing",
+          "description": "Establishing value chains for the global apparel industry."
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Multi-brand Retail Businesses",
+          "description": "Through joint ventures"
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Textile R&D Centres",
+          "description": "Setting up design studios and training centers"
+        }
+      ],
+      "opportunityFormat": "carousel",
+      "contacts": [
+        {
+          "name": "Shri. Pramod Chandra Thakur",
+          "department": "Sector Expert",
+          "designation": "Joint Commissioner",
+          "phone": "9670133334",
+          "email": "pcthakur08@gmail.com"
+        }
+      ],
+      "detailScraped": true
+    },
+    {
+      "id": "it-ites",
+      "name": "IT & ITES",
+      "slug": "it-ites",
+      "url": "https://invest.up.gov.in/it-ites/",
+      "source": "investup_live",
+      "industryOverview": {
+        "indiaScenario": [],
+        "upScenario": [
+          "Uttar Pradesh’s talent base is supported by major institutions including IIT Kanpur, IIT-BHU, NIT Prayagraj, IIIT Prayagraj/Allahabad, IIIT Lucknow and IIM Lucknow, which strengthen the state’s software, engineering, electronics, analytics and management talent pipeline.",
+          "4th largest Startup Ecosystem in the country",
+          "63 Incubators and 8 Unicorns Startups",
+          "Abundance of skilled labour at 10-20% lower cost",
+          "Office space at 15-30% lower rental rates than other IT hubs",
+          "Recognized as a ‘leader’ in start-up space with 12000+ DPIIT recognized Startups",
+          "India’s largest international airport under-construction in Jewar",
+          "India's first-of-its kind AI City planned to be set up at a prime location in Lucknow."
+        ],
+        "otherSections": [],
+        "highlights": [
+          {
+            "label": "Presence of 300 STPI registered IT Units"
+          },
+          {
+            "label": "IT & ITeS sector employed nearly 3.55 lakh people"
+          },
+          {
+            "label": "40+ Global Capability Centres in UP"
+          }
+        ],
+        "stats": [
+          {
+            "value": "6th",
+            "label": "Highest share in India's IT exports growing at CAGR of ~8%"
+          },
+          {
+            "value": "12",
+            "label": "IT/ITes SEZs"
+          },
+          {
+            "value": "7",
+            "label": "Centers of Excellence in the field of AI, Blockchain, 5G, 6G and other Emerging Technologies."
+          },
+          {
+            "value": "100 Acre",
+            "label": "HCL IT City in Lucknow"
+          }
+        ]
+      },
+      "investmentOpportunities": [
+        {
+          "category": "Investment Opportunities",
+          "title": "Infrastructure development of IT Cities / IT Parks",
+          "description": "Infrastructure development of IT Cities / IT Parks"
+        },
+        {
+          "category": "Investment Opportunities",
+          "title": "IT/ITeS units",
+          "description": "IT/ITeS units"
+        },
+        {
+          "category": "Investment Opportunities",
+          "title": "Center of Excellence (COE’s) for Emerging Technologies",
+          "description": "Center of Excellence (COE’s) for Emerging Technologies"
+        },
+        {
+          "category": "Investment Opportunities",
+          "title": "R&D centers and Design center",
+          "description": "R&D centers and Design center"
+        },
+        {
+          "category": "Focus Cities",
+          "title": "Key investment opportunities in Uttar Pradesh include IT services and digital de",
+          "description": "Key investment opportunities in Uttar Pradesh include IT services and digital delivery centres, ITES / BPM / shared services, Global Capability Centres, data centres and cloud infrastructure, R&D and engineering support centres, and emerging technology-focused Centres of Excellence"
+        },
+        {
+          "category": "Focus Cities",
+          "title": "The state’s proximity to Delhi NCR, large talent pool, cluster-led industrial gr",
+          "description": "The state’s proximity to Delhi NCR, large talent pool, cluster-led industrial growth and expanding policy support create opportunities across enterprise technology, digital platforms, advanced analytics, engineering services and back-office operations."
+        },
+        {
+          "category": "Focus Cities",
+          "title": "AI City in Lucknow to be developed by leveraging the state’s strong infrastructu",
+          "description": "AI City in Lucknow to be developed by leveraging the state’s strong infrastructure, abundant talent pool, and strengthening industrial ecosystem."
+        }
+      ],
+      "investmentScore": 86,
+      "investmentSignal": "high",
+      "opportunityFormat": "two-column",
+      "contacts": [
+        {
+          "name": "Shri. Ritesh Saxena",
+          "department": "Invest UP",
+          "designation": "AGM - Udyami Mitra",
+          "phone": "7905224361",
+          "email": "agmudyamimitra@investup.org.in"
+        }
+      ],
+      "policy": "UP Information Technology Policy 2017",
+      "districtHotspots": [
+        "Noida",
+        "Lucknow",
+        "Kanpur",
+        "Agra"
+      ],
+      "detailScraped": true
+    },
+    {
+      "name": "Medical Device & Pharma",
+      "slug": "medical-device-and-pharma",
+      "url": "https://invest.up.gov.in/medical-device-and-pharma/",
+      "source": "investup_live",
+      "industryOverview": {
+        "indiaScenario": [
+          "FDI up to 100% under the automatic route is permitted for manufacturing of medical devices. Strong FDI inflows reflect the confidence of global players in the Indian market",
+          "$3.28 Bn FDI inflows in Medical and Surgical Appliances from Apr 2000 to Mar 2024",
+          "For further details, please refer FDI Policy, Government of India"
+        ],
+        "upScenario": [
+          "Sector Momentum : The pharmaceutical and medical device sector in Uttar Pradesh has experienced significant growth in recent years.",
+          "Focus Sector : It has been officially recognized as a focus sector in the state’s industrial policy.",
+          "Investment Highlight : The Global Investor Summit held in February 2023 emphasized the sector’s potential, attracting substantial investment.",
+          "Proposed Investments : A total of 217 companies have proposed investments amounting to nearly INR 28,500 crores in this sector.",
+          "Job Creation : These investments are expected to create approximately 57,000 job opportunities.",
+          "Economic Impact : The local economy is likely to benefit significantly from this sector’s growth."
+        ],
+        "otherSections": [],
+        "highlights": [
+          {
+            "label": "Recognised as a sunrise sector of india under make in india campaign of 2014"
+          },
+          {
+            "label": "Market size expected to reach $50 Bn by 2025"
+          },
+          {
+            "label": "India is the fastest growing medical devices market amongst the emerging markets"
+          }
+        ],
+        "stats": [
+          {
+            "value": "15%",
+            "label": "Market Growth Rate (expected)"
+          },
+          {
+            "value": "6000+",
+            "label": "Types of Medical devices in India"
+          },
+          {
+            "value": "10%",
+            "label": "The market share to increase to 10-12% over the next 25 years"
+          },
+          {
+            "value": "38.2%",
+            "label": "Growth in Export in Healthcare(FY16-FY19)"
+          },
+          {
+            "value": "22",
+            "label": "Medical Devices manufacturing Units"
+          },
+          {
+            "value": "17%",
+            "label": "Share of national sales in terms of value"
+          },
+          {
+            "value": "USD 100 Mn+",
+            "label": "Market worth in healthcare and medical device exports"
+          }
+        ]
+      },
+      "investmentOpportunities": [
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Telemedicine",
+          "description": "Establishing dedicated telemedicine hubs of doctors through public-private-partnerships"
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Paramedical",
+          "description": "Development of paramedical education infrastructure - public-private-partnerships for running Nursing & Paramedical Colleges co-located in Government Medical Colleges"
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "AI/ML in Healthcare",
+          "description": "Establishing Al/ML based-diagnostic centers / developing AI/ML solutions to convert varied demographic and epidemiological profile into an advantage"
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Infrastructure",
+          "description": "Development of specialty and super-specialty hospital infrastructure through public private partnerships and/or as private hospitals"
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Trauma Care Network",
+          "description": "Strengthening UP's Trauma Care Network - public-private-partnerships for development of mobile application, control room and ALS Ambulances"
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Medical Colleges",
+          "description": "Development of medical education infrastructure through public-private-partnerships"
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Clinical Trials",
+          "description": "Clinical trials and research within the state employing premier medical institutions in the State AL/ML in the state"
+        }
+      ],
+      "opportunityFormat": "carousel",
+      "contacts": [
+        {
+          "name": "Shri. Shailendra Bhatia",
+          "department": "Sector Expert",
+          "designation": "",
+          "phone": "(+91)",
+          "email": "skbhatiapcs@gmail.com"
+        },
+        {
+          "name": "Shri. D K Tiwari",
+          "department": "Sector Expert",
+          "designation": "Assistant Commissioner (Drug)",
+          "phone": "9935524199",
+          "email": "fda-up@gov.in"
+        },
+        {
+          "name": "Shri. Sameer Mehdi",
+          "department": "Invest UP",
+          "designation": "AGM – Investment Promotion",
+          "phone": "9625556253",
+          "email": "agminvestmentpromotion@investup.org.in"
+        },
+        {
+          "name": "Shri. Himanshu Bhatia",
+          "department": "Invest UP",
+          "designation": "GM - Udyami Mitra",
+          "phone": "8960440837",
+          "email": "gmudyamimitra@investup.org.in"
+        }
+      ],
+      "detailScraped": true
+    },
+    {
+      "id": "msme",
+      "name": "MSME",
+      "slug": "msme-sector",
+      "url": "https://invest.up.gov.in/msme-sector/",
+      "source": "investup_live",
+      "industryOverview": {
+        "indiaScenario": [
+          "The Micro, small, and medium enterprises (MSMEs) are one of the driving forces propelling the Indian economy towards global greatness. They work silently and continuously for up gradation of skills and understanding of the markets and provide employment for lakhs of youth in each year. MSMEs not only play a crucial role in providing ample employment opportunities but also helped in industrialization of the rural and backward areas thereby reducing regional imbalances assuring more equitable distribution of national income and wealth.",
+          "As per the Udayam portal, MSMEs employ over two crore people, firmly establishing themselves as the bedrock of the economy. Aided partly by supportive and reformatory government initiatives and technological innovations, the MSME sector has grown exponentially, accounting for ~46% of India’s total exports. Currently, with 6.3 crore MSMEs in operation, the MSME sector contributes 33.4% to India's manufacturing output.",
+          "As India steadily approaches the threshold of becoming a $5 Tn economy by 2026-27, interest in the nation as an investment destination is soaring. The Indian MSME sector is projected to grow to $1 Tn by 2028. The number of MSMEs in the country is expected to grow from 6.3 crore, to ~ 7.5 crore in the coming times, growing at a projected CAGR of 2.5%.",
+          "Its many winning advantages encompass a diverse range of investment opportunities across various industries and supply chain ecosystems, including but not limited to textiles, food processing, agriculture, and more. Another distinct advantage that MSMEs offer is the opportunity to invest in enterprises beyond metropolitan cities. Investors can capitalise on the potential of the rapidly expanding rural MSMEs catering to an accelerating consumer base, disposable incomes, and a vibrant domestic market.",
+          "Moreover, with the relaxation of the FDI policy allowing a 100% FDI inflow under the automatic route for MSMEs and the various tax exemptions and tax holidays that the sector can avail, investments in Indian MSMEs have much to attract astute investors.",
+          "The role of MSMEs in fostering sustainability and inclusivity in the Indian economy is irrefutable. 20.5% of the MSMEs registered on the Udyam Registration Portal are led by women, accounting for 18.73% of the total employment generated by Udyam-registered MSMEs.",
+          "To ensure the growth of the sector and for the economy to remain inclusive, equitable, and sustainable, the Ministry of MSMEs has undertaken various initiatives to foster MSMEs that value these goals. For example, the Credit Guarantee Scheme for Micro & Small Enterprises offers a 10% concession in annual guarantee fees and up to 85% guarantee coverage for female entrepreneurs. Meanwhile, the SAMARTH initiative provides more than 7500 women from rural and sub-urban areas with skill development and market development assistance to encourage female entrepreneurship.",
+          "Another government initiative, Raising and Accelerating MSME Performance (RAMP) was launched in July 2022, under the aegis of the Ministry of MSME. The World Bank-assisted RAMP scheme aims to improve the access of MSMEs to both the global market and credit and foster the sector by accelerating Centre-State collaboration in MSME promotion and development. With an outlay of INR 6000 Cr has been assigned for five years to ensure the implementation, the scheme aims to benefit over 5.5 Lakh MSMEs."
+        ],
+        "upScenario": [
+          "In Uttar Pradesh, too, the MSME sector serves as a backbone of manufacturing sector with the strong presence of many traditional clusters. The state has a 90-lakh MSME base, which contributes around 14 percent share of India's total MSME count of 6.33 crore. Of the total 90 lakh MSMEs in UP, the Micro industries comprise of 89.64 lakh units, while the small units comprise of 0.36 lakh units.",
+          "MSMEs in UP are major employment generators, providing jobs to millions of people, especially in the rural and semi-urban areas. This has helped in reducing regional disparities and promoting inclusive growth. Women and marginalised communities, especially, have benefitted from the employment opportunities created by MSMEs. MSMEs in UP provide employment to over 14 million people and the export-oriented nature of many MSMEs has significantly boosted the state’s foreign exchange earnings. In 2022, UP’s MSME exports were valued at approximately $16 billion, accounting for nearly 70% of the state’s total exports."
+        ],
+        "otherSections": [],
+        "highlights": [],
+        "stats": [
+          {
+            "value": "Largest",
+            "label": "MSME base 14.2% in India"
+          },
+          {
+            "value": "90 Lakh",
+            "label": "Registered & non registered MSMEs in India"
+          },
+          {
+            "value": "45% of State’s exports",
+            "label": "is contributed by MSME units"
+          },
+          {
+            "value": "Wide manufacturing leading in range",
+            "label": "engineering goods, Carpets, Leather goods, apparel etc."
+          }
+        ]
+      },
+      "investmentOpportunities": [
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Leading state in the export of handicrafts, processed food, engineering goods, c",
+          "description": "Leading state in the export of handicrafts, processed food, engineering goods, carpets, readymade garments, and leather products."
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Famous for the traditional products manufactured by Micro, Small and Medium Ente",
+          "description": "Famous for the traditional products manufactured by Micro, Small and Medium Enterprises (MSMEs) in the state and possess immense potential for generating employment."
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Large opportunities for investments and outputs by large players and their MSME ",
+          "description": "Large opportunities for investments and outputs by large players and their MSME vendors to indigenize and/or enable import substitution."
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "A favourable procurement policy complemented by the huge industrial base",
+          "description": "A favourable procurement policy complemented by the huge industrial base"
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "The State has mandated 25 percent procurement by the state government department",
+          "description": "The State has mandated 25 percent procurement by the state government departments and public sector undertakings (PSU) from the state MSMEs."
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "The state government has fixed a sub-quota of 3 percent and 4 percent for compul",
+          "description": "The state government has fixed a sub-quota of 3 percent and 4 percent for compulsory procurement from the MSME units owned by women and scheduled caste/scheduled tribe (SC/ST)"
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "To encourage Indigenous and specialized products in the state, the UP government",
+          "description": "To encourage Indigenous and specialized products in the state, the UP government has launched schemes like ODOP program and policies like the U.P. Micro, Small & Medium Enterprises Promotion Policy 2022 and the Uttar Pradesh Chief Minister Youth Self Employment Scheme 2020."
+        }
+      ],
+      "investmentScore": 80,
+      "investmentSignal": "high",
+      "opportunityFormat": "carousel",
+      "contacts": [
+        {
+          "name": "Shri. Ajay Chaurasia",
+          "department": "Sector Expert",
+          "designation": "Dy Commissioner, Directorate of Industries",
+          "phone": "9454551851",
+          "email": "diup123@gmail.com"
+        },
+        {
+          "name": "Shri. Neeraj Singh",
+          "department": "Sector Expert",
+          "designation": "Assistant Commissioner Directorate of Industries",
+          "phone": "7355388789",
+          "email": "diup123@gmail.com"
+        }
+      ],
+      "policy": "UP MSME Promotion Policy 2017",
+      "districtHotspots": [
+        "Kanpur",
+        "Lucknow",
+        "Agra",
+        "Moradabad",
+        "Aligarh"
+      ],
+      "detailScraped": true
+    },
+    {
+      "id": "renewable-energy",
+      "name": "Renewable Energy",
+      "slug": "renewable-energy-sector",
+      "url": "https://invest.up.gov.in/renewable-energy-sector/",
+      "source": "investup_live",
+      "industryOverview": {
+        "indiaScenario": [
+          "Up to 100% FDI is allowed under the automatic route for renewable energy generation and distribution projects subject to provisions of The Electricity Act 2003.",
+          "For further details, please refer FDI Policy, Government of India",
+          "India is the 3rd largest energy consuming country in the world.",
+          "India stands 4th globally in Renewable Energy Installed Capacity (including Large Hydro), 4th in Wind Power capacity & 5th in Solar Power capacity (as per REN21 Renewables 2024 Global Status Report).The country has set an enhanced target at the COP26 of 500 GW of non-fossil fuel-based energy by 2030. This has been a key pledge under the Panchamrit. This is the world's largest expansion plan in renewable energy.",
+          "India’s installed non-fossil fuel capacity has increased 396% in the last 8.5 years and stands at more than 201.75 GW (including large Hydro and nuclear), about 45.3% of the country’s total capacity (as of May 2024). India saw the highest year-on-year growth in renewable energy additions of 9.83% in 2022. The installed solar energy capacity has increased by 30 times in the last 9 years and stands at 84.27 GW as of May 2024. India’s solar energy potential is estimated to be 748 GWp as estimated by National Institute of Solar Energy (NISE). The installed Renewable energy capacity (including large hydro) has increased by around 128% since 2014."
+        ],
+        "upScenario": [
+          "Total Electricity Generation tied up capacity of 40,191 MW by FY 2028, out of which 30,003 MW is operational.",
+          "Govt. Schemes viz. Development of Solar and Ultra Mega Solar Power Projects, Kusum Yojana, Village Electrification Program.",
+          "As per Uttar Pradesh Solar Energy Policy 2022, A total of 14 GW of Utility Scale Solar Energy power projects are planned till FY 2028",
+          "Green Power Tariff : GoUP has decided to introduce Green Energy Tariff at 50% of this additional cost which is Rs. 0.54 per kWh.",
+          "Net billing / Net feed-in has been introduced in UPERC (Rooftop Solar PV Grid Interactive System Gross/Net Metering)"
+        ],
+        "otherSections": [],
+        "highlights": [
+          {
+            "label": "0x Increase in Solar Power installed capacity from 2.6 GW to 84.27 GW since 2014"
+          },
+          {
+            "label": "0x+ Increase in Wind capacity from 21 GW to now at 46.92 GW since 2014"
+          },
+          {
+            "label": "0.26% India's share in total installed capacity"
+          }
+        ],
+        "stats": [
+          {
+            "value": "23GW",
+            "label": "State Solar Potential"
+          },
+          {
+            "value": "4184MW+",
+            "label": "Solar Power capacity already installed in the State as on 30.04.2026"
+          },
+          {
+            "value": "2000MW+",
+            "label": "Solar Capacity to be added under PM KUSUM Scheme as declared by the State"
+          }
+        ]
+      },
+      "investmentOpportunities": [
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Pump Storage Plants (PSPs)",
+          "description": "Pump Storage Plants (PSPs)"
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Grid Connected Rooftop Solar Plants/Systems",
+          "description": "Grid Connected Rooftop Solar Plants/Systems"
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Dedicated solar parks with plug and play infra",
+          "description": "Dedicated solar parks with plug and play infra"
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Solar City",
+          "description": "Solar City"
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Solar projects in solar Parks",
+          "description": "Solar projects in solar Parks"
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Solar plants for captive consumption",
+          "description": "Solar plants for captive consumption"
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Green hydrogen units",
+          "description": "Green hydrogen units"
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Centers of Excellence (CoEs) to conduct research, development, and technological",
+          "description": "Centers of Excellence (CoEs) to conduct research, development, and technological innovation activities in Green Hydrogen/Ammonia"
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Bio energy units including Bio-CBG and bio-CNG units, bio-coal plants, cogenerat",
+          "description": "Bio energy units including Bio-CBG and bio-CNG units, bio-coal plants, cogeneration projects"
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Bio-gas units",
+          "description": "Bio-gas units"
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Solar Technology Innovation",
+          "description": "Solar Technology Innovation"
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Compressed Biogas Plants, Bio Diesel production plants and Bio Coal production p",
+          "description": "Compressed Biogas Plants, Bio Diesel production plants and Bio Coal production plants utilising Bioenergy waste."
+        }
+      ],
+      "investmentScore": 87,
+      "investmentSignal": "high",
+      "opportunityFormat": "carousel",
+      "contacts": [
+        {
+          "name": "Shri. Ritesh Saxena",
+          "department": "Invest UP",
+          "designation": "AGM - Udyami Mitra",
+          "phone": "7905224361",
+          "email": "agmudyamimitra@investup.org.in"
+        }
+      ],
+      "policy": "UP Solar Energy Policy 2017",
+      "districtHotspots": [
+        "Jhansi",
+        "Mirzapur",
+        "Sonbhadra",
+        "Lucknow",
+        "Bareilly"
+      ],
+      "detailScraped": true
+    },
+    {
+      "name": "Retail & E-Commerce",
+      "slug": "retail-e-commerce",
+      "url": "https://invest.up.gov.in/retail-e-commerce/",
+      "source": "investup_live",
+      "industryOverview": {
+        "indiaScenario": [
+          "100% FDI allowed in single-brand retail under the automatic route.",
+          "Liberalisation of FDI is expected to give a boost to Ease of Doing Business and Make in India.",
+          "For further details, please refer FDI Policy, Government of India",
+          "India is one of the most promising and developing marketplaces in the world. There is a great deal of desire among multinational corporations to take advantage of the consumer base in India and to enter the market first.",
+          "Increasing purchasing power has led to growing demand.",
+          "Nearly 60 shopping malls encompassing a total retail space of 23.25 million sq. ft are expected to become operational during 2023-25.",
+          "100% FDI is allowed in B2B e-commerce.",
+          "100% FDI under the automatic route is permitted in the marketplace model of E-commerce.",
+          "For further details, please refer FDI Policy, Government of India",
+          "The Indian e-commerce industry is projected to reach US$ 300 billion by 2030, experiencing significant growth.",
+          "Third-party logistics providers are anticipated to manage approximately 17 billion shipments within the next seven years.",
+          "India has around 936.16 million internet subscribers, including about 350 million mature online users actively engaging in transactions."
+        ],
+        "upScenario": [
+          "Dedicated Freight Corridors (EDFC with highest catchment area - ~57% & WDFC – with ~10% catchment area) in the State.",
+          "ICDs (Inland container depot) at Dadri, Agra, Mirzapur, Moradabad, Kanpur. Expanding the network of MRTS & RRTS",
+          "Logistics hubs: MMLH Dadri, MMTH Boraki, and MMT Varanasi",
+          "Planned State Capital Region- Total area of 27,00,000 Ha. including 6 districts Lucknow, Kanpur Dehat, Unnao, Sitapur, Rae Bareli, and Barabanki",
+          "Planned New Noida spread across 209.11 sq Km.",
+          "1st to have multi-modal waterways terminal on river Ganga (5 freight villages planned).",
+          "0st In terms of network of Expressway in India",
+          "Largest railway network with 16000 km+ of railway track length",
+          "0st State to have Regional Rapid Transit System (RRTS) Corridor (Meerut-Delhi)",
+          "0th International Airports (4 existing & 1 upcoming)",
+          "0nd Largest road network in India (> 400,000 km)"
+        ],
+        "otherSections": [],
+        "highlights": [],
+        "stats": [
+          {
+            "value": "1st",
+            "label": "In terms of network of Expressway in India"
+          },
+          {
+            "value": "Largest",
+            "label": "railway network with 16000 km+ of railway track length"
+          },
+          {
+            "value": "1st",
+            "label": "State to have Regional Rapid Transit System (RRTS) Corridor (Meerut-Delhi)"
+          },
+          {
+            "value": "5th",
+            "label": "International Airports (4 existing & 1 upcoming)"
+          },
+          {
+            "value": "2nd",
+            "label": "Largest road network in India (> 400,000 km)"
+          }
+        ]
+      },
+      "investmentOpportunities": [
+        {
+          "category": "Status",
+          "title": "Coming soon",
+          "description": "Official Invest UP content for this section is not yet published on the portal."
+        }
+      ],
+      "opportunityFormat": "placeholder",
+      "contacts": [
+        {
+          "name": "Shri. Anuruddha Kshatriya",
+          "department": "Invest UP",
+          "designation": "GM - Investment Promotion",
+          "phone": "9335393341",
+          "email": "gminvestmentpromotion@investup.org.in"
+        }
+      ],
+      "detailScraped": true
+    },
+    {
+      "id": "semiconductor",
+      "name": "Semiconductor",
+      "slug": "semiconductor-sector",
+      "url": "https://invest.up.gov.in/semiconductor-sector/",
+      "source": "investup_live",
+      "industryOverview": {
+        "indiaScenario": [],
+        "upScenario": [],
+        "otherSections": [
+          {
+            "heading": "Advantage UP",
+            "bullets": [
+              "UPEM Policy 2022 providing capital subsidies, land allotment, infrastructure support, and skill development programs.",
+              "Access to seaports & airports for export and import fulfillment",
+              "Uninterrupted supply of good water quality (potable water), 24x7 power",
+              "Skilled labor availability (training centers, courses, workshops, etc.)",
+              "Research and Development Support : Support for technology upgradation, innovation, and product development.",
+              "Collaboration with industry associations & organizations to address industry challenges, drive sectoral growth, and create a conducive ecosystem.",
+              "1000 Acres of land identified next to Jewar airport dedicated for Semiconductor manufacturing units"
+            ]
+          },
+          {
+            "heading": "Key Investment Opportunities",
+            "bullets": [
+              "3 Electronics Manufacturing Clusters (EMC) focusing on mobile manufacturing, consumer durables, Drone, Semiconductor (FAB) defense electronics, Robotics, IoT etc. to be setup",
+              "Semiconductor design - Embedded software development, VLSI design and Hardware/board design",
+              "Semi-conductor wafer fabrication manufacturing, Light Emitting Diode (LED) manufacturing and Liquid Crystal Display (LCD) manufacturing",
+              "Semiconductor manufacturing zones within ESDM and Auto hubs, with essential supporting infrastructure to also host ancillary & downstream industries:",
+              "Ancillary industries: Polymer processing, Metals, Chemicals",
+              "Downstream industries: Consumer electronics, Aerospace, Automotive"
+            ]
+          }
+        ],
+        "highlights": [],
+        "stats": []
+      },
+      "investmentOpportunities": [
+        {
+          "category": "Key Investment Opportunities",
+          "title": "3 Electronics Manufacturing Clusters (EMC)",
+          "description": "focusing on mobile manufacturing, consumer durables, Drone, Semiconductor (FAB) defense electronics, Robotics, IoT etc."
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Semiconductor Design",
+          "description": "- Embedded software development, VLSI design and Hardware/board design"
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Semi-conductor wafer fabrication manufacturing",
+          "description": ", Light Emitting Diode (LED) manufacturing and Liquid Crystal Display (LCD) manufacturing"
+        }
+      ],
+      "investmentScore": 95,
+      "investmentSignal": "high",
+      "opportunityFormat": "carousel",
+      "contacts": [
+        {
+          "name": "Shri. Ritesh Saxena",
+          "department": "Invest UP",
+          "designation": "AGM - Udyami Mitra",
+          "phone": "7905224361",
+          "email": "agmudyamimitra@investup.org.in"
+        }
+      ],
+      "policy": "UP Electronics Manufacturing Policy 2020",
+      "districtHotspots": [
+        "Noida",
+        "Lucknow",
+        "Kanpur"
+      ],
+      "detailScraped": true
+    },
+    {
+      "id": "startup",
+      "name": "Startup",
+      "slug": "startup-sector",
+      "url": "https://invest.up.gov.in/startup-sector/",
+      "source": "investup_live",
+      "industryOverview": {
+        "indiaScenario": [
+          "159,000+ startups are recognized by the government of India as of Jan 2025",
+          "50% of them having a base in Tier 2 - Tier 3 cities",
+          "These startups are spread over 669 districts from 36 States and Union Territories of India",
+          "As of 31st March 2023, India is home to 108 unicorns with a total valuation of $ 340.80 Bn. Out of the total number of unicorns, 44 unicorns with a total valuation of $ 93.00 Bn were born in 2021 and 21 unicorns with a total valuation of $ 26.99 Bn were born in 2022",
+          "57 Regulations have been simplified for startups",
+          "A INR 945 Cr Startup India Seed fund Scheme has been launched in 2021 to aid setting up and growth of new startups.",
+          "A INR 10,000 Cr ‘fund of funds’ is being managed for growing the domestic venture capital industry.",
+          "Uttar Pradesh is the 3rd Largest Startup Ecosystem in the country after Maharashtra and Karnataka."
+        ],
+        "upScenario": [
+          "+ Startups are recognized by DPIIT",
+          "0+ startups have at least One-Women Director",
+          "0% startups at Ideation & Validation Stages",
+          "0 Lakhs + Jobs created by Startups",
+          "0+ Incubators"
+        ],
+        "otherSections": [],
+        "highlights": [],
+        "stats": [
+          {
+            "value": "16000+",
+            "label": "Startups are recognized by DPIIT"
+          },
+          {
+            "value": "7236+",
+            "label": "startups have at least One-Women Director"
+          },
+          {
+            "value": "66%",
+            "label": "startups at Ideation & Validation Stages"
+          },
+          {
+            "value": "1 Lakhs +",
+            "label": "Jobs created by Startups"
+          },
+          {
+            "value": "8",
+            "label": "Unicorns"
+          },
+          {
+            "value": "70+",
+            "label": "Incubators"
+          },
+          {
+            "value": "7",
+            "label": "CoEs"
+          }
+        ]
+      },
+      "investmentOpportunities": [
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Opportunity 1",
+          "description": "Leading sectors inviting funding include FinTech, EdTech, Ecommerce, Social Network, FoodTech, Logistics and Supply Chain, Media and Entertainment, D2C Brands, SaaS, and HealthTech. Additionally, there also has been a shift in the traditional way of funding, wherein startups are now looking at exercising alternate routes such as crowdfunding, revenue-based financing, venture debt, bank loans, etc."
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Opportunity 2",
+          "description": "Investors essentially buy a piece of the company with their investment. They are putting down capital, in exchange for equity: a portion of ownership in the startup and rights to its potential future profits. Investors form a partnership with the startups they choose to invest in – if the company turns a profit, investors make returns proportionate to their amount of equity in the startup if the startup fails, the investors lose the money they’ve invested."
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Opportunity 3",
+          "description": "Investors realize their return on investment from startups through various means of exit. Ideally, the VC firm and the entrepreneur should discuss the various exit options at the beginning of investment negotiations. A well-performing, high-growth startup that also has excellent management and organizational processes is more likely of being exit-ready earlier than other startups. Venture Capital and Private Equity funds must exit all their investments before the end of the fund’s life."
+        }
+      ],
+      "investmentScore": 74,
+      "investmentSignal": "medium",
+      "opportunityFormat": "columns",
+      "contacts": [
+        {
+          "name": "Shri. Ritesh Saxena",
+          "department": "Invest UP",
+          "designation": "AGM - Udyami Mitra",
+          "phone": "7905224361",
+          "email": "agmudyamimitra@investup.org.in"
+        }
+      ],
+      "policy": "UP Startup Policy 2020",
+      "districtHotspots": [
+        "Lucknow",
+        "Noida",
+        "Kanpur",
+        "Varanasi"
+      ],
+      "detailScraped": true
+    },
+    {
+      "id": "tourism-hospitality",
+      "name": "Tourism & Hospitality",
+      "slug": "tourism-hospitality",
+      "url": "https://invest.up.gov.in/tourism-hospitality/",
+      "source": "investup_live",
+      "industryOverview": {
+        "indiaScenario": [
+          "The Tourism and Hospitality sector is an integral part of the Make in India initiative, serving as a vital economic catalyst that fuels job creation and rapid development.",
+          "The Ministry of Tourism, in its mission mode, is dedicated to promoting the industry through active participation from all States, the convergence of Government Programs, and the establishment of impactful Public-Private Partnerships. This visionary approach will facilitate comprehensive development in at least 50 selected destinations through a challenge mode process.",
+          "Embracing a progressive outlook, India welcomes 100% Foreign Direct Investment (FDI) in the tourism industry under the automatic route.",
+          "Additionally, 100% FDI is permitted for tourism construction projects, including the development of exquisite hotels, resorts, and unparalleled recreational facilities."
+        ],
+        "upScenario": [
+          "Identified tourism circuits to attract various theme-based tourists. Dedicated focus on Buddhist circuit covering key destinations",
+          "24 bird sanctuaries, 11 wildlife sanctuaries and 1 National park",
+          "Rich tradition of Ayurveda and wellness practices.",
+          "UNESCO World Heritage Monuments – 3 Sites – Taj Mahal, Fatehpur Sikri and Agra Fort",
+          "Religious and Cultural sites of international importance such as Ayodhya, Varanasi, Vrindavan, Mathura",
+          "With the presence of the mighty Ganges River, State has presence of adventure tourism activities like river rafting, kayaking, and trekking",
+          "Annual Footfall of 318 million in 2022 (18.3% share in India)",
+          "0st In terms of destination for domestic tourists in India",
+          "0th Highest Foreign tourist footfall in India",
+          "Hotspot For heritage and cultural tourism",
+          "Emerging Destination for eco-tourism"
+        ],
+        "otherSections": [],
+        "highlights": [
+          {
+            "label": "6th in terms of Travel & Tourism total contribution to GDP, WTTC (2021)"
+          },
+          {
+            "label": "2nd in terms of Travel & Tourism Employment, WTTC (2021)"
+          },
+          {
+            "label": "39th on the World Economic Forum Travel & Tourism Development Index (2024)"
+          }
+        ],
+        "stats": [
+          {
+            "value": "1.73 Bn",
+            "label": "Domestic Tourist Visits to all States/UTs (2022)"
+          },
+          {
+            "value": "305.4%",
+            "label": "Annual Growth Rate of FTAs in India (2022)"
+          },
+          {
+            "value": "$28.07 Bn",
+            "label": "Foreign exchange earnings (FEE) from tourism (Jan-Dec 2023)"
+          },
+          {
+            "value": "1.64%",
+            "label": "Share of India in International Tourism Receipts (ITRs) in World"
+          },
+          {
+            "value": "Annual",
+            "label": "Footfall of 318 million in 2022 (18.3% share in India)"
+          },
+          {
+            "value": "1st",
+            "label": "In terms of destination for domestic tourists in India"
+          },
+          {
+            "value": "5th",
+            "label": "Highest Foreign tourist footfall in India"
+          },
+          {
+            "value": "Hotspot",
+            "label": "For heritage and cultural tourism"
+          },
+          {
+            "value": "Emerging",
+            "label": "Destination for eco-tourism"
+          }
+        ]
+      },
+      "investmentOpportunities": [
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Tourist Infrastructure",
+          "description": "Develop hotels, wellness centers and resorts, sports resorts, budget hotels, tented accommodation, eco-tourism resorts, heritage hotels, heritage homestays, flotels, Swiss cottages to cater to a cross-section of tourists."
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Thematic Tourism",
+          "description": "Establish theme-based facilities across Wildlife, Nature & Eco-tourism, adventure tourism, rural tourism segments."
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Experiential Tourism",
+          "description": "Develop experiences for tourists in inland water and cruise-based tourism segment, provide accommodation in ecotourism destinations such as forests, reservoirs, water bodies and other eco-sites where tourists can enjoy flora and fauna"
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Focus Tourist Destinations (FTDs)",
+          "description": "Develop a holistic end-to-end experience at the tourist place with all customer touch points"
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Tourist Circuits",
+          "description": "Enhance infrastructure across various tourist circuits to drive quality and reach of inbound tourists"
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Wellness and Medical Tourism",
+          "description": "Establish Yoga, Ayurveda, and other wellness centres focussed on lifestyle enhancement techniques"
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Adventure Tourism",
+          "description": "Develop Land, Water and Air-based adventure tourism activities such as Bungee Jumping, Cycling Tours, Jeep Safaris, Motorcycle tours, Nature Walks, Bird Watching, Rock Climbing, Wildlife Safaris, river rafting, kayaking, water sports centers, trekking, hot air ballooning, paragliding, sky diving, etc."
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Religious & Cultural Tourism",
+          "description": "Enhance the availability and quality of infrastructure across various religious and cultural sites of international importance circuits such as Ayodhya, Varanasi, Vrindavan, Mathura, etc and also developing and popularising various spiritual circuits such as the Ramayana circuit, Mahabharata circuit, Buddhist circuit, Jain circuit, Shakti-Peeth circuit, Sufi-Kabir circuit, etc."
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Heritage Properties",
+          "description": "Re-adaptive use of heritage properties such as forts, palaces and other structures as heritage hotels, museums, heritage restaurants/banquets/wedding destinations/etc, on PPP model."
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Historical Sites",
+          "description": "Develop facilities, especially around UNESCO World Heritage Monuments sites such as Taj Mahal, Fatehpur Sikri and Agra Fort"
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Wildlife & Nature/Eco-Tourism",
+          "description": "Develop improved facilities within one national park, 11 wild life sanctuaries and 24 bird sanctuaries of the state"
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Investible land parcels",
+          "description": "Develop integrated tourism zones comprising of hotel rooms of diverse categories, banquets, restaurants, retail areas, food courts, MICE facilities, convention centres and yoga centres."
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Heliports",
+          "description": "Development of heliports on PPP model in five tourism destinations of the state Agra and Mathura in Phase I and Lucknow, Prayagraj and Ayodhya in Phase II"
+        }
+      ],
+      "investmentScore": 66,
+      "investmentSignal": "medium",
+      "opportunityFormat": "carousel",
+      "contacts": [
+        {
+          "name": "Shri. Dinesh Kumar",
+          "department": "Sector Expert",
+          "designation": "Dy Director Tourism",
+          "phone": "9795368900",
+          "email": "dineshddupt@gmail.com"
+        }
+      ],
+      "policy": "UP Tourism Policy 2018",
+      "districtHotspots": [
+        "Agra",
+        "Varanasi",
+        "Lucknow",
+        "Ayodhya",
+        "Mathura"
+      ],
+      "detailScraped": true
+    },
+    {
+      "id": "urban-development",
+      "name": "Urban Development",
+      "slug": "urban-development",
+      "url": "https://invest.up.gov.in/urban-development/",
+      "source": "investup_live",
+      "industryOverview": {
+        "indiaScenario": [
+          "Under the National Infrastructure Pipeline (NIP), projects worth Rs. 108 trillion (US$ 1.3 trillion) are currently at different stages of implementation.",
+          "In March 2024, Prime Minister, Mr. Narendra Modi inaugurated multiple connectivity projects in Kolkata, totaling US$ 1.8 billion.",
+          "In March 2024, the Minister of Civil Aviation and Steel announced inaugurating 15 airport projects worth US$ 12.1 billion by 2028.",
+          "Under Interim Budget 2024-25, capital investment outlay for infrastructure has been increased by 11.1% to Rs.11.11 lakh crore (US$ 133.86 billion), which would be 3.4 % of GDP."
+        ],
+        "upScenario": [
+          "No. 1 ranking in completion of houses (13.3 L houses completed) under PMAY-Urban scheme",
+          "1st state to launch State Smart city scheme using its own funding scheme.",
+          "10 Smart Cities developed under Smart Cities Mission + 7 Smart cities under state mission",
+          "Smart City Central Digital Monitoring Center established for monitoring of 17 Smart Cities.",
+          "Operational metro projects in Lucknow, Kanpur, Agra, and underway in 5+ urban centers.",
+          "0st Ranking PMAY-U Awards 2021",
+          "0rd Position Best state category at the Smart City Awards",
+          "Rs. 0,465 crore Allocated towards Urban Development under State Budget 2023-24",
+          "Rs. 0,490 crore Allocated for grants towards the creation of capital assets under PM Awas Yojana (Urban)"
+        ],
+        "otherSections": [],
+        "highlights": [],
+        "stats": [
+          {
+            "value": "1st Ranking",
+            "label": "PMAY-U Awards 2021"
+          },
+          {
+            "value": "3rd Position",
+            "label": "Best state category at the Smart City Awards"
+          },
+          {
+            "value": "Rs. 28,465 crore",
+            "label": "Rs. 0,465 crore Allocated towards Urban Development under State Budget 2023-24"
+          },
+          {
+            "value": "Rs. 2,490 crore",
+            "label": "Rs. 0,490 crore Allocated for grants towards the creation of capital assets under PM Awas Yojana (Urban)"
+          }
+        ]
+      },
+      "investmentOpportunities": [
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Industrial Model Townships",
+          "description": "Projects like Trans Ganga City in Unnao and Saraswati Hitech City in Naini, Allahabad, are being developed with state-of-the-art infrastructure, including industrial, residential, and commercial sectors."
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Special Economic Zones (SEZs)",
+          "description": "The Moradabad SEZ, focusing on handicrafts, textiles, IT/ITES, and electronics, provides excellent infrastructure and supportive services."
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Integrated Industrial Townships",
+          "description": "UPSIDA is developing integrated townships in Ghaziabad and other areas, offering a mix of industrial, residential, and commercial plots with comprehensive amenities."
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Mega Leather Cluster",
+          "description": "A significant project in Kanpur aims to develop a 300-acre leather cluster, enhancing the region's industrial capabilities."
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Film City and Financial City",
+          "description": "These projects aim to create hubs for the entertainment and financial sectors, attracting significant investments."
+        },
+        {
+          "category": "Key Investment Opportunities",
+          "title": "Ayodhya Development",
+          "description": "Transforming Ayodhya into a global pilgrimage city is another major initiative, expected to drive tourism and related infrastructure development."
+        }
+      ],
+      "investmentScore": 79,
+      "investmentSignal": "high",
+      "opportunityFormat": "carousel",
+      "contacts": [
+        {
+          "name": "Shri. Ritesh Saxena",
+          "department": "Invest UP",
+          "designation": "AGM - Udyami Mitra",
+          "phone": "7905224361",
+          "email": "agmudyamimitra@investup.org.in"
+        }
+      ],
+      "policy": "Industrial Investment Policy 2017",
+      "districtHotspots": [
+        "Lucknow",
+        "Kanpur",
+        "Noida",
+        "Ghaziabad",
+        "Varanasi"
+      ],
+      "detailScraped": true
+    },
+    {
+      "id": "warehousing-logistics",
+      "name": "Warehousing & Logistics",
+      "slug": "warehousing-logistics-sector",
+      "url": "https://invest.up.gov.in/warehousing-logistics-sector/",
+      "source": "investup_live",
+      "industryOverview": {
+        "indiaScenario": [
+          "The Indian logistics and warehousing industry is at the heart of the nation’s economic expansion. As businesses continue to adopt advanced technologies and automation, the sector is poised to become more efficient, productive, and sustainable. Government policies and infrastructure improvements further enhance its investment appeal, making it a dynamic and globally competitive industry with immense potential for future growth.",
+          "The logistics and warehousing sector in India has undergone significant transformation, particularly in the post-pandemic era, driven by a surge in online shopping and shifts in consumer behaviour. This shift has prompted businesses to adopt new, flexible formats that prioritize speed, convenience, and cost-effectiveness. The rise in demand for e-commerce, combined with changing business models and the growth of smaller, flexible office spaces near customer locations, has created vast opportunities for the sector to expand.",
+          "Logistics is a critical determinant of trade within the country and is significant for India’s competitiveness in global trade as a whole. The cost of logistics as a percentage of the GDP in India is as high as 13%-14% compared to 7%-8% in developed countries and 9%-10% in other BRIC countries. A reduction of even 1% in the logistics cost would mean a saving of approximately INR 1.4 Lakhs crore per annum. Therefore, there is an inherent need to develop a robust, well integrated, and efficient logistics ecosystem in the country.",
+          "The logistics sector has embraced technology to enhance speed, efficiency, and optimization. Companies are increasingly relying on automation, data analytics, and digital tools to better manage operations, streamline supply chains, and reduce costs. Warehouse automation, in particular, is helping to manage higher volumes of goods with fewer errors and lower labor costs.",
+          "The explosion in online shopping has fuelled demand for efficient logistics and warehousing services. Consumers' focus on convenience and speed has made logistics companies adapt, focusing on last-mile delivery and faster fulfilment. This shift is propelling the sector to develop larger and more advanced warehousing solutions."
+        ],
+        "upScenario": [
+          "Uttar Pradesh is 4th largest state in India in terms of area and accounts for 17% of the population of India. Being strategically located adjacent to National Capital Region, it offers a lucrative gateway to eastern exporting ports and central India. The State offers a vast consumer and labour market to investors. Uttar Pradesh, with its investor friendly policies, reforms and proactive governance, has set a target to become USD 1 trillion-dollar economy. For this, the State Government is aggressively promoting rapid industrialisation and infrastructure development as manufacturing and logistics are intrinsically linked.",
+          "In recent years, the State has established itself as a leading investment destination in India. Merchandise exports from Uttar Pradesh reached US$ 16.39 billion in FY21 and US$ 18.83 billion in FY22 (until February 2022). The State ranked 11th in India in terms of FDI inflows in 2021. In 2019, 147 investment intentions worth Rs. 16,799 crore (US$ 2.40 billion) were filed in the State (DPIIT). Given the emphasis laid on logistics development and for providing ease of logistics, Uttar Pradesh has been graded under “Achievers” category within the Landlocked cluster in Logistics Ease Across Different States (LEADS) Survey 2022. It has been recognised as one of the leader States, in terms of “quality of rail infrastructure” and leading State to process of integration of essential data layers on PM Gati Shakti portal (LEADS 2022). Previously, Uttar Pradesh has jumped 7 positions to rank 6th in the country in the last Logistics Ease Across Different States (LEADS) ranking 2021 and was categorised as “Top Improvers”. Also, UP is ranked no. 1 in India's Smart City Mission."
+        ],
+        "otherSections": [
+          {
+            "heading": "ECOSYSTEM SUPPORT",
+            "bullets": [
+              "In order to ensure comprehensive development of logistics infrastructure in the country, the Union Government of India has been taking multiple initiatives. These are primarily based on 4 - pillars viz. infrastructure development, logistics planning, pro-active governance and adoption of technology. This includes easing of FDI norms, implementation of GST, stimulating growth of ecommerce, positive changes in regulatory policies, and all round infrastructure & industrial development through programmes like “Gatishakti”, “Sagarmala”, “Make in India” etc. The Government of India is coming up with 2-Dedicated Freight Corridors (DFC) i.e. Eastern Dedicated Freight Corridor (EDFC) and Western Dedicated Freight Corridor (WDFC) as high speed and highcapacity railway corridor for the transportation of freight. As these corridors reduce the logistics costs and timing of transportation, 2-prominent Industrial Corridors i.e. Delhi-Mumbai Industrial (DMIC) and Amritsar-Kolkata Corridor (AKIC) are coming up around both these DFCs.",
+              "Other projects include Multi Modal Logistic Parks, Rapid Rail Transit System, Expressways, UDAN - Regional Air Connectivity Scheme etc. are also being implemented to reduce the cost of logistics spending from 14% of GDP to less than 10%.",
+              "The Central Government is also emphasizing pro-active and effective governance for focused development of Logistics sector in India and has set up a dedicated Logistics Division to ensure coordinated growth of the logistics industry started in India in 2017. The Union Government has launched PM Gati Shakti National Master Plan in 2021 for integrated and comprehensive project planning for infrastructure and industrial development in India which will further improve the logistics in the country.",
+              "To complement the PM GatiShakti NMP, the National Logistics Policy (NLP) was launched by the Central Government. While the PM GatiShakti NMP addresses integrated development of the fixed infrastructure and network planning, the NLP envisions to improve efficiency in services (processes, digital systems, regulatory framework) and human resource by providing a Comprehensive Logistics Action Plan (CLAP). The aim of the NLP is to develop a technologically enabled, integrated, cost efficient, resilient, sustainable and trusted logistics ecosystem in the country for accelerated and inclusive growth."
+            ]
+          }
+        ],
+        "highlights": [],
+        "stats": [
+          {
+            "value": "57%",
+            "label": "Catchment Area in AKIC"
+          },
+          {
+            "value": "8.5%",
+            "label": "Catchment Area in DMIC"
+          },
+          {
+            "value": "16",
+            "label": "Clusters identified for Multi-Modal Logistics Facilities"
+          },
+          {
+            "value": "1st",
+            "label": "Multi-Modal Waterways Terminal on River Ganga"
+          }
+        ]
+      },
+      "investmentOpportunities": [
+        {
+          "category": "Overview",
+          "title": "Investment Landscape",
+          "description": "With the development of road and railway networks, there is a strong reason to develop several investment zones and logistics hubs to attract maximum benefits from these infrastructure projects. Besides areas along DMIC and EDFC catchment areas, there are many more places where logistics infrastructure can be developed. The UP government has recently selected seven cities in the state for developing logistics hubs including Ghaziabad which will be nearby Delhi-Meerut Expressway. The Ghaziabad Development Authority has planned the development of two logistics hubs for which land has been identified in Bhojpur and Kaushaliya. Similarly, the government has selected 12 districts near the Purvanchal Expressway for the Purvanchal Expressway Industrial Corridor project including Barabanki, Amethi, Sultanpur, Azamgarh, Mau, Ayodhya, and Ambedkar Nagar 3 Other key investment zones include:"
+        },
+        {
+          "category": "Investment Regions",
+          "title": "Dadri-Noida-Ghaziabad Investment Region",
+          "description": "Dadri-Noida-Ghaziabad Investment Region"
+        },
+        {
+          "category": "Investment Regions",
+          "title": "Meerut-Muzaffarnagar Investment Region",
+          "description": "Meerut-Muzaffarnagar Investment Region"
+        },
+        {
+          "category": "Investment Regions",
+          "title": "DDU Nagar – Varanasi – Mirzapur Investment Region",
+          "description": "DDU Nagar – Varanasi – Mirzapur Investment Region"
+        },
+        {
+          "category": "Investment Regions",
+          "title": "National Investment & Manufacturing Zones at Jhansi and Auraiya",
+          "description": "National Investment & Manufacturing Zones at Jhansi and Auraiya"
+        },
+        {
+          "category": "Investment Regions",
+          "title": "Lucknow-Unnao-Kanpur region vi. Prayagraj-Varanasi region",
+          "description": "Lucknow-Unnao-Kanpur region vi. Prayagraj-Varanasi region"
+        },
+        {
+          "category": "Opportunities In The Logistics Sector Include The Following",
+          "title": "Warehousing Facilities",
+          "description": "Warehousing Facilities"
+        },
+        {
+          "category": "Opportunities In The Logistics Sector Include The Following",
+          "title": "Cold Storages",
+          "description": "Cold Storages"
+        },
+        {
+          "category": "Opportunities In The Logistics Sector Include The Following",
+          "title": "Logistics Parks",
+          "description": "Logistics Parks"
+        },
+        {
+          "category": "Opportunities In The Logistics Sector Include The Following",
+          "title": "E-Commerce Hubs",
+          "description": "E-Commerce Hubs"
+        },
+        {
+          "category": "Opportunities In The Logistics Sector Include The Following",
+          "title": "Real Time Logistics",
+          "description": "- With the higher use of the internet and e-commerce, there is scope to provide services that help in tracking and monitoring the transported goods."
+        },
+        {
+          "category": "Opportunities In The Logistics Sector Include The Following",
+          "title": "Digitalisation",
+          "description": "- Development of technological solutions to improve the work process of the logistic organization."
+        },
+        {
+          "category": "Opportunities In The Logistics Sector Include The Following",
+          "title": "Robotics & Automation",
+          "description": "– In order to provide third-generation facilities for loading, unloading, to supplement logistics services, investment in robotics is an attractive opportunity."
+        }
+      ],
+      "investmentScore": 83,
+      "investmentSignal": "high",
+      "opportunityFormat": "bullets",
+      "contacts": [
+        {
+          "name": "Shri. Bassi Khan",
+          "department": "Industrial Development/UPSIDA",
+          "designation": "Manager UPSIDA",
+          "phone": "5226923000",
+          "email": "bassi.k@upsida.co.in"
+        },
+        {
+          "name": "Shri. Himanshu Bhatia",
+          "department": "Invest UP",
+          "designation": "GM - Udyami Mitra",
+          "phone": "8960440837",
+          "email": "gmudyamimitra@investup.org.in"
+        }
+      ],
+      "policy": "UP Warehousing & Logistics Policy 2018",
+      "districtHotspots": [
+        "Ghaziabad",
+        "Lucknow",
+        "Kanpur",
+        "Varanasi",
+        "Gautam Buddha Nagar"
+      ],
+      "detailScraped": true
+    }
+  ],
   "ncsData": {
     "upSkillPortals": [],
     "industryJobLinks": [

@@ -17,12 +17,24 @@ const PUBLIC_AI_PATH = path.join(__dirname, "..", "dashboard", "public", "upAiRe
 const SCRAPED_CACHE_PATH = path.join(__dirname, "..", "data", "scrapedSourcesCache.json");
 const PUBLIC_CACHE_PATH = path.join(__dirname, "..", "dashboard", "public", "scrapedSourcesCache.json");
 
-function buildInvestUpSectorLinks(sectors, source) {
+function buildInvestUpSectorPayload(sectors, source) {
   if (!sectors?.length) return [];
   return sectors.map((s) => ({
+    id: s.id,
     name: s.name,
-    url: s.sourceUrl || `https://invest.up.gov.in/sectors-in-uttar-pradesh/#${s.slug}`,
+    slug: s.slug,
+    url: s.url || s.sourceUrl || `https://invest.up.gov.in/${s.slug}/`,
     source,
+    industryOverview: s.industryOverview ?? null,
+    investmentOpportunities: s.investmentOpportunities ?? [],
+    investmentScore: s.investmentScore,
+    investmentSignal: s.investmentSignal,
+    opportunityFormat: s.opportunityFormat,
+    contacts: s.contacts ?? [],
+    policy: s.policy,
+    districtHotspots: s.districtHotspots,
+    isSpecialProject: s.isSpecialProject ?? false,
+    detailScraped: s.detailScraped ?? false,
   }));
 }
 
@@ -74,7 +86,7 @@ async function syncAuthenticData() {
     investUp: investUp.meta,
     upsidaProjects: upsida.projects,
     investIndiaSectors: investIndia.sectors,
-    investUpSectors: buildInvestUpSectorLinks(investUp.sectors, investUp.meta?.source),
+    investUpSectors: buildInvestUpSectorPayload(investUp.sectors, investUp.meta?.source),
     ncsData: {
       upSkillPortals: ncs.upSkillPortals,
       industryJobLinks: ncs.industryJobLinks,

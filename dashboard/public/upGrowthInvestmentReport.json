@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-20T07:28:06.606843Z",
+  "generatedAt": "2026-06-21T19:24:37.688Z",
   "model": "ai-job-opportunity-forecasting-v1",
   "modelNote": "Imported from AI Job Opportunity Forecasting Dashboard workbook (PIB, DPIIT, Naukri JobSpeak, Tracxn, India Investment Grid, NSDC).",
   "stateCode": "IN",
@@ -56,7 +56,7 @@
       "growthRate": 20,
       "growthMultiplier": 1.2,
       "liveOnSite": true,
-      "sourceUrl": "",
+      "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
       "baseline": {
         "listings": 0,
         "vacancies": 0
@@ -93,7 +93,9 @@
           "keySkillsRequired": "",
           "sourceReference": "",
           "confidenceLevel": "Medium",
-          "additionalInsights": "Stage: . Announced: ."
+          "additionalInsights": "Stage: . Announced: .",
+          "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
+          "sourceLabel": "Invest India – Uttar Pradesh"
         }
       ]
     },
@@ -107,7 +109,7 @@
       "growthRate": 20,
       "growthMultiplier": 1.2,
       "liveOnSite": true,
-      "sourceUrl": "",
+      "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
       "baseline": {
         "listings": 0,
         "vacancies": 0
@@ -127,13 +129,13 @@
       "keywords": [
         "Policy / Multi-sector"
       ],
-      "investmentCr": 1027000.0,
+      "investmentCr": 1027000,
       "projectCount": 1,
       "projects": [
         {
           "name": "Karnataka Industrial Policy – Statewide Job Target",
           "subSector": "Policy / Multi-sector",
-          "investmentCr": 1027000.0,
+          "investmentCr": 1027000,
           "vacancies": 1080000,
           "startDate": "24+ months (phased)",
           "expectedCompletion": "",
@@ -144,7 +146,9 @@
           "keySkillsRequired": "Policy Launched (Investor Commitments at GIM)",
           "sourceReference": "Deccan Herald — Invest Karnataka 2025 GIM, MB Patil statement",
           "confidenceLevel": "Low",
-          "additionalInsights": "Stage: Policy Launched (Investor Commitments at GIM). Announced: Feb-2026."
+          "additionalInsights": "Stage: Policy Launched (Investor Commitments at GIM). Announced: Feb-2026.",
+          "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
+          "sourceLabel": "Invest India – Uttar Pradesh"
         }
       ]
     },
@@ -158,7 +162,7 @@
       "growthRate": 20,
       "growthMultiplier": 1.2,
       "liveOnSite": true,
-      "sourceUrl": "",
+      "sourceUrl": "https://www.investindia.gov.in/sector/food-processing",
       "baseline": {
         "listings": 0,
         "vacancies": 0
@@ -196,12 +200,14 @@
           "keySkillsRequired": "Approved",
           "sourceReference": "Business Standard, 14-Mar-2026",
           "confidenceLevel": "Medium",
-          "additionalInsights": "Stage: Approved. Announced: 14-Mar-2026."
+          "additionalInsights": "Stage: Approved. Announced: 14-Mar-2026.",
+          "sourceUrl": "https://www.investindia.gov.in/sector/food-processing",
+          "sourceLabel": "Food Processing"
         },
         {
           "name": "PLI Food Processing (165 approved applications)",
           "subSector": "Food Processing",
-          "investmentCr": 9207.0,
+          "investmentCr": 9207,
           "vacancies": 339000,
           "startDate": "Ongoing",
           "expectedCompletion": "",
@@ -212,7 +218,9 @@
           "keySkillsRequired": "Operational / Ongoing",
           "sourceReference": "Tribune/ANI, 21-Apr-2026 — PLISFPI cumulative",
           "confidenceLevel": "High",
-          "additionalInsights": "Stage: Operational / Ongoing. Announced: Ongoing (PLI FY21–27)."
+          "additionalInsights": "Stage: Operational / Ongoing. Announced: Ongoing (PLI FY21–27).",
+          "sourceUrl": "https://www.investindia.gov.in/sector/food-processing",
+          "sourceLabel": "Food Processing"
         }
       ]
     },
@@ -226,7 +234,7 @@
       "growthRate": 20,
       "growthMultiplier": 1.2,
       "liveOnSite": true,
-      "sourceUrl": "",
+      "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
       "baseline": {
         "listings": 0,
         "vacancies": 0
@@ -246,13 +254,13 @@
       "keywords": [
         "Mixed – High-Tech Industrial"
       ],
-      "investmentCr": 135371.0,
+      "investmentCr": 135371,
       "projectCount": 1,
       "projects": [
         {
           "name": "Maharashtra Thrust-Sector Mega/Ultra-Mega Basket (19 proposals, 17 approved)",
           "subSector": "Mixed – High-Tech Industrial",
-          "investmentCr": 135371.0,
+          "investmentCr": 135371,
           "vacancies": 180000,
           "startDate": "12–24 months",
           "expectedCompletion": "",
@@ -263,7 +271,9 @@
           "keySkillsRequired": "Approved",
           "sourceReference": "News on Air / PIB-style release, Jul-2025",
           "confidenceLevel": "Medium",
-          "additionalInsights": "Stage: Approved. Announced: 03-Jul-2025."
+          "additionalInsights": "Stage: Approved. Announced: 03-Jul-2025.",
+          "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
+          "sourceLabel": "Invest India – Uttar Pradesh"
         }
       ]
     },
@@ -277,7 +287,7 @@
       "growthRate": 20,
       "growthMultiplier": 1.2,
       "liveOnSite": true,
-      "sourceUrl": "",
+      "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
       "baseline": {
         "listings": 0,
         "vacancies": 0
@@ -297,13 +307,13 @@
       "keywords": [
         "EV / Policy Programme"
       ],
-      "investmentCr": 50000.0,
+      "investmentCr": 50000,
       "projectCount": 1,
       "projects": [
         {
           "name": "Karnataka Clean Mobility Policy – EV Value Chain",
           "subSector": "EV / Policy Programme",
-          "investmentCr": 50000.0,
+          "investmentCr": 50000,
           "vacancies": 180000,
           "startDate": "24+ months (phased)",
           "expectedCompletion": "",
@@ -314,7 +324,9 @@
           "keySkillsRequired": "Policy Launched",
           "sourceReference": "Deccan Herald, Invest Karnataka GIM coverage",
           "confidenceLevel": "Medium",
-          "additionalInsights": "Stage: Policy Launched. Announced: Feb-2026."
+          "additionalInsights": "Stage: Policy Launched. Announced: Feb-2026.",
+          "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
+          "sourceLabel": "Invest India – Uttar Pradesh"
         }
       ]
     },
@@ -328,7 +340,7 @@
       "growthRate": 20,
       "growthMultiplier": 1.2,
       "liveOnSite": true,
-      "sourceUrl": "",
+      "sourceUrl": "https://www.investindia.gov.in/sector/semiconductor-and-it-hardware",
       "baseline": {
         "listings": 0,
         "vacancies": 0
@@ -353,13 +365,13 @@
       "keywords": [
         "Semiconductors"
       ],
-      "investmentCr": 132654.0,
+      "investmentCr": 132654,
       "projectCount": 8,
       "projects": [
         {
           "name": "Tata Electronics Semiconductor Fab (with ASML)",
           "subSector": "Semiconductors",
-          "investmentCr": 91000.0,
+          "investmentCr": 91000,
           "vacancies": 14400,
           "startDate": "Q4 2027",
           "expectedCompletion": "",
@@ -370,12 +382,14 @@
           "keySkillsRequired": "Under Construction",
           "sourceReference": "Tata-ASML agreement, BIS Infotech, May-2026; ~US$11bn investment",
           "confidenceLevel": "High",
-          "additionalInsights": "Stage: Under Construction. Announced: 16-May-2026."
+          "additionalInsights": "Stage: Under Construction. Announced: 16-May-2026.",
+          "sourceUrl": "https://www.investindia.gov.in/sector/semiconductor-and-it-hardware",
+          "sourceLabel": "Semiconductor and IT Hardware"
         },
         {
           "name": "Micron Technology ATMP Facility",
           "subSector": "Semiconductors",
-          "investmentCr": 22500.0,
+          "investmentCr": 22500,
           "vacancies": 9000,
           "startDate": "Immediate",
           "expectedCompletion": "",
@@ -386,12 +400,14 @@
           "keySkillsRequired": "Operational (Inaugurated)",
           "sourceReference": "PM Modi inauguration; Udyami Digital, Mar-2026",
           "confidenceLevel": "High",
-          "additionalInsights": "Stage: Operational (Inaugurated). Announced: 28-Feb-2026."
+          "additionalInsights": "Stage: Operational (Inaugurated). Announced: 28-Feb-2026.",
+          "sourceUrl": "https://www.investindia.gov.in/sector/semiconductor-and-it-hardware",
+          "sourceLabel": "Semiconductor and IT Hardware"
         },
         {
           "name": "Crystal Matrix Ltd – Compound Semicon Fab & ATMP",
           "subSector": "Semiconductors",
-          "investmentCr": 2800.0,
+          "investmentCr": 2800,
           "vacancies": 2520,
           "startDate": "12–18 months",
           "expectedCompletion": "",
@@ -402,12 +418,14 @@
           "keySkillsRequired": "Approved",
           "sourceReference": "MeitY approval; IMARC Engineering, May-2026",
           "confidenceLevel": "Medium",
-          "additionalInsights": "Stage: Approved. Announced: 05-May-2026."
+          "additionalInsights": "Stage: Approved. Announced: 05-May-2026.",
+          "sourceUrl": "https://www.investindia.gov.in/sector/semiconductor-and-it-hardware",
+          "sourceLabel": "Semiconductor and IT Hardware"
         },
         {
           "name": "Suchi Semicon Pvt Ltd – OSAT Facility",
           "subSector": "Semiconductors",
-          "investmentCr": 1136.0,
+          "investmentCr": 1136,
           "vacancies": 1494,
           "startDate": "12–18 months",
           "expectedCompletion": "",
@@ -418,12 +436,14 @@
           "keySkillsRequired": "Approved",
           "sourceReference": "MeitY approval, 1,033mn chips/year; IMARC, May-2026",
           "confidenceLevel": "Medium",
-          "additionalInsights": "Stage: Approved. Announced: 05-May-2026."
+          "additionalInsights": "Stage: Approved. Announced: 05-May-2026.",
+          "sourceUrl": "https://www.investindia.gov.in/sector/semiconductor-and-it-hardware",
+          "sourceLabel": "Semiconductor and IT Hardware"
         },
         {
           "name": "HCL-Foxconn JV – Display Driver Chip ATMP",
           "subSector": "Semiconductors",
-          "investmentCr": 3700.0,
+          "investmentCr": 3700,
           "vacancies": 3600,
           "startDate": "2027",
           "expectedCompletion": "",
@@ -434,12 +454,14 @@
           "keySkillsRequired": "Under Construction",
           "sourceReference": "IMARC Engineering, Apr-2026; 36mn chips/month target",
           "confidenceLevel": "Medium",
-          "additionalInsights": "Stage: Under Construction. Announced: 2026 (ongoing)."
+          "additionalInsights": "Stage: Under Construction. Announced: 2026 (ongoing).",
+          "sourceUrl": "https://www.investindia.gov.in/sector/semiconductor-and-it-hardware",
+          "sourceLabel": "Semiconductor and IT Hardware"
         },
         {
           "name": "Kaynes Semicon Pvt Ltd",
           "subSector": "Semiconductors",
-          "investmentCr": 3300.0,
+          "investmentCr": 3300,
           "vacancies": 2700,
           "startDate": "Mid-2025 onward",
           "expectedCompletion": "",
@@ -450,12 +472,14 @@
           "keySkillsRequired": "Under Construction",
           "sourceReference": "Blackridge Research, May-2026",
           "confidenceLevel": "High",
-          "additionalInsights": "Stage: Under Construction. Announced: 2025 (ongoing)."
+          "additionalInsights": "Stage: Under Construction. Announced: 2025 (ongoing).",
+          "sourceUrl": "https://www.investindia.gov.in/sector/semiconductor-and-it-hardware",
+          "sourceLabel": "Semiconductor and IT Hardware"
         },
         {
           "name": "CG Power / CG Semi – OSAT (Renesas, Stars Micro JV)",
           "subSector": "Semiconductors",
-          "investmentCr": 7600.0,
+          "investmentCr": 7600,
           "vacancies": 3240,
           "startDate": "Immediate",
           "expectedCompletion": "",
@@ -466,12 +490,14 @@
           "keySkillsRequired": "Operational (1st OSAT launched)",
           "sourceReference": "Blackridge Research, May-2026",
           "confidenceLevel": "High",
-          "additionalInsights": "Stage: Operational (1st OSAT launched). Announced: 28-Aug-2025."
+          "additionalInsights": "Stage: Operational (1st OSAT launched). Announced: 28-Aug-2025.",
+          "sourceUrl": "https://www.investindia.gov.in/sector/semiconductor-and-it-hardware",
+          "sourceLabel": "Semiconductor and IT Hardware"
         },
         {
           "name": "RIR Power Electronics – India's first SiC Fab",
           "subSector": "Semiconductors",
-          "investmentCr": 618.0,
+          "investmentCr": 618,
           "vacancies": 810,
           "startDate": "12 months",
           "expectedCompletion": "",
@@ -482,7 +508,9 @@
           "keySkillsRequired": "Approved",
           "sourceReference": "IMARC Engineering, Apr-2026",
           "confidenceLevel": "Medium",
-          "additionalInsights": "Stage: Approved. Announced: Aug-2025."
+          "additionalInsights": "Stage: Approved. Announced: Aug-2025.",
+          "sourceUrl": "https://www.investindia.gov.in/sector/semiconductor-and-it-hardware",
+          "sourceLabel": "Semiconductor and IT Hardware"
         }
       ]
     },
@@ -496,7 +524,7 @@
       "growthRate": 20,
       "growthMultiplier": 1.2,
       "liveOnSite": true,
-      "sourceUrl": "",
+      "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
       "baseline": {
         "listings": 0,
         "vacancies": 0
@@ -516,13 +544,13 @@
       "keywords": [
         "Mixed – Coal Gasification/Solar/Steel/Graphite"
       ],
-      "investmentCr": 89731.0,
+      "investmentCr": 89731,
       "projectCount": 1,
       "projects": [
         {
           "name": "Maharashtra High-Tech Mega Projects (5-project basket)",
           "subSector": "Mixed – Coal Gasification/Solar/Steel/Graphite",
-          "investmentCr": 89731.0,
+          "investmentCr": 89731,
           "vacancies": 36000,
           "startDate": "12–24 months",
           "expectedCompletion": "",
@@ -533,7 +561,9 @@
           "keySkillsRequired": "Approved",
           "sourceReference": "Deccan Chronicle, late-May 2026 — aggregate basket incl. P022–P024",
           "confidenceLevel": "Medium",
-          "additionalInsights": "Stage: Approved. Announced: 27-May-2026."
+          "additionalInsights": "Stage: Approved. Announced: 27-May-2026.",
+          "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
+          "sourceLabel": "Invest India – Uttar Pradesh"
         }
       ]
     },
@@ -547,7 +577,7 @@
       "growthRate": 20,
       "growthMultiplier": 1.2,
       "liveOnSite": true,
-      "sourceUrl": "",
+      "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
       "baseline": {
         "listings": 0,
         "vacancies": 0
@@ -567,13 +597,13 @@
       "keywords": [
         "Core Industry / Chemicals"
       ],
-      "investmentCr": 70000.0,
+      "investmentCr": 70000,
       "projectCount": 1,
       "projects": [
         {
           "name": "Adani Enterprises – Coal Gasification & Derivatives",
           "subSector": "Core Industry / Chemicals",
-          "investmentCr": 70000.0,
+          "investmentCr": 70000,
           "vacancies": 18000,
           "startDate": "18–24 months",
           "expectedCompletion": "",
@@ -584,7 +614,9 @@
           "keySkillsRequired": "Final Stages / Land Acquired",
           "sourceReference": "Deccan Chronicle, ~3 weeks old (late-May 2026)",
           "confidenceLevel": "Medium",
-          "additionalInsights": "Stage: Final Stages / Land Acquired. Announced: 27-May-2026."
+          "additionalInsights": "Stage: Final Stages / Land Acquired. Announced: 27-May-2026.",
+          "sourceUrl": "https://www.investindia.gov.in/sector/chemicals",
+          "sourceLabel": "Chemicals"
         }
       ]
     },
@@ -598,7 +630,7 @@
       "growthRate": 20,
       "growthMultiplier": 1.2,
       "liveOnSite": true,
-      "sourceUrl": "",
+      "sourceUrl": "https://www.investindia.gov.in/sector/defence-manufacturing",
       "baseline": {
         "listings": 0,
         "vacancies": 0
@@ -619,13 +651,13 @@
       "keywords": [
         "Manufacturing – Steel"
       ],
-      "investmentCr": 11702.0,
+      "investmentCr": 11702,
       "projectCount": 2,
       "projects": [
         {
           "name": "JSW Steel – Integrated Steel Plant Expansion",
           "subSector": "Manufacturing – Steel",
-          "investmentCr": 4600.0,
+          "investmentCr": 4600,
           "vacancies": 5760,
           "startDate": "6–12 months",
           "expectedCompletion": "",
@@ -636,12 +668,14 @@
           "keySkillsRequired": "Approved",
           "sourceReference": "Deccan Herald, 13-Apr-2026",
           "confidenceLevel": "High",
-          "additionalInsights": "Stage: Approved. Announced: 13-Apr-2026."
+          "additionalInsights": "Stage: Approved. Announced: 13-Apr-2026.",
+          "sourceUrl": "https://www.investindia.gov.in/sector/defence-manufacturing",
+          "sourceLabel": "Defence Manufacturing"
         },
         {
           "name": "JSW JFE Electrical Steel Pvt Ltd",
           "subSector": "Manufacturing – Steel",
-          "investmentCr": 7102.0,
+          "investmentCr": 7102,
           "vacancies": 1620,
           "startDate": "12 months",
           "expectedCompletion": "",
@@ -652,7 +686,9 @@
           "keySkillsRequired": "Approved",
           "sourceReference": "Careers360 / PTI, 24-Oct-2025",
           "confidenceLevel": "Medium",
-          "additionalInsights": "Stage: Approved. Announced: 24-Oct-2025."
+          "additionalInsights": "Stage: Approved. Announced: 24-Oct-2025.",
+          "sourceUrl": "https://www.investindia.gov.in/sector/defence-manufacturing",
+          "sourceLabel": "Defence Manufacturing"
         }
       ]
     },
@@ -666,7 +702,7 @@
       "growthRate": 20,
       "growthMultiplier": 1.2,
       "liveOnSite": true,
-      "sourceUrl": "",
+      "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
       "baseline": {
         "listings": 0,
         "vacancies": 0
@@ -693,7 +729,7 @@
         {
           "name": "Erisha E-Mobility – EV Manufacturing Scale-up",
           "subSector": "EV Mobility",
-          "investmentCr": 0.0,
+          "investmentCr": 0,
           "vacancies": 2500,
           "startDate": "12 months",
           "expectedCompletion": "",
@@ -704,7 +740,9 @@
           "keySkillsRequired": "Funded / Scaling",
           "sourceReference": "Newskart Startup Funding Report — $1.0bn raised, Mar-2026",
           "confidenceLevel": "Medium",
-          "additionalInsights": "Stage: Funded / Scaling. Announced: 2025–2026."
+          "additionalInsights": "Stage: Funded / Scaling. Announced: 2025–2026.",
+          "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
+          "sourceLabel": "Invest India – Uttar Pradesh"
         },
         {
           "name": "Euler Motors – Commercial EV Manufacturing",
@@ -720,7 +758,9 @@
           "keySkillsRequired": "Funded / Scaling",
           "sourceReference": "Newskart — ₹437.5cr raised, 25-Mar-2026",
           "confidenceLevel": "Medium",
-          "additionalInsights": "Stage: Funded / Scaling. Announced: 25-Mar-2026."
+          "additionalInsights": "Stage: Funded / Scaling. Announced: 25-Mar-2026.",
+          "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
+          "sourceLabel": "Invest India – Uttar Pradesh"
         }
       ]
     },
@@ -734,7 +774,7 @@
       "growthRate": 20,
       "growthMultiplier": 1.2,
       "liveOnSite": true,
-      "sourceUrl": "",
+      "sourceUrl": "https://www.investindia.gov.in/sector/renewable-energy",
       "baseline": {
         "listings": 0,
         "vacancies": 0
@@ -754,13 +794,13 @@
       "keywords": [
         "Renewable Energy"
       ],
-      "investmentCr": 1251.0,
+      "investmentCr": 1251,
       "projectCount": 1,
       "projects": [
         {
           "name": "Vayu Assets Pvt Ltd",
           "subSector": "Renewable Energy",
-          "investmentCr": 1251.0,
+          "investmentCr": 1251,
           "vacancies": 3441,
           "startDate": "9–12 months",
           "expectedCompletion": "",
@@ -771,7 +811,9 @@
           "keySkillsRequired": "Approved",
           "sourceReference": "Careers360 / PTI, 24-Oct-2025",
           "confidenceLevel": "Medium",
-          "additionalInsights": "Stage: Approved. Announced: 24-Oct-2025."
+          "additionalInsights": "Stage: Approved. Announced: 24-Oct-2025.",
+          "sourceUrl": "https://www.investindia.gov.in/sector/renewable-energy",
+          "sourceLabel": "Renewable Energy"
         }
       ]
     },
@@ -785,7 +827,7 @@
       "growthRate": 20,
       "growthMultiplier": 1.2,
       "liveOnSite": true,
-      "sourceUrl": "",
+      "sourceUrl": "https://www.investindia.gov.in/sector/textiles-apparel",
       "baseline": {
         "listings": 0,
         "vacancies": 0
@@ -806,13 +848,13 @@
       "keywords": [
         "Textiles"
       ],
-      "investmentCr": 1116.0,
+      "investmentCr": 1116,
       "projectCount": 2,
       "projects": [
         {
           "name": "HSS Textile Pvt Ltd",
           "subSector": "Textiles",
-          "investmentCr": 740.0,
+          "investmentCr": 740,
           "vacancies": 1440,
           "startDate": "9 months",
           "expectedCompletion": "",
@@ -823,12 +865,14 @@
           "keySkillsRequired": "Approved",
           "sourceReference": "Careers360 / PTI, 24-Oct-2025",
           "confidenceLevel": "Medium",
-          "additionalInsights": "Stage: Approved. Announced: 24-Oct-2025."
+          "additionalInsights": "Stage: Approved. Announced: 24-Oct-2025.",
+          "sourceUrl": "https://www.investindia.gov.in/sector/textiles-apparel",
+          "sourceLabel": "Textiles & Apparel"
         },
         {
           "name": "Kleine Pax Ltd – Technical Textile Unit",
           "subSector": "Textiles",
-          "investmentCr": 376.0,
+          "investmentCr": 376,
           "vacancies": 1260,
           "startDate": "9 months",
           "expectedCompletion": "",
@@ -839,7 +883,9 @@
           "keySkillsRequired": "Approved",
           "sourceReference": "Business Standard, 14-Mar-2026",
           "confidenceLevel": "Medium",
-          "additionalInsights": "Stage: Approved. Announced: 14-Mar-2026."
+          "additionalInsights": "Stage: Approved. Announced: 14-Mar-2026.",
+          "sourceUrl": "https://www.investindia.gov.in/sector/textiles-apparel",
+          "sourceLabel": "Textiles & Apparel"
         }
       ]
     },
@@ -853,7 +899,7 @@
       "growthRate": 20,
       "growthMultiplier": 1.2,
       "liveOnSite": true,
-      "sourceUrl": "",
+      "sourceUrl": "https://www.investindia.gov.in/sector/telecom",
       "baseline": {
         "listings": 0,
         "vacancies": 0
@@ -874,13 +920,13 @@
       "keywords": [
         "Telecom Equipment"
       ],
-      "investmentCr": 542.0,
+      "investmentCr": 542,
       "projectCount": 2,
       "projects": [
         {
           "name": "Tejas Networks Ltd – Telecom Equipment Expansion",
           "subSector": "Telecom Equipment",
-          "investmentCr": 542.0,
+          "investmentCr": 542,
           "vacancies": 2361,
           "startDate": "6–9 months",
           "expectedCompletion": "",
@@ -891,12 +937,14 @@
           "keySkillsRequired": "Approved",
           "sourceReference": "Careers360 / PTI, 24-Oct-2025",
           "confidenceLevel": "High",
-          "additionalInsights": "Stage: Approved. Announced: 24-Oct-2025."
+          "additionalInsights": "Stage: Approved. Announced: 24-Oct-2025.",
+          "sourceUrl": "https://www.investindia.gov.in/sector/telecom",
+          "sourceLabel": "Telecom"
         },
         {
           "name": "Tejas Networks / Telecom PLI Linked Expansion",
           "subSector": "Telecom Equipment",
-          "investmentCr": 0.0,
+          "investmentCr": 0,
           "vacancies": 0,
           "startDate": "Ongoing",
           "expectedCompletion": "",
@@ -907,7 +955,9 @@
           "keySkillsRequired": "Operational / Ongoing",
           "sourceReference": "PLI telecom scheme + Careers360, Oct-2025",
           "confidenceLevel": "Medium",
-          "additionalInsights": "Stage: Operational / Ongoing. Announced: 2025–2026."
+          "additionalInsights": "Stage: Operational / Ongoing. Announced: 2025–2026.",
+          "sourceUrl": "https://www.investindia.gov.in/sector/telecom",
+          "sourceLabel": "Telecom"
         }
       ]
     },
@@ -921,7 +971,7 @@
       "growthRate": 20,
       "growthMultiplier": 1.2,
       "liveOnSite": true,
-      "sourceUrl": "",
+      "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
       "baseline": {
         "listings": 0,
         "vacancies": 0
@@ -941,13 +991,13 @@
       "keywords": [
         "FMCG / Food Processing"
       ],
-      "investmentCr": 1622.0,
+      "investmentCr": 1622,
       "projectCount": 1,
       "projects": [
         {
           "name": "Reliance Consumer Products Ltd",
           "subSector": "FMCG / Food Processing",
-          "investmentCr": 1622.0,
+          "investmentCr": 1622,
           "vacancies": 2160,
           "startDate": "9 months",
           "expectedCompletion": "",
@@ -958,7 +1008,9 @@
           "keySkillsRequired": "Approved",
           "sourceReference": "Careers360 / PTI, 24-Oct-2025",
           "confidenceLevel": "Medium",
-          "additionalInsights": "Stage: Approved. Announced: 24-Oct-2025."
+          "additionalInsights": "Stage: Approved. Announced: 24-Oct-2025.",
+          "sourceUrl": "https://www.investindia.gov.in/sector/food-processing",
+          "sourceLabel": "Food Processing"
         }
       ]
     },
@@ -972,7 +1024,7 @@
       "growthRate": 20,
       "growthMultiplier": 1.2,
       "liveOnSite": true,
-      "sourceUrl": "",
+      "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
       "baseline": {
         "listings": 0,
         "vacancies": 0
@@ -992,13 +1044,13 @@
       "keywords": [
         "Battery / EV Components"
       ],
-      "investmentCr": 4651.0,
+      "investmentCr": 4651,
       "projectCount": 1,
       "projects": [
         {
           "name": "Graphite India Ltd – Synthetic Graphite Anode (Li-ion)",
           "subSector": "Battery / EV Components",
-          "investmentCr": 4651.0,
+          "investmentCr": 4651,
           "vacancies": 2098,
           "startDate": "12–18 months",
           "expectedCompletion": "",
@@ -1009,7 +1061,9 @@
           "keySkillsRequired": "Approved",
           "sourceReference": "Deccan Chronicle, late-May 2026",
           "confidenceLevel": "Medium",
-          "additionalInsights": "Stage: Approved. Announced: 27-May-2026."
+          "additionalInsights": "Stage: Approved. Announced: 27-May-2026.",
+          "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
+          "sourceLabel": "Invest India – Uttar Pradesh"
         }
       ]
     },
@@ -1023,7 +1077,7 @@
       "growthRate": 20,
       "growthMultiplier": 1.2,
       "liveOnSite": true,
-      "sourceUrl": "",
+      "sourceUrl": "https://www.investindia.gov.in/sector/automobile",
       "baseline": {
         "listings": 0,
         "vacancies": 0
@@ -1043,13 +1097,13 @@
       "keywords": [
         "Automobiles"
       ],
-      "investmentCr": 1500.0,
+      "investmentCr": 1500,
       "projectCount": 1,
       "projects": [
         {
           "name": "Volvo Group India – Automobile Facility",
           "subSector": "Automobiles",
-          "investmentCr": 1500.0,
+          "investmentCr": 1500,
           "vacancies": 1980,
           "startDate": "6–12 months",
           "expectedCompletion": "",
@@ -1060,7 +1114,9 @@
           "keySkillsRequired": "Approved",
           "sourceReference": "Deccan Herald, 13-Apr-2026",
           "confidenceLevel": "Medium",
-          "additionalInsights": "Stage: Approved. Announced: 13-Apr-2026."
+          "additionalInsights": "Stage: Approved. Announced: 13-Apr-2026.",
+          "sourceUrl": "https://www.investindia.gov.in/sector/automobile",
+          "sourceLabel": "Automobile"
         }
       ]
     },
@@ -1074,7 +1130,7 @@
       "growthRate": 20,
       "growthMultiplier": 1.2,
       "liveOnSite": true,
-      "sourceUrl": "",
+      "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
       "baseline": {
         "listings": 0,
         "vacancies": 0
@@ -1111,7 +1167,9 @@
           "keySkillsRequired": "Approved",
           "sourceReference": "Business Standard, 14-Mar-2026",
           "confidenceLevel": "Medium",
-          "additionalInsights": "Stage: Approved. Announced: 14-Mar-2026."
+          "additionalInsights": "Stage: Approved. Announced: 14-Mar-2026.",
+          "sourceUrl": "https://www.investindia.gov.in/sector/real-estate",
+          "sourceLabel": "Real Estate"
         }
       ]
     },
@@ -1125,7 +1183,7 @@
       "growthRate": 20,
       "growthMultiplier": 1.2,
       "liveOnSite": true,
-      "sourceUrl": "",
+      "sourceUrl": "https://www.investindia.gov.in/sector/defence-manufacturing",
       "baseline": {
         "listings": 0,
         "vacancies": 0
@@ -1145,13 +1203,13 @@
       "keywords": [
         "Manufacturing / Mixed"
       ],
-      "investmentCr": 6450.0,
+      "investmentCr": 6450,
       "projectCount": 1,
       "projects": [
         {
           "name": "Karnataka–Japan/Korea Investment Commitments",
           "subSector": "Manufacturing / Mixed",
-          "investmentCr": 6450.0,
+          "investmentCr": 6450,
           "vacancies": 1800,
           "startDate": "18–24 months",
           "expectedCompletion": "",
@@ -1162,7 +1220,9 @@
           "keySkillsRequired": "MoU Stage",
           "sourceReference": "Deccan Herald — Osaka Gas, DN Solutions, Aoyama Seisakusho MoUs",
           "confidenceLevel": "Low",
-          "additionalInsights": "Stage: MoU Stage. Announced: 2025."
+          "additionalInsights": "Stage: MoU Stage. Announced: 2025.",
+          "sourceUrl": "https://www.investindia.gov.in/sector/defence-manufacturing",
+          "sourceLabel": "Defence Manufacturing"
         }
       ]
     },
@@ -1176,7 +1236,7 @@
       "growthRate": 20,
       "growthMultiplier": 1.2,
       "liveOnSite": true,
-      "sourceUrl": "",
+      "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
       "baseline": {
         "listings": 0,
         "vacancies": 0
@@ -1196,13 +1256,13 @@
       "keywords": [
         "EV Mobility / Logistics"
       ],
-      "investmentCr": 0.0,
+      "investmentCr": 0,
       "projectCount": 1,
       "projects": [
         {
           "name": "GreenLine – EV Logistics Fleet Expansion",
           "subSector": "EV Mobility / Logistics",
-          "investmentCr": 0.0,
+          "investmentCr": 0,
           "vacancies": 1800,
           "startDate": "9–12 months",
           "expectedCompletion": "",
@@ -1213,7 +1273,9 @@
           "keySkillsRequired": "Funded / Scaling",
           "sourceReference": "Newskart Startup Funding Report — $275mn raised",
           "confidenceLevel": "Medium",
-          "additionalInsights": "Stage: Funded / Scaling. Announced: 2025–2026."
+          "additionalInsights": "Stage: Funded / Scaling. Announced: 2025–2026.",
+          "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
+          "sourceLabel": "Invest India – Uttar Pradesh"
         }
       ]
     },
@@ -1227,7 +1289,7 @@
       "growthRate": 20,
       "growthMultiplier": 1.2,
       "liveOnSite": true,
-      "sourceUrl": "",
+      "sourceUrl": "https://www.investindia.gov.in/sector/defence-manufacturing",
       "baseline": {
         "listings": 0,
         "vacancies": 0
@@ -1247,13 +1309,13 @@
       "keywords": [
         "Manufacturing"
       ],
-      "investmentCr": 9298.0,
+      "investmentCr": 9298,
       "projectCount": 1,
       "projects": [
         {
           "name": "SFX India Mfg Pvt Ltd",
           "subSector": "Manufacturing",
-          "investmentCr": 9298.0,
+          "investmentCr": 9298,
           "vacancies": 1450,
           "startDate": "12 months",
           "expectedCompletion": "",
@@ -1264,7 +1326,9 @@
           "keySkillsRequired": "Approved",
           "sourceReference": "Careers360 / PTI, 24-Oct-2025",
           "confidenceLevel": "Low",
-          "additionalInsights": "Stage: Approved. Announced: 24-Oct-2025."
+          "additionalInsights": "Stage: Approved. Announced: 24-Oct-2025.",
+          "sourceUrl": "https://www.investindia.gov.in/sector/defence-manufacturing",
+          "sourceLabel": "Defence Manufacturing"
         }
       ]
     },
@@ -1278,7 +1342,7 @@
       "growthRate": 20,
       "growthMultiplier": 1.2,
       "liveOnSite": true,
-      "sourceUrl": "",
+      "sourceUrl": "https://www.investindia.gov.in/sector/tourism-hospitality",
       "baseline": {
         "listings": 0,
         "vacancies": 0
@@ -1298,13 +1362,13 @@
       "keywords": [
         "Hospitality"
       ],
-      "investmentCr": 300.0,
+      "investmentCr": 300,
       "projectCount": 1,
       "projects": [
         {
           "name": "Trishul Buildtech – Five-Star Hotel Project",
           "subSector": "Hospitality",
-          "investmentCr": 300.0,
+          "investmentCr": 300,
           "vacancies": 1170,
           "startDate": "12 months",
           "expectedCompletion": "",
@@ -1315,7 +1379,9 @@
           "keySkillsRequired": "Approved",
           "sourceReference": "Business Standard, 14-Mar-2026",
           "confidenceLevel": "Low",
-          "additionalInsights": "Stage: Approved. Announced: 14-Mar-2026."
+          "additionalInsights": "Stage: Approved. Announced: 14-Mar-2026.",
+          "sourceUrl": "https://www.investindia.gov.in/sector/tourism-hospitality",
+          "sourceLabel": "Tourism & Hospitality"
         }
       ]
     },
@@ -1329,7 +1395,7 @@
       "growthRate": 20,
       "growthMultiplier": 1.2,
       "liveOnSite": true,
-      "sourceUrl": "",
+      "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
       "baseline": {
         "listings": 0,
         "vacancies": 0
@@ -1349,13 +1415,13 @@
       "keywords": [
         "EV Components"
       ],
-      "investmentCr": 250.0,
+      "investmentCr": 250,
       "projectCount": 1,
       "projects": [
         {
           "name": "Tsuyo Manufacturing – EV Motor & Controller Unit",
           "subSector": "EV Components",
-          "investmentCr": 250.0,
+          "investmentCr": 250,
           "vacancies": 900,
           "startDate": "6–9 months",
           "expectedCompletion": "",
@@ -1366,7 +1432,9 @@
           "keySkillsRequired": "Approved",
           "sourceReference": "Business Standard, 14-Mar-2026",
           "confidenceLevel": "Medium",
-          "additionalInsights": "Stage: Approved. Announced: 14-Mar-2026."
+          "additionalInsights": "Stage: Approved. Announced: 14-Mar-2026.",
+          "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
+          "sourceLabel": "Invest India – Uttar Pradesh"
         }
       ]
     },
@@ -1380,7 +1448,7 @@
       "growthRate": 20,
       "growthMultiplier": 1.2,
       "liveOnSite": true,
-      "sourceUrl": "",
+      "sourceUrl": "https://www.investindia.gov.in/sector/auto-components",
       "baseline": {
         "listings": 0,
         "vacancies": 0
@@ -1400,13 +1468,13 @@
       "keywords": [
         "Auto Components"
       ],
-      "investmentCr": 1740.0,
+      "investmentCr": 1740,
       "projectCount": 1,
       "projects": [
         {
           "name": "HS Hyosung India – Tyre Cord Manufacturing Plant",
           "subSector": "Auto Components",
-          "investmentCr": 1740.0,
+          "investmentCr": 1740,
           "vacancies": 720,
           "startDate": "9–12 months",
           "expectedCompletion": "",
@@ -1417,7 +1485,9 @@
           "keySkillsRequired": "Approved",
           "sourceReference": "Deccan Chronicle, late-May 2026",
           "confidenceLevel": "Medium",
-          "additionalInsights": "Stage: Approved. Announced: 27-May-2026."
+          "additionalInsights": "Stage: Approved. Announced: 27-May-2026.",
+          "sourceUrl": "https://www.investindia.gov.in/sector/auto-components",
+          "sourceLabel": "Auto Components"
         }
       ]
     },
@@ -1431,7 +1501,7 @@
       "growthRate": 20,
       "growthMultiplier": 1.2,
       "liveOnSite": true,
-      "sourceUrl": "",
+      "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
       "baseline": {
         "listings": 0,
         "vacancies": 0
@@ -1451,13 +1521,13 @@
       "keywords": [
         "Machine Tools"
       ],
-      "investmentCr": 1000.0,
+      "investmentCr": 1000,
       "projectCount": 1,
       "projects": [
         {
           "name": "DN Solutions – Precision Tools Manufacturing",
           "subSector": "Machine Tools",
-          "investmentCr": 1000.0,
+          "investmentCr": 1000,
           "vacancies": 540,
           "startDate": "18 months",
           "expectedCompletion": "",
@@ -1468,7 +1538,9 @@
           "keySkillsRequired": "MoU Stage",
           "sourceReference": "Deccan Herald — part of P034 basket",
           "confidenceLevel": "Low",
-          "additionalInsights": "Stage: MoU Stage. Announced: 2025."
+          "additionalInsights": "Stage: MoU Stage. Announced: 2025.",
+          "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
+          "sourceLabel": "Invest India – Uttar Pradesh"
         }
       ]
     },
@@ -1482,7 +1554,7 @@
       "growthRate": 20,
       "growthMultiplier": 1.2,
       "liveOnSite": true,
-      "sourceUrl": "",
+      "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
       "baseline": {
         "listings": 0,
         "vacancies": 0
@@ -1502,13 +1574,13 @@
       "keywords": [
         "AI Infrastructure"
       ],
-      "investmentCr": 0.0,
+      "investmentCr": 0,
       "projectCount": 1,
       "projects": [
         {
           "name": "Neysa – AI Infrastructure Platform Scale-up",
           "subSector": "AI Infrastructure",
-          "investmentCr": 0.0,
+          "investmentCr": 0,
           "vacancies": 400,
           "startDate": "6–9 months",
           "expectedCompletion": "",
@@ -1519,7 +1591,9 @@
           "keySkillsRequired": "Funded / Scaling",
           "sourceReference": "Entrackr Q1-2026 Funding Report — $1.2bn Series B",
           "confidenceLevel": "Low",
-          "additionalInsights": "Stage: Funded / Scaling. Announced: Q1 2026."
+          "additionalInsights": "Stage: Funded / Scaling. Announced: Q1 2026.",
+          "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
+          "sourceLabel": "Invest India – Uttar Pradesh"
         }
       ]
     },
@@ -1533,7 +1607,7 @@
       "growthRate": 20,
       "growthMultiplier": 1.2,
       "liveOnSite": true,
-      "sourceUrl": "",
+      "sourceUrl": "https://www.investindia.gov.in/sector/renewable-energy",
       "baseline": {
         "listings": 0,
         "vacancies": 0
@@ -1553,13 +1627,13 @@
       "keywords": [
         "Energy Infrastructure"
       ],
-      "investmentCr": 5000.0,
+      "investmentCr": 5000,
       "projectCount": 1,
       "projects": [
         {
           "name": "Osaka Gas – Gas Distribution Infrastructure Expansion",
           "subSector": "Energy Infrastructure",
-          "investmentCr": 5000.0,
+          "investmentCr": 5000,
           "vacancies": 360,
           "startDate": "18–24 months",
           "expectedCompletion": "",
@@ -1570,7 +1644,9 @@
           "keySkillsRequired": "MoU Stage",
           "sourceReference": "Deccan Herald — part of P034 basket",
           "confidenceLevel": "Low",
-          "additionalInsights": "Stage: MoU Stage. Announced: 2025."
+          "additionalInsights": "Stage: MoU Stage. Announced: 2025.",
+          "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
+          "sourceLabel": "Invest India – Uttar Pradesh"
         }
       ]
     },
@@ -1584,7 +1660,7 @@
       "growthRate": 20,
       "growthMultiplier": 1.2,
       "liveOnSite": true,
-      "sourceUrl": "",
+      "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
       "baseline": {
         "listings": 0,
         "vacancies": 0
@@ -1604,13 +1680,13 @@
       "keywords": [
         "Fintech / Housing Finance"
       ],
-      "investmentCr": 0.0,
+      "investmentCr": 0,
       "projectCount": 1,
       "projects": [
         {
           "name": "Weaver Services – Affordable Housing Finance Expansion",
           "subSector": "Fintech / Housing Finance",
-          "investmentCr": 0.0,
+          "investmentCr": 0,
           "vacancies": 350,
           "startDate": "9 months",
           "expectedCompletion": "",
@@ -1621,7 +1697,9 @@
           "keySkillsRequired": "Funded / Scaling",
           "sourceReference": "Entrackr Q1-2026 Funding Report — $156mn raised",
           "confidenceLevel": "Low",
-          "additionalInsights": "Stage: Funded / Scaling. Announced: Q1 2026."
+          "additionalInsights": "Stage: Funded / Scaling. Announced: Q1 2026.",
+          "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
+          "sourceLabel": "Invest India – Uttar Pradesh"
         }
       ]
     },
@@ -1635,7 +1713,7 @@
       "growthRate": 20,
       "growthMultiplier": 1.2,
       "liveOnSite": true,
-      "sourceUrl": "",
+      "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
       "baseline": {
         "listings": 0,
         "vacancies": 0
@@ -1655,13 +1733,13 @@
       "keywords": [
         "Agritech"
       ],
-      "investmentCr": 0.0,
+      "investmentCr": 0,
       "projectCount": 1,
       "projects": [
         {
           "name": "Arya.ag – Agritech Platform Expansion",
           "subSector": "Agritech",
-          "investmentCr": 0.0,
+          "investmentCr": 0,
           "vacancies": 220,
           "startDate": "9–12 months",
           "expectedCompletion": "",
@@ -1672,7 +1750,9 @@
           "keySkillsRequired": "Funded / Scaling",
           "sourceReference": "Entrackr Q1-2026 Funding Report — $80.3mn raised",
           "confidenceLevel": "Low",
-          "additionalInsights": "Stage: Funded / Scaling. Announced: Q1 2026."
+          "additionalInsights": "Stage: Funded / Scaling. Announced: Q1 2026.",
+          "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
+          "sourceLabel": "Invest India – Uttar Pradesh"
         }
       ]
     },
@@ -1686,7 +1766,7 @@
       "growthRate": 20,
       "growthMultiplier": 1.2,
       "liveOnSite": true,
-      "sourceUrl": "",
+      "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
       "baseline": {
         "listings": 0,
         "vacancies": 0
@@ -1706,13 +1786,13 @@
       "keywords": [
         "Fintech"
       ],
-      "investmentCr": 0.0,
+      "investmentCr": 0,
       "projectCount": 1,
       "projects": [
         {
           "name": "Juspay – Fintech Infra Expansion",
           "subSector": "Fintech",
-          "investmentCr": 0.0,
+          "investmentCr": 0,
           "vacancies": 200,
           "startDate": "6–9 months",
           "expectedCompletion": "",
@@ -1723,7 +1803,9 @@
           "keySkillsRequired": "Funded / Scaling",
           "sourceReference": "Entrackr Q1-2026 Funding Report — $50mn raised",
           "confidenceLevel": "Low",
-          "additionalInsights": "Stage: Funded / Scaling. Announced: Q1 2026."
+          "additionalInsights": "Stage: Funded / Scaling. Announced: Q1 2026.",
+          "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
+          "sourceLabel": "Invest India – Uttar Pradesh"
         }
       ]
     },
@@ -1737,7 +1819,7 @@
       "growthRate": 20,
       "growthMultiplier": 1.2,
       "liveOnSite": true,
-      "sourceUrl": "",
+      "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
       "baseline": {
         "listings": 0,
         "vacancies": 0
@@ -1757,13 +1839,13 @@
       "keywords": [
         "FMCG"
       ],
-      "investmentCr": 0.0,
+      "investmentCr": 0,
       "projectCount": 1,
       "projects": [
         {
           "name": "The Whole Truth – Clean-Label FMCG Scale-up",
           "subSector": "FMCG",
-          "investmentCr": 0.0,
+          "investmentCr": 0,
           "vacancies": 180,
           "startDate": "9 months",
           "expectedCompletion": "",
@@ -1774,7 +1856,9 @@
           "keySkillsRequired": "Funded / Scaling",
           "sourceReference": "Entrackr Q1-2026 Funding Report — $51mn raised",
           "confidenceLevel": "Low",
-          "additionalInsights": "Stage: Funded / Scaling. Announced: Q1 2026."
+          "additionalInsights": "Stage: Funded / Scaling. Announced: Q1 2026.",
+          "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
+          "sourceLabel": "Invest India – Uttar Pradesh"
         }
       ]
     },
@@ -1788,7 +1872,7 @@
       "growthRate": 20,
       "growthMultiplier": 1.2,
       "liveOnSite": true,
-      "sourceUrl": "",
+      "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
       "baseline": {
         "listings": 0,
         "vacancies": 0
@@ -1808,13 +1892,13 @@
       "keywords": [
         "SaaS"
       ],
-      "investmentCr": 0.0,
+      "investmentCr": 0,
       "projectCount": 1,
       "projects": [
         {
           "name": "Rocketlane – Enterprise SaaS Scale-up",
           "subSector": "SaaS",
-          "investmentCr": 0.0,
+          "investmentCr": 0,
           "vacancies": 150,
           "startDate": "6 months",
           "expectedCompletion": "",
@@ -1825,7 +1909,9 @@
           "keySkillsRequired": "Funded / Scaling",
           "sourceReference": "Entrackr Q1-2026 Funding Report — $60mn raised",
           "confidenceLevel": "Low",
-          "additionalInsights": "Stage: Funded / Scaling. Announced: Q1 2026."
+          "additionalInsights": "Stage: Funded / Scaling. Announced: Q1 2026.",
+          "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
+          "sourceLabel": "Invest India – Uttar Pradesh"
         }
       ]
     },
@@ -1839,7 +1925,7 @@
       "growthRate": 20,
       "growthMultiplier": 1.2,
       "liveOnSite": true,
-      "sourceUrl": "",
+      "sourceUrl": "https://www.investindia.gov.in/sector/semiconductor-and-it-hardware",
       "baseline": {
         "listings": 0,
         "vacancies": 0
@@ -1859,13 +1945,13 @@
       "keywords": [
         "Semiconductors / SEZ Infra"
       ],
-      "investmentCr": 0.0,
+      "investmentCr": 0,
       "projectCount": 1,
       "projects": [
         {
           "name": "Tata Semiconductor SEZ Notification – Dholera",
           "subSector": "Semiconductors / SEZ Infra",
-          "investmentCr": 0.0,
+          "investmentCr": 0,
           "vacancies": 0,
           "startDate": "Enables P001",
           "expectedCompletion": "",
@@ -1876,7 +1962,9 @@
           "keySkillsRequired": "Regulatory Milestone (SEZ Notified)",
           "sourceReference": "BIS Infotech, May-2026",
           "confidenceLevel": "High",
-          "additionalInsights": "Stage: Regulatory Milestone (SEZ Notified). Announced: 09-Apr-2026."
+          "additionalInsights": "Stage: Regulatory Milestone (SEZ Notified). Announced: 09-Apr-2026.",
+          "sourceUrl": "https://www.investindia.gov.in/sector/semiconductor-and-it-hardware",
+          "sourceLabel": "Semiconductor and IT Hardware"
         }
       ]
     },
@@ -1890,7 +1978,7 @@
       "growthRate": 20,
       "growthMultiplier": 1.2,
       "liveOnSite": true,
-      "sourceUrl": "",
+      "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
       "baseline": {
         "listings": 0,
         "vacancies": 0
@@ -1910,13 +1998,13 @@
       "keywords": [
         "Policy / Semiconductors"
       ],
-      "investmentCr": 0.0,
+      "investmentCr": 0,
       "projectCount": 1,
       "projects": [
         {
           "name": "HCL-Foxconn UP Semiconductor Policy Incentive Package",
           "subSector": "Policy / Semiconductors",
-          "investmentCr": 0.0,
+          "investmentCr": 0,
           "vacancies": 0,
           "startDate": "Ongoing",
           "expectedCompletion": "",
@@ -1927,7 +2015,9 @@
           "keySkillsRequired": "Policy in force",
           "sourceReference": "IMARC Engineering, Apr-2026 — 50% extra capital subsidy",
           "confidenceLevel": "Medium",
-          "additionalInsights": "Stage: Policy in force. Announced: 2024 (ongoing)."
+          "additionalInsights": "Stage: Policy in force. Announced: 2024 (ongoing).",
+          "sourceUrl": "https://www.investindia.gov.in/sector/semiconductor-and-it-hardware",
+          "sourceLabel": "Semiconductor and IT Hardware"
         }
       ]
     },
@@ -1941,7 +2031,7 @@
       "growthRate": 20,
       "growthMultiplier": 1.2,
       "liveOnSite": true,
-      "sourceUrl": "",
+      "sourceUrl": "https://www.investindia.gov.in/sector/electric-mobility",
       "baseline": {
         "listings": 0,
         "vacancies": 0
@@ -1961,13 +2051,13 @@
       "keywords": [
         "Electronics"
       ],
-      "investmentCr": 0.0,
+      "investmentCr": 0,
       "projectCount": 1,
       "projects": [
         {
           "name": "PLI Electronics & Mobile Manufacturing (cumulative)",
           "subSector": "Electronics",
-          "investmentCr": 0.0,
+          "investmentCr": 0,
           "vacancies": 0,
           "startDate": "Ongoing",
           "expectedCompletion": "",
@@ -1978,7 +2068,9 @@
           "keySkillsRequired": "Operational / Ongoing",
           "sourceReference": "PIB PRID=2230621, Dec-2025 — part of 14.39L PLI jobs",
           "confidenceLevel": "High",
-          "additionalInsights": "Stage: Operational / Ongoing. Announced: Ongoing (PLI FY21–26)."
+          "additionalInsights": "Stage: Operational / Ongoing. Announced: Ongoing (PLI FY21–26).",
+          "sourceUrl": "https://www.investindia.gov.in/sector/electronic-components-materials",
+          "sourceLabel": "Electronic Components and Materials"
         }
       ]
     },
@@ -1992,7 +2084,7 @@
       "growthRate": 20,
       "growthMultiplier": 1.2,
       "liveOnSite": true,
-      "sourceUrl": "",
+      "sourceUrl": "https://www.investindia.gov.in/sector/automobile",
       "baseline": {
         "listings": 0,
         "vacancies": 0
@@ -2012,13 +2104,13 @@
       "keywords": [
         "Automobiles / EV"
       ],
-      "investmentCr": 0.0,
+      "investmentCr": 0,
       "projectCount": 1,
       "projects": [
         {
           "name": "PLI Automobile & Auto Components (cumulative)",
           "subSector": "Automobiles / EV",
-          "investmentCr": 0.0,
+          "investmentCr": 0,
           "vacancies": 0,
           "startDate": "Ongoing",
           "expectedCompletion": "",
@@ -2029,7 +2121,9 @@
           "keySkillsRequired": "Operational / Ongoing",
           "sourceReference": "Arthneeti Global, Mar-2026 — ₹32,879cr FY25-26 sales",
           "confidenceLevel": "High",
-          "additionalInsights": "Stage: Operational / Ongoing. Announced: Ongoing (PLI FY21–26)."
+          "additionalInsights": "Stage: Operational / Ongoing. Announced: Ongoing (PLI FY21–26).",
+          "sourceUrl": "https://www.investindia.gov.in/sector/automobile",
+          "sourceLabel": "Automobile"
         }
       ]
     },
@@ -2043,7 +2137,7 @@
       "growthRate": 20,
       "growthMultiplier": 1.2,
       "liveOnSite": true,
-      "sourceUrl": "",
+      "sourceUrl": "https://www.investindia.gov.in/sector/semiconductor-and-it-hardware",
       "baseline": {
         "listings": 0,
         "vacancies": 0
@@ -2064,13 +2158,13 @@
       "keywords": [
         "Semiconductors / Policy"
       ],
-      "investmentCr": 8000.0,
+      "investmentCr": 8000,
       "projectCount": 2,
       "projects": [
         {
           "name": "India Semiconductor Mission 2.0 – Equipment & Materials",
           "subSector": "Semiconductors / Policy",
-          "investmentCr": 8000.0,
+          "investmentCr": 8000,
           "vacancies": 0,
           "startDate": "Ongoing",
           "expectedCompletion": "",
@@ -2081,12 +2175,14 @@
           "keySkillsRequired": "Policy Launched (Budget Allocation)",
           "sourceReference": "BIS Infotech, Apr-2026 — largest single-year ISM outlay",
           "confidenceLevel": "Medium",
-          "additionalInsights": "Stage: Policy Launched (Budget Allocation). Announced: Budget 2026-27."
+          "additionalInsights": "Stage: Policy Launched (Budget Allocation). Announced: Budget 2026-27.",
+          "sourceUrl": "https://www.investindia.gov.in/sector/semiconductor-and-it-hardware",
+          "sourceLabel": "Semiconductor and IT Hardware"
         },
         {
           "name": "Odisha & Andhra Pradesh Single-Window Semicon Facilitation",
           "subSector": "Semiconductors / Policy",
-          "investmentCr": 0.0,
+          "investmentCr": 0,
           "vacancies": 0,
           "startDate": "Ongoing",
           "expectedCompletion": "",
@@ -2097,7 +2193,9 @@
           "keySkillsRequired": "Policy in force",
           "sourceReference": "IMARC Engineering, May-2026",
           "confidenceLevel": "Medium",
-          "additionalInsights": "Stage: Policy in force. Announced: 2026 (ongoing)."
+          "additionalInsights": "Stage: Policy in force. Announced: 2026 (ongoing).",
+          "sourceUrl": "https://www.investindia.gov.in/sector/semiconductor-and-it-hardware",
+          "sourceLabel": "Semiconductor and IT Hardware"
         }
       ]
     }
@@ -2113,7 +2211,7 @@
           "Sector": "Semiconductors",
           "Sub-Sector": "Semiconductors",
           "Investment Project / Initiative": "Tata Electronics Semiconductor Fab (with ASML)",
-          "Investment Value (INR Cr)": 91000.0,
+          "Investment Value (INR Cr)": 91000,
           "Skill Type": "Skilled",
           "Job Category": "Under Construction",
           "Projected Vacancies": 14400,
@@ -2129,7 +2227,9 @@
           "Confidence Level": "High",
           "Additional Insights": "Stage: Under Construction. Announced: 16-May-2026.",
           "Project_ID": "P001",
-          "Project Stage": "Under Construction"
+          "Project Stage": "Under Construction",
+          "sourceUrl": "https://www.investindia.gov.in/sector/semiconductor-and-it-hardware",
+          "sourceLabel": "Semiconductor and IT Hardware"
         },
         {
           "Region": "Gujarat",
@@ -2138,7 +2238,7 @@
           "Sector": "Semiconductors",
           "Sub-Sector": "Semiconductors",
           "Investment Project / Initiative": "Micron Technology ATMP Facility",
-          "Investment Value (INR Cr)": 22500.0,
+          "Investment Value (INR Cr)": 22500,
           "Skill Type": "Skilled",
           "Job Category": "Operational (Inaugurated)",
           "Projected Vacancies": 9000,
@@ -2154,7 +2254,9 @@
           "Confidence Level": "High",
           "Additional Insights": "Stage: Operational (Inaugurated). Announced: 28-Feb-2026.",
           "Project_ID": "P002",
-          "Project Stage": "Operational (Inaugurated)"
+          "Project Stage": "Operational (Inaugurated)",
+          "sourceUrl": "https://www.investindia.gov.in/sector/semiconductor-and-it-hardware",
+          "sourceLabel": "Semiconductor and IT Hardware"
         },
         {
           "Region": "Gujarat",
@@ -2163,7 +2265,7 @@
           "Sector": "Semiconductors",
           "Sub-Sector": "Semiconductors",
           "Investment Project / Initiative": "Crystal Matrix Ltd – Compound Semicon Fab & ATMP",
-          "Investment Value (INR Cr)": 2800.0,
+          "Investment Value (INR Cr)": 2800,
           "Skill Type": "Skilled",
           "Job Category": "Approved",
           "Projected Vacancies": 2520,
@@ -2179,7 +2281,9 @@
           "Confidence Level": "Medium",
           "Additional Insights": "Stage: Approved. Announced: 05-May-2026.",
           "Project_ID": "P003",
-          "Project Stage": "Approved"
+          "Project Stage": "Approved",
+          "sourceUrl": "https://www.investindia.gov.in/sector/semiconductor-and-it-hardware",
+          "sourceLabel": "Semiconductor and IT Hardware"
         },
         {
           "Region": "Gujarat",
@@ -2188,7 +2292,7 @@
           "Sector": "Semiconductors",
           "Sub-Sector": "Semiconductors",
           "Investment Project / Initiative": "Suchi Semicon Pvt Ltd – OSAT Facility",
-          "Investment Value (INR Cr)": 1136.0,
+          "Investment Value (INR Cr)": 1136,
           "Skill Type": "Skilled",
           "Job Category": "Approved",
           "Projected Vacancies": 1494,
@@ -2204,7 +2308,9 @@
           "Confidence Level": "Medium",
           "Additional Insights": "Stage: Approved. Announced: 05-May-2026.",
           "Project_ID": "P004",
-          "Project Stage": "Approved"
+          "Project Stage": "Approved",
+          "sourceUrl": "https://www.investindia.gov.in/sector/semiconductor-and-it-hardware",
+          "sourceLabel": "Semiconductor and IT Hardware"
         },
         {
           "Region": "Uttar Pradesh",
@@ -2213,7 +2319,7 @@
           "Sector": "Semiconductors",
           "Sub-Sector": "Semiconductors",
           "Investment Project / Initiative": "HCL-Foxconn JV – Display Driver Chip ATMP",
-          "Investment Value (INR Cr)": 3700.0,
+          "Investment Value (INR Cr)": 3700,
           "Skill Type": "Skilled",
           "Job Category": "Under Construction",
           "Projected Vacancies": 3600,
@@ -2229,7 +2335,9 @@
           "Confidence Level": "Medium",
           "Additional Insights": "Stage: Under Construction. Announced: 2026 (ongoing).",
           "Project_ID": "P005",
-          "Project Stage": "Under Construction"
+          "Project Stage": "Under Construction",
+          "sourceUrl": "https://www.investindia.gov.in/sector/semiconductor-and-it-hardware",
+          "sourceLabel": "Semiconductor and IT Hardware"
         },
         {
           "Region": "Gujarat",
@@ -2238,7 +2346,7 @@
           "Sector": "Semiconductors",
           "Sub-Sector": "Semiconductors",
           "Investment Project / Initiative": "Kaynes Semicon Pvt Ltd",
-          "Investment Value (INR Cr)": 3300.0,
+          "Investment Value (INR Cr)": 3300,
           "Skill Type": "Skilled",
           "Job Category": "Under Construction",
           "Projected Vacancies": 2700,
@@ -2254,7 +2362,9 @@
           "Confidence Level": "High",
           "Additional Insights": "Stage: Under Construction. Announced: 2025 (ongoing).",
           "Project_ID": "P006",
-          "Project Stage": "Under Construction"
+          "Project Stage": "Under Construction",
+          "sourceUrl": "https://www.investindia.gov.in/sector/semiconductor-and-it-hardware",
+          "sourceLabel": "Semiconductor and IT Hardware"
         },
         {
           "Region": "Gujarat",
@@ -2263,7 +2373,7 @@
           "Sector": "Semiconductors",
           "Sub-Sector": "Semiconductors",
           "Investment Project / Initiative": "CG Power / CG Semi – OSAT (Renesas, Stars Micro JV)",
-          "Investment Value (INR Cr)": 7600.0,
+          "Investment Value (INR Cr)": 7600,
           "Skill Type": "Skilled",
           "Job Category": "Operational (1st OSAT launched)",
           "Projected Vacancies": 3240,
@@ -2279,7 +2389,9 @@
           "Confidence Level": "High",
           "Additional Insights": "Stage: Operational (1st OSAT launched). Announced: 28-Aug-2025.",
           "Project_ID": "P007",
-          "Project Stage": "Operational (1st OSAT launched)"
+          "Project Stage": "Operational (1st OSAT launched)",
+          "sourceUrl": "https://www.investindia.gov.in/sector/semiconductor-and-it-hardware",
+          "sourceLabel": "Semiconductor and IT Hardware"
         },
         {
           "Region": "Odisha",
@@ -2288,7 +2400,7 @@
           "Sector": "Semiconductors",
           "Sub-Sector": "Semiconductors",
           "Investment Project / Initiative": "RIR Power Electronics – India's first SiC Fab",
-          "Investment Value (INR Cr)": 618.0,
+          "Investment Value (INR Cr)": 618,
           "Skill Type": "Skilled",
           "Job Category": "Approved",
           "Projected Vacancies": 810,
@@ -2304,7 +2416,9 @@
           "Confidence Level": "Medium",
           "Additional Insights": "Stage: Approved. Announced: Aug-2025.",
           "Project_ID": "P008",
-          "Project Stage": "Approved"
+          "Project Stage": "Approved",
+          "sourceUrl": "https://www.investindia.gov.in/sector/semiconductor-and-it-hardware",
+          "sourceLabel": "Semiconductor and IT Hardware"
         },
         {
           "Region": "Karnataka",
@@ -2313,7 +2427,7 @@
           "Sector": "Manufacturing – Steel",
           "Sub-Sector": "Manufacturing – Steel",
           "Investment Project / Initiative": "JSW Steel – Integrated Steel Plant Expansion",
-          "Investment Value (INR Cr)": 4600.0,
+          "Investment Value (INR Cr)": 4600,
           "Skill Type": "Skilled",
           "Job Category": "Approved",
           "Projected Vacancies": 5760,
@@ -2329,7 +2443,9 @@
           "Confidence Level": "High",
           "Additional Insights": "Stage: Approved. Announced: 13-Apr-2026.",
           "Project_ID": "P009",
-          "Project Stage": "Approved"
+          "Project Stage": "Approved",
+          "sourceUrl": "https://www.investindia.gov.in/sector/defence-manufacturing",
+          "sourceLabel": "Defence Manufacturing"
         },
         {
           "Region": "Karnataka",
@@ -2338,7 +2454,7 @@
           "Sector": "Automobiles",
           "Sub-Sector": "Automobiles",
           "Investment Project / Initiative": "Volvo Group India – Automobile Facility",
-          "Investment Value (INR Cr)": 1500.0,
+          "Investment Value (INR Cr)": 1500,
           "Skill Type": "Skilled",
           "Job Category": "Approved",
           "Projected Vacancies": 1980,
@@ -2354,7 +2470,9 @@
           "Confidence Level": "Medium",
           "Additional Insights": "Stage: Approved. Announced: 13-Apr-2026.",
           "Project_ID": "P010",
-          "Project Stage": "Approved"
+          "Project Stage": "Approved",
+          "sourceUrl": "https://www.investindia.gov.in/sector/automobile",
+          "sourceLabel": "Automobile"
         },
         {
           "Region": "Karnataka",
@@ -2363,7 +2481,7 @@
           "Sector": "Manufacturing – Steel",
           "Sub-Sector": "Manufacturing – Steel",
           "Investment Project / Initiative": "JSW JFE Electrical Steel Pvt Ltd",
-          "Investment Value (INR Cr)": 7102.0,
+          "Investment Value (INR Cr)": 7102,
           "Skill Type": "Skilled",
           "Job Category": "Approved",
           "Projected Vacancies": 1620,
@@ -2379,7 +2497,9 @@
           "Confidence Level": "Medium",
           "Additional Insights": "Stage: Approved. Announced: 24-Oct-2025.",
           "Project_ID": "P011",
-          "Project Stage": "Approved"
+          "Project Stage": "Approved",
+          "sourceUrl": "https://www.investindia.gov.in/sector/defence-manufacturing",
+          "sourceLabel": "Defence Manufacturing"
         },
         {
           "Region": "Karnataka",
@@ -2388,7 +2508,7 @@
           "Sector": "Manufacturing",
           "Sub-Sector": "Manufacturing",
           "Investment Project / Initiative": "SFX India Mfg Pvt Ltd",
-          "Investment Value (INR Cr)": 9298.0,
+          "Investment Value (INR Cr)": 9298,
           "Skill Type": "Skilled",
           "Job Category": "Approved",
           "Projected Vacancies": 1450,
@@ -2404,7 +2524,9 @@
           "Confidence Level": "Low",
           "Additional Insights": "Stage: Approved. Announced: 24-Oct-2025.",
           "Project_ID": "P012",
-          "Project Stage": "Approved"
+          "Project Stage": "Approved",
+          "sourceUrl": "https://www.investindia.gov.in/sector/defence-manufacturing",
+          "sourceLabel": "Defence Manufacturing"
         },
         {
           "Region": "Karnataka",
@@ -2413,7 +2535,7 @@
           "Sector": "Renewable Energy",
           "Sub-Sector": "Renewable Energy",
           "Investment Project / Initiative": "Vayu Assets Pvt Ltd",
-          "Investment Value (INR Cr)": 1251.0,
+          "Investment Value (INR Cr)": 1251,
           "Skill Type": "Skilled",
           "Job Category": "Approved",
           "Projected Vacancies": 3441,
@@ -2429,7 +2551,9 @@
           "Confidence Level": "Medium",
           "Additional Insights": "Stage: Approved. Announced: 24-Oct-2025.",
           "Project_ID": "P013",
-          "Project Stage": "Approved"
+          "Project Stage": "Approved",
+          "sourceUrl": "https://www.investindia.gov.in/sector/renewable-energy",
+          "sourceLabel": "Renewable Energy"
         },
         {
           "Region": "Karnataka",
@@ -2438,7 +2562,7 @@
           "Sector": "Telecom Equipment",
           "Sub-Sector": "Telecom Equipment",
           "Investment Project / Initiative": "Tejas Networks Ltd – Telecom Equipment Expansion",
-          "Investment Value (INR Cr)": 542.0,
+          "Investment Value (INR Cr)": 542,
           "Skill Type": "Skilled",
           "Job Category": "Approved",
           "Projected Vacancies": 2361,
@@ -2454,7 +2578,9 @@
           "Confidence Level": "High",
           "Additional Insights": "Stage: Approved. Announced: 24-Oct-2025.",
           "Project_ID": "P014",
-          "Project Stage": "Approved"
+          "Project Stage": "Approved",
+          "sourceUrl": "https://www.investindia.gov.in/sector/telecom",
+          "sourceLabel": "Telecom"
         },
         {
           "Region": "Karnataka",
@@ -2463,7 +2589,7 @@
           "Sector": "FMCG / Food Processing",
           "Sub-Sector": "FMCG / Food Processing",
           "Investment Project / Initiative": "Reliance Consumer Products Ltd",
-          "Investment Value (INR Cr)": 1622.0,
+          "Investment Value (INR Cr)": 1622,
           "Skill Type": "Skilled",
           "Job Category": "Approved",
           "Projected Vacancies": 2160,
@@ -2479,7 +2605,9 @@
           "Confidence Level": "Medium",
           "Additional Insights": "Stage: Approved. Announced: 24-Oct-2025.",
           "Project_ID": "P015",
-          "Project Stage": "Approved"
+          "Project Stage": "Approved",
+          "sourceUrl": "https://www.investindia.gov.in/sector/food-processing",
+          "sourceLabel": "Food Processing"
         },
         {
           "Region": "Karnataka",
@@ -2488,7 +2616,7 @@
           "Sector": "Textiles",
           "Sub-Sector": "Textiles",
           "Investment Project / Initiative": "HSS Textile Pvt Ltd",
-          "Investment Value (INR Cr)": 740.0,
+          "Investment Value (INR Cr)": 740,
           "Skill Type": "Skilled",
           "Job Category": "Approved",
           "Projected Vacancies": 1440,
@@ -2504,7 +2632,9 @@
           "Confidence Level": "Medium",
           "Additional Insights": "Stage: Approved. Announced: 24-Oct-2025.",
           "Project_ID": "P016",
-          "Project Stage": "Approved"
+          "Project Stage": "Approved",
+          "sourceUrl": "https://www.investindia.gov.in/sector/textiles-apparel",
+          "sourceLabel": "Textiles & Apparel"
         },
         {
           "Region": "Karnataka",
@@ -2529,7 +2659,9 @@
           "Confidence Level": "Medium",
           "Additional Insights": "Stage: Approved. Announced: 14-Mar-2026.",
           "Project_ID": "P017",
-          "Project Stage": "Approved"
+          "Project Stage": "Approved",
+          "sourceUrl": "https://www.investindia.gov.in/sector/real-estate",
+          "sourceLabel": "Real Estate"
         },
         {
           "Region": "Karnataka",
@@ -2554,7 +2686,9 @@
           "Confidence Level": "Medium",
           "Additional Insights": "Stage: Approved. Announced: 14-Mar-2026.",
           "Project_ID": "P018",
-          "Project Stage": "Approved"
+          "Project Stage": "Approved",
+          "sourceUrl": "https://www.investindia.gov.in/sector/food-processing",
+          "sourceLabel": "Food Processing"
         },
         {
           "Region": "Karnataka",
@@ -2563,7 +2697,7 @@
           "Sector": "Textiles",
           "Sub-Sector": "Textiles",
           "Investment Project / Initiative": "Kleine Pax Ltd – Technical Textile Unit",
-          "Investment Value (INR Cr)": 376.0,
+          "Investment Value (INR Cr)": 376,
           "Skill Type": "Skilled",
           "Job Category": "Approved",
           "Projected Vacancies": 1260,
@@ -2579,7 +2713,9 @@
           "Confidence Level": "Medium",
           "Additional Insights": "Stage: Approved. Announced: 14-Mar-2026.",
           "Project_ID": "P019",
-          "Project Stage": "Approved"
+          "Project Stage": "Approved",
+          "sourceUrl": "https://www.investindia.gov.in/sector/textiles-apparel",
+          "sourceLabel": "Textiles & Apparel"
         },
         {
           "Region": "Karnataka",
@@ -2588,7 +2724,7 @@
           "Sector": "EV Components",
           "Sub-Sector": "EV Components",
           "Investment Project / Initiative": "Tsuyo Manufacturing – EV Motor & Controller Unit",
-          "Investment Value (INR Cr)": 250.0,
+          "Investment Value (INR Cr)": 250,
           "Skill Type": "Skilled",
           "Job Category": "Approved",
           "Projected Vacancies": 900,
@@ -2604,7 +2740,9 @@
           "Confidence Level": "Medium",
           "Additional Insights": "Stage: Approved. Announced: 14-Mar-2026.",
           "Project_ID": "P020",
-          "Project Stage": "Approved"
+          "Project Stage": "Approved",
+          "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
+          "sourceLabel": "Invest India – Uttar Pradesh"
         },
         {
           "Region": "Karnataka",
@@ -2613,7 +2751,7 @@
           "Sector": "Hospitality",
           "Sub-Sector": "Hospitality",
           "Investment Project / Initiative": "Trishul Buildtech – Five-Star Hotel Project",
-          "Investment Value (INR Cr)": 300.0,
+          "Investment Value (INR Cr)": 300,
           "Skill Type": "Skilled",
           "Job Category": "Approved",
           "Projected Vacancies": 1170,
@@ -2629,7 +2767,9 @@
           "Confidence Level": "Low",
           "Additional Insights": "Stage: Approved. Announced: 14-Mar-2026.",
           "Project_ID": "P021",
-          "Project Stage": "Approved"
+          "Project Stage": "Approved",
+          "sourceUrl": "https://www.investindia.gov.in/sector/tourism-hospitality",
+          "sourceLabel": "Tourism & Hospitality"
         },
         {
           "Region": "Maharashtra",
@@ -2638,7 +2778,7 @@
           "Sector": "Core Industry / Chemicals",
           "Sub-Sector": "Core Industry / Chemicals",
           "Investment Project / Initiative": "Adani Enterprises – Coal Gasification & Derivatives",
-          "Investment Value (INR Cr)": 70000.0,
+          "Investment Value (INR Cr)": 70000,
           "Skill Type": "Skilled",
           "Job Category": "Final Stages / Land Acquired",
           "Projected Vacancies": 18000,
@@ -2654,7 +2794,9 @@
           "Confidence Level": "Medium",
           "Additional Insights": "Stage: Final Stages / Land Acquired. Announced: 27-May-2026.",
           "Project_ID": "P022",
-          "Project Stage": "Final Stages / Land Acquired"
+          "Project Stage": "Final Stages / Land Acquired",
+          "sourceUrl": "https://www.investindia.gov.in/sector/chemicals",
+          "sourceLabel": "Chemicals"
         },
         {
           "Region": "Maharashtra",
@@ -2663,7 +2805,7 @@
           "Sector": "Battery / EV Components",
           "Sub-Sector": "Battery / EV Components",
           "Investment Project / Initiative": "Graphite India Ltd – Synthetic Graphite Anode (Li-ion)",
-          "Investment Value (INR Cr)": 4651.0,
+          "Investment Value (INR Cr)": 4651,
           "Skill Type": "Skilled",
           "Job Category": "Approved",
           "Projected Vacancies": 2098,
@@ -2679,7 +2821,9 @@
           "Confidence Level": "Medium",
           "Additional Insights": "Stage: Approved. Announced: 27-May-2026.",
           "Project_ID": "P023",
-          "Project Stage": "Approved"
+          "Project Stage": "Approved",
+          "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
+          "sourceLabel": "Invest India – Uttar Pradesh"
         },
         {
           "Region": "Maharashtra",
@@ -2688,7 +2832,7 @@
           "Sector": "Auto Components",
           "Sub-Sector": "Auto Components",
           "Investment Project / Initiative": "HS Hyosung India – Tyre Cord Manufacturing Plant",
-          "Investment Value (INR Cr)": 1740.0,
+          "Investment Value (INR Cr)": 1740,
           "Skill Type": "Skilled",
           "Job Category": "Approved",
           "Projected Vacancies": 720,
@@ -2704,7 +2848,9 @@
           "Confidence Level": "Medium",
           "Additional Insights": "Stage: Approved. Announced: 27-May-2026.",
           "Project_ID": "P024",
-          "Project Stage": "Approved"
+          "Project Stage": "Approved",
+          "sourceUrl": "https://www.investindia.gov.in/sector/auto-components",
+          "sourceLabel": "Auto Components"
         },
         {
           "Region": "Maharashtra",
@@ -2713,7 +2859,7 @@
           "Sector": "Mixed – Coal Gasification/Solar/Steel/Graphite",
           "Sub-Sector": "Mixed – Coal Gasification/Solar/Steel/Graphite",
           "Investment Project / Initiative": "Maharashtra High-Tech Mega Projects (5-project basket)",
-          "Investment Value (INR Cr)": 89731.0,
+          "Investment Value (INR Cr)": 89731,
           "Skill Type": "Skilled",
           "Job Category": "Approved",
           "Projected Vacancies": 36000,
@@ -2729,7 +2875,9 @@
           "Confidence Level": "Medium",
           "Additional Insights": "Stage: Approved. Announced: 27-May-2026.",
           "Project_ID": "P025",
-          "Project Stage": "Approved"
+          "Project Stage": "Approved",
+          "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
+          "sourceLabel": "Invest India – Uttar Pradesh"
         },
         {
           "Region": "Maharashtra",
@@ -2738,7 +2886,7 @@
           "Sector": "Mixed – High-Tech Industrial",
           "Sub-Sector": "Mixed – High-Tech Industrial",
           "Investment Project / Initiative": "Maharashtra Thrust-Sector Mega/Ultra-Mega Basket (19 proposals, 17 approved)",
-          "Investment Value (INR Cr)": 135371.0,
+          "Investment Value (INR Cr)": 135371,
           "Skill Type": "Skilled",
           "Job Category": "Approved",
           "Projected Vacancies": 180000,
@@ -2754,7 +2902,9 @@
           "Confidence Level": "Medium",
           "Additional Insights": "Stage: Approved. Announced: 03-Jul-2025.",
           "Project_ID": "P026",
-          "Project Stage": "Approved"
+          "Project Stage": "Approved",
+          "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
+          "sourceLabel": "Invest India – Uttar Pradesh"
         },
         {
           "Region": "Gujarat",
@@ -2763,7 +2913,7 @@
           "Sector": "Semiconductors / SEZ Infra",
           "Sub-Sector": "Semiconductors / SEZ Infra",
           "Investment Project / Initiative": "Tata Semiconductor SEZ Notification – Dholera",
-          "Investment Value (INR Cr)": 0.0,
+          "Investment Value (INR Cr)": 0,
           "Skill Type": "Skilled",
           "Job Category": "Regulatory Milestone (SEZ Notified)",
           "Projected Vacancies": 0,
@@ -2779,7 +2929,9 @@
           "Confidence Level": "High",
           "Additional Insights": "Stage: Regulatory Milestone (SEZ Notified). Announced: 09-Apr-2026.",
           "Project_ID": "P027",
-          "Project Stage": "Regulatory Milestone (SEZ Notified)"
+          "Project Stage": "Regulatory Milestone (SEZ Notified)",
+          "sourceUrl": "https://www.investindia.gov.in/sector/semiconductor-and-it-hardware",
+          "sourceLabel": "Semiconductor and IT Hardware"
         },
         {
           "Region": "Uttar Pradesh",
@@ -2788,7 +2940,7 @@
           "Sector": "Policy / Semiconductors",
           "Sub-Sector": "Policy / Semiconductors",
           "Investment Project / Initiative": "HCL-Foxconn UP Semiconductor Policy Incentive Package",
-          "Investment Value (INR Cr)": 0.0,
+          "Investment Value (INR Cr)": 0,
           "Skill Type": "Skilled",
           "Job Category": "Policy in force",
           "Projected Vacancies": 0,
@@ -2804,7 +2956,9 @@
           "Confidence Level": "Medium",
           "Additional Insights": "Stage: Policy in force. Announced: 2024 (ongoing).",
           "Project_ID": "P028",
-          "Project Stage": "Policy in force"
+          "Project Stage": "Policy in force",
+          "sourceUrl": "https://www.investindia.gov.in/sector/semiconductor-and-it-hardware",
+          "sourceLabel": "Semiconductor and IT Hardware"
         },
         {
           "Region": "Karnataka",
@@ -2813,7 +2967,7 @@
           "Sector": "EV / Policy Programme",
           "Sub-Sector": "EV / Policy Programme",
           "Investment Project / Initiative": "Karnataka Clean Mobility Policy – EV Value Chain",
-          "Investment Value (INR Cr)": 50000.0,
+          "Investment Value (INR Cr)": 50000,
           "Skill Type": "Skilled",
           "Job Category": "Policy Launched",
           "Projected Vacancies": 180000,
@@ -2829,7 +2983,9 @@
           "Confidence Level": "Medium",
           "Additional Insights": "Stage: Policy Launched. Announced: Feb-2026.",
           "Project_ID": "P029",
-          "Project Stage": "Policy Launched"
+          "Project Stage": "Policy Launched",
+          "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
+          "sourceLabel": "Invest India – Uttar Pradesh"
         },
         {
           "Region": "Karnataka",
@@ -2838,7 +2994,7 @@
           "Sector": "Policy / Multi-sector",
           "Sub-Sector": "Policy / Multi-sector",
           "Investment Project / Initiative": "Karnataka Industrial Policy – Statewide Job Target",
-          "Investment Value (INR Cr)": 1027000.0,
+          "Investment Value (INR Cr)": 1027000,
           "Skill Type": "Skilled",
           "Job Category": "Policy Launched (Investor Commitments at GIM)",
           "Projected Vacancies": 1080000,
@@ -2854,7 +3010,9 @@
           "Confidence Level": "Low",
           "Additional Insights": "Stage: Policy Launched (Investor Commitments at GIM). Announced: Feb-2026.",
           "Project_ID": "P030",
-          "Project Stage": "Policy Launched (Investor Commitments at GIM)"
+          "Project Stage": "Policy Launched (Investor Commitments at GIM)",
+          "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
+          "sourceLabel": "Invest India – Uttar Pradesh"
         },
         {
           "Region": "India",
@@ -2863,7 +3021,7 @@
           "Sector": "Electronics",
           "Sub-Sector": "Electronics",
           "Investment Project / Initiative": "PLI Electronics & Mobile Manufacturing (cumulative)",
-          "Investment Value (INR Cr)": 0.0,
+          "Investment Value (INR Cr)": 0,
           "Skill Type": "Skilled",
           "Job Category": "Operational / Ongoing",
           "Projected Vacancies": 0,
@@ -2879,7 +3037,9 @@
           "Confidence Level": "High",
           "Additional Insights": "Stage: Operational / Ongoing. Announced: Ongoing (PLI FY21–26).",
           "Project_ID": "P031",
-          "Project Stage": "Operational / Ongoing"
+          "Project Stage": "Operational / Ongoing",
+          "sourceUrl": "https://www.investindia.gov.in/sector/electronic-components-materials",
+          "sourceLabel": "Electronic Components and Materials"
         },
         {
           "Region": "India",
@@ -2888,7 +3048,7 @@
           "Sector": "Food Processing",
           "Sub-Sector": "Food Processing",
           "Investment Project / Initiative": "PLI Food Processing (165 approved applications)",
-          "Investment Value (INR Cr)": 9207.0,
+          "Investment Value (INR Cr)": 9207,
           "Skill Type": "Skilled",
           "Job Category": "Operational / Ongoing",
           "Projected Vacancies": 339000,
@@ -2904,7 +3064,9 @@
           "Confidence Level": "High",
           "Additional Insights": "Stage: Operational / Ongoing. Announced: Ongoing (PLI FY21–27).",
           "Project_ID": "P032",
-          "Project Stage": "Operational / Ongoing"
+          "Project Stage": "Operational / Ongoing",
+          "sourceUrl": "https://www.investindia.gov.in/sector/food-processing",
+          "sourceLabel": "Food Processing"
         },
         {
           "Region": "India",
@@ -2913,7 +3075,7 @@
           "Sector": "Automobiles / EV",
           "Sub-Sector": "Automobiles / EV",
           "Investment Project / Initiative": "PLI Automobile & Auto Components (cumulative)",
-          "Investment Value (INR Cr)": 0.0,
+          "Investment Value (INR Cr)": 0,
           "Skill Type": "Skilled",
           "Job Category": "Operational / Ongoing",
           "Projected Vacancies": 0,
@@ -2929,7 +3091,9 @@
           "Confidence Level": "High",
           "Additional Insights": "Stage: Operational / Ongoing. Announced: Ongoing (PLI FY21–26).",
           "Project_ID": "P033",
-          "Project Stage": "Operational / Ongoing"
+          "Project Stage": "Operational / Ongoing",
+          "sourceUrl": "https://www.investindia.gov.in/sector/automobile",
+          "sourceLabel": "Automobile"
         },
         {
           "Region": "Karnataka",
@@ -2938,7 +3102,7 @@
           "Sector": "Manufacturing / Mixed",
           "Sub-Sector": "Manufacturing / Mixed",
           "Investment Project / Initiative": "Karnataka–Japan/Korea Investment Commitments",
-          "Investment Value (INR Cr)": 6450.0,
+          "Investment Value (INR Cr)": 6450,
           "Skill Type": "Skilled",
           "Job Category": "MoU Stage",
           "Projected Vacancies": 1800,
@@ -2954,7 +3118,9 @@
           "Confidence Level": "Low",
           "Additional Insights": "Stage: MoU Stage. Announced: 2025.",
           "Project_ID": "P034",
-          "Project Stage": "MoU Stage"
+          "Project Stage": "MoU Stage",
+          "sourceUrl": "https://www.investindia.gov.in/sector/defence-manufacturing",
+          "sourceLabel": "Defence Manufacturing"
         },
         {
           "Region": "Karnataka",
@@ -2963,7 +3129,7 @@
           "Sector": "Machine Tools",
           "Sub-Sector": "Machine Tools",
           "Investment Project / Initiative": "DN Solutions – Precision Tools Manufacturing",
-          "Investment Value (INR Cr)": 1000.0,
+          "Investment Value (INR Cr)": 1000,
           "Skill Type": "Skilled",
           "Job Category": "MoU Stage",
           "Projected Vacancies": 540,
@@ -2979,7 +3145,9 @@
           "Confidence Level": "Low",
           "Additional Insights": "Stage: MoU Stage. Announced: 2025.",
           "Project_ID": "P035",
-          "Project Stage": "MoU Stage"
+          "Project Stage": "MoU Stage",
+          "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
+          "sourceLabel": "Invest India – Uttar Pradesh"
         },
         {
           "Region": "Karnataka",
@@ -2988,7 +3156,7 @@
           "Sector": "Energy Infrastructure",
           "Sub-Sector": "Energy Infrastructure",
           "Investment Project / Initiative": "Osaka Gas – Gas Distribution Infrastructure Expansion",
-          "Investment Value (INR Cr)": 5000.0,
+          "Investment Value (INR Cr)": 5000,
           "Skill Type": "Skilled",
           "Job Category": "MoU Stage",
           "Projected Vacancies": 360,
@@ -3004,7 +3172,9 @@
           "Confidence Level": "Low",
           "Additional Insights": "Stage: MoU Stage. Announced: 2025.",
           "Project_ID": "P036",
-          "Project Stage": "MoU Stage"
+          "Project Stage": "MoU Stage",
+          "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
+          "sourceLabel": "Invest India – Uttar Pradesh"
         },
         {
           "Region": "Karnataka",
@@ -3013,7 +3183,7 @@
           "Sector": "Telecom Equipment",
           "Sub-Sector": "Telecom Equipment",
           "Investment Project / Initiative": "Tejas Networks / Telecom PLI Linked Expansion",
-          "Investment Value (INR Cr)": 0.0,
+          "Investment Value (INR Cr)": 0,
           "Skill Type": "Skilled",
           "Job Category": "Operational / Ongoing",
           "Projected Vacancies": 0,
@@ -3029,7 +3199,9 @@
           "Confidence Level": "Medium",
           "Additional Insights": "Stage: Operational / Ongoing. Announced: 2025–2026.",
           "Project_ID": "P037",
-          "Project Stage": "Operational / Ongoing"
+          "Project Stage": "Operational / Ongoing",
+          "sourceUrl": "https://www.investindia.gov.in/sector/telecom",
+          "sourceLabel": "Telecom"
         },
         {
           "Region": "India",
@@ -3038,7 +3210,7 @@
           "Sector": "EV Mobility",
           "Sub-Sector": "EV Mobility",
           "Investment Project / Initiative": "Erisha E-Mobility – EV Manufacturing Scale-up",
-          "Investment Value (INR Cr)": 0.0,
+          "Investment Value (INR Cr)": 0,
           "Skill Type": "Skilled",
           "Job Category": "Funded / Scaling",
           "Projected Vacancies": 2500,
@@ -3054,7 +3226,9 @@
           "Confidence Level": "Medium",
           "Additional Insights": "Stage: Funded / Scaling. Announced: 2025–2026.",
           "Project_ID": "P038",
-          "Project Stage": "Funded / Scaling"
+          "Project Stage": "Funded / Scaling",
+          "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
+          "sourceLabel": "Invest India – Uttar Pradesh"
         },
         {
           "Region": "India",
@@ -3063,7 +3237,7 @@
           "Sector": "EV Mobility / Logistics",
           "Sub-Sector": "EV Mobility / Logistics",
           "Investment Project / Initiative": "GreenLine – EV Logistics Fleet Expansion",
-          "Investment Value (INR Cr)": 0.0,
+          "Investment Value (INR Cr)": 0,
           "Skill Type": "Skilled",
           "Job Category": "Funded / Scaling",
           "Projected Vacancies": 1800,
@@ -3079,7 +3253,9 @@
           "Confidence Level": "Medium",
           "Additional Insights": "Stage: Funded / Scaling. Announced: 2025–2026.",
           "Project_ID": "P039",
-          "Project Stage": "Funded / Scaling"
+          "Project Stage": "Funded / Scaling",
+          "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
+          "sourceLabel": "Invest India – Uttar Pradesh"
         },
         {
           "Region": "India",
@@ -3104,7 +3280,9 @@
           "Confidence Level": "Medium",
           "Additional Insights": "Stage: Funded / Scaling. Announced: 25-Mar-2026.",
           "Project_ID": "P040",
-          "Project Stage": "Funded / Scaling"
+          "Project Stage": "Funded / Scaling",
+          "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
+          "sourceLabel": "Invest India – Uttar Pradesh"
         },
         {
           "Region": "Maharashtra",
@@ -3113,7 +3291,7 @@
           "Sector": "AI Infrastructure",
           "Sub-Sector": "AI Infrastructure",
           "Investment Project / Initiative": "Neysa – AI Infrastructure Platform Scale-up",
-          "Investment Value (INR Cr)": 0.0,
+          "Investment Value (INR Cr)": 0,
           "Skill Type": "Skilled",
           "Job Category": "Funded / Scaling",
           "Projected Vacancies": 400,
@@ -3129,7 +3307,9 @@
           "Confidence Level": "Low",
           "Additional Insights": "Stage: Funded / Scaling. Announced: Q1 2026.",
           "Project_ID": "P041",
-          "Project Stage": "Funded / Scaling"
+          "Project Stage": "Funded / Scaling",
+          "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
+          "sourceLabel": "Invest India – Uttar Pradesh"
         },
         {
           "Region": "Maharashtra",
@@ -3138,7 +3318,7 @@
           "Sector": "Fintech / Housing Finance",
           "Sub-Sector": "Fintech / Housing Finance",
           "Investment Project / Initiative": "Weaver Services – Affordable Housing Finance Expansion",
-          "Investment Value (INR Cr)": 0.0,
+          "Investment Value (INR Cr)": 0,
           "Skill Type": "Skilled",
           "Job Category": "Funded / Scaling",
           "Projected Vacancies": 350,
@@ -3154,7 +3334,9 @@
           "Confidence Level": "Low",
           "Additional Insights": "Stage: Funded / Scaling. Announced: Q1 2026.",
           "Project_ID": "P042",
-          "Project Stage": "Funded / Scaling"
+          "Project Stage": "Funded / Scaling",
+          "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
+          "sourceLabel": "Invest India – Uttar Pradesh"
         },
         {
           "Region": "Karnataka",
@@ -3163,7 +3345,7 @@
           "Sector": "SaaS",
           "Sub-Sector": "SaaS",
           "Investment Project / Initiative": "Rocketlane – Enterprise SaaS Scale-up",
-          "Investment Value (INR Cr)": 0.0,
+          "Investment Value (INR Cr)": 0,
           "Skill Type": "Skilled",
           "Job Category": "Funded / Scaling",
           "Projected Vacancies": 150,
@@ -3179,7 +3361,9 @@
           "Confidence Level": "Low",
           "Additional Insights": "Stage: Funded / Scaling. Announced: Q1 2026.",
           "Project_ID": "P043",
-          "Project Stage": "Funded / Scaling"
+          "Project Stage": "Funded / Scaling",
+          "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
+          "sourceLabel": "Invest India – Uttar Pradesh"
         },
         {
           "Region": "Karnataka",
@@ -3188,7 +3372,7 @@
           "Sector": "Fintech",
           "Sub-Sector": "Fintech",
           "Investment Project / Initiative": "Juspay – Fintech Infra Expansion",
-          "Investment Value (INR Cr)": 0.0,
+          "Investment Value (INR Cr)": 0,
           "Skill Type": "Skilled",
           "Job Category": "Funded / Scaling",
           "Projected Vacancies": 200,
@@ -3204,7 +3388,9 @@
           "Confidence Level": "Low",
           "Additional Insights": "Stage: Funded / Scaling. Announced: Q1 2026.",
           "Project_ID": "P044",
-          "Project Stage": "Funded / Scaling"
+          "Project Stage": "Funded / Scaling",
+          "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
+          "sourceLabel": "Invest India – Uttar Pradesh"
         },
         {
           "Region": "Maharashtra",
@@ -3213,7 +3399,7 @@
           "Sector": "FMCG",
           "Sub-Sector": "FMCG",
           "Investment Project / Initiative": "The Whole Truth – Clean-Label FMCG Scale-up",
-          "Investment Value (INR Cr)": 0.0,
+          "Investment Value (INR Cr)": 0,
           "Skill Type": "Skilled",
           "Job Category": "Funded / Scaling",
           "Projected Vacancies": 180,
@@ -3229,7 +3415,9 @@
           "Confidence Level": "Low",
           "Additional Insights": "Stage: Funded / Scaling. Announced: Q1 2026.",
           "Project_ID": "P045",
-          "Project Stage": "Funded / Scaling"
+          "Project Stage": "Funded / Scaling",
+          "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
+          "sourceLabel": "Invest India – Uttar Pradesh"
         },
         {
           "Region": "India",
@@ -3238,7 +3426,7 @@
           "Sector": "Agritech",
           "Sub-Sector": "Agritech",
           "Investment Project / Initiative": "Arya.ag – Agritech Platform Expansion",
-          "Investment Value (INR Cr)": 0.0,
+          "Investment Value (INR Cr)": 0,
           "Skill Type": "Skilled",
           "Job Category": "Funded / Scaling",
           "Projected Vacancies": 220,
@@ -3254,7 +3442,9 @@
           "Confidence Level": "Low",
           "Additional Insights": "Stage: Funded / Scaling. Announced: Q1 2026.",
           "Project_ID": "P046",
-          "Project Stage": "Funded / Scaling"
+          "Project Stage": "Funded / Scaling",
+          "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
+          "sourceLabel": "Invest India – Uttar Pradesh"
         },
         {
           "Region": "India",
@@ -3263,7 +3453,7 @@
           "Sector": "Semiconductors / Policy",
           "Sub-Sector": "Semiconductors / Policy",
           "Investment Project / Initiative": "India Semiconductor Mission 2.0 – Equipment & Materials",
-          "Investment Value (INR Cr)": 8000.0,
+          "Investment Value (INR Cr)": 8000,
           "Skill Type": "Skilled",
           "Job Category": "Policy Launched (Budget Allocation)",
           "Projected Vacancies": 0,
@@ -3279,7 +3469,9 @@
           "Confidence Level": "Medium",
           "Additional Insights": "Stage: Policy Launched (Budget Allocation). Announced: Budget 2026-27.",
           "Project_ID": "P047",
-          "Project Stage": "Policy Launched (Budget Allocation)"
+          "Project Stage": "Policy Launched (Budget Allocation)",
+          "sourceUrl": "https://www.investindia.gov.in/sector/semiconductor-and-it-hardware",
+          "sourceLabel": "Semiconductor and IT Hardware"
         },
         {
           "Region": "Odisha",
@@ -3288,7 +3480,7 @@
           "Sector": "Semiconductors / Policy",
           "Sub-Sector": "Semiconductors / Policy",
           "Investment Project / Initiative": "Odisha & Andhra Pradesh Single-Window Semicon Facilitation",
-          "Investment Value (INR Cr)": 0.0,
+          "Investment Value (INR Cr)": 0,
           "Skill Type": "Skilled",
           "Job Category": "Policy in force",
           "Projected Vacancies": 0,
@@ -3304,7 +3496,9 @@
           "Confidence Level": "Medium",
           "Additional Insights": "Stage: Policy in force. Announced: 2026 (ongoing).",
           "Project_ID": "P048",
-          "Project Stage": "Policy in force"
+          "Project Stage": "Policy in force",
+          "sourceUrl": "https://www.investindia.gov.in/sector/semiconductor-and-it-hardware",
+          "sourceLabel": "Semiconductor and IT Hardware"
         },
         {
           "Region": "India",
@@ -3329,7 +3523,9 @@
           "Confidence Level": "Medium",
           "Additional Insights": "Stage: . Announced: .",
           "Project_ID": "",
-          "Project Stage": ""
+          "Project Stage": "",
+          "sourceUrl": "https://www.investindia.gov.in/state/uttar-pradesh",
+          "sourceLabel": "Invest India – Uttar Pradesh"
         }
       ],
       "projectPipeline": [
@@ -3340,7 +3536,7 @@
           "Sector": "Semiconductors",
           "Sub-Sector": "Semiconductors",
           "Investment Project / Initiative": "Tata Electronics Semiconductor Fab (with ASML)",
-          "Investment Value (INR Cr)": 91000.0,
+          "Investment Value (INR Cr)": 91000,
           "Skill Type": "Skilled",
           "Job Category": "Under Construction",
           "Projected Vacancies": 14400,
@@ -3365,7 +3561,7 @@
           "Sector": "Semiconductors",
           "Sub-Sector": "Semiconductors",
           "Investment Project / Initiative": "Micron Technology ATMP Facility",
-          "Investment Value (INR Cr)": 22500.0,
+          "Investment Value (INR Cr)": 22500,
           "Skill Type": "Skilled",
           "Job Category": "Operational (Inaugurated)",
           "Projected Vacancies": 9000,
@@ -3390,7 +3586,7 @@
           "Sector": "Semiconductors",
           "Sub-Sector": "Semiconductors",
           "Investment Project / Initiative": "Crystal Matrix Ltd – Compound Semicon Fab & ATMP",
-          "Investment Value (INR Cr)": 2800.0,
+          "Investment Value (INR Cr)": 2800,
           "Skill Type": "Skilled",
           "Job Category": "Approved",
           "Projected Vacancies": 2520,
@@ -3415,7 +3611,7 @@
           "Sector": "Semiconductors",
           "Sub-Sector": "Semiconductors",
           "Investment Project / Initiative": "Suchi Semicon Pvt Ltd – OSAT Facility",
-          "Investment Value (INR Cr)": 1136.0,
+          "Investment Value (INR Cr)": 1136,
           "Skill Type": "Skilled",
           "Job Category": "Approved",
           "Projected Vacancies": 1494,
@@ -3440,7 +3636,7 @@
           "Sector": "Semiconductors",
           "Sub-Sector": "Semiconductors",
           "Investment Project / Initiative": "HCL-Foxconn JV – Display Driver Chip ATMP",
-          "Investment Value (INR Cr)": 3700.0,
+          "Investment Value (INR Cr)": 3700,
           "Skill Type": "Skilled",
           "Job Category": "Under Construction",
           "Projected Vacancies": 3600,
@@ -3465,7 +3661,7 @@
           "Sector": "Semiconductors",
           "Sub-Sector": "Semiconductors",
           "Investment Project / Initiative": "Kaynes Semicon Pvt Ltd",
-          "Investment Value (INR Cr)": 3300.0,
+          "Investment Value (INR Cr)": 3300,
           "Skill Type": "Skilled",
           "Job Category": "Under Construction",
           "Projected Vacancies": 2700,
@@ -3490,7 +3686,7 @@
           "Sector": "Semiconductors",
           "Sub-Sector": "Semiconductors",
           "Investment Project / Initiative": "CG Power / CG Semi – OSAT (Renesas, Stars Micro JV)",
-          "Investment Value (INR Cr)": 7600.0,
+          "Investment Value (INR Cr)": 7600,
           "Skill Type": "Skilled",
           "Job Category": "Operational (1st OSAT launched)",
           "Projected Vacancies": 3240,
@@ -3515,7 +3711,7 @@
           "Sector": "Semiconductors",
           "Sub-Sector": "Semiconductors",
           "Investment Project / Initiative": "RIR Power Electronics – India's first SiC Fab",
-          "Investment Value (INR Cr)": 618.0,
+          "Investment Value (INR Cr)": 618,
           "Skill Type": "Skilled",
           "Job Category": "Approved",
           "Projected Vacancies": 810,
@@ -3540,7 +3736,7 @@
           "Sector": "Manufacturing – Steel",
           "Sub-Sector": "Manufacturing – Steel",
           "Investment Project / Initiative": "JSW Steel – Integrated Steel Plant Expansion",
-          "Investment Value (INR Cr)": 4600.0,
+          "Investment Value (INR Cr)": 4600,
           "Skill Type": "Skilled",
           "Job Category": "Approved",
           "Projected Vacancies": 5760,
@@ -3565,7 +3761,7 @@
           "Sector": "Automobiles",
           "Sub-Sector": "Automobiles",
           "Investment Project / Initiative": "Volvo Group India – Automobile Facility",
-          "Investment Value (INR Cr)": 1500.0,
+          "Investment Value (INR Cr)": 1500,
           "Skill Type": "Skilled",
           "Job Category": "Approved",
           "Projected Vacancies": 1980,
@@ -3590,7 +3786,7 @@
           "Sector": "Manufacturing – Steel",
           "Sub-Sector": "Manufacturing – Steel",
           "Investment Project / Initiative": "JSW JFE Electrical Steel Pvt Ltd",
-          "Investment Value (INR Cr)": 7102.0,
+          "Investment Value (INR Cr)": 7102,
           "Skill Type": "Skilled",
           "Job Category": "Approved",
           "Projected Vacancies": 1620,
@@ -3615,7 +3811,7 @@
           "Sector": "Manufacturing",
           "Sub-Sector": "Manufacturing",
           "Investment Project / Initiative": "SFX India Mfg Pvt Ltd",
-          "Investment Value (INR Cr)": 9298.0,
+          "Investment Value (INR Cr)": 9298,
           "Skill Type": "Skilled",
           "Job Category": "Approved",
           "Projected Vacancies": 1450,
@@ -3640,7 +3836,7 @@
           "Sector": "Renewable Energy",
           "Sub-Sector": "Renewable Energy",
           "Investment Project / Initiative": "Vayu Assets Pvt Ltd",
-          "Investment Value (INR Cr)": 1251.0,
+          "Investment Value (INR Cr)": 1251,
           "Skill Type": "Skilled",
           "Job Category": "Approved",
           "Projected Vacancies": 3441,
@@ -3665,7 +3861,7 @@
           "Sector": "Telecom Equipment",
           "Sub-Sector": "Telecom Equipment",
           "Investment Project / Initiative": "Tejas Networks Ltd – Telecom Equipment Expansion",
-          "Investment Value (INR Cr)": 542.0,
+          "Investment Value (INR Cr)": 542,
           "Skill Type": "Skilled",
           "Job Category": "Approved",
           "Projected Vacancies": 2361,
@@ -3690,7 +3886,7 @@
           "Sector": "FMCG / Food Processing",
           "Sub-Sector": "FMCG / Food Processing",
           "Investment Project / Initiative": "Reliance Consumer Products Ltd",
-          "Investment Value (INR Cr)": 1622.0,
+          "Investment Value (INR Cr)": 1622,
           "Skill Type": "Skilled",
           "Job Category": "Approved",
           "Projected Vacancies": 2160,
@@ -3715,7 +3911,7 @@
           "Sector": "Textiles",
           "Sub-Sector": "Textiles",
           "Investment Project / Initiative": "HSS Textile Pvt Ltd",
-          "Investment Value (INR Cr)": 740.0,
+          "Investment Value (INR Cr)": 740,
           "Skill Type": "Skilled",
           "Job Category": "Approved",
           "Projected Vacancies": 1440,
@@ -3790,7 +3986,7 @@
           "Sector": "Textiles",
           "Sub-Sector": "Textiles",
           "Investment Project / Initiative": "Kleine Pax Ltd – Technical Textile Unit",
-          "Investment Value (INR Cr)": 376.0,
+          "Investment Value (INR Cr)": 376,
           "Skill Type": "Skilled",
           "Job Category": "Approved",
           "Projected Vacancies": 1260,
@@ -3815,7 +4011,7 @@
           "Sector": "EV Components",
           "Sub-Sector": "EV Components",
           "Investment Project / Initiative": "Tsuyo Manufacturing – EV Motor & Controller Unit",
-          "Investment Value (INR Cr)": 250.0,
+          "Investment Value (INR Cr)": 250,
           "Skill Type": "Skilled",
           "Job Category": "Approved",
           "Projected Vacancies": 900,
@@ -3840,7 +4036,7 @@
           "Sector": "Hospitality",
           "Sub-Sector": "Hospitality",
           "Investment Project / Initiative": "Trishul Buildtech – Five-Star Hotel Project",
-          "Investment Value (INR Cr)": 300.0,
+          "Investment Value (INR Cr)": 300,
           "Skill Type": "Skilled",
           "Job Category": "Approved",
           "Projected Vacancies": 1170,
@@ -3865,7 +4061,7 @@
           "Sector": "Core Industry / Chemicals",
           "Sub-Sector": "Core Industry / Chemicals",
           "Investment Project / Initiative": "Adani Enterprises – Coal Gasification & Derivatives",
-          "Investment Value (INR Cr)": 70000.0,
+          "Investment Value (INR Cr)": 70000,
           "Skill Type": "Skilled",
           "Job Category": "Final Stages / Land Acquired",
           "Projected Vacancies": 18000,
@@ -3890,7 +4086,7 @@
           "Sector": "Battery / EV Components",
           "Sub-Sector": "Battery / EV Components",
           "Investment Project / Initiative": "Graphite India Ltd – Synthetic Graphite Anode (Li-ion)",
-          "Investment Value (INR Cr)": 4651.0,
+          "Investment Value (INR Cr)": 4651,
           "Skill Type": "Skilled",
           "Job Category": "Approved",
           "Projected Vacancies": 2098,
@@ -3915,7 +4111,7 @@
           "Sector": "Auto Components",
           "Sub-Sector": "Auto Components",
           "Investment Project / Initiative": "HS Hyosung India – Tyre Cord Manufacturing Plant",
-          "Investment Value (INR Cr)": 1740.0,
+          "Investment Value (INR Cr)": 1740,
           "Skill Type": "Skilled",
           "Job Category": "Approved",
           "Projected Vacancies": 720,
@@ -3940,7 +4136,7 @@
           "Sector": "Mixed – Coal Gasification/Solar/Steel/Graphite",
           "Sub-Sector": "Mixed – Coal Gasification/Solar/Steel/Graphite",
           "Investment Project / Initiative": "Maharashtra High-Tech Mega Projects (5-project basket)",
-          "Investment Value (INR Cr)": 89731.0,
+          "Investment Value (INR Cr)": 89731,
           "Skill Type": "Skilled",
           "Job Category": "Approved",
           "Projected Vacancies": 36000,
@@ -3965,7 +4161,7 @@
           "Sector": "Mixed – High-Tech Industrial",
           "Sub-Sector": "Mixed – High-Tech Industrial",
           "Investment Project / Initiative": "Maharashtra Thrust-Sector Mega/Ultra-Mega Basket (19 proposals, 17 approved)",
-          "Investment Value (INR Cr)": 135371.0,
+          "Investment Value (INR Cr)": 135371,
           "Skill Type": "Skilled",
           "Job Category": "Approved",
           "Projected Vacancies": 180000,
@@ -3990,7 +4186,7 @@
           "Sector": "Semiconductors / SEZ Infra",
           "Sub-Sector": "Semiconductors / SEZ Infra",
           "Investment Project / Initiative": "Tata Semiconductor SEZ Notification – Dholera",
-          "Investment Value (INR Cr)": 0.0,
+          "Investment Value (INR Cr)": 0,
           "Skill Type": "Skilled",
           "Job Category": "Regulatory Milestone (SEZ Notified)",
           "Projected Vacancies": 0,
@@ -4015,7 +4211,7 @@
           "Sector": "Policy / Semiconductors",
           "Sub-Sector": "Policy / Semiconductors",
           "Investment Project / Initiative": "HCL-Foxconn UP Semiconductor Policy Incentive Package",
-          "Investment Value (INR Cr)": 0.0,
+          "Investment Value (INR Cr)": 0,
           "Skill Type": "Skilled",
           "Job Category": "Policy in force",
           "Projected Vacancies": 0,
@@ -4040,7 +4236,7 @@
           "Sector": "EV / Policy Programme",
           "Sub-Sector": "EV / Policy Programme",
           "Investment Project / Initiative": "Karnataka Clean Mobility Policy – EV Value Chain",
-          "Investment Value (INR Cr)": 50000.0,
+          "Investment Value (INR Cr)": 50000,
           "Skill Type": "Skilled",
           "Job Category": "Policy Launched",
           "Projected Vacancies": 180000,
@@ -4065,7 +4261,7 @@
           "Sector": "Policy / Multi-sector",
           "Sub-Sector": "Policy / Multi-sector",
           "Investment Project / Initiative": "Karnataka Industrial Policy – Statewide Job Target",
-          "Investment Value (INR Cr)": 1027000.0,
+          "Investment Value (INR Cr)": 1027000,
           "Skill Type": "Skilled",
           "Job Category": "Policy Launched (Investor Commitments at GIM)",
           "Projected Vacancies": 1080000,
@@ -4090,7 +4286,7 @@
           "Sector": "Electronics",
           "Sub-Sector": "Electronics",
           "Investment Project / Initiative": "PLI Electronics & Mobile Manufacturing (cumulative)",
-          "Investment Value (INR Cr)": 0.0,
+          "Investment Value (INR Cr)": 0,
           "Skill Type": "Skilled",
           "Job Category": "Operational / Ongoing",
           "Projected Vacancies": 0,
@@ -4115,7 +4311,7 @@
           "Sector": "Food Processing",
           "Sub-Sector": "Food Processing",
           "Investment Project / Initiative": "PLI Food Processing (165 approved applications)",
-          "Investment Value (INR Cr)": 9207.0,
+          "Investment Value (INR Cr)": 9207,
           "Skill Type": "Skilled",
           "Job Category": "Operational / Ongoing",
           "Projected Vacancies": 339000,
@@ -4140,7 +4336,7 @@
           "Sector": "Automobiles / EV",
           "Sub-Sector": "Automobiles / EV",
           "Investment Project / Initiative": "PLI Automobile & Auto Components (cumulative)",
-          "Investment Value (INR Cr)": 0.0,
+          "Investment Value (INR Cr)": 0,
           "Skill Type": "Skilled",
           "Job Category": "Operational / Ongoing",
           "Projected Vacancies": 0,
@@ -4165,7 +4361,7 @@
           "Sector": "Manufacturing / Mixed",
           "Sub-Sector": "Manufacturing / Mixed",
           "Investment Project / Initiative": "Karnataka–Japan/Korea Investment Commitments",
-          "Investment Value (INR Cr)": 6450.0,
+          "Investment Value (INR Cr)": 6450,
           "Skill Type": "Skilled",
           "Job Category": "MoU Stage",
           "Projected Vacancies": 1800,
@@ -4190,7 +4386,7 @@
           "Sector": "Machine Tools",
           "Sub-Sector": "Machine Tools",
           "Investment Project / Initiative": "DN Solutions – Precision Tools Manufacturing",
-          "Investment Value (INR Cr)": 1000.0,
+          "Investment Value (INR Cr)": 1000,
           "Skill Type": "Skilled",
           "Job Category": "MoU Stage",
           "Projected Vacancies": 540,
@@ -4215,7 +4411,7 @@
           "Sector": "Energy Infrastructure",
           "Sub-Sector": "Energy Infrastructure",
           "Investment Project / Initiative": "Osaka Gas – Gas Distribution Infrastructure Expansion",
-          "Investment Value (INR Cr)": 5000.0,
+          "Investment Value (INR Cr)": 5000,
           "Skill Type": "Skilled",
           "Job Category": "MoU Stage",
           "Projected Vacancies": 360,
@@ -4240,7 +4436,7 @@
           "Sector": "Telecom Equipment",
           "Sub-Sector": "Telecom Equipment",
           "Investment Project / Initiative": "Tejas Networks / Telecom PLI Linked Expansion",
-          "Investment Value (INR Cr)": 0.0,
+          "Investment Value (INR Cr)": 0,
           "Skill Type": "Skilled",
           "Job Category": "Operational / Ongoing",
           "Projected Vacancies": 0,
@@ -4265,7 +4461,7 @@
           "Sector": "EV Mobility",
           "Sub-Sector": "EV Mobility",
           "Investment Project / Initiative": "Erisha E-Mobility – EV Manufacturing Scale-up",
-          "Investment Value (INR Cr)": 0.0,
+          "Investment Value (INR Cr)": 0,
           "Skill Type": "Skilled",
           "Job Category": "Funded / Scaling",
           "Projected Vacancies": 2500,
@@ -4290,7 +4486,7 @@
           "Sector": "EV Mobility / Logistics",
           "Sub-Sector": "EV Mobility / Logistics",
           "Investment Project / Initiative": "GreenLine – EV Logistics Fleet Expansion",
-          "Investment Value (INR Cr)": 0.0,
+          "Investment Value (INR Cr)": 0,
           "Skill Type": "Skilled",
           "Job Category": "Funded / Scaling",
           "Projected Vacancies": 1800,
@@ -4340,7 +4536,7 @@
           "Sector": "AI Infrastructure",
           "Sub-Sector": "AI Infrastructure",
           "Investment Project / Initiative": "Neysa – AI Infrastructure Platform Scale-up",
-          "Investment Value (INR Cr)": 0.0,
+          "Investment Value (INR Cr)": 0,
           "Skill Type": "Skilled",
           "Job Category": "Funded / Scaling",
           "Projected Vacancies": 400,
@@ -4365,7 +4561,7 @@
           "Sector": "Fintech / Housing Finance",
           "Sub-Sector": "Fintech / Housing Finance",
           "Investment Project / Initiative": "Weaver Services – Affordable Housing Finance Expansion",
-          "Investment Value (INR Cr)": 0.0,
+          "Investment Value (INR Cr)": 0,
           "Skill Type": "Skilled",
           "Job Category": "Funded / Scaling",
           "Projected Vacancies": 350,
@@ -4390,7 +4586,7 @@
           "Sector": "SaaS",
           "Sub-Sector": "SaaS",
           "Investment Project / Initiative": "Rocketlane – Enterprise SaaS Scale-up",
-          "Investment Value (INR Cr)": 0.0,
+          "Investment Value (INR Cr)": 0,
           "Skill Type": "Skilled",
           "Job Category": "Funded / Scaling",
           "Projected Vacancies": 150,
@@ -4415,7 +4611,7 @@
           "Sector": "Fintech",
           "Sub-Sector": "Fintech",
           "Investment Project / Initiative": "Juspay – Fintech Infra Expansion",
-          "Investment Value (INR Cr)": 0.0,
+          "Investment Value (INR Cr)": 0,
           "Skill Type": "Skilled",
           "Job Category": "Funded / Scaling",
           "Projected Vacancies": 200,
@@ -4440,7 +4636,7 @@
           "Sector": "FMCG",
           "Sub-Sector": "FMCG",
           "Investment Project / Initiative": "The Whole Truth – Clean-Label FMCG Scale-up",
-          "Investment Value (INR Cr)": 0.0,
+          "Investment Value (INR Cr)": 0,
           "Skill Type": "Skilled",
           "Job Category": "Funded / Scaling",
           "Projected Vacancies": 180,
@@ -4465,7 +4661,7 @@
           "Sector": "Agritech",
           "Sub-Sector": "Agritech",
           "Investment Project / Initiative": "Arya.ag – Agritech Platform Expansion",
-          "Investment Value (INR Cr)": 0.0,
+          "Investment Value (INR Cr)": 0,
           "Skill Type": "Skilled",
           "Job Category": "Funded / Scaling",
           "Projected Vacancies": 220,
@@ -4490,7 +4686,7 @@
           "Sector": "Semiconductors / Policy",
           "Sub-Sector": "Semiconductors / Policy",
           "Investment Project / Initiative": "India Semiconductor Mission 2.0 – Equipment & Materials",
-          "Investment Value (INR Cr)": 8000.0,
+          "Investment Value (INR Cr)": 8000,
           "Skill Type": "Skilled",
           "Job Category": "Policy Launched (Budget Allocation)",
           "Projected Vacancies": 0,
@@ -4515,7 +4711,7 @@
           "Sector": "Semiconductors / Policy",
           "Sub-Sector": "Semiconductors / Policy",
           "Investment Project / Initiative": "Odisha & Andhra Pradesh Single-Window Semicon Facilitation",
-          "Investment Value (INR Cr)": 0.0,
+          "Investment Value (INR Cr)": 0,
           "Skill Type": "Skilled",
           "Job Category": "Policy in force",
           "Projected Vacancies": 0,
@@ -5387,7 +5583,7 @@
           "Gap Severity": "High",
           "Avg. Time-to-Fill (days)": 62,
           "Median CTC (₹ lakh p.a.)": 4.2,
-          "YoY Demand Growth %": 9.0,
+          "YoY Demand Growth %": 9,
           "Top Constraint": "Skilled technician shortage (SMT/test)",
           "Recommended Action": "Scale ITI-industry tie-ups; fast-track skill certification",
           "Confidence": "High",
@@ -5405,7 +5601,7 @@
           "Gap Severity": "Moderate",
           "Avg. Time-to-Fill (days)": 55,
           "Median CTC (₹ lakh p.a.)": 4.5,
-          "YoY Demand Growth %": 9.0,
+          "YoY Demand Growth %": 9,
           "Top Constraint": "Mid-management bench depth",
           "Recommended Action": "Leverage existing Samsung/Foxconn supplier base for upskilling",
           "Confidence": "High",
@@ -5423,7 +5619,7 @@
           "Gap Severity": "Critical",
           "Avg. Time-to-Fill (days)": 95,
           "Median CTC (₹ lakh p.a.)": 9.8,
-          "YoY Demand Growth %": 15.0,
+          "YoY Demand Growth %": 15,
           "Top Constraint": "Acute shortage of fab-trained engineers",
           "Recommended Action": "National semiconductor skilling mission; import trained talent short-term",
           "Confidence": "Medium",
@@ -5441,7 +5637,7 @@
           "Gap Severity": "Critical",
           "Avg. Time-to-Fill (days)": 110,
           "Median CTC (₹ lakh p.a.)": 9.2,
-          "YoY Demand Growth %": 18.0,
+          "YoY Demand Growth %": 18,
           "Top Constraint": "No existing fab-trained workforce base",
           "Recommended Action": "Greenfield skilling centre near Jewar/Greater Noida",
           "Confidence": "Medium",
@@ -5459,7 +5655,7 @@
           "Gap Severity": "Moderate",
           "Avg. Time-to-Fill (days)": 58,
           "Median CTC (₹ lakh p.a.)": 5.1,
-          "YoY Demand Growth %": 12.0,
+          "YoY Demand Growth %": 12,
           "Top Constraint": "EV-specific powertrain skill gap",
           "Recommended Action": "EV-focused ITI curriculum updates",
           "Confidence": "High",
@@ -5477,7 +5673,7 @@
           "Gap Severity": "Moderate",
           "Avg. Time-to-Fill (days)": 51,
           "Median CTC (₹ lakh p.a.)": 4.8,
-          "YoY Demand Growth %": 9.0,
+          "YoY Demand Growth %": 9,
           "Top Constraint": "Adequate base, tightness at senior engineer level",
           "Recommended Action": "Lateral hiring incentives for 8+ yr experience band",
           "Confidence": "High",
@@ -5495,7 +5691,7 @@
           "Gap Severity": "Moderate",
           "Avg. Time-to-Fill (days)": 49,
           "Median CTC (₹ lakh p.a.)": 5.4,
-          "YoY Demand Growth %": 7.0,
+          "YoY Demand Growth %": 7,
           "Top Constraint": "Competitive lateral market, low net gap",
           "Recommended Action": "Retention-focused, not acquisition-focused",
           "Confidence": "High",
@@ -5513,7 +5709,7 @@
           "Gap Severity": "Low",
           "Avg. Time-to-Fill (days)": 44,
           "Median CTC (₹ lakh p.a.)": 6.2,
-          "YoY Demand Growth %": 5.0,
+          "YoY Demand Growth %": 5,
           "Top Constraint": "Largely balanced; mild QA/regulatory-affairs shortage",
           "Recommended Action": "Targeted GMP/regulatory-affairs certification drives",
           "Confidence": "High",
@@ -5531,7 +5727,7 @@
           "Gap Severity": "Low",
           "Avg. Time-to-Fill (days)": 38,
           "Median CTC (₹ lakh p.a.)": 3.1,
-          "YoY Demand Growth %": 8.0,
+          "YoY Demand Growth %": 8,
           "Top Constraint": "Seasonal labour churn in processing units",
           "Recommended Action": "Strengthen FPO-linked seasonal workforce pools",
           "Confidence": "High",
@@ -5549,7 +5745,7 @@
           "Gap Severity": "Low",
           "Avg. Time-to-Fill (days)": 35,
           "Median CTC (₹ lakh p.a.)": 2.8,
-          "YoY Demand Growth %": 3.0,
+          "YoY Demand Growth %": 3,
           "Top Constraint": "Stable; minor machine-operator shortfall",
           "Recommended Action": "Standard ITI pipeline sufficient",
           "Confidence": "High",
@@ -5567,7 +5763,7 @@
           "Gap Severity": "Surplus",
           "Avg. Time-to-Fill (days)": 33,
           "Median CTC (₹ lakh p.a.)": 9.5,
-          "YoY Demand Growth %": 1.0,
+          "YoY Demand Growth %": 1,
           "Top Constraint": "Oversupply at entry level; niche cloud/AI skill shortage persists",
           "Recommended Action": "Reskill surplus entry-level talent into AI/cloud tracks",
           "Confidence": "High",
@@ -5585,7 +5781,7 @@
           "Gap Severity": "Surplus",
           "Avg. Time-to-Fill (days)": 31,
           "Median CTC (₹ lakh p.a.)": 9.1,
-          "YoY Demand Growth %": 1.0,
+          "YoY Demand Growth %": 1,
           "Top Constraint": "Similar entry-level oversupply pattern",
           "Recommended Action": "Reskilling over fresh hiring",
           "Confidence": "High",
@@ -5603,7 +5799,7 @@
           "Gap Severity": "Critical",
           "Avg. Time-to-Fill (days)": 71,
           "Median CTC (₹ lakh p.a.)": 18.5,
-          "YoY Demand Growth %": 45.0,
+          "YoY Demand Growth %": 45,
           "Top Constraint": "Most acute skill shortage in the dataset — demand far outstrips trained supply",
           "Recommended Action": "Emergency upskilling cohorts; GCC-funded AI academies",
           "Confidence": "High",
@@ -5621,7 +5817,7 @@
           "Gap Severity": "Critical",
           "Avg. Time-to-Fill (days)": 69,
           "Median CTC (₹ lakh p.a.)": 17.8,
-          "YoY Demand Growth %": 35.0,
+          "YoY Demand Growth %": 35,
           "Top Constraint": "Same acute pattern as Bengaluru, slightly smaller base",
           "Recommended Action": "Cross-city talent mobility incentives",
           "Confidence": "High",
@@ -5639,7 +5835,7 @@
           "Gap Severity": "Low",
           "Avg. Time-to-Fill (days)": 40,
           "Median CTC (₹ lakh p.a.)": 12.4,
-          "YoY Demand Growth %": 14.0,
+          "YoY Demand Growth %": 14,
           "Top Constraint": "Compliance/risk-analytics niche shortage",
           "Recommended Action": "Targeted RegTech-analytics certification",
           "Confidence": "Medium",
@@ -5657,7 +5853,7 @@
           "Gap Severity": "Surplus",
           "Avg. Time-to-Fill (days)": 36,
           "Median CTC (₹ lakh p.a.)": 8.9,
-          "YoY Demand Growth %": -15.0,
+          "YoY Demand Growth %": -15,
           "Top Constraint": "Branch-banking roles declining as digital channels scale",
           "Recommended Action": "Redeploy branch staff into digital/relationship roles",
           "Confidence": "High",
@@ -5675,7 +5871,7 @@
           "Gap Severity": "Moderate",
           "Avg. Time-to-Fill (days)": 30,
           "Median CTC (₹ lakh p.a.)": 3.8,
-          "YoY Demand Growth %": 21.0,
+          "YoY Demand Growth %": 21,
           "Top Constraint": "Front-of-house and culinary-skill shortage post-pandemic attrition",
           "Recommended Action": "Hospitality-sector ITI tie-ups; tourism-board skilling funds",
           "Confidence": "High",
@@ -5693,7 +5889,7 @@
           "Gap Severity": "Low",
           "Avg. Time-to-Fill (days)": 28,
           "Median CTC (₹ lakh p.a.)": 3.4,
-          "YoY Demand Growth %": 18.0,
+          "YoY Demand Growth %": 18,
           "Top Constraint": "Adequate supply; voice-process attrition remains structural",
           "Recommended Action": "Improve retention via career-pathing programmes",
           "Confidence": "High",
@@ -5711,7 +5907,7 @@
           "Gap Severity": "Moderate",
           "Avg. Time-to-Fill (days)": 42,
           "Median CTC (₹ lakh p.a.)": 4.6,
-          "YoY Demand Growth %": 15.0,
+          "YoY Demand Growth %": 15,
           "Top Constraint": "Subject-matter-expert shortage in STEM content roles",
           "Recommended Action": "STEM-teacher fellowship and content-creator programmes",
           "Confidence": "Medium",
@@ -5729,7 +5925,7 @@
           "Gap Severity": "High",
           "Avg. Time-to-Fill (days)": 64,
           "Median CTC (₹ lakh p.a.)": 7.8,
-          "YoY Demand Growth %": 15.0,
+          "YoY Demand Growth %": 15,
           "Top Constraint": "Process-engineering and HSE-certified talent shortage",
           "Recommended Action": "Refinery-linked apprenticeship scale-up",
           "Confidence": "Medium",
@@ -5747,7 +5943,7 @@
           "Gap Severity": "Critical",
           "Avg. Time-to-Fill (days)": 58,
           "Median CTC (₹ lakh p.a.)": 8.2,
-          "YoY Demand Growth %": 24.0,
+          "YoY Demand Growth %": 24,
           "Top Constraint": "Battery-systems and charging-infra engineering shortage",
           "Recommended Action": "EV-specific deeptech fellowships; OEM-startup talent exchange",
           "Confidence": "Medium",
@@ -5765,7 +5961,7 @@
           "Gap Severity": "Critical",
           "Avg. Time-to-Fill (days)": 66,
           "Median CTC (₹ lakh p.a.)": 7.1,
-          "YoY Demand Growth %": 17.0,
+          "YoY Demand Growth %": 17,
           "Top Constraint": "Project-engineering and grid-integration skill shortage",
           "Recommended Action": "Renewable-energy-focused diploma fast-track programmes",
           "Confidence": "Medium",
@@ -5783,7 +5979,7 @@
           "Gap Severity": "Moderate",
           "Avg. Time-to-Fill (days)": 24,
           "Median CTC (₹ lakh p.a.)": 3.9,
-          "YoY Demand Growth %": 12.0,
+          "YoY Demand Growth %": 12,
           "Top Constraint": "Last-mile delivery & warehouse-ops churn",
           "Recommended Action": "Gig-to-permanent conversion pathways",
           "Confidence": "Medium",
@@ -5801,7 +5997,7 @@
           "Gap Severity": "Low",
           "Avg. Time-to-Fill (days)": 33,
           "Median CTC (₹ lakh p.a.)": 3.6,
-          "YoY Demand Growth %": 14.0,
+          "YoY Demand Growth %": 14,
           "Top Constraint": "Site-supervisor and skilled-mason shortage in tier-2 cities",
           "Recommended Action": "Construction-skill council certification scale-up",
           "Confidence": "Medium",
@@ -5812,7 +6008,7 @@
         {
           "Sector": "Semiconductors & ATMP/OSAT",
           "State": "Gujarat",
-          "Investment in Scope (₹ Cr)": 128336.0,
+          "Investment in Scope (₹ Cr)": 128336,
           "Direct Jobs per ₹100cr": 14.4,
           "Indirect Multiplier": 1.8,
           "3-Month Jobs": 665,
@@ -5828,7 +6024,7 @@
         {
           "Sector": "Semiconductors & ATMP/OSAT",
           "State": "Uttar Pradesh",
-          "Investment in Scope (₹ Cr)": 3700.0,
+          "Investment in Scope (₹ Cr)": 3700,
           "Direct Jobs per ₹100cr": 54.1,
           "Indirect Multiplier": 1.8,
           "3-Month Jobs": 72,
@@ -5844,7 +6040,7 @@
         {
           "Sector": "Semiconductors & ATMP/OSAT",
           "State": "Odisha",
-          "Investment in Scope (₹ Cr)": 618.0,
+          "Investment in Scope (₹ Cr)": 618,
           "Direct Jobs per ₹100cr": 72.8,
           "Indirect Multiplier": 1.6,
           "3-Month Jobs": 21,
@@ -5860,7 +6056,7 @@
         {
           "Sector": "Automobiles & Auto Components (incl. EV)",
           "State": "Karnataka",
-          "Investment in Scope (₹ Cr)": 1750.0,
+          "Investment in Scope (₹ Cr)": 1750,
           "Direct Jobs per ₹100cr": 91.4,
           "Indirect Multiplier": 2.4,
           "3-Month Jobs": 383,
@@ -5876,8 +6072,8 @@
         {
           "Sector": "Automobiles & Auto Components (incl. EV)",
           "State": "Maharashtra",
-          "Investment in Scope (₹ Cr)": 1740.0,
-          "Direct Jobs per ₹100cr": 23.0,
+          "Investment in Scope (₹ Cr)": 1740,
+          "Direct Jobs per ₹100cr": 23,
           "Indirect Multiplier": 2.4,
           "3-Month Jobs": 86,
           "6-Month Jobs": 249,
@@ -5892,8 +6088,8 @@
         {
           "Sector": "Steel & Metals",
           "State": "Karnataka",
-          "Investment in Scope (₹ Cr)": 11702.0,
-          "Direct Jobs per ₹100cr": 35.0,
+          "Investment in Scope (₹ Cr)": 11702,
+          "Direct Jobs per ₹100cr": 35,
           "Indirect Multiplier": 1.7,
           "3-Month Jobs": 417,
           "6-Month Jobs": 1183,
@@ -5908,7 +6104,7 @@
         {
           "Sector": "Manufacturing (Diversified Industrial)",
           "State": "Karnataka",
-          "Investment in Scope (₹ Cr)": 9298.0,
+          "Investment in Scope (₹ Cr)": 9298,
           "Direct Jobs per ₹100cr": 8.7,
           "Indirect Multiplier": 1.7,
           "3-Month Jobs": 68,
@@ -5924,7 +6120,7 @@
         {
           "Sector": "Renewable Energy (Solar/Wind)",
           "State": "Karnataka",
-          "Investment in Scope (₹ Cr)": 1251.0,
+          "Investment in Scope (₹ Cr)": 1251,
           "Direct Jobs per ₹100cr": 152.8,
           "Indirect Multiplier": 1.6,
           "3-Month Jobs": 428,
@@ -5940,7 +6136,7 @@
         {
           "Sector": "Telecom & Networking Equipment",
           "State": "Karnataka",
-          "Investment in Scope (₹ Cr)": 542.0,
+          "Investment in Scope (₹ Cr)": 542,
           "Direct Jobs per ₹100cr": 242.1,
           "Indirect Multiplier": 1.9,
           "3-Month Jobs": 498,
@@ -5956,7 +6152,7 @@
         {
           "Sector": "Food Processing & FMCG",
           "State": "Karnataka",
-          "Investment in Scope (₹ Cr)": 2066.0,
+          "Investment in Scope (₹ Cr)": 2066,
           "Direct Jobs per ₹100cr": 104.1,
           "Indirect Multiplier": 1.9,
           "3-Month Jobs": 898,
@@ -5972,7 +6168,7 @@
         {
           "Sector": "Textiles & Technical Textiles",
           "State": "Karnataka",
-          "Investment in Scope (₹ Cr)": 1116.0,
+          "Investment in Scope (₹ Cr)": 1116,
           "Direct Jobs per ₹100cr": 134.4,
           "Indirect Multiplier": 2.2,
           "3-Month Jobs": 593,
@@ -5988,7 +6184,7 @@
         {
           "Sector": "IT Infrastructure / Commercial Real Estate",
           "State": "Karnataka",
-          "Investment in Scope (₹ Cr)": 495.0,
+          "Investment in Scope (₹ Cr)": 495,
           "Direct Jobs per ₹100cr": 222.4,
           "Indirect Multiplier": 1.3,
           "3-Month Jobs": 286,
@@ -6004,7 +6200,7 @@
         {
           "Sector": "Hospitality & Travel",
           "State": "Karnataka",
-          "Investment in Scope (₹ Cr)": 300.0,
+          "Investment in Scope (₹ Cr)": 300,
           "Direct Jobs per ₹100cr": 216.7,
           "Indirect Multiplier": 1.7,
           "3-Month Jobs": 309,
@@ -6020,7 +6216,7 @@
         {
           "Sector": "Core Industry — Coal Gasification & Chemicals",
           "State": "Maharashtra",
-          "Investment in Scope (₹ Cr)": 70000.0,
+          "Investment in Scope (₹ Cr)": 70000,
           "Direct Jobs per ₹100cr": 14.3,
           "Indirect Multiplier": 1.5,
           "3-Month Jobs": 750,
@@ -6036,7 +6232,7 @@
         {
           "Sector": "Battery / EV Components (Graphite Anode)",
           "State": "Maharashtra",
-          "Investment in Scope (₹ Cr)": 4651.0,
+          "Investment in Scope (₹ Cr)": 4651,
           "Direct Jobs per ₹100cr": 25.1,
           "Indirect Multiplier": 1.6,
           "3-Month Jobs": 168,
@@ -7154,240 +7350,240 @@
         {
           "State": "Maharashtra",
           "State / Sector": "Maharashtra",
-          "Electronics & Semiconductors": 72.0,
-          "Automobiles & EV": 88.0,
-          "Pharma & Chemicals": 58.0,
-          "Food Processing": 52.0,
-          "Textiles": 46.0,
-          "IT Services & GCC": 81.0,
-          "AI/ML & Deeptech": 86.0,
-          "Fintech & BFSI": 84.0,
-          "Hospitality & Travel": 58.0,
-          "BPO/ITES": 62.0,
-          "Real Estate & Construction": 77.0,
-          "Renewable Energy": 64.0,
-          "Logistics & E-commerce": 74.0
+          "Electronics & Semiconductors": 72,
+          "Automobiles & EV": 88,
+          "Pharma & Chemicals": 58,
+          "Food Processing": 52,
+          "Textiles": 46,
+          "IT Services & GCC": 81,
+          "AI/ML & Deeptech": 86,
+          "Fintech & BFSI": 84,
+          "Hospitality & Travel": 58,
+          "BPO/ITES": 62,
+          "Real Estate & Construction": 77,
+          "Renewable Energy": 64,
+          "Logistics & E-commerce": 74
         },
         {
           "State": "Karnataka",
           "State / Sector": "Karnataka",
-          "Electronics & Semiconductors": 70.0,
-          "Automobiles & EV": 82.0,
-          "Pharma & Chemicals": 44.0,
-          "Food Processing": 38.0,
-          "Textiles": 40.0,
-          "IT Services & GCC": 92.0,
-          "AI/ML & Deeptech": 95.0,
-          "Fintech & BFSI": 88.0,
-          "Hospitality & Travel": 52.0,
-          "BPO/ITES": 84.0,
-          "Real Estate & Construction": 68.0,
-          "Renewable Energy": 58.0,
-          "Logistics & E-commerce": 70.0
+          "Electronics & Semiconductors": 70,
+          "Automobiles & EV": 82,
+          "Pharma & Chemicals": 44,
+          "Food Processing": 38,
+          "Textiles": 40,
+          "IT Services & GCC": 92,
+          "AI/ML & Deeptech": 95,
+          "Fintech & BFSI": 88,
+          "Hospitality & Travel": 52,
+          "BPO/ITES": 84,
+          "Real Estate & Construction": 68,
+          "Renewable Energy": 58,
+          "Logistics & E-commerce": 70
         },
         {
           "State": "Gujarat",
           "State / Sector": "Gujarat",
-          "Electronics & Semiconductors": 94.0,
-          "Automobiles & EV": 76.0,
-          "Pharma & Chemicals": 62.0,
-          "Food Processing": 48.0,
-          "Textiles": 54.0,
-          "IT Services & GCC": 52.0,
-          "AI/ML & Deeptech": 48.0,
-          "Fintech & BFSI": 46.0,
-          "Hospitality & Travel": 40.0,
-          "BPO/ITES": 40.0,
-          "Real Estate & Construction": 60.0,
-          "Renewable Energy": 82.0,
-          "Logistics & E-commerce": 56.0
+          "Electronics & Semiconductors": 94,
+          "Automobiles & EV": 76,
+          "Pharma & Chemicals": 62,
+          "Food Processing": 48,
+          "Textiles": 54,
+          "IT Services & GCC": 52,
+          "AI/ML & Deeptech": 48,
+          "Fintech & BFSI": 46,
+          "Hospitality & Travel": 40,
+          "BPO/ITES": 40,
+          "Real Estate & Construction": 60,
+          "Renewable Energy": 82,
+          "Logistics & E-commerce": 56
         },
         {
           "State": "Tamil Nadu",
           "State / Sector": "Tamil Nadu",
-          "Electronics & Semiconductors": 88.0,
-          "Automobiles & EV": 91.0,
-          "Pharma & Chemicals": 68.0,
-          "Food Processing": 56.0,
-          "Textiles": 72.0,
-          "IT Services & GCC": 64.0,
-          "AI/ML & Deeptech": 58.0,
-          "Fintech & BFSI": 50.0,
-          "Hospitality & Travel": 46.0,
-          "BPO/ITES": 58.0,
-          "Real Estate & Construction": 56.0,
-          "Renewable Energy": 70.0,
-          "Logistics & E-commerce": 60.0
+          "Electronics & Semiconductors": 88,
+          "Automobiles & EV": 91,
+          "Pharma & Chemicals": 68,
+          "Food Processing": 56,
+          "Textiles": 72,
+          "IT Services & GCC": 64,
+          "AI/ML & Deeptech": 58,
+          "Fintech & BFSI": 50,
+          "Hospitality & Travel": 46,
+          "BPO/ITES": 58,
+          "Real Estate & Construction": 56,
+          "Renewable Energy": 70,
+          "Logistics & E-commerce": 60
         },
         {
           "State": "Delhi-NCR",
           "State / Sector": "Delhi-NCR",
-          "Electronics & Semiconductors": 62.0,
-          "Automobiles & EV": 68.0,
-          "Pharma & Chemicals": 56.0,
-          "Food Processing": 44.0,
-          "Textiles": 38.0,
-          "IT Services & GCC": 86.0,
-          "AI/ML & Deeptech": 90.0,
-          "Fintech & BFSI": 82.0,
-          "Hospitality & Travel": 56.0,
-          "BPO/ITES": 80.0,
-          "Real Estate & Construction": 72.0,
-          "Renewable Energy": 52.0,
-          "Logistics & E-commerce": 78.0
+          "Electronics & Semiconductors": 62,
+          "Automobiles & EV": 68,
+          "Pharma & Chemicals": 56,
+          "Food Processing": 44,
+          "Textiles": 38,
+          "IT Services & GCC": 86,
+          "AI/ML & Deeptech": 90,
+          "Fintech & BFSI": 82,
+          "Hospitality & Travel": 56,
+          "BPO/ITES": 80,
+          "Real Estate & Construction": 72,
+          "Renewable Energy": 52,
+          "Logistics & E-commerce": 78
         },
         {
           "State": "Telangana",
           "State / Sector": "Telangana",
-          "Electronics & Semiconductors": 54.0,
-          "Automobiles & EV": 48.0,
-          "Pharma & Chemicals": 84.0,
-          "Food Processing": 42.0,
-          "Textiles": 32.0,
-          "IT Services & GCC": 88.0,
-          "AI/ML & Deeptech": 82.0,
-          "Fintech & BFSI": 68.0,
-          "Hospitality & Travel": 48.0,
-          "BPO/ITES": 76.0,
-          "Real Estate & Construction": 58.0,
-          "Renewable Energy": 46.0,
-          "Logistics & E-commerce": 54.0
+          "Electronics & Semiconductors": 54,
+          "Automobiles & EV": 48,
+          "Pharma & Chemicals": 84,
+          "Food Processing": 42,
+          "Textiles": 32,
+          "IT Services & GCC": 88,
+          "AI/ML & Deeptech": 82,
+          "Fintech & BFSI": 68,
+          "Hospitality & Travel": 48,
+          "BPO/ITES": 76,
+          "Real Estate & Construction": 58,
+          "Renewable Energy": 46,
+          "Logistics & E-commerce": 54
         },
         {
           "State": "Uttar Pradesh",
           "State / Sector": "Uttar Pradesh",
-          "Electronics & Semiconductors": 66.0,
-          "Automobiles & EV": 52.0,
-          "Pharma & Chemicals": 46.0,
-          "Food Processing": 58.0,
-          "Textiles": 54.0,
-          "IT Services & GCC": 58.0,
-          "AI/ML & Deeptech": 52.0,
-          "Fintech & BFSI": 44.0,
-          "Hospitality & Travel": 40.0,
-          "BPO/ITES": 54.0,
-          "Real Estate & Construction": 62.0,
-          "Renewable Energy": 42.0,
-          "Logistics & E-commerce": 58.0
+          "Electronics & Semiconductors": 66,
+          "Automobiles & EV": 52,
+          "Pharma & Chemicals": 46,
+          "Food Processing": 58,
+          "Textiles": 54,
+          "IT Services & GCC": 58,
+          "AI/ML & Deeptech": 52,
+          "Fintech & BFSI": 44,
+          "Hospitality & Travel": 40,
+          "BPO/ITES": 54,
+          "Real Estate & Construction": 62,
+          "Renewable Energy": 42,
+          "Logistics & E-commerce": 58
         },
         {
           "State": "Odisha",
           "State / Sector": "Odisha",
-          "Electronics & Semiconductors": 58.0,
-          "Automobiles & EV": 32.0,
-          "Pharma & Chemicals": 28.0,
-          "Food Processing": 36.0,
-          "Textiles": 24.0,
-          "IT Services & GCC": 28.0,
-          "AI/ML & Deeptech": 24.0,
-          "Fintech & BFSI": 22.0,
-          "Hospitality & Travel": 26.0,
-          "BPO/ITES": 30.0,
-          "Real Estate & Construction": 38.0,
-          "Renewable Energy": 48.0,
-          "Logistics & E-commerce": 32.0
+          "Electronics & Semiconductors": 58,
+          "Automobiles & EV": 32,
+          "Pharma & Chemicals": 28,
+          "Food Processing": 36,
+          "Textiles": 24,
+          "IT Services & GCC": 28,
+          "AI/ML & Deeptech": 24,
+          "Fintech & BFSI": 22,
+          "Hospitality & Travel": 26,
+          "BPO/ITES": 30,
+          "Real Estate & Construction": 38,
+          "Renewable Energy": 48,
+          "Logistics & E-commerce": 32
         },
         {
           "State": "Andhra Pradesh",
           "State / Sector": "Andhra Pradesh",
-          "Electronics & Semiconductors": 52.0,
-          "Automobiles & EV": 38.0,
-          "Pharma & Chemicals": 40.0,
-          "Food Processing": 44.0,
-          "Textiles": 30.0,
-          "IT Services & GCC": 42.0,
-          "AI/ML & Deeptech": 38.0,
-          "Fintech & BFSI": 32.0,
-          "Hospitality & Travel": 34.0,
-          "BPO/ITES": 40.0,
-          "Real Estate & Construction": 40.0,
-          "Renewable Energy": 52.0,
-          "Logistics & E-commerce": 38.0
+          "Electronics & Semiconductors": 52,
+          "Automobiles & EV": 38,
+          "Pharma & Chemicals": 40,
+          "Food Processing": 44,
+          "Textiles": 30,
+          "IT Services & GCC": 42,
+          "AI/ML & Deeptech": 38,
+          "Fintech & BFSI": 32,
+          "Hospitality & Travel": 34,
+          "BPO/ITES": 40,
+          "Real Estate & Construction": 40,
+          "Renewable Energy": 52,
+          "Logistics & E-commerce": 38
         },
         {
           "State": "West Bengal",
           "State / Sector": "West Bengal",
-          "Electronics & Semiconductors": 34.0,
-          "Automobiles & EV": 30.0,
-          "Pharma & Chemicals": 38.0,
-          "Food Processing": 46.0,
-          "Textiles": 42.0,
-          "IT Services & GCC": 52.0,
-          "AI/ML & Deeptech": 58.0,
-          "Fintech & BFSI": 48.0,
-          "Hospitality & Travel": 40.0,
-          "BPO/ITES": 56.0,
-          "Real Estate & Construction": 44.0,
-          "Renewable Energy": 36.0,
-          "Logistics & E-commerce": 48.0
+          "Electronics & Semiconductors": 34,
+          "Automobiles & EV": 30,
+          "Pharma & Chemicals": 38,
+          "Food Processing": 46,
+          "Textiles": 42,
+          "IT Services & GCC": 52,
+          "AI/ML & Deeptech": 58,
+          "Fintech & BFSI": 48,
+          "Hospitality & Travel": 40,
+          "BPO/ITES": 56,
+          "Real Estate & Construction": 44,
+          "Renewable Energy": 36,
+          "Logistics & E-commerce": 48
         },
         {
           "State": "Rajasthan",
           "State / Sector": "Rajasthan",
-          "Electronics & Semiconductors": 38.0,
-          "Automobiles & EV": 42.0,
-          "Pharma & Chemicals": 32.0,
-          "Food Processing": 40.0,
-          "Textiles": 36.0,
-          "IT Services & GCC": 34.0,
-          "AI/ML & Deeptech": 30.0,
-          "Fintech & BFSI": 26.0,
-          "Hospitality & Travel": 52.0,
-          "BPO/ITES": 30.0,
-          "Real Estate & Construction": 40.0,
-          "Renewable Energy": 72.0,
-          "Logistics & E-commerce": 34.0
+          "Electronics & Semiconductors": 38,
+          "Automobiles & EV": 42,
+          "Pharma & Chemicals": 32,
+          "Food Processing": 40,
+          "Textiles": 36,
+          "IT Services & GCC": 34,
+          "AI/ML & Deeptech": 30,
+          "Fintech & BFSI": 26,
+          "Hospitality & Travel": 52,
+          "BPO/ITES": 30,
+          "Real Estate & Construction": 40,
+          "Renewable Energy": 72,
+          "Logistics & E-commerce": 34
         },
         {
           "State": "Madhya Pradesh",
           "State / Sector": "Madhya Pradesh",
-          "Electronics & Semiconductors": 28.0,
-          "Automobiles & EV": 32.0,
-          "Pharma & Chemicals": 26.0,
-          "Food Processing": 62.0,
-          "Textiles": 48.0,
-          "IT Services & GCC": 24.0,
-          "AI/ML & Deeptech": 20.0,
-          "Fintech & BFSI": 18.0,
-          "Hospitality & Travel": 28.0,
-          "BPO/ITES": 24.0,
-          "Real Estate & Construction": 34.0,
-          "Renewable Energy": 38.0,
-          "Logistics & E-commerce": 30.0
+          "Electronics & Semiconductors": 28,
+          "Automobiles & EV": 32,
+          "Pharma & Chemicals": 26,
+          "Food Processing": 62,
+          "Textiles": 48,
+          "IT Services & GCC": 24,
+          "AI/ML & Deeptech": 20,
+          "Fintech & BFSI": 18,
+          "Hospitality & Travel": 28,
+          "BPO/ITES": 24,
+          "Real Estate & Construction": 34,
+          "Renewable Energy": 38,
+          "Logistics & E-commerce": 30
         },
         {
           "State": "Kerala",
           "State / Sector": "Kerala",
-          "Electronics & Semiconductors": 24.0,
-          "Automobiles & EV": 26.0,
-          "Pharma & Chemicals": 30.0,
-          "Food Processing": 34.0,
-          "Textiles": 28.0,
-          "IT Services & GCC": 52.0,
-          "AI/ML & Deeptech": 42.0,
-          "Fintech & BFSI": 44.0,
-          "Hospitality & Travel": 58.0,
-          "BPO/ITES": 46.0,
-          "Real Estate & Construction": 38.0,
-          "Renewable Energy": 40.0,
-          "Logistics & E-commerce": 40.0
+          "Electronics & Semiconductors": 24,
+          "Automobiles & EV": 26,
+          "Pharma & Chemicals": 30,
+          "Food Processing": 34,
+          "Textiles": 28,
+          "IT Services & GCC": 52,
+          "AI/ML & Deeptech": 42,
+          "Fintech & BFSI": 44,
+          "Hospitality & Travel": 58,
+          "BPO/ITES": 46,
+          "Real Estate & Construction": 38,
+          "Renewable Energy": 40,
+          "Logistics & E-commerce": 40
         },
         {
           "State": "Punjab",
           "State / Sector": "Punjab",
-          "Electronics & Semiconductors": 30.0,
-          "Automobiles & EV": 34.0,
-          "Pharma & Chemicals": 28.0,
-          "Food Processing": 58.0,
-          "Textiles": 52.0,
-          "IT Services & GCC": 30.0,
-          "AI/ML & Deeptech": 26.0,
-          "Fintech & BFSI": 22.0,
-          "Hospitality & Travel": 34.0,
-          "BPO/ITES": 28.0,
-          "Real Estate & Construction": 36.0,
-          "Renewable Energy": 32.0,
-          "Logistics & E-commerce": 32.0
+          "Electronics & Semiconductors": 30,
+          "Automobiles & EV": 34,
+          "Pharma & Chemicals": 28,
+          "Food Processing": 58,
+          "Textiles": 52,
+          "IT Services & GCC": 30,
+          "AI/ML & Deeptech": 26,
+          "Fintech & BFSI": 22,
+          "Hospitality & Travel": 34,
+          "BPO/ITES": 28,
+          "Real Estate & Construction": 36,
+          "Renewable Energy": 32,
+          "Logistics & E-commerce": 32
         }
       ],
       "skillDemandForecast": [
@@ -7798,7 +7994,7 @@
         {
           "Sector": "Semiconductors & ATMP/OSAT",
           "State": "Gujarat",
-          "Investment in Scope (₹ Cr)": 128336.0,
+          "Investment in Scope (₹ Cr)": 128336,
           "Direct Jobs per ₹100cr": 14.4,
           "Indirect Multiplier": 1.8,
           "3-Month Jobs": 665,
@@ -7814,7 +8010,7 @@
         {
           "Sector": "Semiconductors & ATMP/OSAT",
           "State": "Uttar Pradesh",
-          "Investment in Scope (₹ Cr)": 3700.0,
+          "Investment in Scope (₹ Cr)": 3700,
           "Direct Jobs per ₹100cr": 54.1,
           "Indirect Multiplier": 1.8,
           "3-Month Jobs": 72,
@@ -7830,7 +8026,7 @@
         {
           "Sector": "Semiconductors & ATMP/OSAT",
           "State": "Odisha",
-          "Investment in Scope (₹ Cr)": 618.0,
+          "Investment in Scope (₹ Cr)": 618,
           "Direct Jobs per ₹100cr": 72.8,
           "Indirect Multiplier": 1.6,
           "3-Month Jobs": 21,
@@ -7846,7 +8042,7 @@
         {
           "Sector": "Automobiles & Auto Components (incl. EV)",
           "State": "Karnataka",
-          "Investment in Scope (₹ Cr)": 1750.0,
+          "Investment in Scope (₹ Cr)": 1750,
           "Direct Jobs per ₹100cr": 91.4,
           "Indirect Multiplier": 2.4,
           "3-Month Jobs": 383,
@@ -7862,8 +8058,8 @@
         {
           "Sector": "Automobiles & Auto Components (incl. EV)",
           "State": "Maharashtra",
-          "Investment in Scope (₹ Cr)": 1740.0,
-          "Direct Jobs per ₹100cr": 23.0,
+          "Investment in Scope (₹ Cr)": 1740,
+          "Direct Jobs per ₹100cr": 23,
           "Indirect Multiplier": 2.4,
           "3-Month Jobs": 86,
           "6-Month Jobs": 249,
@@ -7878,8 +8074,8 @@
         {
           "Sector": "Steel & Metals",
           "State": "Karnataka",
-          "Investment in Scope (₹ Cr)": 11702.0,
-          "Direct Jobs per ₹100cr": 35.0,
+          "Investment in Scope (₹ Cr)": 11702,
+          "Direct Jobs per ₹100cr": 35,
           "Indirect Multiplier": 1.7,
           "3-Month Jobs": 417,
           "6-Month Jobs": 1183,
@@ -7894,7 +8090,7 @@
         {
           "Sector": "Manufacturing (Diversified Industrial)",
           "State": "Karnataka",
-          "Investment in Scope (₹ Cr)": 9298.0,
+          "Investment in Scope (₹ Cr)": 9298,
           "Direct Jobs per ₹100cr": 8.7,
           "Indirect Multiplier": 1.7,
           "3-Month Jobs": 68,
@@ -7910,7 +8106,7 @@
         {
           "Sector": "Renewable Energy (Solar/Wind)",
           "State": "Karnataka",
-          "Investment in Scope (₹ Cr)": 1251.0,
+          "Investment in Scope (₹ Cr)": 1251,
           "Direct Jobs per ₹100cr": 152.8,
           "Indirect Multiplier": 1.6,
           "3-Month Jobs": 428,
@@ -7926,7 +8122,7 @@
         {
           "Sector": "Telecom & Networking Equipment",
           "State": "Karnataka",
-          "Investment in Scope (₹ Cr)": 542.0,
+          "Investment in Scope (₹ Cr)": 542,
           "Direct Jobs per ₹100cr": 242.1,
           "Indirect Multiplier": 1.9,
           "3-Month Jobs": 498,
@@ -7942,7 +8138,7 @@
         {
           "Sector": "Food Processing & FMCG",
           "State": "Karnataka",
-          "Investment in Scope (₹ Cr)": 2066.0,
+          "Investment in Scope (₹ Cr)": 2066,
           "Direct Jobs per ₹100cr": 104.1,
           "Indirect Multiplier": 1.9,
           "3-Month Jobs": 898,
@@ -7958,7 +8154,7 @@
         {
           "Sector": "Textiles & Technical Textiles",
           "State": "Karnataka",
-          "Investment in Scope (₹ Cr)": 1116.0,
+          "Investment in Scope (₹ Cr)": 1116,
           "Direct Jobs per ₹100cr": 134.4,
           "Indirect Multiplier": 2.2,
           "3-Month Jobs": 593,
@@ -7974,7 +8170,7 @@
         {
           "Sector": "IT Infrastructure / Commercial Real Estate",
           "State": "Karnataka",
-          "Investment in Scope (₹ Cr)": 495.0,
+          "Investment in Scope (₹ Cr)": 495,
           "Direct Jobs per ₹100cr": 222.4,
           "Indirect Multiplier": 1.3,
           "3-Month Jobs": 286,
@@ -7990,7 +8186,7 @@
         {
           "Sector": "Hospitality & Travel",
           "State": "Karnataka",
-          "Investment in Scope (₹ Cr)": 300.0,
+          "Investment in Scope (₹ Cr)": 300,
           "Direct Jobs per ₹100cr": 216.7,
           "Indirect Multiplier": 1.7,
           "3-Month Jobs": 309,
@@ -8006,7 +8202,7 @@
         {
           "Sector": "Core Industry — Coal Gasification & Chemicals",
           "State": "Maharashtra",
-          "Investment in Scope (₹ Cr)": 70000.0,
+          "Investment in Scope (₹ Cr)": 70000,
           "Direct Jobs per ₹100cr": 14.3,
           "Indirect Multiplier": 1.5,
           "3-Month Jobs": 750,
@@ -8022,7 +8218,7 @@
         {
           "Sector": "Battery / EV Components (Graphite Anode)",
           "State": "Maharashtra",
-          "Investment in Scope (₹ Cr)": 4651.0,
+          "Investment in Scope (₹ Cr)": 4651,
           "Direct Jobs per ₹100cr": 25.1,
           "Indirect Multiplier": 1.6,
           "3-Month Jobs": 168,
@@ -8280,7 +8476,7 @@
         {
           "Region": "Gujarat",
           "Industry": "Semiconductors",
-          "Total Investment (INR Cr)": 128336.0,
+          "Total Investment (INR Cr)": 128336,
           "Projected Jobs (Total)": 0,
           "Major Locations": "Dholera, Gujarat",
           "Growth Outlook": "High ▲",
@@ -8290,7 +8486,7 @@
         {
           "Region": "Uttar Pradesh",
           "Industry": "Semiconductors",
-          "Total Investment (INR Cr)": 3700.0,
+          "Total Investment (INR Cr)": 3700,
           "Projected Jobs (Total)": 0,
           "Major Locations": "Greater Noida (Jewar), Uttar Pradesh",
           "Growth Outlook": "High ▲",
@@ -8300,7 +8496,7 @@
         {
           "Region": "Odisha",
           "Industry": "Semiconductors",
-          "Total Investment (INR Cr)": 618.0,
+          "Total Investment (INR Cr)": 618,
           "Projected Jobs (Total)": 0,
           "Major Locations": "Bhubaneswar (Infovalley), Odisha",
           "Growth Outlook": "High ▲",
@@ -8310,7 +8506,7 @@
         {
           "Region": "Karnataka",
           "Industry": "Manufacturing – Steel",
-          "Total Investment (INR Cr)": 11702.0,
+          "Total Investment (INR Cr)": 11702,
           "Projected Jobs (Total)": 0,
           "Major Locations": "Ballari, Karnataka",
           "Growth Outlook": "High ▲",
@@ -8320,7 +8516,7 @@
         {
           "Region": "Karnataka",
           "Industry": "Automobiles",
-          "Total Investment (INR Cr)": 1500.0,
+          "Total Investment (INR Cr)": 1500,
           "Projected Jobs (Total)": 0,
           "Major Locations": "Bengaluru North, Karnataka",
           "Growth Outlook": "High ▲",
@@ -8330,7 +8526,7 @@
         {
           "Region": "Karnataka",
           "Industry": "Manufacturing",
-          "Total Investment (INR Cr)": 9298.0,
+          "Total Investment (INR Cr)": 9298,
           "Projected Jobs (Total)": 0,
           "Major Locations": "—, Karnataka",
           "Growth Outlook": "High ▲",
@@ -8340,7 +8536,7 @@
         {
           "Region": "Karnataka",
           "Industry": "Renewable Energy",
-          "Total Investment (INR Cr)": 1251.0,
+          "Total Investment (INR Cr)": 1251,
           "Projected Jobs (Total)": 0,
           "Major Locations": "—, Karnataka",
           "Growth Outlook": "High ▲",
@@ -8350,7 +8546,7 @@
         {
           "Region": "Karnataka",
           "Industry": "Telecom Equipment",
-          "Total Investment (INR Cr)": 542.0,
+          "Total Investment (INR Cr)": 542,
           "Projected Jobs (Total)": 0,
           "Major Locations": "Bengaluru, Karnataka",
           "Growth Outlook": "High ▲",
@@ -8360,7 +8556,7 @@
         {
           "Region": "Karnataka",
           "Industry": "FMCG / Food Processing",
-          "Total Investment (INR Cr)": 1622.0,
+          "Total Investment (INR Cr)": 1622,
           "Projected Jobs (Total)": 0,
           "Major Locations": "—, Karnataka",
           "Growth Outlook": "High ▲",
@@ -8370,7 +8566,7 @@
         {
           "Region": "Karnataka",
           "Industry": "Textiles",
-          "Total Investment (INR Cr)": 1116.0,
+          "Total Investment (INR Cr)": 1116,
           "Projected Jobs (Total)": 0,
           "Major Locations": "—, Karnataka",
           "Growth Outlook": "High ▲",
@@ -8400,7 +8596,7 @@
         {
           "Region": "Karnataka",
           "Industry": "EV Components",
-          "Total Investment (INR Cr)": 250.0,
+          "Total Investment (INR Cr)": 250,
           "Projected Jobs (Total)": 0,
           "Major Locations": "—, Karnataka",
           "Growth Outlook": "High ▲",
@@ -8410,7 +8606,7 @@
         {
           "Region": "Karnataka",
           "Industry": "Hospitality",
-          "Total Investment (INR Cr)": 300.0,
+          "Total Investment (INR Cr)": 300,
           "Projected Jobs (Total)": 0,
           "Major Locations": "—, Karnataka",
           "Growth Outlook": "High ▲",
@@ -8420,7 +8616,7 @@
         {
           "Region": "Maharashtra",
           "Industry": "Core Industry / Chemicals",
-          "Total Investment (INR Cr)": 70000.0,
+          "Total Investment (INR Cr)": 70000,
           "Projected Jobs (Total)": 0,
           "Major Locations": "Nagpur, Maharashtra",
           "Growth Outlook": "High ▲",
@@ -8430,7 +8626,7 @@
         {
           "Region": "Maharashtra",
           "Industry": "Battery / EV Components",
-          "Total Investment (INR Cr)": 4651.0,
+          "Total Investment (INR Cr)": 4651,
           "Projected Jobs (Total)": 0,
           "Major Locations": "Nashik, Maharashtra",
           "Growth Outlook": "High ▲",
@@ -8440,7 +8636,7 @@
         {
           "Region": "Maharashtra",
           "Industry": "Auto Components",
-          "Total Investment (INR Cr)": 1740.0,
+          "Total Investment (INR Cr)": 1740,
           "Projected Jobs (Total)": 0,
           "Major Locations": "Nagpur, Maharashtra",
           "Growth Outlook": "High ▲",
@@ -8450,7 +8646,7 @@
         {
           "Region": "Maharashtra",
           "Industry": "Mixed – Coal Gasification/Solar/Steel/Graphite",
-          "Total Investment (INR Cr)": 89731.0,
+          "Total Investment (INR Cr)": 89731,
           "Projected Jobs (Total)": 0,
           "Major Locations": "Vidarbha/Marathwada/Nashik, Maharashtra",
           "Growth Outlook": "High ▲",
@@ -8460,7 +8656,7 @@
         {
           "Region": "Maharashtra",
           "Industry": "Mixed – High-Tech Industrial",
-          "Total Investment (INR Cr)": 135371.0,
+          "Total Investment (INR Cr)": 135371,
           "Projected Jobs (Total)": 0,
           "Major Locations": "Statewide, Maharashtra",
           "Growth Outlook": "High ▲",
@@ -8470,7 +8666,7 @@
         {
           "Region": "Gujarat",
           "Industry": "Semiconductors / SEZ Infra",
-          "Total Investment (INR Cr)": 0.0,
+          "Total Investment (INR Cr)": 0,
           "Projected Jobs (Total)": 0,
           "Major Locations": "Dholera, Gujarat",
           "Growth Outlook": "High ▲",
@@ -8480,7 +8676,7 @@
         {
           "Region": "Uttar Pradesh",
           "Industry": "Policy / Semiconductors",
-          "Total Investment (INR Cr)": 0.0,
+          "Total Investment (INR Cr)": 0,
           "Projected Jobs (Total)": 0,
           "Major Locations": "Statewide, Uttar Pradesh",
           "Growth Outlook": "High ▲",
@@ -8490,7 +8686,7 @@
         {
           "Region": "Karnataka",
           "Industry": "EV / Policy Programme",
-          "Total Investment (INR Cr)": 50000.0,
+          "Total Investment (INR Cr)": 50000,
           "Projected Jobs (Total)": 0,
           "Major Locations": "Statewide, Karnataka",
           "Growth Outlook": "High ▲",
@@ -8500,7 +8696,7 @@
         {
           "Region": "Karnataka",
           "Industry": "Policy / Multi-sector",
-          "Total Investment (INR Cr)": 1027000.0,
+          "Total Investment (INR Cr)": 1027000,
           "Projected Jobs (Total)": 0,
           "Major Locations": "Statewide, Karnataka",
           "Growth Outlook": "High ▲",
@@ -8510,7 +8706,7 @@
         {
           "Region": "India",
           "Industry": "Electronics",
-          "Total Investment (INR Cr)": 0.0,
+          "Total Investment (INR Cr)": 0,
           "Projected Jobs (Total)": 0,
           "Major Locations": "Multiple",
           "Growth Outlook": "High ▲",
@@ -8520,7 +8716,7 @@
         {
           "Region": "India",
           "Industry": "Food Processing",
-          "Total Investment (INR Cr)": 9207.0,
+          "Total Investment (INR Cr)": 9207,
           "Projected Jobs (Total)": 0,
           "Major Locations": "274 project locations",
           "Growth Outlook": "High ▲",
@@ -8530,7 +8726,7 @@
         {
           "Region": "India",
           "Industry": "Automobiles / EV",
-          "Total Investment (INR Cr)": 0.0,
+          "Total Investment (INR Cr)": 0,
           "Projected Jobs (Total)": 0,
           "Major Locations": "Multiple",
           "Growth Outlook": "High ▲",
@@ -8540,7 +8736,7 @@
         {
           "Region": "Karnataka",
           "Industry": "Manufacturing / Mixed",
-          "Total Investment (INR Cr)": 6450.0,
+          "Total Investment (INR Cr)": 6450,
           "Projected Jobs (Total)": 0,
           "Major Locations": "Location TBD, Karnataka",
           "Growth Outlook": "High ▲",
@@ -8550,7 +8746,7 @@
         {
           "Region": "Karnataka",
           "Industry": "Machine Tools",
-          "Total Investment (INR Cr)": 1000.0,
+          "Total Investment (INR Cr)": 1000,
           "Projected Jobs (Total)": 0,
           "Major Locations": "Location TBD, Karnataka",
           "Growth Outlook": "High ▲",
@@ -8560,7 +8756,7 @@
         {
           "Region": "Karnataka",
           "Industry": "Energy Infrastructure",
-          "Total Investment (INR Cr)": 5000.0,
+          "Total Investment (INR Cr)": 5000,
           "Projected Jobs (Total)": 0,
           "Major Locations": "Statewide, Karnataka",
           "Growth Outlook": "High ▲",
@@ -8580,7 +8776,7 @@
         {
           "Region": "India",
           "Industry": "EV Mobility / Logistics",
-          "Total Investment (INR Cr)": 0.0,
+          "Total Investment (INR Cr)": 0,
           "Projected Jobs (Total)": 0,
           "Major Locations": "Multi-city",
           "Growth Outlook": "High ▲",
@@ -8590,7 +8786,7 @@
         {
           "Region": "Maharashtra",
           "Industry": "AI Infrastructure",
-          "Total Investment (INR Cr)": 0.0,
+          "Total Investment (INR Cr)": 0,
           "Projected Jobs (Total)": 0,
           "Major Locations": "Mumbai, Maharashtra",
           "Growth Outlook": "High ▲",
@@ -8600,7 +8796,7 @@
         {
           "Region": "Maharashtra",
           "Industry": "Fintech / Housing Finance",
-          "Total Investment (INR Cr)": 0.0,
+          "Total Investment (INR Cr)": 0,
           "Projected Jobs (Total)": 0,
           "Major Locations": "Mumbai, Maharashtra",
           "Growth Outlook": "High ▲",
@@ -8610,7 +8806,7 @@
         {
           "Region": "Karnataka",
           "Industry": "SaaS",
-          "Total Investment (INR Cr)": 0.0,
+          "Total Investment (INR Cr)": 0,
           "Projected Jobs (Total)": 0,
           "Major Locations": "Bengaluru, Karnataka",
           "Growth Outlook": "High ▲",
@@ -8620,7 +8816,7 @@
         {
           "Region": "Karnataka",
           "Industry": "Fintech",
-          "Total Investment (INR Cr)": 0.0,
+          "Total Investment (INR Cr)": 0,
           "Projected Jobs (Total)": 0,
           "Major Locations": "Bengaluru, Karnataka",
           "Growth Outlook": "High ▲",
@@ -8630,7 +8826,7 @@
         {
           "Region": "Maharashtra",
           "Industry": "FMCG",
-          "Total Investment (INR Cr)": 0.0,
+          "Total Investment (INR Cr)": 0,
           "Projected Jobs (Total)": 0,
           "Major Locations": "Mumbai, Maharashtra",
           "Growth Outlook": "High ▲",
@@ -8640,7 +8836,7 @@
         {
           "Region": "India",
           "Industry": "Agritech",
-          "Total Investment (INR Cr)": 0.0,
+          "Total Investment (INR Cr)": 0,
           "Projected Jobs (Total)": 0,
           "Major Locations": "Multi-city",
           "Growth Outlook": "High ▲",
@@ -8650,7 +8846,7 @@
         {
           "Region": "India",
           "Industry": "Semiconductors / Policy",
-          "Total Investment (INR Cr)": 8000.0,
+          "Total Investment (INR Cr)": 8000,
           "Projected Jobs (Total)": 0,
           "Major Locations": "Multiple",
           "Growth Outlook": "High ▲",
@@ -8660,7 +8856,7 @@
         {
           "Region": "Odisha",
           "Industry": "Semiconductors / Policy",
-          "Total Investment (INR Cr)": 0.0,
+          "Total Investment (INR Cr)": 0,
           "Projected Jobs (Total)": 0,
           "Major Locations": "Bhubaneswar, Visakhapatnam, Odisha",
           "Growth Outlook": "High ▲",

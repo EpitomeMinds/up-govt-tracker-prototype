@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import type { LiveDataSourcesResponse, UpsidaLiveProject } from "@/lib/liveDataTypes";
+import type { LiveDataSourcesResponse, InvestUpLiveSector, UpsidaLiveProject } from "@/lib/liveDataTypes";
 import { formatSyncedAt, getSourceCounts, isLiveSource } from "@/lib/liveDataApi";
 
 interface Props {
@@ -10,13 +10,39 @@ interface Props {
   refreshing?: boolean;
 }
 
-type SourceFilter = "all" | "upsida" | "investindia" | "nsdc";
+type SourceFilter = "all" | "upsida" | "investindia" | "nsdc" | "investup";
 
 export default function PortalLiveDataBlock({ data, onRefresh, refreshing }: Props) {
   const [query, setQuery] = useState("");
   const [sectorFilter, setSectorFilter] = useState("");
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [investUpQuery, setInvestUpQuery] = useState("");
+  const [selectedInvestUpSlug, setSelectedInvestUpSlug] = useState<string | null>(null);
   const [sourceView, setSourceView] = useState<SourceFilter>("all");
+
+  const investUpSectors = data.investUpSectors ?? [];
+
+  const filteredInvestUpSectors = useMemo(() => {
+    const q = investUpQuery.trim().toLowerCase();
+    if (!q) return investUpSectors;
+    return investUpSectors.filter((s) => {
+      const haystack = [
+        s.name,
+        s.slug,
+        ...(s.investmentOpportunities?.map((o) => `${o.title} ${o.description}`) ?? []),
+        ...(s.industryOverview?.indiaScenario ?? []),
+        ...(s.industryOverview?.upScenario ?? []),
+      ]
+        .join(" ")
+        .toLowerCase();
+      return haystack.includes(q);
+    });
+  }, [investUpSectors, investUpQuery]);
+
+  const selectedInvestUp =
+    filteredInvestUpSectors.find((s) => s.slug === selectedInvestUpSlug) ??
+    filteredInvestUpSectors[0] ??
+    null;
 
   const sectors = useMemo(
     () => [...new Set(data.upsidaProjects.map((p) => p.sector))].sort(),
@@ -100,10 +126,22 @@ export default function PortalLiveDataBlock({ data, onRefresh, refreshing }: Pro
           unit="sectors"
           source={data.investUp.source}
           url={data.investUp.portalUrl}
-          active={sourceView === "all"}
-          onClick={() => setSourceView("all")}
+          active={sourceView === "investup"}
+          onClick={() => setSourceView("investup")}
         />
       </div>
+
+      {(sourceView === "all" || sourceView === "investup") && investUpSectors.length > 0 && (
+        <InvestUpSectorPanel
+          sectors={filteredInvestUpSectors}
+          allCount={investUpSectors.length}
+          portalUrl={data.investUp.portalUrl}
+          query={investUpQuery}
+          onQueryChange={setInvestUpQuery}
+          selected={selectedInvestUp}
+          onSelect={setSelectedInvestUpSlug}
+        />
+      )}
 
       {(sourceView === "all" || sourceView === "upsida") && (
         <div className="portal-panel">
@@ -203,15 +241,6 @@ export default function PortalLiveDataBlock({ data, onRefresh, refreshing }: Pro
           subtitle={`${data.nsdcSectors.length} training & sector links`}
           portalUrl={data.nsdc.portalUrl}
           items={data.nsdcSectors.slice(0, 10).map((s) => ({ name: s.name, url: s.url }))}
-        />
-      )}
-
-      {sourceView === "all" && (data.investUpSectors?.length ?? 0) > 0 && (
-        <LinkGrid
-          title="Invest UP – Priority Sectors"
-          subtitle={`${data.investUpSectors!.length} industrial sectors in Uttar Pradesh`}
-          portalUrl={data.investUp.portalUrl}
-          items={data.investUpSectors!.slice(0, 12).map((s) => ({ name: s.name, url: s.url }))}
         />
       )}
     </div>
@@ -324,6 +353,308 @@ function ProjectDetail({
           All UPSIDA projects
         </a>
       </div>
+    </div>
+  );
+}
+
+function InvestUpSectorPanel({
+  sectors,
+  allCount,
+  portalUrl,
+  query,
+  onQueryChange,
+  selected,
+  onSelect,
+}: {
+  sectors: InvestUpLiveSector[];
+  allCount: number;
+  portalUrl: string;
+  query: string;
+  onQueryChange: (q: string) => void;
+  selected: InvestUpLiveSector | null;
+  onSelect: (slug: string) => void;
+}) {
+  return (
+    <div className="portal-panel">
+      <div className="portal-panel-header flex-wrap gap-3">
+        <div>
+          <h3 className="portal-panel-title">Invest UP – Priority Sectors</h3>
+          <p className="text-[10px] text-slate-500">
+            Live from{" "}
+            <a
+              href={portalUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-[#2563eb] hover:underline"
+            >
+              invest.up.gov.in
+            </a>{" "}
+            · {sectors.length} of {allCount} entries (sectors + AI City)
+          </p>
+        </div>
+        <input
+          type="text"
+          placeholder="Search sector, opportunity, policy…"
+          value={query}
+          onChange={(e) => onQueryChange(e.target.value)}
+          className="portal-input w-52 text-sm"
+        />
+      </div>
+
+      <div className="grid gap-4 p-4 xl:grid-cols-[minmax(240px,300px)_1fr]">
+        <div className="max-h-[560px] overflow-y-auto rounded-xl border border-slate-100">
+          {sectors.map((sector) => {
+            const oppCount = sector.investmentOpportunities?.length ?? 0;
+            const active = selected?.slug === sector.slug;
+            return (
+              <button
+                key={sector.slug}
+                type="button"
+                onClick={() => onSelect(sector.slug)}
+                className={`flex w-full flex-col gap-1.5 border-b border-slate-50 px-4 py-3.5 text-left transition-all ${
+                  active ? "border-l-4 border-l-emerald-500 bg-emerald-50/80" : "border-l-4 border-l-transparent hover:bg-slate-50"
+                }`}
+              >
+                <div className="flex items-start justify-between gap-2">
+                  <p className="text-xs font-bold leading-snug text-slate-900">{sector.name}</p>
+                  <div className="flex shrink-0 flex-col items-end gap-1">
+                    {sector.isSpecialProject && (
+                      <span className="rounded-full bg-violet-100 px-2 py-0.5 text-[8px] font-bold uppercase text-violet-800">
+                        Featured
+                      </span>
+                    )}
+                    {sector.investmentScore != null && (
+                      <span className="rounded-md bg-slate-100 px-1.5 py-0.5 text-[10px] font-bold text-slate-700">
+                        {sector.investmentScore}
+                      </span>
+                    )}
+                  </div>
+                </div>
+                <div className="flex flex-wrap gap-1">
+                  <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-[9px] font-semibold text-emerald-800">
+                    {oppCount} opportunit{oppCount === 1 ? "y" : "ies"}
+                  </span>
+                  {sector.investmentSignal && (
+                    <span
+                      className={`rounded-full px-2 py-0.5 text-[9px] font-semibold capitalize ${
+                        sector.investmentSignal === "high"
+                          ? "bg-violet-100 text-violet-800"
+                          : sector.investmentSignal === "medium"
+                            ? "bg-amber-100 text-amber-800"
+                            : "bg-slate-100 text-slate-600"
+                      }`}
+                    >
+                      {sector.investmentSignal} signal
+                    </span>
+                  )}
+                </div>
+              </button>
+            );
+          })}
+          {sectors.length === 0 && (
+            <p className="px-4 py-8 text-center text-sm text-slate-500">No sectors match your search.</p>
+          )}
+        </div>
+
+        {selected ? (
+          <InvestUpSectorDetail sector={selected} />
+        ) : (
+          <div className="flex min-h-[320px] items-center justify-center rounded-xl border border-dashed border-slate-200 p-8 text-sm text-slate-500">
+            Select a sector to explore investment data
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function signalColor(signal?: string) {
+  if (signal === "high") return "from-violet-600 to-indigo-600";
+  if (signal === "medium") return "from-amber-500 to-orange-500";
+  return "from-slate-500 to-slate-600";
+}
+
+function InvestUpSectorDetail({ sector }: { sector: InvestUpLiveSector }) {
+  const [tab, setTab] = useState<"overview" | "opportunities" | "contact">("overview");
+  const overview = sector.industryOverview;
+  const opportunities = sector.investmentOpportunities ?? [];
+  const contacts = sector.contacts ?? [];
+
+  return (
+    <div className="max-h-[560px] overflow-y-auto bg-slate-50/40 p-4">
+      <div className={`rounded-xl bg-gradient-to-r ${signalColor(sector.investmentSignal)} p-4 text-white`}>
+        <div className="flex flex-wrap items-start justify-between gap-3">
+          <div>
+            <p className="text-[10px] font-bold uppercase tracking-widest text-white/70">Invest UP · Live Sector Profile</p>
+            <h4 className="mt-1 text-lg font-bold">{sector.name}</h4>
+            {sector.policy && <p className="mt-1 text-xs text-white/80">{sector.policy}</p>}
+          </div>
+          {sector.investmentScore != null && (
+            <div className="rounded-xl bg-white/15 px-3 py-2 text-center backdrop-blur">
+              <p className="text-[9px] font-bold uppercase text-white/70">Investment Score</p>
+              <p className="text-2xl font-bold tabular-nums">{sector.investmentScore}</p>
+            </div>
+          )}
+        </div>
+        {sector.districtHotspots && sector.districtHotspots.length > 0 && (
+          <div className="mt-3 flex flex-wrap gap-1.5">
+            {sector.districtHotspots.slice(0, 5).map((d) => (
+              <span key={d} className="rounded-full bg-white/15 px-2 py-0.5 text-[10px] font-medium">
+                {d}
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {overview?.stats && overview.stats.length > 0 && (
+        <div className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+          {overview.stats.slice(0, 6).map((stat) => (
+            <div
+              key={`${stat.value}-${stat.label}`}
+              className="rounded-xl border border-white bg-white px-3 py-2.5 shadow-sm"
+            >
+              <p className="text-lg font-bold leading-tight text-emerald-700">{stat.value}</p>
+              <p className="mt-0.5 text-[10px] leading-snug text-slate-600">{stat.label}</p>
+            </div>
+          ))}
+        </div>
+      )}
+
+      <div className="mt-4 flex gap-1 rounded-lg bg-white p-1 shadow-sm">
+        {(["overview", "opportunities", "contact"] as const).map((t) => (
+          <button
+            key={t}
+            type="button"
+            onClick={() => setTab(t)}
+            className={`flex-1 rounded-md px-2 py-1.5 text-[10px] font-bold uppercase tracking-wide transition-colors ${
+              tab === t ? "bg-emerald-600 text-white" : "text-slate-500 hover:bg-slate-50"
+            }`}
+          >
+            {t === "overview" ? "Overview" : t === "opportunities" ? `Opportunities (${opportunities.length})` : `Contact (${contacts.length})`}
+          </button>
+        ))}
+      </div>
+
+      {tab === "overview" && (
+        <div className="mt-3 space-y-4">
+          {overview?.highlights && overview.highlights.length > 0 && (
+            <div className="grid gap-2 sm:grid-cols-2">
+              {overview.highlights.map((h) => (
+                <div key={h.label} className="flex gap-2 rounded-lg border border-emerald-100 bg-emerald-50/50 px-3 py-2.5">
+                  <span className="mt-0.5 text-emerald-600">✓</span>
+                  <p className="text-[11px] leading-relaxed text-slate-700">{h.label}</p>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {overview?.indiaScenario && overview.indiaScenario.length > 0 && (
+            <OverviewSection
+              title={sector.isSpecialProject ? "Project Summary" : "India Scenario"}
+              items={overview.indiaScenario}
+              accent="blue"
+            />
+          )}
+          {overview?.upScenario && overview.upScenario.length > 0 && (
+            <OverviewSection
+              title={sector.isSpecialProject ? "Infrastructure & Location" : "Uttar Pradesh Scenario"}
+              items={overview.upScenario}
+              accent="emerald"
+            />
+          )}
+          {overview?.otherSections?.map((section) => (
+            <OverviewSection key={section.heading} title={section.heading} items={section.bullets} accent="slate" />
+          ))}
+        </div>
+      )}
+
+      {tab === "opportunities" && (
+        <div className="mt-3 grid gap-2 sm:grid-cols-2">
+          {opportunities.map((opp) => (
+            <div key={`${opp.title}-${opp.description.slice(0, 40)}`} className="rounded-xl border border-slate-100 bg-white p-3 shadow-sm">
+              <p className="text-[9px] font-bold uppercase tracking-wide text-emerald-700">{opp.category}</p>
+              <p className="mt-1 text-xs font-bold text-slate-900">{opp.title}</p>
+              <p className="mt-1.5 text-[11px] leading-relaxed text-slate-600">{opp.description}</p>
+            </div>
+          ))}
+          {opportunities.length === 0 && (
+            <p className="col-span-2 py-6 text-center text-sm text-slate-500">No opportunities listed for this sector yet.</p>
+          )}
+        </div>
+      )}
+
+      {tab === "contact" && (
+        <div className="mt-3 space-y-2">
+          {contacts.map((c) => (
+            <div key={c.email || c.name} className="rounded-xl border border-slate-100 bg-white p-3 shadow-sm">
+              <p className="text-sm font-bold text-slate-900">{c.name}</p>
+              {c.designation && <p className="text-xs text-slate-600">{c.designation}</p>}
+              {c.department && <p className="text-[10px] text-slate-500">{c.department}</p>}
+              <div className="mt-2 flex flex-wrap gap-2">
+                {c.phone && (
+                  <a href={`tel:${c.phone}`} className="rounded-md bg-emerald-50 px-2 py-1 text-[10px] font-semibold text-emerald-800">
+                    {c.phone}
+                  </a>
+                )}
+                {c.email && (
+                  <a href={`mailto:${c.email}`} className="rounded-md bg-blue-50 px-2 py-1 text-[10px] font-semibold text-blue-800">
+                    {c.email}
+                  </a>
+                )}
+              </div>
+            </div>
+          ))}
+          {contacts.length === 0 && (
+            <p className="py-6 text-center text-sm text-slate-500">
+              No sector nodal officer listed on the portal.{" "}
+              <a href={sector.url} target="_blank" rel="noopener noreferrer" className="font-semibold text-emerald-700 hover:underline">
+                View sector page
+              </a>
+            </p>
+          )}
+        </div>
+      )}
+
+      <div className="mt-4">
+        <a
+          href={sector.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="portal-btn-primary inline-flex items-center gap-1.5 text-xs"
+        >
+          View full sector profile on Invest UP
+          <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  );
+}
+
+function OverviewSection({
+  title,
+  items,
+  accent,
+}: {
+  title: string;
+  items: string[];
+  accent: "blue" | "emerald" | "slate";
+}) {
+  const border = accent === "blue" ? "border-blue-200" : accent === "emerald" ? "border-emerald-200" : "border-slate-200";
+  const head = accent === "blue" ? "text-blue-800" : accent === "emerald" ? "text-emerald-800" : "text-slate-700";
+  return (
+    <div className={`rounded-xl border ${border} bg-white p-3 shadow-sm`}>
+      <h5 className={`text-[10px] font-bold uppercase tracking-wide ${head}`}>{title}</h5>
+      <ul className="mt-2 space-y-2">
+        {items.slice(0, 8).map((item) => (
+          <li key={item.slice(0, 70)} className="flex gap-2 text-[11px] leading-relaxed text-slate-700">
+            <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-current opacity-40" />
+            {item}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
