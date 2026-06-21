@@ -143,7 +143,7 @@ export default function Dashboard() {
     try {
       const [jobsRes, statsRes, facetsRes] = await Promise.all([
         getNcsJobs({ ...activeFilters, limit: 200 }),
-        getNcsStats(),
+        getNcsStats(activeFilters),
         getNcsFacets(),
       ]);
       setNcsJobs(jobsRes.data);

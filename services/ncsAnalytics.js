@@ -139,6 +139,16 @@ function buildWhere(filters) {
         conditions.push("(max_experience IS NOT NULL AND max_experience >= @minExperience)");
         params.minExperience = Number(f.value);
         break;
+      case "maxSalary":
+        conditions.push(
+          "(hide_salary_range = 0 AND COALESCE(min_salary, max_salary) <= @maxSalary)"
+        );
+        params.maxSalary = Number(f.value);
+        break;
+      case "maxExperience":
+        conditions.push("(min_experience IS NOT NULL AND min_experience <= @maxExperience)");
+        params.maxExperience = Number(f.value);
+        break;
       default:
         break;
     }
@@ -469,4 +479,79 @@ function listNcsFrames() {
   return Object.keys(FRAME_META).map((id) => ({ id, ...FRAME_META[id] }));
 }
 
-module.exports = { getNcsFrameAnalytics, listNcsFrames };
+function toRankings(items, metric, limit = TOP_N) {
+  return [...items]
+    .sort((a, b) => b[metric] - a[metric])
+    .slice(0, limit)
+    .map((item) => ({
+      name: item.name || item.key,
+      postings: item.postings,
+      vacancies: item.vacancies,
+      applicants: item.applicants,
+      value: item[metric],
+    }));
+}
+
+function getNcsScopedStats(rawScope = []) {
+  const scopeFilters = parseFilters(rawScope);
+  const { where, params } = buildWhere(scopeFilters);
+
+  const summary = db
+    .prepare(
+      `SELECT COUNT(*) AS totalPostings,
+        SUM(CASE WHEN no_of_vacancies IS NOT NULL AND no_of_vacancies > 0 THEN no_of_vacancies ELSE 1 END) AS totalVacancies,
+        SUM(COALESCE(applicant_count, 0)) AS totalApplicants,
+        COUNT(DISTINCT NULLIF(organization_name, '')) AS employers
+       FROM ncs_jobs WHERE ${where}`
+    )
+    .get(params);
+
+  const sevenDaysAgo = new Date();
+  sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+  const newThisWeek = db
+    .prepare(
+      `SELECT COUNT(*) AS c FROM ncs_jobs
+       WHERE ${where} AND published_at >= @since`
+    )
+    .get({ ...params, since: sevenDaysAgo.toISOString() }).c;
+
+  const stateRows = queryStateNormalized(where, params).map((row) => ({
+    key: row.key,
+    name: row.key,
+    postings: row.postings,
+    vacancies: row.vacancies,
+    applicants: row.applicants,
+  }));
+  const industryRows = queryIndustryBucketsAll(where, params).map((row) => ({
+    key: row.key,
+    name: row.key,
+    postings: row.postings,
+    vacancies: row.vacancies,
+    applicants: row.applicants,
+  }));
+
+  const lastSync = db
+    .prepare("SELECT synced_at, job_count, status FROM ncs_sync_log ORDER BY id DESC LIMIT 1")
+    .get();
+
+  return {
+    total: summary.totalPostings ?? 0,
+    totalPostings: summary.totalPostings ?? 0,
+    totalVacancies: summary.totalVacancies ?? 0,
+    totalApplicants: summary.totalApplicants ?? 0,
+    statesCovered: stateRows.length,
+    employers: summary.employers ?? 0,
+    newThisWeek,
+    topIndustriesByPostings: toRankings(industryRows, "postings"),
+    topIndustriesByVacancies: toRankings(industryRows, "vacancies"),
+    topIndustriesByApplicants: toRankings(industryRows, "applicants"),
+    topStatesByVacancies: toRankings(stateRows, "vacancies"),
+    topCities: [],
+    topFunctionalAreas: [],
+    jobTypes: [],
+    sectorBreakdown: [],
+    lastSync: lastSync || null,
+  };
+}
+
+module.exports = { getNcsFrameAnalytics, getNcsScopedStats, listNcsFrames };
