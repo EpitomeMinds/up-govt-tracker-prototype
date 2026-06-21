@@ -281,11 +281,8 @@ export default function Dashboard() {
   };
 
   const handleNcsDrillFilter = (next: Partial<NcsDashboardFilters>) => {
-    setNcsFilters((prev) => {
-      const applied = { ...prev, ...next };
-      setNcsDraftFilters(applied);
-      return applied;
-    });
+    setNcsFilters((prev) => ({ ...prev, ...next }));
+    setNcsDraftFilters((prev) => ({ ...prev, ...next }));
   };
 
   const handleNcsSync = async () => {

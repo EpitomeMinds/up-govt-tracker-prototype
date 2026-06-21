@@ -1,5 +1,5 @@
 import type { NcsDashboardFilters } from "./ncsJobTypes";
-import type { NcsAnalyticsDimension, NcsAnalyticsFilter } from "./ncsAnalyticsTypes";
+import type { NcsAnalyticsDimension, NcsAnalyticsFilter, NcsFrameId } from "./ncsAnalyticsTypes";
 
 export const NCS_GLOBAL_DRILL_DIMENSIONS = new Set<NcsAnalyticsDimension>([
   "state",
@@ -25,8 +25,69 @@ export function ncsDashboardToScopeFilters(filters: NcsDashboardFilters): NcsAna
   return scope;
 }
 
-export function hasNcsScopeFilters(filters: NcsDashboardFilters): boolean {
-  return ncsDashboardToScopeFilters(filters).length > 0;
+export const NCS_FRAME_DRILL_PATHS: Record<NcsFrameId, NcsAnalyticsDimension[]> = {
+  geography: ["state", "city", "functionalArea"],
+  employers: ["organization", "functionalArea", "city"],
+  employment: ["industry", "functionalArea", "functionalRole", "jobTitle"],
+  salary: ["salaryBand", "functionalArea", "city"],
+  experience: ["experienceBand", "functionalArea", "jobType"],
+};
+
+export function isGlobalDrillDimension(dimension: NcsAnalyticsDimension): boolean {
+  return (
+    NCS_GLOBAL_DRILL_DIMENSIONS.has(dimension) ||
+    dimension === "functionalRole" ||
+    dimension === "jobTitle"
+  );
+}
+
+export function isLocalDrillDimension(dimension: NcsAnalyticsDimension): boolean {
+  return dimension === "salaryBand" || dimension === "experienceBand" || dimension === "month";
+}
+
+export function serializeNcsScopeKey(filters: NcsDashboardFilters): string {
+  return JSON.stringify(ncsDashboardToScopeFilters(filters));
+}
+
+function dashboardFilterForPathDimension(
+  filters: NcsDashboardFilters,
+  dimension: NcsAnalyticsDimension
+): NcsAnalyticsFilter | null {
+  switch (dimension) {
+    case "state":
+      return filters.state ? { dimension: "state", value: filters.state } : null;
+    case "city":
+      return filters.city ? { dimension: "city", value: filters.city } : null;
+    case "functionalArea":
+      return filters.functionalArea
+        ? { dimension: "functionalArea", value: filters.functionalArea }
+        : null;
+    case "jobType":
+      return filters.jobType ? { dimension: "jobType", value: filters.jobType } : null;
+    case "industry":
+      return filters.industry ? { dimension: "industry", value: filters.industry } : null;
+    case "organization":
+    case "functionalRole":
+    case "jobTitle":
+      return filters.q.trim() ? { dimension, value: filters.q.trim() } : null;
+    default:
+      return null;
+  }
+}
+
+export function frameDrillStackFromDashboard(
+  frameId: NcsFrameId,
+  filters: NcsDashboardFilters
+): NcsAnalyticsFilter[] {
+  const path = NCS_FRAME_DRILL_PATHS[frameId];
+  const stack: NcsAnalyticsFilter[] = [];
+  for (const dimension of path) {
+    if (isLocalDrillDimension(dimension)) break;
+    const entry = dashboardFilterForPathDimension(filters, dimension);
+    if (!entry) break;
+    stack.push(entry);
+  }
+  return stack;
 }
 
 export function ncsDashboardToDrillFilters(filters: NcsDashboardFilters): NcsAnalyticsFilter[] {
@@ -126,9 +187,13 @@ export function clearDrillStackDashboardPatch(
   return patch;
 }
 
-export function mergeDrillFilters(
-  shared: NcsAnalyticsFilter[],
-  frameLocal: NcsAnalyticsFilter[] = []
-): NcsAnalyticsFilter[] {
-  return [...shared, ...frameLocal];
+export function hasNcsScopeFilters(filters: NcsDashboardFilters): boolean {
+  return ncsDashboardToScopeFilters(filters).length > 0;
+}
+
+export function mergeLocalDrillKey(
+  scopeKey: string,
+  localDrills: NcsAnalyticsFilter[] = []
+): string {
+  return `${scopeKey}|${JSON.stringify(localDrills)}`;
 }

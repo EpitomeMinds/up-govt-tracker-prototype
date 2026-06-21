@@ -41,6 +41,7 @@ interface Props {
   defaultTitle: string;
   defaultHint?: string;
   size?: "default" | "large" | "fill";
+  queryKey: string;
   drillFilters: NcsAnalyticsFilter[];
   scopeFilters?: NcsAnalyticsFilter[];
   onDrill: (dimension: string, value: string) => void;
@@ -105,6 +106,7 @@ export default function NcsDrillChartFrame({
   defaultTitle,
   defaultHint,
   size = "default",
+  queryKey,
   drillFilters,
   scopeFilters = [],
   onDrill,
@@ -116,24 +118,30 @@ export default function NcsDrillChartFrame({
   const [loading, setLoading] = useState(true);
   const [slideKey, setSlideKey] = useState(0);
   const [filterOpen, setFilterOpen] = useState(false);
+  const scopeFiltersRef = useRef(scopeFilters);
+  const drillFiltersRef = useRef(drillFilters);
+  scopeFiltersRef.current = scopeFilters;
+  drillFiltersRef.current = drillFilters;
 
-  const load = useCallback(
-    async (signal?: AbortSignal) => {
-      setLoading(true);
-      try {
-        const data = await getNcsFrameAnalytics(frameId, drillFilters, scopeFilters, signal);
-        if (signal?.aborted) return;
-        setAnalytics(data);
-        setSlideKey((k) => k + 1);
-      } catch (err) {
-        if (signal?.aborted || (err instanceof DOMException && err.name === "AbortError")) return;
-        setAnalytics(null);
-      } finally {
-        if (!signal?.aborted) setLoading(false);
-      }
-    },
-    [frameId, drillFilters, scopeFilters]
-  );
+  const load = useCallback(async (signal?: AbortSignal) => {
+    setLoading(true);
+    try {
+      const data = await getNcsFrameAnalytics(
+        frameId,
+        drillFiltersRef.current,
+        scopeFiltersRef.current,
+        signal
+      );
+      if (signal?.aborted) return;
+      setAnalytics(data);
+      setSlideKey((k) => k + 1);
+    } catch (err) {
+      if (signal?.aborted || (err instanceof DOMException && err.name === "AbortError")) return;
+      setAnalytics(null);
+    } finally {
+      if (!signal?.aborted) setLoading(false);
+    }
+  }, [frameId]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -144,7 +152,9 @@ export default function NcsDrillChartFrame({
       window.clearTimeout(timer);
       controller.abort();
     };
-  }, [load]);
+  }, [queryKey, load]);
+
+  const isDrilled = (analytics?.filters?.length ?? 0) > 0;
 
   const drillInto = (key: string) => {
     if (!analytics?.drillable || !analytics.dimension) return;
@@ -158,7 +168,7 @@ export default function NcsDrillChartFrame({
   };
 
   const goBack = () => {
-    if (drillFilters.length === 0) return;
+    if (!isDrilled) return;
     onDrillBack();
   };
 
@@ -167,7 +177,6 @@ export default function NcsDrillChartFrame({
     onDrillReset();
   };
 
-  const isDrilled = drillFilters.length > 0;
   const pickerOptions = analytics?.pickerOptions ?? [];
 
   const chartData = (analytics?.data ?? []).map((row, i) => ({
@@ -203,7 +212,7 @@ export default function NcsDrillChartFrame({
               onPick={(row) => drillInto(row.key)}
             />
           )}
-          {drillFilters.length > 0 && (
+          {isDrilled && (
             <button type="button" onClick={goBack} className="portal-btn-ghost px-2 py-1 text-[11px]">
               ← Back
             </button>

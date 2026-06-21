@@ -12,9 +12,13 @@ import {
   clearDrillDimensionPatch,
   clearDrillStackDashboardPatch,
   drillDimensionToDashboardPatch,
+  frameDrillStackFromDashboard,
   hasNcsScopeFilters,
-  NCS_GLOBAL_DRILL_DIMENSIONS,
+  isGlobalDrillDimension,
+  isLocalDrillDimension,
+  mergeLocalDrillKey,
   ncsDashboardToScopeFilters,
+  serializeNcsScopeKey,
 } from "@/lib/ncsAnalyticsFilters";
 
 const FRAME_LABELS: Record<
@@ -36,30 +40,39 @@ interface Props {
 
 export default function PortalNcsMetricsPanel({
   stats,
-  matchTotal,
   appliedFilters,
   onApplyDrillFilter,
 }: Props) {
-  const [frameDrillFilters, setFrameDrillFilters] = useState<
-    Partial<Record<NcsFrameId, NcsAnalyticsFilter[]>>
+  const [frameLocalDrills, setFrameLocalDrills] = useState<
+    Partial<Record<NcsFrameId | "geography", NcsAnalyticsFilter[]>>
   >({});
 
+  const scopeKey = useMemo(() => serializeNcsScopeKey(appliedFilters), [appliedFilters]);
   const scopeFilters = useMemo(
     () => ncsDashboardToScopeFilters(appliedFilters),
-    [appliedFilters]
+    [scopeKey]
   );
+
+  const frameQueryKeys = useMemo(() => {
+    const keys: Partial<Record<NcsFrameId | "geography", string>> = {
+      geography: mergeLocalDrillKey(scopeKey, frameLocalDrills.geography ?? []),
+    };
+    for (const frameId of NCS_FRAME_IDS) {
+      keys[frameId] = mergeLocalDrillKey(scopeKey, frameLocalDrills[frameId] ?? []);
+    }
+    return keys;
+  }, [scopeKey, frameLocalDrills]);
 
   const [kpiStats, setKpiStats] = useState<NcsStats | null>(stats);
 
   useEffect(() => {
-    setKpiStats(stats);
-  }, [stats]);
-
-  useEffect(() => {
     if (!hasNcsScopeFilters(appliedFilters)) {
       setKpiStats(stats);
-      return;
     }
+  }, [stats, scopeKey]);
+
+  useEffect(() => {
+    if (!hasNcsScopeFilters(appliedFilters)) return;
 
     let cancelled = false;
     const timer = window.setTimeout(() => {
@@ -76,70 +89,83 @@ export default function PortalNcsMetricsPanel({
       cancelled = true;
       window.clearTimeout(timer);
     };
-  }, [appliedFilters, stats]);
+  }, [scopeKey, appliedFilters, stats]);
 
   const handleDrill = useCallback(
-    (frameId: NcsFrameId, dimension: string, value: string) => {
+    (frameId: NcsFrameId | "geography", dimension: string, value: string) => {
       const dim = dimension as NcsAnalyticsDimension;
-      const entry: NcsAnalyticsFilter = { dimension: dim, value };
 
-      setFrameDrillFilters((prev) => ({
-        ...prev,
-        [frameId]: [...(prev[frameId] ?? []), entry],
-      }));
-
-      if (NCS_GLOBAL_DRILL_DIMENSIONS.has(dim) || dim === "functionalRole" || dim === "jobTitle") {
+      if (isGlobalDrillDimension(dim)) {
         onApplyDrillFilter?.(drillDimensionToDashboardPatch(dim, value));
+        return;
+      }
+
+      if (isLocalDrillDimension(dim)) {
+        setFrameLocalDrills((prev) => ({
+          ...prev,
+          [frameId]: [...(prev[frameId] ?? []), { dimension: dim, value }],
+        }));
       }
     },
     [onApplyDrillFilter]
   );
 
   const handleDrillBack = useCallback(
-    (frameId: NcsFrameId) => {
-      const local = frameDrillFilters[frameId] ?? [];
-      if (local.length === 0) return;
-
-      const removed = local[local.length - 1];
-      const next = local.slice(0, -1);
-      setFrameDrillFilters((prev) => ({ ...prev, [frameId]: next }));
-
-      if (
-        NCS_GLOBAL_DRILL_DIMENSIONS.has(removed.dimension) ||
-        removed.dimension === "functionalRole" ||
-        removed.dimension === "jobTitle"
-      ) {
-        onApplyDrillFilter?.(clearDrillDimensionPatch(removed.dimension));
+    (frameId: NcsFrameId | "geography") => {
+      const local = frameLocalDrills[frameId] ?? [];
+      if (local.length > 0) {
+        setFrameLocalDrills((prev) => ({
+          ...prev,
+          [frameId]: local.slice(0, -1),
+        }));
+        return;
       }
+
+      const globalStack = frameDrillStackFromDashboard(frameId as NcsFrameId, appliedFilters);
+      if (globalStack.length === 0) return;
+      const removed = globalStack[globalStack.length - 1];
+      onApplyDrillFilter?.(clearDrillDimensionPatch(removed.dimension));
     },
-    [frameDrillFilters, onApplyDrillFilter]
+    [frameLocalDrills, appliedFilters, onApplyDrillFilter]
   );
 
   const handleDrillToLevel = useCallback(
-    (frameId: NcsFrameId, level: number) => {
-      const local = frameDrillFilters[frameId] ?? [];
-      if (level >= local.length) return;
+    (frameId: NcsFrameId | "geography", level: number) => {
+      const local = frameLocalDrills[frameId] ?? [];
+      const globalStack = frameDrillStackFromDashboard(frameId as NcsFrameId, appliedFilters);
+      const totalDepth = local.length + globalStack.length;
+      if (level >= totalDepth) return;
 
-      const removed = local.slice(level);
-      const next = local.slice(0, level);
-      setFrameDrillFilters((prev) => ({ ...prev, [frameId]: next }));
-
-      if (removed.length > 0) {
-        onApplyDrillFilter?.(clearDrillStackDashboardPatch(removed));
+      if (level < globalStack.length) {
+        const removed = globalStack.slice(level);
+        setFrameLocalDrills((prev) => ({ ...prev, [frameId]: [] }));
+        if (removed.length > 0) {
+          onApplyDrillFilter?.(clearDrillStackDashboardPatch(removed));
+        }
+        return;
       }
+
+      const localTarget = level - globalStack.length;
+      setFrameLocalDrills((prev) => ({
+        ...prev,
+        [frameId]: local.slice(0, localTarget),
+      }));
     },
-    [frameDrillFilters, onApplyDrillFilter]
+    [frameLocalDrills, appliedFilters, onApplyDrillFilter]
   );
 
   const handleDrillReset = useCallback(
-    (frameId: NcsFrameId) => {
-      const local = frameDrillFilters[frameId] ?? [];
-      if (local.length === 0) return;
+    (frameId: NcsFrameId | "geography") => {
+      const local = frameLocalDrills[frameId] ?? [];
+      const globalStack = frameDrillStackFromDashboard(frameId as NcsFrameId, appliedFilters);
+      if (local.length === 0 && globalStack.length === 0) return;
 
-      setFrameDrillFilters((prev) => ({ ...prev, [frameId]: [] }));
-      onApplyDrillFilter?.(clearDrillStackDashboardPatch(local));
+      setFrameLocalDrills((prev) => ({ ...prev, [frameId]: [] }));
+      if (globalStack.length > 0) {
+        onApplyDrillFilter?.(clearDrillStackDashboardPatch(globalStack));
+      }
     },
-    [frameDrillFilters, onApplyDrillFilter]
+    [frameLocalDrills, appliedFilters, onApplyDrillFilter]
   );
 
   const isFiltered = hasNcsScopeFilters(appliedFilters);
@@ -216,7 +242,8 @@ export default function PortalNcsMetricsPanel({
           defaultTitle="Geography"
           defaultHint="Heat map · click state → top 5 cities → sectors"
           size="fill"
-          drillFilters={frameDrillFilters.geography ?? []}
+          queryKey={frameQueryKeys.geography ?? scopeKey}
+          drillFilters={frameLocalDrills.geography ?? []}
           scopeFilters={scopeFilters}
           onDrill={(dimension, value) => handleDrill("geography", dimension, value)}
           onDrillBack={() => handleDrillBack("geography")}
@@ -231,7 +258,8 @@ export default function PortalNcsMetricsPanel({
               frameId={frameId}
               defaultTitle={FRAME_LABELS[frameId].title}
               defaultHint={FRAME_LABELS[frameId].hint}
-              drillFilters={frameDrillFilters[frameId] ?? []}
+              queryKey={frameQueryKeys[frameId] ?? scopeKey}
+              drillFilters={frameLocalDrills[frameId] ?? []}
               scopeFilters={scopeFilters}
               onDrill={(dimension, value) => handleDrill(frameId, dimension, value)}
               onDrillBack={() => handleDrillBack(frameId)}

@@ -410,24 +410,56 @@ function formatDatumRows(rows, dimension) {
   }));
 }
 
+function getFilterForPathDimension(allFilters, dim) {
+  const direct = allFilters.find((f) => f.dimension === dim);
+  if (direct) return direct;
+  if (dim === "organization" || dim === "functionalRole" || dim === "jobTitle") {
+    const search = allFilters.find((f) => f.dimension === "search");
+    if (search) return { dimension: dim, value: search.value };
+  }
+  return null;
+}
+
+function buildFrameStack(frameId, allFilters) {
+  const path = FRAME_DRILL[frameId];
+  if (!path) return [];
+  const stack = [];
+  for (const dim of path) {
+    const entry = getFilterForPathDimension(allFilters, dim);
+    if (!entry) break;
+    stack.push(entry);
+  }
+  return stack;
+}
+
+function dedupeFilters(filters) {
+  const merged = new Map();
+  for (const f of filters) {
+    if (!f?.dimension || f.value == null || f.value === "") continue;
+    merged.set(f.dimension, f);
+  }
+  return Array.from(merged.values());
+}
+
 function getNcsFrameAnalytics(frameId, rawFilters = [], rawScope = []) {
-  const drillFilters = parseFilters(rawFilters);
+  const localDrill = parseFilters(rawFilters);
   const scopeFilters = parseFilters(rawScope);
-  const filters = [...scopeFilters, ...drillFilters];
+  const allFilters = dedupeFilters([...scopeFilters, ...localDrill]);
   const drillPath = FRAME_DRILL[frameId];
   if (!drillPath) {
     throw new Error(`Unknown analytics frame: ${frameId}`);
   }
 
-  const level = drillFilters.length;
+  const frameStack = buildFrameStack(frameId, allFilters);
+  const level = frameStack.length;
   const dimension = drillPath[Math.min(level, drillPath.length - 1)];
   const nextDimension = level < drillPath.length - 1 ? drillPath[level + 1] : null;
-  const { where, params } = buildWhere(filters);
+  const { where, params } = buildWhere(allFilters);
 
-  const rows = queryDimension(dimension, where, params, frameId, drillFilters.length);
+  const rows = queryDimension(dimension, where, params, frameId, level);
   const pickerRows =
     nextDimension && dimension !== "jobTitle"
-      ? queryDimensionWithLimit(dimension, where, params, frameId, drillFilters.length, 500)
+      ? queryDimensionWithLimit(dimension, where, params, frameId, level, 500)
       : [];
   const summary = db
     .prepare(
@@ -441,7 +473,7 @@ function getNcsFrameAnalytics(frameId, rawFilters = [], rawScope = []) {
   const data = formatDatumRows(rows, dimension);
   const pickerOptions = formatDatumRows(pickerRows, dimension);
 
-  const chartType = chartTypeFor(frameId, dimension, drillFilters.length);
+  const chartType = chartTypeFor(frameId, dimension, level);
   if (chartType === "bar" || chartType === "horizontalBar") {
     data.sort((a, b) => b.vacancies - a.vacancies);
     pickerOptions.sort((a, b) => b.vacancies - a.vacancies);
@@ -454,10 +486,10 @@ function getNcsFrameAnalytics(frameId, rawFilters = [], rawScope = []) {
     nextDimension,
     drillable: Boolean(nextDimension) && data.length > 0 && dimension !== "jobTitle",
     chartType,
-    title: buildTitle(frameId, dimension, drillFilters),
+    title: buildTitle(frameId, dimension, frameStack),
     hint: FRAME_META[frameId]?.hint,
-    breadcrumb: buildBreadcrumb(frameId, drillFilters),
-    filters: drillFilters,
+    breadcrumb: buildBreadcrumb(frameId, frameStack),
+    filters: frameStack,
     summary: {
       postings: summary?.postings ?? 0,
       vacancies: summary?.vacancies ?? 0,
