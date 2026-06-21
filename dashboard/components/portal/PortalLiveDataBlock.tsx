@@ -12,23 +12,61 @@ interface Props {
 
 type SourceFilter = "all" | "upsida" | "investindia" | "nsdc" | "investup";
 
+type InvestUpOppFilter = "" | "has" | "5plus";
+type InvestUpSort = "score-desc" | "name-asc" | "opportunities-desc";
+
+function sectorMatchesCity(sector: InvestUpLiveSector, city: string) {
+  const needle = city.toLowerCase();
+  const inHotspots = (sector.districtHotspots ?? []).some(
+    (d) => d.toLowerCase() === needle || d.toLowerCase().includes(needle)
+  );
+  if (inHotspots) return true;
+  const content = [
+    ...(sector.industryOverview?.upScenario ?? []),
+    ...(sector.industryOverview?.indiaScenario ?? []),
+  ]
+    .join(" ")
+    .toLowerCase();
+  return content.includes(needle);
+}
+
 export default function PortalLiveDataBlock({ data, onRefresh, refreshing }: Props) {
   const [query, setQuery] = useState("");
   const [sectorFilter, setSectorFilter] = useState("");
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [investUpQuery, setInvestUpQuery] = useState("");
+  const [investUpSectorFilter, setInvestUpSectorFilter] = useState("");
+  const [investUpCityFilter, setInvestUpCityFilter] = useState("");
+  const [investUpOppFilter, setInvestUpOppFilter] = useState<InvestUpOppFilter>("");
+  const [investUpFeaturedOnly, setInvestUpFeaturedOnly] = useState(false);
+  const [investUpSort, setInvestUpSort] = useState<InvestUpSort>("score-desc");
   const [selectedInvestUpSlug, setSelectedInvestUpSlug] = useState<string | null>(null);
   const [sourceView, setSourceView] = useState<SourceFilter>("all");
 
   const investUpSectors = data.investUpSectors ?? [];
 
+  const investUpCities = useMemo(() => {
+    const cities = new Set<string>();
+    for (const s of investUpSectors) {
+      for (const d of s.districtHotspots ?? []) cities.add(d);
+    }
+    return [...cities].sort((a, b) => a.localeCompare(b));
+  }, [investUpSectors]);
+
   const filteredInvestUpSectors = useMemo(() => {
     const q = investUpQuery.trim().toLowerCase();
-    if (!q) return investUpSectors;
-    return investUpSectors.filter((s) => {
+    const list = investUpSectors.filter((s) => {
+      if (investUpSectorFilter && s.slug !== investUpSectorFilter) return false;
+      if (investUpCityFilter && !sectorMatchesCity(s, investUpCityFilter)) return false;
+      if (investUpOppFilter === "has" && !(s.investmentOpportunities?.length ?? 0)) return false;
+      if (investUpOppFilter === "5plus" && (s.investmentOpportunities?.length ?? 0) < 5) return false;
+      if (investUpFeaturedOnly && !s.isSpecialProject) return false;
+      if (!q) return true;
       const haystack = [
         s.name,
         s.slug,
+        s.policy,
+        ...(s.districtHotspots ?? []),
         ...(s.investmentOpportunities?.map((o) => `${o.title} ${o.description}`) ?? []),
         ...(s.industryOverview?.indiaScenario ?? []),
         ...(s.industryOverview?.upScenario ?? []),
@@ -37,7 +75,41 @@ export default function PortalLiveDataBlock({ data, onRefresh, refreshing }: Pro
         .toLowerCase();
       return haystack.includes(q);
     });
-  }, [investUpSectors, investUpQuery]);
+
+    return [...list].sort((a, b) => {
+      if (investUpSort === "name-asc") return a.name.localeCompare(b.name);
+      if (investUpSort === "opportunities-desc") {
+        return (b.investmentOpportunities?.length ?? 0) - (a.investmentOpportunities?.length ?? 0);
+      }
+      return (b.investmentScore ?? 0) - (a.investmentScore ?? 0);
+    });
+  }, [
+    investUpSectors,
+    investUpQuery,
+    investUpSectorFilter,
+    investUpCityFilter,
+    investUpOppFilter,
+    investUpFeaturedOnly,
+    investUpSort,
+  ]);
+
+  const resetInvestUpFilters = () => {
+    setInvestUpQuery("");
+    setInvestUpSectorFilter("");
+    setInvestUpCityFilter("");
+    setInvestUpOppFilter("");
+    setInvestUpFeaturedOnly(false);
+    setInvestUpSort("score-desc");
+    setSelectedInvestUpSlug(null);
+  };
+
+  const investUpFiltersActive =
+    investUpQuery.trim().length > 0 ||
+    investUpSectorFilter.length > 0 ||
+    investUpCityFilter.length > 0 ||
+    investUpOppFilter.length > 0 ||
+    investUpFeaturedOnly ||
+    investUpSort !== "score-desc";
 
   const selectedInvestUp =
     filteredInvestUpSectors.find((s) => s.slug === selectedInvestUpSlug) ??
@@ -134,10 +206,24 @@ export default function PortalLiveDataBlock({ data, onRefresh, refreshing }: Pro
       {(sourceView === "all" || sourceView === "investup") && investUpSectors.length > 0 && (
         <InvestUpSectorPanel
           sectors={filteredInvestUpSectors}
+          allSectors={investUpSectors}
           allCount={investUpSectors.length}
           portalUrl={data.investUp.portalUrl}
           query={investUpQuery}
           onQueryChange={setInvestUpQuery}
+          sectorFilter={investUpSectorFilter}
+          onSectorFilterChange={setInvestUpSectorFilter}
+          cityFilter={investUpCityFilter}
+          onCityFilterChange={setInvestUpCityFilter}
+          cities={investUpCities}
+          oppFilter={investUpOppFilter}
+          onOppFilterChange={setInvestUpOppFilter}
+          featuredOnly={investUpFeaturedOnly}
+          onFeaturedOnlyChange={setInvestUpFeaturedOnly}
+          sort={investUpSort}
+          onSortChange={setInvestUpSort}
+          filtersActive={investUpFiltersActive}
+          onReset={resetInvestUpFilters}
           selected={selectedInvestUp}
           onSelect={setSelectedInvestUpSlug}
         />
@@ -359,18 +445,46 @@ function ProjectDetail({
 
 function InvestUpSectorPanel({
   sectors,
+  allSectors,
   allCount,
   portalUrl,
   query,
   onQueryChange,
+  sectorFilter,
+  onSectorFilterChange,
+  cityFilter,
+  onCityFilterChange,
+  cities,
+  oppFilter,
+  onOppFilterChange,
+  featuredOnly,
+  onFeaturedOnlyChange,
+  sort,
+  onSortChange,
+  filtersActive,
+  onReset,
   selected,
   onSelect,
 }: {
   sectors: InvestUpLiveSector[];
+  allSectors: InvestUpLiveSector[];
   allCount: number;
   portalUrl: string;
   query: string;
   onQueryChange: (q: string) => void;
+  sectorFilter: string;
+  onSectorFilterChange: (slug: string) => void;
+  cityFilter: string;
+  onCityFilterChange: (city: string) => void;
+  cities: string[];
+  oppFilter: InvestUpOppFilter;
+  onOppFilterChange: (v: InvestUpOppFilter) => void;
+  featuredOnly: boolean;
+  onFeaturedOnlyChange: (v: boolean) => void;
+  sort: InvestUpSort;
+  onSortChange: (v: InvestUpSort) => void;
+  filtersActive: boolean;
+  onReset: () => void;
   selected: InvestUpLiveSector | null;
   onSelect: (slug: string) => void;
 }) {
@@ -392,13 +506,82 @@ function InvestUpSectorPanel({
             · {sectors.length} of {allCount} entries (sectors + AI City)
           </p>
         </div>
-        <input
-          type="text"
-          placeholder="Search sector, opportunity, policy…"
-          value={query}
-          onChange={(e) => onQueryChange(e.target.value)}
-          className="portal-input w-52 text-sm"
-        />
+        <div className="flex flex-wrap items-center gap-2">
+          <input
+            type="text"
+            placeholder="Search sector, opportunity, policy…"
+            value={query}
+            onChange={(e) => onQueryChange(e.target.value)}
+            className="portal-input w-44 text-sm"
+          />
+          <select
+            value={sectorFilter}
+            onChange={(e) => {
+              const slug = e.target.value;
+              onSectorFilterChange(slug);
+              if (slug) onSelect(slug);
+            }}
+            className="portal-select min-w-[160px] text-sm"
+            aria-label="Filter by sector"
+          >
+            <option value="">All sectors</option>
+            {allSectors.map((s) => (
+              <option key={s.slug} value={s.slug}>
+                {s.name}
+              </option>
+            ))}
+          </select>
+          {filtersActive && (
+            <button type="button" className="portal-btn-ghost text-xs" onClick={onReset}>
+              Reset
+            </button>
+          )}
+        </div>
+      </div>
+
+      <div className="flex flex-wrap items-center gap-2 border-b border-slate-100 px-4 py-2.5">
+        <select
+          value={cityFilter}
+          onChange={(e) => onCityFilterChange(e.target.value)}
+          className="portal-select min-w-[140px] text-sm"
+          aria-label="Filter by city"
+        >
+          <option value="">All cities</option>
+          {cities.map((city) => (
+            <option key={city} value={city}>
+              {city}
+            </option>
+          ))}
+        </select>
+        <select
+          value={oppFilter}
+          onChange={(e) => onOppFilterChange(e.target.value as InvestUpOppFilter)}
+          className="portal-select min-w-[140px] text-sm"
+          aria-label="Filter by opportunities"
+        >
+          <option value="">Any opportunities</option>
+          <option value="has">Has opportunities</option>
+          <option value="5plus">5+ opportunities</option>
+        </select>
+        <select
+          value={sort}
+          onChange={(e) => onSortChange(e.target.value as InvestUpSort)}
+          className="portal-select min-w-[140px] text-sm"
+          aria-label="Sort sectors"
+        >
+          <option value="score-desc">Sort: Score ↓</option>
+          <option value="name-asc">Sort: Name A–Z</option>
+          <option value="opportunities-desc">Sort: Opportunities ↓</option>
+        </select>
+        <label className="flex cursor-pointer items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs text-slate-700">
+          <input
+            type="checkbox"
+            checked={featuredOnly}
+            onChange={(e) => onFeaturedOnlyChange(e.target.checked)}
+            className="rounded border-slate-300"
+          />
+          Featured only
+        </label>
       </div>
 
       <div className="grid gap-4 p-4 xl:grid-cols-[minmax(240px,300px)_1fr]">
