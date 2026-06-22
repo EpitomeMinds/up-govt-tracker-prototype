@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const Database = require("better-sqlite3");
 const crypto = require("crypto");
-const { normalizeStateToGeo, primeStateVariantCache } = require("../services/indiaStateNormalize");
+const { normalizeStateToGeo, primeStateVariantCache, getStateDbVariants } = require("../services/indiaStateNormalize");
 const { resolveIndustryBucket } = require("../services/ncsIndustryBuckets");
 
 const DATA_DIR = path.join(__dirname, "..", "data");
@@ -581,6 +581,18 @@ function getNcsFilterOptions() {
   }
 }
 
+function ensureNcsStateVariantCache() {
+  if (primeStateVariantCache._ready) return;
+  const rows = db
+    .prepare(
+      `SELECT DISTINCT state FROM ncs_jobs
+       WHERE is_active = 1 AND is_government_job = 0
+         AND state IS NOT NULL AND TRIM(state) != ''`
+    )
+    .all();
+  primeStateVariantCache(rows.map((r) => r.state));
+}
+
 function queryNcsJobs({
   q,
   city,
@@ -610,8 +622,18 @@ function queryNcsJobs({
     params.city = city;
   }
   if (state) {
-    conditions.push("state = @state");
-    params.state = state;
+    ensureNcsStateVariantCache();
+    const variants = getStateDbVariants(state);
+    if (variants.length === 1) {
+      conditions.push("state = @state");
+      params.state = variants[0];
+    } else {
+      const placeholders = variants.map((_, i) => `@stateVar${i}`).join(", ");
+      conditions.push(`state IN (${placeholders})`);
+      variants.forEach((v, i) => {
+        params[`stateVar${i}`] = v;
+      });
+    }
   }
   if (jobType) {
     conditions.push("job_type = @jobType");
@@ -860,13 +882,10 @@ function getNcsFacets() {
     )
     .all();
 
-  const states = db
-    .prepare(
-      `SELECT state, COUNT(*) as count FROM ncs_jobs
-       WHERE is_active = 1 AND is_government_job = 0 AND state != ''
-       GROUP BY state ORDER BY count DESC`
-    )
-    .all();
+  const states = getNormalizedStateStats().map(({ name, postings }) => ({
+    state: name,
+    count: postings,
+  }));
 
   const functionalAreas = db
     .prepare(

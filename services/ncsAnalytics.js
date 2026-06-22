@@ -62,6 +62,7 @@ function parseFilters(raw) {
 }
 
 function buildWhere(filters) {
+  ensureStateVariantCache();
   const conditions = [ACTIVE];
   const params = {};
 

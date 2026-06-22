@@ -310,7 +310,7 @@ export default function PortalDashboard({
                 <div className="mt-5 grid gap-5">
                   <PortalNcsVacancyList
                     jobs={ncsFiltered}
-                    totalCount={ncsMatchTotal || ncsStats?.total}
+                    totalCount={ncsMatchTotal ?? ncsStats?.total}
                   />
                 </div>
               </>
