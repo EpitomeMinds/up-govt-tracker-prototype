@@ -10,6 +10,7 @@ import {
   DEFAULT_GROWTH_FILTERS,
   extractGrowthFacets,
   recommendationMatchesGrowthSectorFilters,
+  recommendationMatchesState,
   type GrowthFilters,
 } from "@/lib/portalGrowthFilters";
 import { applyAiFilters } from "@/lib/portalAiFilters";
@@ -71,9 +72,7 @@ export default function PortalGrowthDashboard({
       });
     }
     if (growthFilters.state) {
-      recs = recs.filter(
-        (r) => r.region === growthFilters.state || String(r.location ?? "").includes(growthFilters.state)
-      );
+      recs = recs.filter((r) => recommendationMatchesState(r, growthFilters.state));
     }
     if (growthFilters.skillType) {
       recs = recs.filter((r) => r.actionType === growthFilters.skillType);
@@ -89,6 +88,13 @@ export default function PortalGrowthDashboard({
   const projectRows = growthView.rows ?? [];
   const recCount = filteredAiData?.recommendations.length ?? 0;
   const recTotal = aiData?.recommendations.length ?? 0;
+
+  const openDetailed = (nav?: GrowthDrillNavigation) => {
+    onOpenDetailedAnalysis({
+      ...nav,
+      state: growthFilters.state || nav?.state,
+    });
+  };
 
   return (
     <div className="space-y-5 pb-6">
@@ -149,7 +155,7 @@ export default function PortalGrowthDashboard({
 
           <PortalGrowthProjectList
             rows={projectRows}
-            onOpenDetailed={() => onOpenDetailedAnalysis()}
+            onOpenDetailed={() => openDetailed()}
           />
 
           {growthResult === 0 && (
@@ -164,7 +170,8 @@ export default function PortalGrowthDashboard({
               data={filteredAiData}
               listOnly
               growthFacets={growthFacets}
-              onOpenDetailed={() => onOpenDetailedAnalysis({ section: "recommendations" })}
+              appliedState={growthFilters.state}
+              onOpenDetailed={() => openDetailed({ section: "recommendations" })}
             />
           ) : aiData === null ? (
             <div className="portal-panel flex flex-col items-center justify-center py-12 text-center">
@@ -175,7 +182,7 @@ export default function PortalGrowthDashboard({
 
           <button
             type="button"
-            onClick={() => onOpenDetailedAnalysis()}
+            onClick={() => openDetailed()}
             className="portal-btn-primary portal-btn-blinker w-full justify-center py-3"
           >
             Get Detailed Growth Analysis

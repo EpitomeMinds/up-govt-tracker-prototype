@@ -1,42 +1,168 @@
 "use client";
 
+import { useMemo } from "react";
 import type { NcsDashboardFilters } from "@/lib/ncsJobTypes";
-import type { NcsFacetsResponse } from "@/lib/ncsJobTypes";
+import type { NcsScopedFacets } from "@/lib/ncsJobsApi";
+import { hasNcsScopeFilters } from "@/lib/ncsAnalyticsFilters";
+import { isIndustryBucketKey } from "@/lib/ncsFilterNormalize";
 
 interface Props {
   filters: NcsDashboardFilters;
-  facets: NcsFacetsResponse["facets"] | null;
+  scopedFacets: NcsScopedFacets | null;
   totalAvailable?: number;
+  matchTotal?: number;
   onChange: (next: Partial<NcsDashboardFilters>) => void;
   onApply: () => void;
   onReset: () => void;
 }
 
+function ensureOption(
+  options: { value: string; label: string; count?: number }[],
+  value: string,
+  fallbackLabel?: string
+) {
+  if (!value) return options;
+  if (options.some((opt) => opt.value === value)) return options;
+  return [{ value, label: fallbackLabel || value, count: undefined }, ...options];
+}
+
 export default function PortalNcsFilterBar({
   filters,
-  facets,
+  scopedFacets,
   totalAvailable,
+  matchTotal,
   onChange,
   onApply,
   onReset,
 }: Props) {
-  const cities = facets?.cities ?? [];
-  const states = facets?.states ?? [];
-  const jobTypes = facets?.jobTypes ?? [];
-  const functionalAreas = facets?.functionalAreas ?? [];
+  const isFiltered = hasNcsScopeFilters(filters);
+
+  const stateOptions = useMemo(() => {
+    const rows = scopedFacets?.states ?? [];
+    const options = rows.map((s) => ({
+      value: s.state,
+      label: s.state,
+      count: s.count,
+    }));
+    return ensureOption(options, filters.state);
+  }, [scopedFacets?.states, filters.state]);
+
+  const cities = useMemo(() => {
+    const rows = scopedFacets?.cities ?? [];
+    const options = rows.map((c) => ({
+      value: c.city,
+      label: c.city,
+      count: c.count,
+    }));
+    return ensureOption(options, filters.city);
+  }, [scopedFacets?.cities, filters.city]);
+
+  const industries = useMemo(() => {
+    const rows = scopedFacets?.industries ?? [];
+    const options = rows.map((row) => ({
+      value: row.name,
+      label: row.name,
+      count: row.count,
+    }));
+    return ensureOption(options, filters.industry);
+  }, [scopedFacets?.industries, filters.industry]);
+
+  const functionalAreas = useMemo(() => {
+    const rows = (scopedFacets?.functionalAreas ?? []).filter(
+      (row) => row.name && !isIndustryBucketKey(row.name)
+    );
+    const options = rows.map((row) => ({
+      value: row.name,
+      label: row.name,
+      count: row.count,
+    }));
+    return ensureOption(options, filters.functionalArea);
+  }, [scopedFacets?.functionalAreas, filters.functionalArea]);
+
+  const jobTypes = useMemo(() => {
+    const rows = scopedFacets?.jobTypes ?? [];
+    const options = rows.map((row) => ({
+      value: row.name,
+      label: row.name.replace(/_/g, " "),
+      count: row.count,
+    }));
+    return ensureOption(options, filters.jobType);
+  }, [scopedFacets?.jobTypes, filters.jobType]);
+
+  const activeChips = useMemo(() => {
+    const chips: { key: keyof NcsDashboardFilters; label: string; value: string }[] = [];
+    if (filters.state) chips.push({ key: "state", label: "State", value: filters.state });
+    if (filters.city) chips.push({ key: "city", label: "City", value: filters.city });
+    if (filters.industry) chips.push({ key: "industry", label: "Sector", value: filters.industry });
+    if (filters.functionalArea) {
+      chips.push({ key: "functionalArea", label: "Sub-sector", value: filters.functionalArea });
+    }
+    if (filters.organization) {
+      chips.push({ key: "organization", label: "Employer", value: filters.organization });
+    }
+    if (filters.functionalRole) {
+      chips.push({ key: "functionalRole", label: "Role", value: filters.functionalRole });
+    }
+    if (filters.jobTitle) chips.push({ key: "jobTitle", label: "Opening", value: filters.jobTitle });
+    if (filters.jobType) chips.push({ key: "jobType", label: "Job type", value: filters.jobType });
+    if (filters.salaryBand) {
+      chips.push({ key: "salaryBand", label: "Salary band", value: filters.salaryBand });
+    }
+    if (filters.experienceBand) {
+      chips.push({ key: "experienceBand", label: "Experience", value: filters.experienceBand });
+    }
+    if (filters.q.trim()) chips.push({ key: "q", label: "Search", value: filters.q.trim() });
+    return chips;
+  }, [filters]);
+
+  const clearChip = (key: keyof NcsDashboardFilters) => {
+    if (key === "state") {
+      onChange({ state: "", city: "", industry: "", functionalArea: "" });
+      return;
+    }
+    if (key === "industry") {
+      onChange({ industry: "", functionalArea: "" });
+      return;
+    }
+    onChange({ [key]: "" } as Partial<NcsDashboardFilters>);
+  };
 
   return (
     <div className="portal-filter-card flex-col items-stretch gap-3 !p-4">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <div>
           <p className="text-sm font-semibold text-slate-800">Private sector vacancies</p>
-          {totalAvailable != null && (
+          {isFiltered && matchTotal != null ? (
+            <p className="text-xs text-slate-500">
+              {matchTotal.toLocaleString("en-IN")} listings match your chart filters
+              {totalAvailable != null && totalAvailable !== matchTotal
+                ? ` (${totalAvailable.toLocaleString("en-IN")} nationally)`
+                : ""}
+            </p>
+          ) : totalAvailable != null ? (
             <p className="text-xs text-slate-500">
               {totalAvailable.toLocaleString("en-IN")} jobs available nationally
             </p>
-          )}
+          ) : null}
         </div>
       </div>
+
+      {activeChips.length > 0 && (
+        <div className="flex flex-wrap gap-2">
+          {activeChips.map((chip) => (
+            <button
+              key={`${chip.key}-${chip.value}`}
+              type="button"
+              onClick={() => clearChip(chip.key)}
+              className="inline-flex items-center gap-1 rounded-full border border-blue-200 bg-blue-50 px-2.5 py-1 text-[11px] font-medium text-blue-800"
+            >
+              <span className="text-blue-600">{chip.label}:</span>
+              <span className="max-w-[180px] truncate">{chip.value}</span>
+              <span className="text-blue-500">×</span>
+            </button>
+          ))}
+        </div>
+      )}
 
       <div className="flex flex-wrap gap-3">
         <div className="relative min-w-[220px] flex-1">
@@ -61,13 +187,21 @@ export default function PortalNcsFilterBar({
 
         <select
           value={filters.state}
-          onChange={(e) => onChange({ state: e.target.value, city: "" })}
+          onChange={(e) =>
+            onChange({
+              state: e.target.value,
+              city: "",
+              industry: "",
+              functionalArea: "",
+            })
+          }
           className="portal-select"
         >
           <option value="">All states</option>
-          {states.slice(0, 40).map((s) => (
-            <option key={s.state} value={s.state}>
-              {s.state} ({s.count})
+          {stateOptions.map((s) => (
+            <option key={s.value} value={s.value}>
+              {s.label}
+              {s.count != null ? ` (${s.count})` : ""}
             </option>
           ))}
         </select>
@@ -76,11 +210,48 @@ export default function PortalNcsFilterBar({
           value={filters.city}
           onChange={(e) => onChange({ city: e.target.value })}
           className="portal-select"
+          disabled={!filters.state && cities.length === 0}
         >
-          <option value="">All cities</option>
-          {cities.slice(0, 50).map((c) => (
-            <option key={c.city} value={c.city}>
-              {c.city} ({c.count})
+          <option value="">
+            {filters.state ? "All cities in state" : "City (select state first)"}
+          </option>
+          {cities.map((c) => (
+            <option key={c.value} value={c.value}>
+              {c.label} ({c.count ?? 0})
+            </option>
+          ))}
+        </select>
+
+        <select
+          value={filters.industry}
+          onChange={(e) =>
+            onChange({
+              industry: e.target.value,
+              functionalArea: "",
+            })
+          }
+          className="portal-select"
+        >
+          <option value="">Industry sector</option>
+          {industries.map((row) => (
+            <option key={row.value} value={row.value}>
+              {row.label} ({row.count ?? 0})
+            </option>
+          ))}
+        </select>
+
+        <select
+          value={filters.functionalArea}
+          onChange={(e) => onChange({ functionalArea: e.target.value })}
+          className="portal-select"
+          disabled={!filters.industry && functionalAreas.length === 0}
+        >
+          <option value="">
+            {filters.industry ? "Sub-sector (functional area)" : "Sub-sector (select sector first)"}
+          </option>
+          {functionalAreas.map((a) => (
+            <option key={a.value} value={a.value}>
+              {a.label} ({a.count ?? 0})
             </option>
           ))}
         </select>
@@ -92,21 +263,8 @@ export default function PortalNcsFilterBar({
         >
           <option value="">Job type</option>
           {jobTypes.map((t) => (
-            <option key={t.name} value={t.name}>
-              {t.name.replace(/_/g, " ")} ({t.count})
-            </option>
-          ))}
-        </select>
-
-        <select
-          value={filters.functionalArea}
-          onChange={(e) => onChange({ functionalArea: e.target.value })}
-          className="portal-select"
-        >
-          <option value="">Functional area</option>
-          {functionalAreas.slice(0, 40).map((a) => (
-            <option key={a.name} value={a.name}>
-              {a.name} ({a.count})
+            <option key={t.value} value={t.value}>
+              {t.label} ({t.count ?? 0})
             </option>
           ))}
         </select>

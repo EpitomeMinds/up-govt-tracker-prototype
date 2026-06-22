@@ -70,7 +70,10 @@ export default function PortalGrowthDetailedAnalysis({
       <div className="portal-panel overflow-y-auto p-3">
         <div className="portal-analysis-body">
           {activeDef && (
-            <GrowthWorkbookSheetView def={activeDef} rows={activeRows as Record<string, unknown>[] | undefined} />
+            <GrowthWorkbookSheetView
+              def={activeDef}
+              rows={activeRows as Record<string, unknown>[] | undefined}
+            />
           )}
         </div>
       </div>

@@ -1,5 +1,6 @@
 import type { NcsDashboardFilters } from "./ncsJobTypes";
 import type { NcsAnalyticsDimension, NcsAnalyticsFilter, NcsFrameId } from "./ncsAnalyticsTypes";
+import { isIndustryBucketKey } from "./ncsFilterNormalize";
 
 export const NCS_GLOBAL_DRILL_DIMENSIONS = new Set<NcsAnalyticsDimension>([
   "state",
@@ -8,6 +9,10 @@ export const NCS_GLOBAL_DRILL_DIMENSIONS = new Set<NcsAnalyticsDimension>([
   "jobType",
   "industry",
   "organization",
+  "functionalRole",
+  "jobTitle",
+  "salaryBand",
+  "experienceBand",
 ]);
 
 export function ncsDashboardToScopeFilters(filters: NcsDashboardFilters): NcsAnalyticsFilter[] {
@@ -17,6 +22,11 @@ export function ncsDashboardToScopeFilters(filters: NcsDashboardFilters): NcsAna
   if (filters.functionalArea) scope.push({ dimension: "functionalArea", value: filters.functionalArea });
   if (filters.jobType) scope.push({ dimension: "jobType", value: filters.jobType });
   if (filters.industry) scope.push({ dimension: "industry", value: filters.industry });
+  if (filters.organization) scope.push({ dimension: "organization", value: filters.organization });
+  if (filters.functionalRole) scope.push({ dimension: "functionalRole", value: filters.functionalRole });
+  if (filters.jobTitle) scope.push({ dimension: "jobTitle", value: filters.jobTitle });
+  if (filters.salaryBand) scope.push({ dimension: "salaryBand", value: filters.salaryBand });
+  if (filters.experienceBand) scope.push({ dimension: "experienceBand", value: filters.experienceBand });
   if (filters.q.trim()) scope.push({ dimension: "search", value: filters.q.trim() });
   if (filters.minSalary) scope.push({ dimension: "minSalary", value: filters.minSalary });
   if (filters.maxSalary) scope.push({ dimension: "maxSalary", value: filters.maxSalary });
@@ -34,15 +44,11 @@ export const NCS_FRAME_DRILL_PATHS: Record<NcsFrameId, NcsAnalyticsDimension[]> 
 };
 
 export function isGlobalDrillDimension(dimension: NcsAnalyticsDimension): boolean {
-  return (
-    NCS_GLOBAL_DRILL_DIMENSIONS.has(dimension) ||
-    dimension === "functionalRole" ||
-    dimension === "jobTitle"
-  );
+  return NCS_GLOBAL_DRILL_DIMENSIONS.has(dimension);
 }
 
 export function isLocalDrillDimension(dimension: NcsAnalyticsDimension): boolean {
-  return dimension === "salaryBand" || dimension === "experienceBand" || dimension === "month";
+  return dimension === "month";
 }
 
 export function serializeNcsScopeKey(filters: NcsDashboardFilters): string {
@@ -67,9 +73,17 @@ function dashboardFilterForPathDimension(
     case "industry":
       return filters.industry ? { dimension: "industry", value: filters.industry } : null;
     case "organization":
+      return filters.organization ? { dimension: "organization", value: filters.organization } : null;
     case "functionalRole":
+      return filters.functionalRole ? { dimension: "functionalRole", value: filters.functionalRole } : null;
     case "jobTitle":
-      return filters.q.trim() ? { dimension, value: filters.q.trim() } : null;
+      return filters.jobTitle ? { dimension: "jobTitle", value: filters.jobTitle } : null;
+    case "salaryBand":
+      return filters.salaryBand ? { dimension: "salaryBand", value: filters.salaryBand } : null;
+    case "experienceBand":
+      return filters.experienceBand
+        ? { dimension: "experienceBand", value: filters.experienceBand }
+        : null;
     default:
       return null;
   }
@@ -97,6 +111,9 @@ export function ncsDashboardToDrillFilters(filters: NcsDashboardFilters): NcsAna
   if (filters.functionalArea) drill.push({ dimension: "functionalArea", value: filters.functionalArea });
   if (filters.jobType) drill.push({ dimension: "jobType", value: filters.jobType });
   if (filters.industry) drill.push({ dimension: "industry", value: filters.industry });
+  if (filters.organization) drill.push({ dimension: "organization", value: filters.organization });
+  if (filters.functionalRole) drill.push({ dimension: "functionalRole", value: filters.functionalRole });
+  if (filters.jobTitle) drill.push({ dimension: "jobTitle", value: filters.jobTitle });
   return drill;
 }
 
@@ -109,6 +126,11 @@ export function drillFiltersToDashboardPatch(
     functionalArea: "",
     jobType: "",
     industry: "",
+    organization: "",
+    functionalRole: "",
+    jobTitle: "",
+    salaryBand: "",
+    experienceBand: "",
     q: "",
   };
 
@@ -118,13 +140,11 @@ export function drillFiltersToDashboardPatch(
     if (filter.dimension === "functionalArea") patch.functionalArea = filter.value;
     if (filter.dimension === "jobType") patch.jobType = filter.value;
     if (filter.dimension === "industry") patch.industry = filter.value;
-    if (
-      filter.dimension === "organization" ||
-      filter.dimension === "functionalRole" ||
-      filter.dimension === "jobTitle"
-    ) {
-      patch.q = filter.value;
-    }
+    if (filter.dimension === "organization") patch.organization = filter.value;
+    if (filter.dimension === "functionalRole") patch.functionalRole = filter.value;
+    if (filter.dimension === "jobTitle") patch.jobTitle = filter.value;
+    if (filter.dimension === "salaryBand") patch.salaryBand = filter.value;
+    if (filter.dimension === "experienceBand") patch.experienceBand = filter.value;
   }
 
   return patch;
@@ -140,15 +160,24 @@ export function drillDimensionToDashboardPatch(
     case "city":
       return { city: value };
     case "functionalArea":
+      if (isIndustryBucketKey(value)) {
+        return { industry: value, functionalArea: "" };
+      }
       return { functionalArea: value };
     case "jobType":
       return { jobType: value };
     case "industry":
-      return { industry: value };
+      return { industry: value, functionalArea: "" };
     case "organization":
+      return { organization: value, q: "" };
     case "functionalRole":
+      return { functionalRole: value, jobTitle: "", q: "" };
     case "jobTitle":
-      return { q: value };
+      return { jobTitle: value, functionalRole: "", q: "" };
+    case "salaryBand":
+      return { salaryBand: value };
+    case "experienceBand":
+      return { experienceBand: value };
     default:
       return {};
   }
@@ -169,9 +198,15 @@ export function clearDrillDimensionPatch(
     case "industry":
       return { industry: "" };
     case "organization":
+      return { organization: "" };
     case "functionalRole":
+      return { functionalRole: "" };
     case "jobTitle":
-      return { q: "" };
+      return { jobTitle: "" };
+    case "salaryBand":
+      return { salaryBand: "" };
+    case "experienceBand":
+      return { experienceBand: "" };
     default:
       return {};
   }

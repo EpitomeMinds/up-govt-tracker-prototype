@@ -178,6 +178,14 @@ export function subSectorsForIndustry(facets: GrowthFacets, industry: string): s
 }
 
 /** Apply growth sector / sub-sector filters to AI recommendation rows. */
+export function recommendationMatchesState(
+  rec: { region?: string; location?: string | null },
+  state: string
+): boolean {
+  if (!state) return true;
+  return rec.region === state || String(rec.location ?? "").includes(state);
+}
+
 export function recommendationMatchesGrowthSectorFilters(
   rec: Record<string, unknown>,
   filters: GrowthFilters,

@@ -17,6 +17,7 @@ import PortalGrowthDashboard from "./PortalGrowthDashboard";
 import PortalUserManagement from "./PortalUserManagement";
 import type { ExtendedAnalytics, DashboardFilters, JobEnriched } from "@/lib/jobAnalytics";
 import type { NcsDashboardFilters, NcsFacetsResponse, NcsJob, NcsStats } from "@/lib/ncsJobTypes";
+import type { NcsScopedFacets } from "@/lib/ncsJobsApi";
 import { DEFAULT_NCS_FILTERS } from "@/lib/ncsJobAnalytics";
 import type { Stats } from "@/lib/types";
 import type { InvestmentPredictionsResponse } from "@/lib/investmentTypes";
@@ -97,6 +98,7 @@ interface Props {
   ncsAppliedFilters?: NcsDashboardFilters;
   ncsDrillKey?: number;
   ncsFacets?: NcsFacetsResponse["facets"] | null;
+  ncsScopedFacets?: NcsScopedFacets | null;
   ncsStats?: NcsStats | null;
   ncsMatchTotal?: number;
   ncsLoading?: boolean;
@@ -144,6 +146,7 @@ export default function PortalDashboard({
   ncsAppliedFilters,
   ncsDrillKey = 0,
   ncsFacets,
+  ncsScopedFacets,
   ncsStats,
   ncsMatchTotal = 0,
   ncsLoading,
@@ -298,8 +301,9 @@ export default function PortalDashboard({
                 {ncsFilters && onNcsFilterChange && onNcsFilterApply && onNcsFilterReset && (
                   <PortalNcsFilterBar
                     filters={ncsFilters}
-                    facets={ncsFacets ?? null}
+                    scopedFacets={ncsScopedFacets ?? null}
                     totalAvailable={ncsStats?.total}
+                    matchTotal={ncsMatchTotal}
                     onChange={onNcsFilterChange}
                     onApply={onNcsFilterApply}
                     onReset={onNcsFilterReset}
@@ -307,7 +311,7 @@ export default function PortalDashboard({
                 )}
                 </div>
 
-                <div className="mt-5 grid gap-5">
+                <div id="ncs-vacancy-list" className="mt-5 grid gap-5">
                   <PortalNcsVacancyList
                     jobs={ncsFiltered}
                     totalCount={ncsMatchTotal ?? ncsStats?.total}

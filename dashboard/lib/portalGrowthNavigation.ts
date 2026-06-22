@@ -6,6 +6,8 @@ export interface GrowthDrillNavigation {
   /** Workbook column to filter on (e.g. "Sector"). */
   filterKey?: string;
   filterValue?: string;
+  /** Pre-selected state for detailed analysis filters. */
+  state?: string;
 }
 
 export interface GrowthOverviewDrillHandlers {

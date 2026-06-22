@@ -312,8 +312,10 @@ export default function PortalLiveDataBlock({ data, onRefresh, refreshing }: Pro
       {(sourceView === "all" || sourceView === "investindia") && data.investIndiaSectors.length > 0 && (
         <LinkGrid
           title="Invest India – Uttar Pradesh Sectors"
-          subtitle={`${data.investIndiaSectors.length} official sector pages`}
           portalUrl={data.investIndia.portalUrl}
+          source={data.investIndia.source}
+          totalCount={data.investIndiaSectors.length}
+          entryNoun="official sector pages"
           items={data.investIndiaSectors.slice(0, 12).map((s) => ({
             name: s.name,
             url: s.url,
@@ -324,8 +326,10 @@ export default function PortalLiveDataBlock({ data, onRefresh, refreshing }: Pro
       {(sourceView === "all" || sourceView === "nsdc") && data.nsdcSectors.length > 0 && (
         <LinkGrid
           title="NSDC Skill Resources"
-          subtitle={`${data.nsdcSectors.length} training & sector links`}
           portalUrl={data.nsdc.portalUrl}
+          source={data.nsdc.source}
+          totalCount={data.nsdcSectors.length}
+          entryNoun="training & sector links"
           items={data.nsdcSectors.slice(0, 10).map((s) => ({ name: s.name, url: s.url }))}
         />
       )}
@@ -842,44 +846,89 @@ function OverviewSection({
   );
 }
 
+function prettyDomain(url: string) {
+  try {
+    return new URL(url).hostname.replace(/^www\./, "");
+  } catch {
+    return url.replace(/^https?:\/\//, "").replace(/^www\./, "").split("/")[0];
+  }
+}
+
 function LinkGrid({
   title,
-  subtitle,
   portalUrl,
+  source,
+  totalCount,
+  entryNoun,
   items,
 }: {
   title: string;
-  subtitle: string;
   portalUrl: string;
+  source: string;
+  totalCount: number;
+  entryNoun: string;
   items: { name: string; url: string }[];
 }) {
+  const live = isLiveSource(source);
+  const domain = prettyDomain(portalUrl);
+
   return (
     <div className="portal-panel">
-      <div className="portal-panel-header">
+      <div className="portal-panel-header flex-wrap gap-3">
         <div>
-          <h3 className="portal-panel-title">{title}</h3>
-          <p className="text-[10px] text-slate-500">{subtitle}</p>
+          <div className="flex items-center gap-2">
+            <h3 className="portal-panel-title">{title}</h3>
+            <span
+              className={`rounded-full px-1.5 py-0.5 text-[8px] font-bold uppercase tracking-wide ${
+                live ? "bg-emerald-100 text-emerald-700" : "bg-amber-100 text-amber-700"
+              }`}
+            >
+              {live ? "Live" : "Cached"}
+            </span>
+          </div>
+          <p className="mt-0.5 text-[10px] text-slate-500">
+            Live from{" "}
+            <a
+              href={portalUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-[#2563eb] hover:underline"
+            >
+              {domain}
+            </a>{" "}
+            · {Math.min(items.length, totalCount)} of {totalCount} {entryNoun}
+          </p>
         </div>
         <a
           href={portalUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="portal-btn-ghost text-xs"
+          className="portal-btn-ghost inline-flex items-center gap-1 text-xs"
         >
           Open portal
+          <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </svg>
         </a>
       </div>
-      <div className="grid gap-2 p-4 sm:grid-cols-2">
-        {items.map((item) => (
+      <div className="grid gap-2.5 p-4 sm:grid-cols-2">
+        {items.map((item, i) => (
           <a
             key={`${item.name}-${item.url}`}
             href={item.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 px-3 py-2.5 text-left transition-colors hover:border-blue-200 hover:bg-blue-50/40"
+            className="group flex items-center gap-3 rounded-xl border border-slate-100 bg-white px-3 py-3 text-left shadow-sm transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-md"
           >
-            <span className="line-clamp-2 text-xs font-semibold text-slate-800">{item.name}</span>
-            <span className="shrink-0 text-[10px] font-bold text-[#2563eb]">View →</span>
+            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-blue-50 text-[11px] font-bold text-[#2563eb] transition-colors group-hover:bg-[#2563eb] group-hover:text-white">
+              {i + 1}
+            </span>
+            <span className="line-clamp-2 min-w-0 flex-1 text-xs font-semibold text-slate-800">
+              {item.name}
+            </span>
+            <span className="shrink-0 text-[11px] font-bold text-[#2563eb] transition-transform group-hover:translate-x-0.5">
+              View →
+            </span>
           </a>
         ))}
       </div>

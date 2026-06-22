@@ -3,7 +3,13 @@ const path = require("path");
 const Database = require("better-sqlite3");
 const crypto = require("crypto");
 const { normalizeStateToGeo, primeStateVariantCache, getStateDbVariants } = require("../services/indiaStateNormalize");
-const { resolveIndustryBucket } = require("../services/ncsIndustryBuckets");
+const {
+  resolveIndustryBucket,
+  buildIndustryBucketCondition,
+  getBucketDef,
+} = require("../services/ncsIndustryBuckets");
+const { normalizeNcsJobParams, industryBucketKeys } = require("../services/ncsFilterNormalize");
+const { SALARY_BAND_EXPR, EXPERIENCE_BAND_EXPR } = require("../services/ncsBandFilters");
 
 const DATA_DIR = path.join(__dirname, "..", "data");
 const DB_PATH = process.env.DB_PATH || path.join(DATA_DIR, "jobs.db");
@@ -593,26 +599,29 @@ function ensureNcsStateVariantCache() {
   primeStateVariantCache(rows.map((r) => r.state));
 }
 
-function queryNcsJobs({
-  q,
-  city,
-  state,
-  jobType,
-  functionalArea,
-  industry,
-  minSalary,
-  maxSalary,
-  minExperience,
-  maxExperience,
-  sort = "published_at",
-  order = "desc",
-  page = 1,
-  limit = 50,
-  activeOnly = true,
-  privateOnly = true,
-}) {
+function buildNcsJobsWhere(rawParams = {}) {
+  const {
+    q,
+    city,
+    state,
+    jobType,
+    functionalArea,
+    industry,
+    organization,
+    functionalRole,
+    jobTitle,
+    salaryBand,
+    experienceBand,
+    minSalary,
+    maxSalary,
+    minExperience,
+    maxExperience,
+    activeOnly = true,
+    privateOnly = true,
+  } = normalizeNcsJobParams(rawParams);
+
   const conditions = [];
-  const params = { limit: Number(limit), offset: (Number(page) - 1) * Number(limit) };
+  const params = {};
 
   if (activeOnly) conditions.push("is_active = 1");
   if (privateOnly) conditions.push("is_government_job = 0");
@@ -644,8 +653,32 @@ function queryNcsJobs({
     params.functionalArea = functionalArea;
   }
   if (industry) {
-    conditions.push("industry = @industry");
-    params.industry = industry;
+    if (getBucketDef(industry)) {
+      conditions.push(buildIndustryBucketCondition(industry, params, "indFilter"));
+    } else {
+      conditions.push("industry = @industry");
+      params.industry = industry;
+    }
+  }
+  if (organization) {
+    conditions.push("TRIM(organization_name) = TRIM(@organization)");
+    params.organization = organization;
+  }
+  if (functionalRole && !jobTitle) {
+    conditions.push("TRIM(functional_role) = TRIM(@functionalRole)");
+    params.functionalRole = functionalRole;
+  }
+  if (jobTitle) {
+    conditions.push("TRIM(job_title) = TRIM(@jobTitle)");
+    params.jobTitle = jobTitle;
+  }
+  if (salaryBand) {
+    conditions.push(`${SALARY_BAND_EXPR} = @salaryBand`);
+    params.salaryBand = salaryBand;
+  }
+  if (experienceBand) {
+    conditions.push(`${EXPERIENCE_BAND_EXPR} = @experienceBand`);
+    params.experienceBand = experienceBand;
   }
   if (minSalary != null && minSalary !== "") {
     conditions.push("(max_salary IS NULL OR max_salary >= @minSalary)");
@@ -665,10 +698,62 @@ function queryNcsJobs({
   }
   if (q) {
     conditions.push(
-      "(job_title LIKE @q OR organization_name LIKE @q OR functional_area LIKE @q OR job_description LIKE @q OR city LIKE @q OR state LIKE @q)"
+      "(job_title LIKE @q OR organization_name LIKE @q OR functional_area LIKE @q OR functional_role LIKE @q OR job_description LIKE @q OR city LIKE @q OR state LIKE @q)"
     );
     params.q = `%${q}%`;
   }
+
+  const where = conditions.length ? conditions.join(" AND ") : "1=1";
+  return { where, params };
+}
+
+function queryNcsJobs({
+  q,
+  city,
+  state,
+  jobType,
+  functionalArea,
+  industry,
+  organization,
+  functionalRole,
+  jobTitle,
+  salaryBand,
+  experienceBand,
+  minSalary,
+  maxSalary,
+  minExperience,
+  maxExperience,
+  sort = "published_at",
+  order = "desc",
+  page = 1,
+  limit = 50,
+  activeOnly = true,
+  privateOnly = true,
+}) {
+  const { where, params: filterParams } = buildNcsJobsWhere({
+    q,
+    city,
+    state,
+    jobType,
+    functionalArea,
+    industry,
+    organization,
+    functionalRole,
+    jobTitle,
+    salaryBand,
+    experienceBand,
+    minSalary,
+    maxSalary,
+    minExperience,
+    maxExperience,
+    activeOnly,
+    privateOnly,
+  });
+  const params = {
+    ...filterParams,
+    limit: Number(limit),
+    offset: (Number(page) - 1) * Number(limit),
+  };
 
   const sortMap = {
     published_at: "published_at",
@@ -679,7 +764,6 @@ function queryNcsJobs({
   };
   const sortCol = sortMap[sort] || "published_at";
   const sortOrder = order === "asc" ? "ASC" : "DESC";
-  const where = conditions.length ? conditions.join(" AND ") : "1=1";
 
   const countRow = db
     .prepare(`SELECT COUNT(*) as total FROM ncs_jobs WHERE ${where}`)
@@ -873,6 +957,66 @@ function logNcsSync(jobCount, status, message = "") {
   });
 }
 
+function getNcsScopedFacets(rawParams = {}) {
+  const { where, params } = buildNcsJobsWhere(rawParams);
+
+  const cities = db
+    .prepare(
+      `SELECT city, COUNT(*) as count FROM ncs_jobs
+       WHERE ${where} AND city IS NOT NULL AND TRIM(city) != ''
+       GROUP BY city ORDER BY count DESC LIMIT 100`
+    )
+    .all(params);
+
+  const functionalAreas = db
+    .prepare(
+      `SELECT functional_area as name, COUNT(*) as count FROM ncs_jobs
+       WHERE ${where} AND functional_area IS NOT NULL AND TRIM(functional_area) != ''
+       GROUP BY functional_area ORDER BY count DESC LIMIT 100`
+    )
+    .all(params);
+
+  const jobTypes = db
+    .prepare(
+      `SELECT job_type as name, COUNT(*) as count FROM ncs_jobs
+       WHERE ${where} AND job_type IS NOT NULL AND TRIM(job_type) != ''
+       GROUP BY job_type ORDER BY count DESC`
+    )
+    .all(params);
+
+  const industryRows = db
+    .prepare(
+      `SELECT industry, functional_area,
+        COUNT(*) AS count
+       FROM ncs_jobs
+       WHERE ${where}
+       GROUP BY industry, functional_area`
+    )
+    .all(params);
+
+  const bucketCounts = new Map();
+  for (const key of industryBucketKeys()) {
+    bucketCounts.set(key, 0);
+  }
+  for (const row of industryRows) {
+    const bucket = resolveIndustryBucket(row.industry, row.functional_area);
+    bucketCounts.set(bucket, (bucketCounts.get(bucket) || 0) + row.count);
+  }
+
+  const industries = industryBucketKeys()
+    .map((name) => ({ name, count: bucketCounts.get(name) || 0 }))
+    .filter((row) => row.count > 0)
+    .sort((a, b) => b.count - a.count);
+
+  const total = db.prepare(`SELECT COUNT(*) as count FROM ncs_jobs WHERE ${where}`).get(params).count;
+
+  const states = getNormalizedStateStats()
+    .map(({ name, postings }) => ({ state: name, count: postings }))
+    .filter((row) => row.count > 0);
+
+  return { cities, functionalAreas, industries, jobTypes, states, total };
+}
+
 function getNcsFacets() {
   const cities = db
     .prepare(
@@ -934,4 +1078,6 @@ module.exports = {
   saveNcsFilterOptions,
   getNcsFilterOptions,
   getNcsFacets,
+  getNcsScopedFacets,
+  buildNcsJobsWhere,
 };

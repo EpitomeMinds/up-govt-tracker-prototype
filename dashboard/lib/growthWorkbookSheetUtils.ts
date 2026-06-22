@@ -92,6 +92,47 @@ export function aggregateSheetRows(
     .slice(0, limit);
 }
 
+const STATE_COLUMN_PATTERN = /^(state|region)(\s|\/)|$|^state\s*\//i;
+
+function stateLikeValues(row: Record<string, unknown>): string[] {
+  const values: string[] = [];
+  for (const [key, value] of Object.entries(row)) {
+    if (value == null || value === "") continue;
+    if (STATE_COLUMN_PATTERN.test(key.trim())) {
+      values.push(String(value).trim());
+    }
+  }
+  return values;
+}
+
+export function sheetHasStateColumn(rows: Record<string, unknown>[]): boolean {
+  if (!rows.length) return false;
+  return sheetColumns(rows).some((col) => STATE_COLUMN_PATTERN.test(col.trim()));
+}
+
+export function rowMatchesState(row: Record<string, unknown>, state: string): boolean {
+  if (!state) return true;
+  const target = state.trim().toLowerCase();
+  if (!target) return true;
+
+  for (const raw of stateLikeValues(row)) {
+    const value = raw.toLowerCase();
+    if (value === target) return true;
+    if (value.includes(target) || target.includes(value)) return true;
+  }
+  return false;
+}
+
+export function filterWorkbookRowsByState(
+  rows: Record<string, unknown>[] | undefined,
+  state: string
+): Record<string, unknown>[] {
+  if (!rows?.length) return rows ?? [];
+  if (!state.trim()) return rows;
+  if (!sheetHasStateColumn(rows)) return rows;
+  return rows.filter((row) => rowMatchesState(row, state));
+}
+
 export function countByColumn(rows: Record<string, unknown>[], groupKey: string, limit = 8) {
   const map = new Map<string, { name: string; fullName: string; value: number }>();
   for (const row of rows) {

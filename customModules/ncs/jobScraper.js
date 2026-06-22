@@ -30,7 +30,7 @@ function normalizeJob(raw) {
     jobTitle: raw.jobTitle?.trim() || "",
     organizationName: raw.organizationName?.trim() || "",
     functionalArea: raw.functionalArea || "",
-    functionalRole: raw.functionalState || "",
+    functionalRole: (raw.functionalRole || "").trim(),
     industry: raw.industry || "",
     jobType: raw.jobType || "",
     jobDescription: raw.jobDescription || "",

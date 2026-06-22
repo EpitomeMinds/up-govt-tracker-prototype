@@ -7,6 +7,11 @@ export const DEFAULT_NCS_FILTERS: NcsDashboardFilters = {
   jobType: "",
   functionalArea: "",
   industry: "",
+  organization: "",
+  functionalRole: "",
+  jobTitle: "",
+  salaryBand: "",
+  experienceBand: "",
   minSalary: "",
   maxSalary: "",
   minExperience: "",
@@ -37,6 +42,9 @@ export function applyNcsFilters(jobs: NcsJob[], filters: NcsDashboardFilters): N
     if (filters.jobType && job.job_type !== filters.jobType) return false;
     if (filters.functionalArea && job.functional_area !== filters.functionalArea) return false;
     if (filters.industry && job.industry !== filters.industry) return false;
+    if (filters.organization && job.organization_name !== filters.organization) return false;
+    if (filters.functionalRole && job.functional_role !== filters.functionalRole) return false;
+    if (filters.jobTitle && job.job_title !== filters.jobTitle) return false;
     if (filters.minSalary && (job.max_salary == null || job.max_salary < Number(filters.minSalary))) {
       return false;
     }

@@ -26,8 +26,10 @@ import type { Job, Stats } from "@/lib/types";
 import type { InvestmentPredictionsResponse } from "@/lib/investmentTypes";
 import type { AiRecommendationsResponse } from "@/lib/aiRecommendationsTypes";
 import type { LiveDataSourcesResponse } from "@/lib/liveDataTypes";
-import { getNcsJobs, getNcsStats, getNcsFacets, triggerNcsSync } from "@/lib/ncsJobsApi";
+import { getNcsJobs, getNcsStats, getNcsFacets, getNcsScopedFacets, triggerNcsSync } from "@/lib/ncsJobsApi";
+import type { NcsScopedFacets } from "@/lib/ncsJobsApi";
 import { DEFAULT_NCS_FILTERS } from "@/lib/ncsJobAnalytics";
+import { normalizeNcsDashboardFilters } from "@/lib/ncsFilterNormalize";
 import type { NcsDashboardFilters, NcsFacetsResponse, NcsJob, NcsStats } from "@/lib/ncsJobTypes";
 
 const STATE_NAMES: Record<string, string> = {
@@ -47,6 +49,7 @@ export default function Dashboard() {
   const [ncsJobs, setNcsJobs] = useState<NcsJob[]>([]);
   const [ncsStats, setNcsStats] = useState<NcsStats | null>(null);
   const [ncsFacets, setNcsFacets] = useState<NcsFacetsResponse["facets"] | null>(null);
+  const [ncsScopedFacets, setNcsScopedFacets] = useState<NcsScopedFacets | null>(null);
   const [ncsFilters, setNcsFilters] = useState<NcsDashboardFilters>(DEFAULT_NCS_FILTERS);
   const [ncsDraftFilters, setNcsDraftFilters] = useState<NcsDashboardFilters>(DEFAULT_NCS_FILTERS);
   const [ncsDrillKey, setNcsDrillKey] = useState(0);
@@ -138,6 +141,15 @@ export default function Dashboard() {
     }
   }, []);
 
+  const loadNcsScopedFacets = useCallback(async (activeFilters: NcsDashboardFilters) => {
+    try {
+      const facets = await getNcsScopedFacets(activeFilters);
+      setNcsScopedFacets(facets);
+    } catch {
+      setNcsScopedFacets(null);
+    }
+  }, []);
+
   const loadNcsInitial = useCallback(async () => {
     setNcsLoading(true);
     try {
@@ -150,6 +162,7 @@ export default function Dashboard() {
       setNcsMatchTotal(jobsRes.pagination.total);
       setNcsStats(statsRes);
       setNcsFacets(facetsRes.facets);
+      void loadNcsScopedFacets(DEFAULT_NCS_FILTERS);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to load NCS vacancies");
       setNcsJobs([]);
@@ -158,17 +171,26 @@ export default function Dashboard() {
     } finally {
       setNcsLoading(false);
     }
-  }, []);
+  }, [loadNcsScopedFacets]);
 
   const loadNcsJobs = useCallback(async (activeFilters: NcsDashboardFilters) => {
     try {
-      const jobsRes = await getNcsJobs({ ...activeFilters, limit: 200 });
+      const normalized = normalizeNcsDashboardFilters(activeFilters);
+      const jobsRes = await getNcsJobs({ ...normalized, limit: 200 });
       setNcsJobs(jobsRes.data);
       setNcsMatchTotal(jobsRes.pagination.total);
+      void loadNcsScopedFacets(normalized);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to load NCS vacancies");
     }
-  }, []);
+  }, [loadNcsScopedFacets]);
+
+  const applyNcsFilterPatch = useCallback(
+    (patch: Partial<NcsDashboardFilters>) =>
+      (prev: NcsDashboardFilters) =>
+        normalizeNcsDashboardFilters({ ...prev, ...patch }) as NcsDashboardFilters,
+    []
+  );
 
   const ncsBootstrappedRef = useRef(false);
   const ncsJobsSkipDebounceRef = useRef(false);
@@ -262,7 +284,8 @@ export default function Dashboard() {
   };
 
   const handleNcsFilterChange = (next: Partial<NcsDashboardFilters>) => {
-    setNcsDraftFilters((prev) => ({ ...prev, ...next }));
+    setNcsDraftFilters((prev) => applyNcsFilterPatch(next)(prev));
+    setNcsFilters((prev) => applyNcsFilterPatch(next)(prev));
   };
 
   const handleNcsFilterApply = () => {
@@ -281,8 +304,16 @@ export default function Dashboard() {
   };
 
   const handleNcsDrillFilter = (next: Partial<NcsDashboardFilters>) => {
-    setNcsFilters((prev) => ({ ...prev, ...next }));
-    setNcsDraftFilters((prev) => ({ ...prev, ...next }));
+    setNcsFilters((prev) => {
+      const merged = applyNcsFilterPatch(next)(prev);
+      ncsJobsSkipDebounceRef.current = true;
+      void loadNcsJobs(merged);
+      window.requestAnimationFrame(() => {
+        document.getElementById("ncs-vacancy-list")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+      return merged;
+    });
+    setNcsDraftFilters((prev) => applyNcsFilterPatch(next)(prev));
   };
 
   const handleNcsSync = async () => {
@@ -334,10 +365,11 @@ export default function Dashboard() {
       syncing={syncing}
       ncsJobs={ncsJobs}
       ncsFiltered={ncsFiltered}
-      ncsFilters={ncsDraftFilters}
+      ncsFilters={ncsFilters}
       ncsAppliedFilters={ncsFilters}
       ncsDrillKey={ncsDrillKey}
       ncsFacets={ncsFacets}
+      ncsScopedFacets={ncsScopedFacets}
       ncsStats={ncsStats}
       ncsMatchTotal={ncsMatchTotal}
       ncsLoading={ncsLoading}

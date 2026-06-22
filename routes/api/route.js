@@ -11,6 +11,7 @@ const {
   getNcsStats,
   getNcsFilterOptions,
   getNcsFacets,
+  getNcsScopedFacets,
 } = require("../../db/database");
 const { syncState, syncAllStates } = require("../../services/ingestion");
 const { syncInvestUp } = require("../../services/investIngestion");
@@ -69,6 +70,11 @@ router.get("/ncs/jobs", (req, res) => {
     jobType,
     functionalArea,
     industry,
+    organization,
+    functionalRole,
+    jobTitle,
+    salaryBand,
+    experienceBand,
     minSalary,
     maxSalary,
     minExperience,
@@ -86,6 +92,11 @@ router.get("/ncs/jobs", (req, res) => {
     jobType: jobType || undefined,
     functionalArea: functionalArea || undefined,
     industry: industry || undefined,
+    organization: organization || undefined,
+    functionalRole: functionalRole || undefined,
+    jobTitle: jobTitle || undefined,
+    salaryBand: salaryBand || undefined,
+    experienceBand: experienceBand || undefined,
     minSalary: minSalary || undefined,
     maxSalary: maxSalary || undefined,
     minExperience: minExperience || undefined,
@@ -121,6 +132,46 @@ router.get("/ncs/facets", (req, res) => {
     filterOptions: cached?.data || null,
     scrapedAt: cached?.scrapedAt || null,
   });
+});
+
+router.get("/ncs/facets/scoped", (req, res) => {
+  const {
+    q,
+    city,
+    state,
+    jobType,
+    functionalArea,
+    industry,
+    organization,
+    functionalRole,
+    jobTitle,
+    salaryBand,
+    experienceBand,
+    minSalary,
+    maxSalary,
+    minExperience,
+    maxExperience,
+  } = req.query;
+
+  res.json(
+    getNcsScopedFacets({
+      q: q || undefined,
+      city: city || undefined,
+      state: state || undefined,
+      jobType: jobType || undefined,
+      functionalArea: functionalArea || undefined,
+      industry: industry || undefined,
+      organization: organization || undefined,
+      functionalRole: functionalRole || undefined,
+      jobTitle: jobTitle || undefined,
+      salaryBand: salaryBand || undefined,
+      experienceBand: experienceBand || undefined,
+      minSalary: minSalary || undefined,
+      maxSalary: maxSalary || undefined,
+      minExperience: minExperience || undefined,
+      maxExperience: maxExperience || undefined,
+    })
+  );
 });
 
 router.get("/ncs/analytics/frames", (req, res) => {

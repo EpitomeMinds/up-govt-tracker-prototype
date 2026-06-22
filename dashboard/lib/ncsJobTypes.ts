@@ -107,6 +107,11 @@ export interface NcsDashboardFilters {
   jobType: string;
   functionalArea: string;
   industry: string;
+  organization: string;
+  functionalRole: string;
+  jobTitle: string;
+  salaryBand: string;
+  experienceBand: string;
   minSalary: string;
   maxSalary: string;
   minExperience: string;

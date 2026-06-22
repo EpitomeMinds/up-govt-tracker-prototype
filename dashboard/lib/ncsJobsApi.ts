@@ -6,6 +6,15 @@ import type {
 } from "./ncsJobTypes";
 import { ncsDashboardToScopeFilters } from "./ncsAnalyticsFilters";
 
+export interface NcsScopedFacets {
+  cities: { city: string; count: number }[];
+  functionalAreas: { name: string; count: number }[];
+  industries: { name: string; count: number }[];
+  jobTypes: { name: string; count: number }[];
+  states: { state: string; count: number }[];
+  total: number;
+}
+
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
 
 async function fetchJson<T>(path: string, init?: RequestInit): Promise<T> {
@@ -29,6 +38,11 @@ export function getNcsJobs(
   if (filters.jobType) search.set("jobType", filters.jobType);
   if (filters.functionalArea) search.set("functionalArea", filters.functionalArea);
   if (filters.industry) search.set("industry", filters.industry);
+  if (filters.organization) search.set("organization", filters.organization);
+  if (filters.functionalRole) search.set("functionalRole", filters.functionalRole);
+  if (filters.jobTitle) search.set("jobTitle", filters.jobTitle);
+  if (filters.salaryBand) search.set("salaryBand", filters.salaryBand);
+  if (filters.experienceBand) search.set("experienceBand", filters.experienceBand);
   if (filters.minSalary) search.set("minSalary", filters.minSalary);
   if (filters.maxSalary) search.set("maxSalary", filters.maxSalary);
   if (filters.minExperience) search.set("minExperience", filters.minExperience);
@@ -50,6 +64,29 @@ export function getNcsStats(filters?: Partial<NcsDashboardFilters>): Promise<Ncs
 
 export function getNcsFacets(): Promise<NcsFacetsResponse> {
   return fetchJson("/api/ncs/facets");
+}
+
+export function getNcsScopedFacets(
+  filters: Partial<NcsDashboardFilters> = {}
+): Promise<NcsScopedFacets> {
+  const search = new URLSearchParams();
+  if (filters.q) search.set("q", filters.q);
+  if (filters.city) search.set("city", filters.city);
+  if (filters.state) search.set("state", filters.state);
+  if (filters.jobType) search.set("jobType", filters.jobType);
+  if (filters.functionalArea) search.set("functionalArea", filters.functionalArea);
+  if (filters.industry) search.set("industry", filters.industry);
+  if (filters.organization) search.set("organization", filters.organization);
+  if (filters.functionalRole) search.set("functionalRole", filters.functionalRole);
+  if (filters.jobTitle) search.set("jobTitle", filters.jobTitle);
+  if (filters.salaryBand) search.set("salaryBand", filters.salaryBand);
+  if (filters.experienceBand) search.set("experienceBand", filters.experienceBand);
+  if (filters.minSalary) search.set("minSalary", filters.minSalary);
+  if (filters.maxSalary) search.set("maxSalary", filters.maxSalary);
+  if (filters.minExperience) search.set("minExperience", filters.minExperience);
+  if (filters.maxExperience) search.set("maxExperience", filters.maxExperience);
+  const qs = search.toString();
+  return fetchJson(`/api/ncs/facets/scoped${qs ? `?${qs}` : ""}`);
 }
 
 export async function triggerNcsSync(maxPages?: number): Promise<void> {

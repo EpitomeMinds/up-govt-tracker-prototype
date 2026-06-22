@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   Bar,
   BarChart,
@@ -32,6 +32,7 @@ import type { GrowthFacets } from "@/lib/portalGrowthFilters";
 import {
   rowMatchesMasterSubSector,
   subSectorsForIndustry,
+  recommendationMatchesState,
 } from "@/lib/portalGrowthFilters";
 
 const CHART_COLORS = ["#2563eb", "#f97316", "#10b981", "#8b5cf6", "#ec4899", "#06b6d4", "#64748b"];
@@ -39,6 +40,7 @@ const CHART_COLORS = ["#2563eb", "#f97316", "#10b981", "#8b5cf6", "#ec4899", "#0
 interface RecommendationPanelFilters {
   industry: string;
   subSector: string;
+  state: string;
   location: string;
   region: string;
 }
@@ -46,6 +48,7 @@ interface RecommendationPanelFilters {
 const DEFAULT_PANEL_FILTERS: RecommendationPanelFilters = {
   industry: "",
   subSector: "",
+  state: "",
   location: "",
   region: "",
 };
@@ -57,6 +60,8 @@ interface Props {
   /** Show recommendation list only — no duplicate chart grid (merged growth tab). */
   listOnly?: boolean;
   growthFacets?: GrowthFacets;
+  /** Sync state filter from growth dashboard filter bar. */
+  appliedState?: string;
 }
 
 interface DrillState {
@@ -116,6 +121,7 @@ function filterRecommendationsByPanel(
     ) {
       return false;
     }
+    if (filters.state && !recommendationMatchesState(rec, filters.state)) return false;
     if (filters.location && rec.location !== filters.location) return false;
     if (filters.region && rec.region !== filters.region) return false;
     return true;
@@ -193,6 +199,7 @@ export default function PortalRecommendationsDashboard({
   embedded,
   listOnly,
   growthFacets,
+  appliedState = "",
 }: Props) {
   const [drill, setDrill] = useState<DrillState | null>(null);
   const [selectedId, setSelectedId] = useState<number | null>(null);
@@ -330,6 +337,7 @@ export default function PortalRecommendationsDashboard({
           onSelect={setSelectedId}
           summary={s}
           growthFacets={growthFacets}
+          appliedState={appliedState}
         />
       ) : (
       <div className="grid gap-4 xl:grid-cols-2">
@@ -545,14 +553,30 @@ function RecommendationsListPanel({
   onSelect,
   summary,
   growthFacets,
+  appliedState = "",
 }: {
   recommendations: AiRecommendation[];
   selectedId: number | null;
   onSelect: (id: number) => void;
   summary: AiRecommendationsSummary;
   growthFacets?: GrowthFacets;
+  appliedState?: string;
 }) {
-  const [panelFilters, setPanelFilters] = useState<RecommendationPanelFilters>(DEFAULT_PANEL_FILTERS);
+  const [panelFilters, setPanelFilters] = useState<RecommendationPanelFilters>({
+    ...DEFAULT_PANEL_FILTERS,
+    state: appliedState,
+  });
+
+  useEffect(() => {
+    setPanelFilters((prev) => ({ ...prev, state: appliedState }));
+  }, [appliedState]);
+
+  const stateOptions = useMemo(() => {
+    if (growthFacets?.states?.length) return growthFacets.states;
+    return [...new Set(recommendations.map((r) => r.region).filter(Boolean))].sort((a, b) =>
+      a.localeCompare(b)
+    );
+  }, [growthFacets, recommendations]);
 
   const locationOptions = useMemo(
     () =>
@@ -642,6 +666,12 @@ function RecommendationsListPanel({
             label={panelFilters.industry ? "Sub-sector" : "Sub-sector (pick sector first)"}
             options={subSectorOptions}
             disabled={!panelFilters.industry}
+          />
+          <PanelSelect
+            value={panelFilters.state}
+            onChange={(state) => handlePanelFilterChange({ state })}
+            label="State"
+            options={stateOptions}
           />
           <PanelSelect
             value={panelFilters.location}
